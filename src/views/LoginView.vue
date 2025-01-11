@@ -1,5 +1,14 @@
 <script setup lang="ts">
 import LogoIcon from '@/icons/LogoIcon.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const onSubmit = (): void => {
+    // TODO: 仮でメニューへ遷移
+    router.push({ name: 'menu' });
+};
+
 </script>
 
 <template>
@@ -11,14 +20,15 @@ import LogoIcon from '@/icons/LogoIcon.vue';
     </header>
     <main class="p-8">
         <div class="container mx-auto text-center">
-            <form class="flex flex-col max-w-80 mx-auto">
+            <form class="flex flex-col max-w-80 mx-auto" v-on:submit.prevent="onSubmit">
                 <label for="userId" class="sr-only">ユーザーID</label>
                 <input type="text" id="userId" name="userId" placeholder="ユーザID"
                     class="z-0 focus:z-10 mb-[-1px] rounded-t-lg border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-300/50">
                 <input type="password" id="password" name="password" placeholder="パスワード"
                     class="z-0 focus:z-10 rounded-b-lg border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-300/50">
                 <label for="password" class="sr-only">パスワード</label>
-                <button class="mt-3 h-12 rounded-md bg-blue-600 hover:bg-blue-700 text-neutral-50">ログイン</button>
+                <button type="submit"
+                    class="mt-3 h-12 rounded-md bg-blue-600 hover:bg-blue-700 text-xl text-neutral-50">ログイン</button>
             </form>
         </div>
     </main>

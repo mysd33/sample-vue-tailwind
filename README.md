@@ -5,7 +5,7 @@
 
 - SPAのサンプルAPです。Vue.jsのプロジェクトを作成し、Tailwind CSSを導入しています。
 
-- 比較のため、[Spring Boot + Thymeleaf + Bootstrap](https://github.com/mysd33/sample-bff/)のサンプルAPと同じ画面を作成しています。
+- 比較のため、[Spring Boot + Thymeleaf + BootstrapのサンプルAP](https://github.com/mysd33/sample-bff/)と同じ画面を作成しています。
 
 ## 画面一覧
 
@@ -14,7 +14,7 @@
 | 画面名 | 説明 | 画面イメージ |
 | ---- | ---- | ---- |
 | ログイン画面 | トップページの画面で、ユーザがログインするための画面。 | [画面](docs/img/screen/screen1.png) |
-| メニュー画面 | メニュー画面。ログインユーザのロールによって管理者メニューの表示有無が切り替わる。 |  |
+| メニュー画面 | メニュー画面。ログインユーザのロールによって管理者メニューの表示有無が切り替わる。 | [画面](docs/img/screen/screen2.png) |
 | Todo管理画面 | Todoリストの一覧表示、登録、完了、削除といった操作を実施できる画面。 |  |
 | Todo一括登録画面 | Todoリストを記載したCSVファイルをアップロードし、非同期でTodoリストを登録できる画面。 |  |
 | ユーザ一覧画面 | 登録されているユーザを一覧表示&CSVファイルダウンロードできる画面。 |  |
