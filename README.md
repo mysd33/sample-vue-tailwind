@@ -50,8 +50,8 @@ npm run dev
 - TailWind CSSプラグイン
     - [@tailwindcss/forms](https://www.cypress.io/)
 
-## (参考)プロジェクトのセットアップ方法
-- Vue.jsとTailwind CSSを使ったプロジェクトの作成手順は以下の通り
+## (参考) ブランクプロジェクトのセットアップ方法
+- Vue.jsとTailwind CSSを使ったブランクプロジェクトの作成手順は以下の通り
 
 ```sh
 # vue-cliを使ってプロジェクトを作成
