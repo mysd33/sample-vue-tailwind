@@ -11,15 +11,15 @@
 
 - 作成している画面は以下の通り。
 
-| 画面名 | 説明 | 画面イメージ |
-| ---- | ---- | ---- |
-| ログイン画面 | トップページの画面で、ユーザがログインするための画面。 | [画面](docs/img/screen/screen1.png) |
-| メニュー画面 | メニュー画面。ログインユーザのロールによって管理者メニューの表示有無が切り替わる。 | [画面](docs/img/screen/screen2.png) |
-| Todo管理画面 | Todoリストの一覧表示、登録、完了、削除といった操作を実施できる画面。 | [画面](docs/img/screen/screen3.png)  |
-| Todo一括登録画面 | Todoリストを記載したCSVファイルをアップロードし、非同期でTodoリストを登録できる画面。 |  |
-| ユーザ一覧画面 | 登録されているユーザを一覧表示&CSVファイルダウンロードできる画面。 |  |
-| ユーザ登録画面 | ユーザを新規登録するための画面。 |  |
-| ユーザ詳細画面 | ユーザの詳細情報の表示と情報更新するための画面。 | |
+| 画面名 | 説明 | 画面イメージ | Vue+TailWindソースコード | （参考比較）Thymeleaf+Bootstrapソースコード |
+| ---- | ---- | ---- | ---- | ---- |
+| ログイン画面 | トップページの画面で、ユーザがログインするための画面。 | [画面](docs/img/screen/screen1.png) | [ソースコード](src/views/LoginView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/login/login.html) |
+| メニュー画面 | メニュー画面。ログインユーザのロールによって管理者メニューの表示有無が切り替わる。 | [画面](docs/img/screen/screen2.png) | [ソースコード](src/views/MenuView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/menu/menu.html) |
+| Todo管理画面 | Todoリストの一覧表示、登録、完了、削除といった操作を実施できる画面。 | [画面](docs/img/screen/screen3.png)  | [ソースコード](src/views/TodoListView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/todoList.html) |
+| Todo一括登録画面 | Todoリストを記載したCSVファイルをアップロードし、非同期でTodoリストを登録できる画面。 |  |  |  |
+| ユーザ一覧画面 | 登録されているユーザを一覧表示&CSVファイルダウンロードできる画面。 |  |  |  |
+| ユーザ登録画面 | ユーザを新規登録するための画面。 |  |  |  |
+| ユーザ詳細画面 | ユーザの詳細情報の表示と情報更新するための画面。 |  |  |  |
 
 ## サンプルAPの動作確認方法
 
