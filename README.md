@@ -7,6 +7,16 @@
 
 - 比較のため、[Spring Boot + Thymeleaf + BootstrapのサンプルAP](https://github.com/mysd33/sample-bff/)と同じ画面を作成しています。
 
+## サンプルAPの動作確認方法
+
+- 開発用サーバーの起動
+
+```sh
+npm run dev
+```
+
+- ブラウザで[http://localhost:5173/](http://localhost:5173/)アクセス
+
 ## 画面一覧
 
 - 作成している画面は以下の通り。
@@ -27,15 +37,21 @@
 
 ![画面遷移図](docs/img/screen-flow.png)
 
-## サンプルAPの動作確認方法
+## 画面部品
+- 画面部品の[src/components/](src/components/)フォルダに入っています。
 
-- 開発用サーバーの起動
+| 画面部品 | 説明 | ソースコード |
+| ---- | ---- | ---- |
+| ヘッダ領域 | 画面ヘッダー部分の表示領域| [ソースコード](src/components/HeaderArea.vue) |
+| メイン領域 | メインの表示利用域 | [ソースコード](src/components/MainContainer.vue) |
+| テキスト入力 | テキスト入力部品 | [ソースコード](src/components/InputText.vue) |
+| パスワード入力 | パスワード入力部品 | [ソースコード](src/components/InputPassword.vue) |
+| TBD: 今後追加予定 |  |  |
+| テキスト入力（ログイン画面用） | ログイン画面のレイアウトに合わせたテキスト入力部品 | [ソースコード](src/components/LoginInputText.vue) |
+| パスワード入力（ログイン画面用） | ログイン画面のレイアウトに合わせたパスワード入力部品 | [ソースコード](src/components/LoginInputPassword.vue) |
+| 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/SubmitButton.vue) |
+| メニュー用ボタン | メニュー画面用のボタン | [ソースコード](src/components/MenuButton.vue) |
 
-```sh
-npm run dev
-```
-
-- ブラウザで[http://localhost:5173/](http://localhost:5173/)アクセス
 
 ## 追加したプラグイン・ライブラリ
 - Vueライブラリ
