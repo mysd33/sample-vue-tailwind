@@ -1,9 +1,25 @@
 # Vue.jsとTailwind CSSを使ったSPAサンプルAP
 
-- SPAのサンプルAPです。
-  - Vue.jsのプロジェクトを作成し、Tailwind CSSを導入しています。
+> [!WARNING]
+> 現在、作成中です。
 
-## TBD: サンプルAPの説明
+- SPAのサンプルAPです。Vue.jsのプロジェクトを作成し、Tailwind CSSを導入しています。
+
+- 比較のため、[Spring Boot + Thymeleaf + Bootstrap](https://github.com/mysd33/sample-bff/)のサンプルAPと同じ画面を作成しています。
+
+## 画面一覧
+
+- 作成している画面は以下の通り。
+
+| 画面名           | 説明                                                                                  | 画面イメージ                            |
+| ---------------- | ------------------------------------------------------------------------------------- | --------------------------------------- |
+| ログイン画面     | トップページの画面で、ユーザがログインするための画面。                                | [画面](docs/img/img/screen/screen1.png) |
+| メニュー画面     | メニュー画面。ログインユーザのロールによって管理者メニューの表示有無が切り替わる。    | [画面]()                                |
+| Todo管理画面     | Todoリストの一覧表示、登録、完了、削除といった操作を実施できる画面。                  | [画面]()                                |
+| Todo一括登録画面 | Todoリストを記載したCSVファイルをアップロードし、非同期でTodoリストを登録できる画面。 | [画面]()                                |
+| ユーザ一覧画面   | 登録されているユーザを一覧表示&CSVファイルダウンロードできる画面。                    | [画面]()                                |
+| ユーザ登録画面   | ユーザを新規登録するための画面。                                                      | [画面]()                                |
+| ユーザ詳細画面   | ユーザの詳細情報の表示と情報更新するための画面。                                      | [画面]()                                |
 
 ## APの動作確認方法
 
@@ -37,13 +53,13 @@ cd sample-vue-tailwind
 # Tailwind CSS等のインストール
 npm install -D tailwindcss postcss autoprefixer
 
-# tailwind.config.ts、postcss.config.jsの作成
-npx tailwindcss init -p --ts
+# tailwind.config.js、postcss.config.jsの作成
+npx tailwindcss init -p
 ```
 
-- tailwind.config.tsにコンテンツの指定を追加
+- tailwind.config.jsにコンテンツの指定を追加
 
-```ts
+```js
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
