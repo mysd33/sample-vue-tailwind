@@ -8,8 +8,12 @@ const title = 'TODO管理アプリ メニュー';
 
 const router = useRouter();
 
+
+// TODO: 仮の画面遷移
+const todo = (): void => {
+    router.push({ name: 'todo' });
+}
 const logout = (): void => {
-    // TODO: 仮でログインへ遷移
     router.push({ name: 'home' });
 };
 
@@ -19,7 +23,7 @@ const logout = (): void => {
     <HeaderArea v-bind:title="title" />
     <MainContainer>
         <div class="flex flex-col mx-auto">
-            <MenuButton>TODO管理</MenuButton>
+            <MenuButton v-on:click="todo">TODO管理</MenuButton>
             <MenuButton>TODO一括登録</MenuButton>
             <MenuButton>ユーザ管理</MenuButton>
             <MenuButton v-on:click="logout">ログアウト</MenuButton>
