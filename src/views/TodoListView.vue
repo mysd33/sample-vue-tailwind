@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import HeaderArea from '@/components/HeaderArea.vue';
-import MainContainer from '@/components/MainContainer.vue';
-import InputText from '@/components/InputText.vue';
-import SubmitButton from '@/components/SubmitButton.vue';
+import HeaderArea from '@/components/layout/HeaderArea.vue';
+import MainContainer from '@/components/layout/MainContainer.vue';
+import InputText from '@/components/form/InputText.vue';
+import SubmitButton from '@/components/button/SubmitButton.vue';
 
 const title = 'TODOリスト';
 

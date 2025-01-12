@@ -34,10 +34,10 @@ npm run dev
 | ログイン画面 | トップページの画面で、ユーザがログインするための画面。 | [画面](docs/img/screen/screen1.png) | [ソースコード](src/views/LoginView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/login/login.html) |
 | メニュー画面 | メニュー画面。ログインユーザのロールによって管理者メニューの表示有無が切り替わる。 | [画面](docs/img/screen/screen2.png) | [ソースコード](src/views/MenuView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/menu/menu.html) |
 | Todo管理画面 | Todoリストの一覧表示、登録、完了、削除といった操作を実施できる画面。 | [画面](docs/img/screen/screen3.png)  | [ソースコード](src/views/TodoListView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/todoList.html) |
-| Todo一括登録画面 | Todoリストを記載したCSVファイルをアップロードし、非同期でTodoリストを登録できる画面。 |  |  |  |
-| ユーザ一覧画面 | 登録されているユーザを一覧表示&CSVファイルダウンロードできる画面。 |  |  |  |
-| ユーザ登録画面 | ユーザを新規登録するための画面。 |  |  |  |
-| ユーザ詳細画面 | ユーザの詳細情報の表示と情報更新するための画面。 |  |  |  |
+| Todo一括登録画面 | Todoリストを記載したCSVファイルをアップロードし、非同期でTodoリストを登録できる画面。 |  |  | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/upload.html)  |
+| ユーザ一覧画面 | 登録されているユーザを一覧表示&CSVファイルダウンロードできる画面。 |  |  | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userList.html) |
+| ユーザ登録画面 | ユーザを新規登録するための画面。 |  |  | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/regist.html) |
+| ユーザ詳細画面 | ユーザの詳細情報の表示と情報更新するための画面。 |  |  | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userDetail.html) |
 
 ## 画面遷移図
 > [!WARNING]
@@ -50,16 +50,17 @@ npm run dev
 
 | 画面部品 | 説明 | ソースコード |
 | ---- | ---- | ---- |
-| ヘッダ領域 | 画面ヘッダー部分の表示領域| [ソースコード](src/components/HeaderArea.vue) |
-| メイン領域 | メインの表示利用域 | [ソースコード](src/components/MainContainer.vue) |
-| テキスト入力 | テキスト入力部品 | [ソースコード](src/components/InputText.vue) |
-| パスワード入力 | パスワード入力部品 | [ソースコード](src/components/InputPassword.vue) |
+| ヘッダ領域 | 画面ヘッダー部分の表示領域| [ソースコード](src/components/layout/HeaderArea.vue) |
+| メイン領域 | メインの表示領域 | [ソースコード](src/components/layout/MainContainer.vue) |
+| フォーム領域  | フォームの表示領域 | [ソースコード](src/components/form/FormArea.vue) |
+| テキスト入力 | テキスト入力部品 | [ソースコード](src/components/form/InputText.vue) |
+| パスワード入力 | パスワード入力部品 | [ソースコード](src/components/form/InputPassword.vue) |
 | TBD: 今後追加予定 |  |  |
-| テキスト入力（ログイン画面用） | ログイン画面のレイアウトに合わせたテキスト入力部品 | [ソースコード](src/components/LoginInputText.vue) |
-| パスワード入力（ログイン画面用） | ログイン画面のレイアウトに合わせたパスワード入力部品 | [ソースコード](src/components/LoginInputPassword.vue) |
-| 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/SubmitButton.vue) |
-| メニュー用ボタン | メニュー画面用のボタン | [ソースコード](src/components/MenuButton.vue) |
-
+| テキスト入力（ログイン画面用） | ログイン画面のレイアウトに合わせたテキスト入力部品 | [ソースコード](src/components/form/LoginInputText.vue) |
+| パスワード入力（ログイン画面用） | ログイン画面のレイアウトに合わせたパスワード入力部品 | [ソースコード](src/components/form/LoginInputPassword.vue) |
+| リンクボタン | 画面遷移のリンクボタン | [ソースコード](src/components/button/LinkButton.vue) |
+| メニュー用ボタン | メニュー画面のレイアウトに合わせたリンクボタン | [ソースコード](src/components/button/MenuButton.vue) |
+| 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/button/SubmitButton.vue) |
 
 ## 追加したプラグイン・ライブラリ
 - Vueライブラリ

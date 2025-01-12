@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import HeaderArea from '@/components/HeaderArea.vue';
-import MainContainer from '@/components/MainContainer.vue';
-import FormArea from '@/components/FormArea.vue';
-import LoginInputText from '@/components/LoginInputText.vue';
-import LoginInputPassword from '@/components/LoginInputPassword.vue';
-import SubmitButton from '@/components/SubmitButton.vue';
+import HeaderArea from '@/components/layout/HeaderArea.vue';
+import MainContainer from '@/components/layout/MainContainer.vue';
+import FormArea from '@/components/form/FormArea.vue';
+import LoginInputText from '@/components/form/LoginInputText.vue';
+import LoginInputPassword from '@/components/form/LoginInputPassword.vue';
+import SubmitButton from '@/components/button/SubmitButton.vue';
 import { useRouter } from 'vue-router';
 
 const title = 'TODO管理アプリ';

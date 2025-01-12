@@ -19,11 +19,23 @@ const height = computed(() => {
     }
 });
 
+const textSize = computed(() => {
+    switch (props.size) {
+        case 'sm':
+            return 'text-sm';
+        case 'md':
+            return 'text-md';
+        case 'lg':
+            return 'text-xl';
+        default:
+            return 'text-md';
+    }
+});
+
 </script>
 
 <template>
-    <button type="submit" class="px-3 rounded-md bg-blue-600 hover:bg-blue-700 text-md text-neutral-50"
-        v-bind:class="height">
+    <button class="px-3 rounded-md bg-blue-600 hover:bg-blue-700 text-neutral-50" v-bind:class="[height, textSize]">
         <slot></slot>
     </button>
 </template>
