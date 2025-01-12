@@ -5,6 +5,7 @@ import TableArea from '@/components/table/TableArea.vue';
 import TableHeaderRow from '@/components/table/TableHeaderRow.vue';
 import TableHeaderCol from '@/components/table/TableHeaderCol.vue';
 import TableDataRow from '@/components/table/TableDataRow.vue';
+import PaginationLink from '@/components/pagination/PaginationLink.vue';
 import LinkButton from '@/components/button/LinkButton.vue';
 import TableDataCol from '@/components/table/TableDataCol.vue';
 const title = 'ユーザ管理';
@@ -61,11 +62,32 @@ const title = 'ユーザ管理';
                         <LinkButton>詳細</LinkButton>
                     </TableDataCol>
                 </TableDataRow>
+                <TableDataRow>
+                    <TableDataCol>4</TableDataCol>
+                    <TableDataCol>tamura3@xxx.co.jp</TableDataCol>
+                    <TableDataCol>田村3</TableDataCol>
+                    <TableDataCol>1986/11/05</TableDataCol>
+                    <TableDataCol>38</TableDataCol>
+                    <TableDataCol>-</TableDataCol>
+                    <TableDataCol>
+                        <LinkButton>詳細</LinkButton>
+                    </TableDataCol>
+                </TableDataRow>
+                <TableDataRow>
+                    <TableDataCol>5</TableDataCol>
+                    <TableDataCol>tamura4@xxx.co.jp</TableDataCol>
+                    <TableDataCol>田村4</TableDataCol>
+                    <TableDataCol>1986/11/05</TableDataCol>
+                    <TableDataCol>38</TableDataCol>
+                    <TableDataCol>-</TableDataCol>
+                    <TableDataCol>
+                        <LinkButton>詳細</LinkButton>
+                    </TableDataCol>
+                </TableDataRow>
             </template>
         </TableArea>
-        <div class="text-left my-2">
-            TBD: ページング
-        </div>
+        <PaginationLink />
+
         <div class="text-left my-2">
             <label>合計: 11件</label>
         </div>
