@@ -5,7 +5,11 @@
 
 - SPAのサンプルAPです。Vue.jsのプロジェクトを作成し、Tailwind CSSを導入しています。
 
-- 比較のため、[Spring Boot + Thymeleaf + BootstrapのサンプルAP](https://github.com/mysd33/sample-bff/)と同じ画面を作成しています。
+- Vue.jsやReactのようなSPAのフレームワークを使ったコンポーネント指向の開発は、従来のサーバレンダリング・MPAの開発とは異なります。
+
+- また、CSSは従来、セマンティックなクラス名を使ってスタイリングを行っており、CSSフレームワークのBootstrapもどちらかというとセマンティックな考え方がメインですが、Tailwind CSSは、ユーティリティファーストの考え方にもとづき、ユーティリティクラスを使ってスタイリングを行い、コンポーネントレベルの抽象化は、Vue.jsやReactのコンポーネントで行うという考え方になっています。
+
+- このサンプルAPでは、2つの考え方の違いによる実装を比較するため、[Spring Boot + Thymeleaf + BootstrapのサンプルAP](https://github.com/mysd33/sample-bff/)と同じ画面を作成して、ソースコードを比較できるようにしてみようと思います。
 
 ## サンプルAPの動作確認方法
 
@@ -18,6 +22,10 @@ npm run dev
 - ブラウザで[http://localhost:5173/](http://localhost:5173/)アクセス
 
 ## 画面一覧
+
+> [!WARNING]
+> 現在、作成中です。Vue.jsとTailwind CSSを使ったSPAの画面は、まだモックアップレベルの実装なので、比較の際、注意してください。
+
 
 - 作成している画面は以下の通り。
 
