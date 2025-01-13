@@ -22,11 +22,10 @@ npm run dev
 - ブラウザで[http://localhost:5173/](http://localhost:5173/)アクセス
 
 ## 画面一覧
-
 > [!WARNING]
 > 現在、作成中です。Vue.jsとTailwind CSSを使ったSPAの画面は、まだモックアップレベルの実装なので、比較の際、注意してください。
 
-
+- [src/views](src/views/)フォルダに入っています。
 - 作成している画面は以下の通り。
 
 | 画面名 | 説明 | 画面イメージ | Vue+TailWindソースコード | （参考比較）Thymeleaf+Bootstrapソースコード |
@@ -36,31 +35,37 @@ npm run dev
 | Todo管理画面 | Todoリストの一覧表示、登録、完了、削除といった操作を実施できる画面。 | [画面](docs/img/screen/screen3.png)  | [ソースコード](src/views/TodoListView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/todoList.html) |
 | Todo一括登録画面 | Todoリストを記載したCSVファイルをアップロードし、非同期でTodoリストを登録できる画面。 |  |  | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/upload.html)  |
 | ユーザ一覧画面 | 登録されているユーザを一覧表示&CSVファイルダウンロードできる画面。 | [画面](docs/img/screen/screen5.png) | [ソースコード](src/views/UserListView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userList.html) |
-| ユーザ登録画面 | ユーザを新規登録するための画面。 |  |  | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/regist.html) |
-| ユーザ詳細画面 | ユーザの詳細情報の表示と情報更新するための画面。 |  |  | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userDetail.html) |
+| ユーザ登録画面 | ユーザを新規登録するための画面。 | [画面](docs/img/screen/screen6.png) | [ソースコード](src/views/UserRegisterView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/regist.html) |
+| ユーザ詳細画面 | ユーザの詳細情報の表示と情報更新するための画面。 | [画面](docs/img/screen/screen7.png) | [ソースコード](src/views/UserDetailView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userDetail.html) |
 
 ## 画面遷移図
 > [!WARNING]
 > 現在、作成中のため、全ての画面はありません。
 
+- [src/router/index.ts](src/router/index.ts)に画面遷移の設定が記述されています。
+
 ![画面遷移図](docs/img/screen-flow.png)
 
 ## 画面部品
-- 画面部品の[src/components/](src/components/)フォルダに入っています。
+- [src/components/](src/components/)フォルダに入っています。
+- 作成している画面部品は以下の通り。
 
 | 画面部品 | 説明 | ソースコード |
 | ---- | ---- | ---- |
 | ヘッダ領域 | 画面ヘッダー部分の表示領域| [ソースコード](src/components/layout/HeaderArea.vue) |
 | メイン領域 | メインの表示領域 | [ソースコード](src/components/layout/MainContainer.vue) |
 | フォーム領域  | フォームの表示領域 | [ソースコード](src/components/form/FormArea.vue) |
-| テーブル | テーブルの表示領域、ヘッダー部、データ部 | [ソースコード](src/components/table/) |
+| 入力項目領域  | フォームの入力項目表示領域 | [ソースコード](src/components/form/InputItem.vue) |
 | テキスト入力 | テキスト入力部品 | [ソースコード](src/components/form/InputText.vue) |
 | テキスト入力（ログイン画面用） | ログイン画面のレイアウトに合わせたテキスト入力部品 | [ソースコード](src/components/form/LoginInputText.vue) |
 | パスワード入力 | パスワード入力部品 | [ソースコード](src/components/form/InputPassword.vue) |
 | パスワード入力（ログイン画面用） | ログイン画面のレイアウトに合わせたパスワード入力部品 | [ソースコード](src/components/form/LoginInputPassword.vue) |
+| 日付入力 | テキスト入力部品 | [ソースコード](src/components/form/InputDate.vue) |
+| ボタン領域 | ボタンを並べて表示する領域 | [ソースコード](src/components/button/ButtonArea.vue) |
+| メニューボタン | メニュー画面のレイアウトに合わせたリンクボタン | [ソースコード](src/components/button/MenuButton.vue) |
 | リンクボタン | 画面遷移のリンクボタン | [ソースコード](src/components/button/LinkButton.vue) |
-| メニュー用ボタン | メニュー画面のレイアウトに合わせたリンクボタン | [ソースコード](src/components/button/MenuButton.vue) |
 | 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/button/SubmitButton.vue) |
+| テーブル | テーブルの表示領域、ヘッダー部、データ部 | [ソースコード](src/components/table/) |
 | ページネーションリンク | ページネーションのリンクボタン | [ソースコード](src/components/pagination/PaginationLink.vue) |
 | TBD: 今後追加予定 |  |  |
 

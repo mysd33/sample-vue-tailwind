@@ -4,6 +4,7 @@ import { computed } from 'vue';
 interface Props {
     size?: string;
     outline?: boolean;
+    danger?: boolean;
 }
 const props = defineProps<Props>();
 
@@ -34,6 +35,9 @@ const textSize = computed(() => {
 });
 
 const colorSet = computed(() => {
+    if (props.danger) {
+        return "bg-red-600 hover:bg-red-700 text-white";
+    }
     if (props.outline) {
         return "border border-blue-600 bg-white text-blue-600 hover:border-transparent hover:bg-blue-600 hover:text-white";
     }

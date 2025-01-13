@@ -34,6 +34,17 @@ const router = createRouter({
       name: 'newUser',
       component: () => import('@/views/UserRegisterView.vue'),
     },
+    {
+      // ユーザ詳細画面
+      path: '/users/:id',
+      name: 'userDetail',
+      component: () => import('@/views/UserDetailView.vue'),
+      props: (routes) => {
+        return {
+          id: routes.params.id,
+        }
+      },
+    },
   ],
 })
 

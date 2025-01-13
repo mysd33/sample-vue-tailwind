@@ -20,6 +20,10 @@ const onBackButtonClick = () => {
 const onNewUserButonClicked = () => {
     router.push({ name: 'newUser' });
 }
+const onDetailButtonClicked = () => {
+    // 仮のidで遷移
+    router.push({ name: 'userDetail', params: { id: 1 } });
+}
 
 </script>
 
@@ -50,7 +54,7 @@ const onNewUserButonClicked = () => {
                     <TableDataCol>35</TableDataCol>
                     <TableDataCol>○</TableDataCol>
                     <TableDataCol>
-                        <LinkButton>詳細</LinkButton>
+                        <LinkButton v-on:click="onDetailButtonClicked">詳細</LinkButton>
                     </TableDataCol>
                 </TableDataRow>
                 <TableDataRow>
@@ -61,7 +65,7 @@ const onNewUserButonClicked = () => {
                     <TableDataCol>38</TableDataCol>
                     <TableDataCol>-</TableDataCol>
                     <TableDataCol>
-                        <LinkButton>詳細</LinkButton>
+                        <LinkButton v-on:click="onDetailButtonClicked">詳細</LinkButton>
                     </TableDataCol>
                 </TableDataRow>
                 <TableDataRow>
@@ -83,7 +87,7 @@ const onNewUserButonClicked = () => {
                     <TableDataCol>38</TableDataCol>
                     <TableDataCol>-</TableDataCol>
                     <TableDataCol>
-                        <LinkButton>詳細</LinkButton>
+                        <LinkButton v-on:click="onDetailButtonClicked">詳細</LinkButton>
                     </TableDataCol>
                 </TableDataRow>
                 <TableDataRow>
@@ -94,7 +98,7 @@ const onNewUserButonClicked = () => {
                     <TableDataCol>38</TableDataCol>
                     <TableDataCol>-</TableDataCol>
                     <TableDataCol>
-                        <LinkButton>詳細</LinkButton>
+                        <LinkButton v-on:click="onDetailButtonClicked">詳細</LinkButton>
                     </TableDataCol>
                 </TableDataRow>
             </template>

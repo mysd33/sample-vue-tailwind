@@ -1,4 +1,12 @@
+<script setup lang="ts">
+import InputText from './InputText.vue';
+interface Props {
+    focus?: boolean;
+}
+
+const props = defineProps<Props>();
+</script>
+
 <template>
-    <input type="text"
-        class="h-12 z-0 focus:z-10 mb-[-1px] rounded-t-lg border-gray-300 shadow-sm focus:border-blue-400 focus:ring focus:ring-blue-300/50" />
+    <InputText v-bind:focus="props.focus" class="h-12 z-0 focus:z-10 mb-[-1px] rounded-none rounded-t-lg" />
 </template>

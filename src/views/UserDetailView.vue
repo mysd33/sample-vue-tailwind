@@ -13,6 +13,11 @@ import SubmitButton from '@/components/button/SubmitButton.vue';
 
 import { useRouter } from 'vue-router';
 
+interface Props {
+    id: string;
+}
+defineProps<Props>();
+
 const title = 'TODO管理アプリ';
 
 const router = useRouter();
@@ -37,28 +42,32 @@ const onSubmit = (): void => {
                 <label for="userId">ユーザーID
                     <RequiredBadge />
                 </label>
-                <InputText type="text" id="userId" name="userId" v-bind:focus="true" />
+                <!-- TODO: データバインド -->
+                <InputText type="text" id="userId" name="userId" v-bind:readonly="true" value="yamada@xxx.co.jp" />
             </InputItem>
             <InputItem>
                 <label for="password">パスワード
                     <RequiredBadge />
                 </label>
-                <InputPassword id="password" name="password" />
+                <InputPassword id="password" name="password" v-bind:focus="true" />
             </InputItem>
             <InputItem>
                 <label for="userName">ユーザー名
                     <RequiredBadge />
                 </label>
-                <InputText type="text" id="userName" name="userName" />
+                <!-- TODO: データバインド -->
+                <InputText type="text" id="userName" name="userName" value="山田太郎" />
             </InputItem>
             <InputItem>
                 <label for="birthday">生年月日
                     <RequiredBadge />
                 </label>
-                <InputDate id="birthday" name="birthday" />
+                <!-- TODO: データバインド -->
+                <InputDate id="birthday" name="birthday" value="1990-01-01" />
             </InputItem>
             <ButtonArea>
-                <SubmitButton>ユーザ登録</SubmitButton>
+                <SubmitButton>ユーザ更新</SubmitButton>
+                <SubmitButton v-bind:danger="true">ユーザ削除</SubmitButton>
             </ButtonArea>
         </FormArea>
     </MainContainer>
