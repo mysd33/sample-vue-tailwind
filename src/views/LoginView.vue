@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import HeaderArea from '@/components/layout/HeaderArea.vue';
 import MainContainer from '@/components/layout/MainContainer.vue';
-import FormArea from '@/components/form/FormArea.vue';
+import LoginFormArea from '@/components/form/LoginFormArea.vue';
 import LoginInputText from '@/components/form/LoginInputText.vue';
 import LoginInputPassword from '@/components/form/LoginInputPassword.vue';
 import SubmitButton from '@/components/button/SubmitButton.vue';
@@ -21,12 +21,12 @@ const onSubmit = (): void => {
 <template>
     <HeaderArea v-bind:title="title" />
     <MainContainer>
-        <FormArea v-on:submit.prevent="onSubmit">
+        <LoginFormArea v-on:submit="onSubmit">
             <label for="userId" class="sr-only">ユーザーID</label>
             <LoginInputText type="text" id="userId" name="userId" placeholder="ユーザID" />
             <label for="password" class="sr-only">パスワード</label>
             <LoginInputPassword type="password" id="password" name="password" placeholder="パスワード" />
             <SubmitButton size="lg" class="mt-3">ログイン</SubmitButton>
-        </FormArea>
+        </LoginFormArea>
     </MainContainer>
 </template>

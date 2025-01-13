@@ -9,10 +9,17 @@ defineProps<Props>();
 </script>
 
 <template>
-    <header class="bg-white flex p-5 shadow-md">
-        <LogoIcon />
-        <h3 class="text-2xl ml-2">
-            {{ title }}
-        </h3>
+    <header class="bg-white flex flex-row p-5 shadow-md">
+        <div class="flex">
+            <LogoIcon />
+            <h3 class="text-2xl ml-2">
+                {{ title }}
+            </h3>
+        </div>
+        <div class="relative ml-auto">
+            <!-- TODO: ログイン済みの場合に、ユーザ名を表示 -->
+            <!-- ようこそ, <strong>山田太郎</strong>さん! -->
+            <slot></slot>
+        </div>
     </header>
 </template>

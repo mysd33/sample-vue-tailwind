@@ -25,8 +25,14 @@ const router = createRouter({
     {
       // ユーザー管理画面
       path: '/users',
-      name: 'users',
+      name: 'userList',
       component: () => import('@/views/UserListView.vue'),
+    },
+    {
+      // ユーザ登録画面
+      path: '/newuser',
+      name: 'newUser',
+      component: () => import('@/views/UserRegisterView.vue'),
     },
   ],
 })

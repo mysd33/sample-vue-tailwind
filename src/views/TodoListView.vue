@@ -3,8 +3,15 @@ import HeaderArea from '@/components/layout/HeaderArea.vue';
 import MainContainer from '@/components/layout/MainContainer.vue';
 import InputText from '@/components/form/InputText.vue';
 import SubmitButton from '@/components/button/SubmitButton.vue';
+import LinkButton from '@/components/button/LinkButton.vue';
+import { useRouter } from 'vue-router';
 
 const title = 'TODOリスト';
+const router = useRouter();
+
+const onBackButtonClick = () => {
+    router.push('menu');
+};
 
 const createTodo = () => {
     console.log('TODOを作成します');
@@ -13,7 +20,9 @@ const createTodo = () => {
 </script>
 
 <template>
-    <HeaderArea v-bind:title="title" />
+    <HeaderArea v-bind:title="title">
+        <LinkButton v-bind:outline="true" v-on:click="onBackButtonClick">メニューに戻る</LinkButton>
+    </HeaderArea>
     <MainContainer>
         <form class="mb-3 flex flex-row gap-10" v-on:submit.prevent="createTodo">
             <InputText id="todoTitle" name="todoTitle" class="basis-2/3" />

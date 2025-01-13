@@ -10,13 +10,13 @@ const router = useRouter();
 
 
 // TODO: 仮の画面遷移
-const forwardToTodoList = (): void => {
+const onTodoMenuClicked = (): void => {
     router.push({ name: 'todo' });
 }
-const forwardToUserList = (): void => {
-    router.push({ name: 'users' });
+const onUsersMenuClicked = (): void => {
+    router.push({ name: 'userList' });
 }
-const logout = (): void => {
+const onLogoutMenuClicked = (): void => {
     router.push({ name: 'home' });
 };
 
@@ -26,10 +26,10 @@ const logout = (): void => {
     <HeaderArea v-bind:title="title" />
     <MainContainer>
         <div class="flex flex-col mx-auto">
-            <MenuButton v-on:click="forwardToTodoList">TODO管理</MenuButton>
+            <MenuButton v-on:click="onTodoMenuClicked">TODO管理</MenuButton>
             <MenuButton>TODO一括登録</MenuButton>
-            <MenuButton v-on:click="forwardToUserList">ユーザ管理</MenuButton>
-            <MenuButton v-on:click="logout">ログアウト</MenuButton>
+            <MenuButton v-on:click="onUsersMenuClicked">ユーザ管理</MenuButton>
+            <MenuButton v-on:click="onLogoutMenuClicked">ログアウト</MenuButton>
         </div>
     </MainContainer>
 </template>

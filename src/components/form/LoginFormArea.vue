@@ -5,7 +5,7 @@ defineEmits(['submit']);
 </script>
 
 <template>
-    <form class="grid grid-cols-2 gap-6 text-left" v-on:submit.prevent="$emit('submit')">
+    <form class="flex flex-col max-w-80 mx-auto" v-on:submit.prevent="$emit('submit')">
         <slot></slot>
     </form>
 </template>

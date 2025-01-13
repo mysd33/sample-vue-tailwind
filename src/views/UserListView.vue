@@ -7,13 +7,26 @@ import TableHeaderCol from '@/components/table/TableHeaderCol.vue';
 import TableDataRow from '@/components/table/TableDataRow.vue';
 import PaginationLink from '@/components/pagination/PaginationLink.vue';
 import LinkButton from '@/components/button/LinkButton.vue';
+import ButtonArea from '@/components/button/ButtonArea.vue';
 import TableDataCol from '@/components/table/TableDataCol.vue';
+import { useRouter } from 'vue-router';
+
 const title = 'ユーザ管理';
+const router = useRouter();
+
+const onBackButtonClick = () => {
+    router.push('menu');
+};
+const onNewUserButonClicked = () => {
+    router.push({ name: 'newUser' });
+}
 
 </script>
 
 <template>
-    <HeaderArea v-bind:title="title" />
+    <HeaderArea v-bind:title="title">
+        <LinkButton v-bind:outline="true" v-on:click="onBackButtonClick">メニューに戻る</LinkButton>
+    </HeaderArea>
     <MainContainer>
         <!-- TODO: テーブルの部品化検討中 -->
         <TableArea>
@@ -92,9 +105,9 @@ const title = 'ユーザ管理';
             <label>合計: 11件</label>
         </div>
         <br />
-        <div class="flex flex-row gap-2">
+        <ButtonArea>
             <LinkButton>CSV出力</LinkButton>
-            <LinkButton>新規ユーザ登録</LinkButton>
-        </div>
+            <LinkButton v-on:click="onNewUserButonClicked">新規ユーザ登録</LinkButton>
+        </ButtonArea>
     </MainContainer>
 </template>

@@ -3,6 +3,7 @@ import { computed } from 'vue';
 
 interface Props {
     size?: string;
+    outline?: boolean;
 }
 const props = defineProps<Props>();
 
@@ -32,10 +33,19 @@ const textSize = computed(() => {
     }
 });
 
+const colorSet = computed(() => {
+    if (props.outline) {
+        return "border border-blue-600 bg-white text-blue-600 hover:border-transparent hover:bg-blue-600 hover:text-white";
+    }
+    return "bg-blue-600 hover:bg-blue-700 text-white";
+})
+
+defineEmits(['click']);
+
 </script>
 
 <template>
-    <button class="px-3 rounded-md bg-blue-600 hover:bg-blue-700 text-neutral-50" v-bind:class="[height, textSize]">
+    <button class="px-3 rounded-md" v-bind:class="[height, textSize, colorSet]" v-on:click="$emit('click')">
         <slot></slot>
     </button>
 </template>
