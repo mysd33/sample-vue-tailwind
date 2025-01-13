@@ -43,7 +43,7 @@ const onSubmit = (): void => {
                     <RequiredBadge />
                 </label>
                 <!-- TODO: データバインド -->
-                <InputText type="text" id="userId" name="userId" v-bind:readonly="true" value="yamada@xxx.co.jp" />
+                <InputText id="userId" name="userId" v-bind:readonly="true" value="yamada@xxx.co.jp" />
             </InputItem>
             <InputItem>
                 <label for="password">パスワード
@@ -56,7 +56,7 @@ const onSubmit = (): void => {
                     <RequiredBadge />
                 </label>
                 <!-- TODO: データバインド -->
-                <InputText type="text" id="userName" name="userName" value="山田太郎" />
+                <InputText id="userName" name="userName" value="山田太郎" />
             </InputItem>
             <InputItem>
                 <label for="birthday">生年月日

@@ -37,7 +37,7 @@ const onSubmit = (): void => {
                 <label for="userId">ユーザーID
                     <RequiredBadge />
                 </label>
-                <InputText type="text" id="userId" name="userId" v-bind:focus="true" />
+                <InputText id="userId" name="userId" v-bind:focus="true" />
             </InputItem>
             <InputItem>
                 <label for="password">パスワード
@@ -49,7 +49,7 @@ const onSubmit = (): void => {
                 <label for="userName">ユーザー名
                     <RequiredBadge />
                 </label>
-                <InputText type="text" id="userName" name="userName" />
+                <InputText id="userName" name="userName" />
             </InputItem>
             <InputItem>
                 <label for="birthday">生年月日

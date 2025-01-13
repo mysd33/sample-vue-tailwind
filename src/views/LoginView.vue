@@ -23,9 +23,9 @@ const onSubmit = (): void => {
     <MainContainer>
         <LoginFormArea v-on:submit="onSubmit">
             <label for="userId" class="sr-only">ユーザーID</label>
-            <LoginInputText type="text" id="userId" name="userId" placeholder="ユーザID" v-bind:focus="true" />
+            <LoginInputText id="userId" name="userId" placeholder="ユーザID" v-bind:focus="true" />
             <label for="password" class="sr-only">パスワード</label>
-            <LoginInputPassword type="password" id="password" name="password" placeholder="パスワード" />
+            <LoginInputPassword id="password" name="password" placeholder="パスワード" />
             <SubmitButton size="lg" class="mt-3">ログイン</SubmitButton>
         </LoginFormArea>
     </MainContainer>

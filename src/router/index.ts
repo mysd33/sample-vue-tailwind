@@ -23,6 +23,12 @@ const router = createRouter({
       component: () => import('@/views/TodoListView.vue'),
     },
     {
+      // TODO一括登録
+      path: '/todoFile/upload',
+      name: 'todoFileUpload',
+      component: () => import('@/views/TodoFileUploadView.vue'),
+    },
+    {
       // ユーザー管理画面
       path: '/users',
       name: 'userList',

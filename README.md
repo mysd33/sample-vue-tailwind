@@ -33,7 +33,7 @@ npm run dev
 | ログイン画面 | トップページの画面で、ユーザがログインするための画面。 | [画面](docs/img/screen/screen1.png) | [ソースコード](src/views/LoginView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/login/login.html) |
 | メニュー画面 | メニュー画面。ログインユーザのロールによって管理者メニューの表示有無が切り替わる。 | [画面](docs/img/screen/screen2.png) | [ソースコード](src/views/MenuView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/menu/menu.html) |
 | Todo管理画面 | Todoリストの一覧表示、登録、完了、削除といった操作を実施できる画面。 | [画面](docs/img/screen/screen3.png)  | [ソースコード](src/views/TodoListView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/todoList.html) |
-| Todo一括登録画面 | Todoリストを記載したCSVファイルをアップロードし、非同期でTodoリストを登録できる画面。 |  |  | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/upload.html)  |
+| Todo一括登録画面 | Todoリストを記載したCSVファイルをアップロードし、非同期でTodoリストを登録できる画面。 | [画面](docs/img/screen/screen4.png) | [ソースコード](src/views/TodoFileUploadView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/upload.html)  |
 | ユーザ一覧画面 | 登録されているユーザを一覧表示&CSVファイルダウンロードできる画面。 | [画面](docs/img/screen/screen5.png) | [ソースコード](src/views/UserListView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userList.html) |
 | ユーザ登録画面 | ユーザを新規登録するための画面。 | [画面](docs/img/screen/screen6.png) | [ソースコード](src/views/UserRegisterView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/regist.html) |
 | ユーザ詳細画面 | ユーザの詳細情報の表示と情報更新するための画面。 | [画面](docs/img/screen/screen7.png) | [ソースコード](src/views/UserDetailView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userDetail.html) |
@@ -60,15 +60,14 @@ npm run dev
 | テキスト入力（ログイン画面用） | ログイン画面のレイアウトに合わせたテキスト入力部品 | [ソースコード](src/components/form/LoginInputText.vue) |
 | パスワード入力 | パスワード入力部品 | [ソースコード](src/components/form/InputPassword.vue) |
 | パスワード入力（ログイン画面用） | ログイン画面のレイアウトに合わせたパスワード入力部品 | [ソースコード](src/components/form/LoginInputPassword.vue) |
-| 日付入力 | テキスト入力部品 | [ソースコード](src/components/form/InputDate.vue) |
+| 日付入力 | 日付入力部品 | [ソースコード](src/components/form/InputDate.vue) |
+| ファイル入力 | ファイルアップロード入力部品 | [ソースコード](src/components/form/InputFile.vue) |
 | ボタン領域 | ボタンを並べて表示する領域 | [ソースコード](src/components/button/ButtonArea.vue) |
 | メニューボタン | メニュー画面のレイアウトに合わせたリンクボタン | [ソースコード](src/components/button/MenuButton.vue) |
 | リンクボタン | 画面遷移のリンクボタン | [ソースコード](src/components/button/LinkButton.vue) |
 | 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/button/SubmitButton.vue) |
 | テーブル | テーブルの表示領域、ヘッダー部、データ部 | [ソースコード](src/components/table/) |
 | ページネーションリンク | ページネーションのリンクボタン | [ソースコード](src/components/pagination/PaginationLink.vue) |
-| TBD: 今後追加予定 |  |  |
-
 
 ## 追加したプラグイン・ライブラリ
 - Vueライブラリ

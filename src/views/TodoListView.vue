@@ -10,7 +10,7 @@ const title = 'TODOリスト';
 const router = useRouter();
 
 const onBackButtonClick = () => {
-    router.push('menu');
+    router.push({ name: 'menu' });
 };
 
 const createTodo = () => {

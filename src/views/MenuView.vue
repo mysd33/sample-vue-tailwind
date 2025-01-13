@@ -8,10 +8,12 @@ const title = 'TODO管理アプリ メニュー';
 
 const router = useRouter();
 
-
-// TODO: 仮の画面遷移
 const onTodoMenuClicked = (): void => {
     router.push({ name: 'todo' });
+}
+
+const onTodoFileUploadMenuClicked = (): void => {
+    router.push({ name: 'todoFileUpload' });
 }
 const onUsersMenuClicked = (): void => {
     router.push({ name: 'userList' });
@@ -27,7 +29,7 @@ const onLogoutMenuClicked = (): void => {
     <MainContainer>
         <div class="flex flex-col mx-auto">
             <MenuButton v-on:click="onTodoMenuClicked">TODO管理</MenuButton>
-            <MenuButton>TODO一括登録</MenuButton>
+            <MenuButton v-on:click="onTodoFileUploadMenuClicked">TODO一括登録</MenuButton>
             <MenuButton v-on:click="onUsersMenuClicked">ユーザ管理</MenuButton>
             <MenuButton v-on:click="onLogoutMenuClicked">ログアウト</MenuButton>
         </div>

@@ -15,7 +15,7 @@ const title = 'ユーザ管理';
 const router = useRouter();
 
 const onBackButtonClick = () => {
-    router.push('menu');
+    router.push({ name: 'menu' });
 };
 const onNewUserButonClicked = () => {
     router.push({ name: 'newUser' });
