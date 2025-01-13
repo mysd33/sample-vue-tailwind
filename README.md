@@ -23,7 +23,10 @@ npm run dev
 
 ## 画面一覧
 > [!WARNING]
-> 現在、作成中です。Vue.jsとTailwind CSSを使ったSPAの画面は、まだモックアップレベルの実装なので、比較の際、注意してください。
+> 現在、作成中です。Vue.jsとTailwind CSSを使ったSPAの画面は、まだモックアップレベルの実装なので、比較の際、ご注意ください。
+
+> [!NOTE]
+> 比較として、完全にHTML、CSSを一致させているわけではなく、だいたいのレイアウト、色が一致するようにしているだけです。ご注意ください。
 
 - [src/views](src/views/)フォルダに入っています。
 - 作成している画面は以下の通り。
@@ -56,6 +59,7 @@ npm run dev
 | メイン領域 | メインの表示領域 | [ソースコード](src/components/layout/MainContainer.vue) |
 | フォーム領域  | フォームの表示領域 | [ソースコード](src/components/form/FormArea.vue) |
 | 入力項目領域  | フォームの入力項目表示領域 | [ソースコード](src/components/form/InputItem.vue) |
+| 入力の基底部品 | 入力部品共通の基底のコンポーネント | [ソースコード](src/components/form/BaseInput.vue) |
 | テキスト入力 | テキスト入力部品 | [ソースコード](src/components/form/InputText.vue) |
 | テキスト入力（ログイン画面用） | ログイン画面のレイアウトに合わせたテキスト入力部品 | [ソースコード](src/components/form/LoginInputText.vue) |
 | パスワード入力 | パスワード入力部品 | [ソースコード](src/components/form/InputPassword.vue) |
@@ -64,6 +68,7 @@ npm run dev
 | トグルスイッチ | トグルの入力部品　| [ソースコード](src/components/form/ToggleSwitch.vue) |
 | ファイル入力 | ファイルアップロード入力部品 | [ソースコード](src/components/form/InputFile.vue) |
 | ボタン領域 | ボタンを並べて表示する領域 | [ソースコード](src/components/button/ButtonArea.vue) |
+| ボタンの基底部品 | ボタン共通の基底のコンポーネント| [ソースコード](src/components/button/BaseButton.vue) |
 | メニューボタン | メニュー画面のレイアウトに合わせたリンクボタン | [ソースコード](src/components/button/MenuButton.vue) |
 | リンクボタン | 画面遷移のリンクボタン | [ソースコード](src/components/button/LinkButton.vue) |
 | 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/button/SubmitButton.vue) |
