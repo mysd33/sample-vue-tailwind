@@ -61,6 +61,7 @@ npm run dev
 | パスワード入力 | パスワード入力部品 | [ソースコード](src/components/form/InputPassword.vue) |
 | パスワード入力（ログイン画面用） | ログイン画面のレイアウトに合わせたパスワード入力部品 | [ソースコード](src/components/form/LoginInputPassword.vue) |
 | 日付入力 | 日付入力部品 | [ソースコード](src/components/form/InputDate.vue) |
+| トグルスイッチ | トグルの入力部品　| [ソースコード](src/components/form/ToggleSwitch.vue) |
 | ファイル入力 | ファイルアップロード入力部品 | [ソースコード](src/components/form/InputFile.vue) |
 | ボタン領域 | ボタンを並べて表示する領域 | [ソースコード](src/components/button/ButtonArea.vue) |
 | メニューボタン | メニュー画面のレイアウトに合わせたリンクボタン | [ソースコード](src/components/button/MenuButton.vue) |
@@ -73,11 +74,12 @@ npm run dev
 - Vueライブラリ
     - [vue-router](https://router.vuejs.org/)
     - [pinia](https://pinia.vuejs.org/)        
-    - [@heroicons/vue](https://github.com/tailwindlabs/heroicons?tab=readme-ov-file#vue)
+    - [Headless UI](https://headlessui.com/v1/vue)
+    - [@heroicons/vue](https://github.com/tailwindlabs/heroicons?tab=readme-ov-file#vue)    
 
 - テストツール
     - [Vitest](https://vitest.dev/)
-    - [Cypress]()
+    - [Cypress](https://www.cypress.io/)
 
 - TailWind CSSプラグイン
     - [@tailwindcss/forms](https://www.cypress.io/)

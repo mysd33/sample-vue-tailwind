@@ -6,12 +6,14 @@ import InputItem from '@/components/form/InputItem.vue';
 import InputText from '@/components/form/InputText.vue';
 import InputPassword from '@/components/form/InputPassword.vue';
 import InputDate from '@/components/form/InputDate.vue';
+import ToggleSwitch from '@/components/form/ToggleSwitch.vue';
 import RequiredBadge from '@/icons/RequiredBadge.vue';
 import ButtonArea from '@/components/button/ButtonArea.vue';
 import LinkButton from '@/components/button/LinkButton.vue';
 import SubmitButton from '@/components/button/SubmitButton.vue';
 
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 interface Props {
     id: string;
@@ -21,6 +23,9 @@ defineProps<Props>();
 const title = 'TODO管理アプリ';
 
 const router = useRouter();
+
+// TODO: 仮のバインド
+const isAdmin = ref(true);
 
 const onBackButtonClick = () => {
     router.push({ name: 'userList' });
@@ -65,6 +70,11 @@ const onSubmit = (): void => {
                 <!-- TODO: データバインド -->
                 <InputDate id="birthday" name="birthday" value="1990-01-01" />
             </InputItem>
+            <InputItem>
+                <!-- TODO: データバインド -->
+                <ToggleSwitch v-bind:enabled="isAdmin">管理者</ToggleSwitch>
+            </InputItem>
+            <InputItem></InputItem>
             <ButtonArea>
                 <SubmitButton>ユーザ更新</SubmitButton>
                 <SubmitButton v-bind:danger="true">ユーザ削除</SubmitButton>
