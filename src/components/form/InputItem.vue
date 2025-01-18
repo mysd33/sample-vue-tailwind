@@ -4,14 +4,18 @@ import RequiredBadge from '@/icons/RequiredBadge.vue';
 interface Props {
     label?: string,
     labelFor?: string,
+    srOnly?: boolean,
     required?: boolean,
+    errors?: string[],
 }
-defineProps<Props>();
+const props = defineProps<Props>();
+
+const srOnly = props.srOnly ? 'sr-only' : '';
 
 </script>
 <template>
     <div class="flex flex-col">
-        <label v-if="label" :for="labelFor">{{ label }}
+        <label v-if="label" :for="labelFor" :class="srOnly">{{ label }}
             <RequiredBadge v-if="required" />
         </label>
         <slot></slot>
