@@ -25,13 +25,13 @@ const onLogoutMenuClicked = (): void => {
 </script>
 
 <template>
-    <HeaderArea v-bind:title="title" />
+    <HeaderArea :title="title" />
     <MainContainer>
         <div class="flex flex-col mx-auto">
-            <MenuButton v-on:click="onTodoMenuClicked">TODO管理</MenuButton>
-            <MenuButton v-on:click="onTodoFileUploadMenuClicked">TODO一括登録</MenuButton>
-            <MenuButton v-on:click="onUsersMenuClicked">ユーザ管理</MenuButton>
-            <MenuButton v-on:click="onLogoutMenuClicked">ログアウト</MenuButton>
+            <MenuButton @click="onTodoMenuClicked">TODO管理</MenuButton>
+            <MenuButton @click="onTodoFileUploadMenuClicked">TODO一括登録</MenuButton>
+            <MenuButton @click="onUsersMenuClicked">ユーザ管理</MenuButton>
+            <MenuButton @click="onLogoutMenuClicked">ログアウト</MenuButton>
         </div>
     </MainContainer>
 </template>

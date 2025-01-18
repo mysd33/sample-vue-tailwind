@@ -1,5 +1,5 @@
 <template>
-    <tr class="bg-stone-300">
+    <tr class="bg-gray-300">
         <slot></slot>
     </tr>
 </template>

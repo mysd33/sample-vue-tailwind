@@ -12,7 +12,7 @@ const props = defineProps<Props>();
 </script>
 
 <template>
-    <BaseButton type="submit" v-bind:size="props.size" v-bind:danger="props.danger">
+    <BaseButton type="submit" :size="props.size" :danger="props.danger">
         <slot></slot>
     </BaseButton>
 </template>

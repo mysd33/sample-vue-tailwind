@@ -49,7 +49,7 @@ defineEmits(['click']);
 </script>
 
 <template>
-    <button class="px-3 rounded-md" v-bind:class="[height, textSize, colorSet]" v-on:click="$emit('click')">
+    <button class="px-3 rounded-md" :class="[height, textSize, colorSet]" @click="$emit('click')">
         <slot></slot>
     </button>
 </template>

@@ -5,7 +5,7 @@ defineEmits(['click']);
 
 </script>
 <template>
-    <BaseButton class="mt-12" size="lg" v-on:click="$emit('click')">
+    <BaseButton class="mt-12" size="lg" @click="$emit('click')">
         <slot></slot>
     </BaseButton>
 </template>

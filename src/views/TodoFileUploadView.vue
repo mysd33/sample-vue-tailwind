@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import HeaderArea from '@/components/layout/HeaderArea.vue';
 import MainContainer from '@/components/layout/MainContainer.vue';
-import FormArea from '@/components/form/FormArea.vue';
 import InputItem from '@/components/form/InputItem.vue';
 import ButtonArea from '@/components/button/ButtonArea.vue';
 import SubmitButton from '@/components/button/SubmitButton.vue';
@@ -24,16 +23,16 @@ const onSubmit = () => {
 </script>
 
 <template>
-    <HeaderArea v-bind:title="title">
-        <LinkButton v-bind:outline="true" v-on:click="onBackButtonClick">メニューに戻る</LinkButton>
+    <HeaderArea :title="title">
+        <LinkButton :outline="true" @click="onBackButtonClick">メニューに戻る</LinkButton>
     </HeaderArea>
     <MainContainer>
-        <form v-on:submit="onSubmit" class="flex flex-col text-left">
+        <form @submit="onSubmit" class="flex flex-col text-left">
             <InputItem>
                 <label for="todoFile">Todoファイル
                     <RequiredBadge />
                 </label>
-                <InputFile id="todoFile" name="todoFile" v-bind:focus="true" />
+                <InputFile id="todoFile" name="todoFile" :focus="true" />
             </InputItem>
             <ButtonArea class="mt-4">
                 <SubmitButton>登録</SubmitButton>

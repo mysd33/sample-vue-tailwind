@@ -28,8 +28,8 @@ const onDetailButtonClicked = () => {
 </script>
 
 <template>
-    <HeaderArea v-bind:title="title">
-        <LinkButton v-bind:outline="true" v-on:click="onBackButtonClick">メニューに戻る</LinkButton>
+    <HeaderArea :title="title">
+        <LinkButton :outline="true" @click="onBackButtonClick">メニューに戻る</LinkButton>
     </HeaderArea>
     <MainContainer>
         <!-- TODO: テーブルの部品化検討中 -->
@@ -54,7 +54,7 @@ const onDetailButtonClicked = () => {
                     <TableDataCol>35</TableDataCol>
                     <TableDataCol>○</TableDataCol>
                     <TableDataCol>
-                        <LinkButton v-on:click="onDetailButtonClicked">詳細</LinkButton>
+                        <LinkButton @click="onDetailButtonClicked">詳細</LinkButton>
                     </TableDataCol>
                 </TableDataRow>
                 <TableDataRow>
@@ -65,7 +65,7 @@ const onDetailButtonClicked = () => {
                     <TableDataCol>38</TableDataCol>
                     <TableDataCol>-</TableDataCol>
                     <TableDataCol>
-                        <LinkButton v-on:click="onDetailButtonClicked">詳細</LinkButton>
+                        <LinkButton @click="onDetailButtonClicked">詳細</LinkButton>
                     </TableDataCol>
                 </TableDataRow>
                 <TableDataRow>
@@ -87,7 +87,7 @@ const onDetailButtonClicked = () => {
                     <TableDataCol>38</TableDataCol>
                     <TableDataCol>-</TableDataCol>
                     <TableDataCol>
-                        <LinkButton v-on:click="onDetailButtonClicked">詳細</LinkButton>
+                        <LinkButton @click="onDetailButtonClicked">詳細</LinkButton>
                     </TableDataCol>
                 </TableDataRow>
                 <TableDataRow>
@@ -98,7 +98,7 @@ const onDetailButtonClicked = () => {
                     <TableDataCol>38</TableDataCol>
                     <TableDataCol>-</TableDataCol>
                     <TableDataCol>
-                        <LinkButton v-on:click="onDetailButtonClicked">詳細</LinkButton>
+                        <LinkButton @click="onDetailButtonClicked">詳細</LinkButton>
                     </TableDataCol>
                 </TableDataRow>
             </template>
@@ -111,7 +111,7 @@ const onDetailButtonClicked = () => {
         <br />
         <ButtonArea>
             <LinkButton>CSV出力</LinkButton>
-            <LinkButton v-on:click="onNewUserButonClicked">新規ユーザ登録</LinkButton>
+            <LinkButton @click="onNewUserButonClicked">新規ユーザ登録</LinkButton>
         </ButtonArea>
     </MainContainer>
 </template>

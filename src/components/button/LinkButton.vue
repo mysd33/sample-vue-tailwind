@@ -9,8 +9,10 @@ defineProps<Props>();
 defineEmits(['click']);
 </script>
 
+
+<!-- TODO* パスでリンク渡せないとダメかも。。。 -->
 <template>
-    <BaseButton v-on:click="$emit('click')" v-bind:outline="outline">
+    <BaseButton @click="$emit('click')" :outline="outline">
         <slot></slot>
     </BaseButton>
 </template>

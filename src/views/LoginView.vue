@@ -19,11 +19,11 @@ const onSubmit = (): void => {
 </script>
 
 <template>
-    <HeaderArea v-bind:title="title" />
+    <HeaderArea :title="title" />
     <MainContainer>
-        <LoginFormArea v-on:submit="onSubmit">
+        <LoginFormArea @submit="onSubmit">
             <label for="userId" class="sr-only">ユーザーID</label>
-            <LoginInputText id="userId" name="userId" placeholder="ユーザID" v-bind:focus="true" />
+            <LoginInputText id="userId" name="userId" placeholder="ユーザID" :focus="true" />
             <label for="password" class="sr-only">パスワード</label>
             <LoginInputPassword id="password" name="password" placeholder="パスワード" />
             <SubmitButton size="lg" class="mt-3">ログイン</SubmitButton>

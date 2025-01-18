@@ -38,46 +38,34 @@ const onSubmit = (): void => {
 </script>
 
 <template>
-    <HeaderArea v-bind:title="title">
-        <LinkButton v-bind:outline="true" v-on:click="onBackButtonClick">ユーザ一覧に戻る</LinkButton>
+    <HeaderArea :title="title">
+        <LinkButton :outline="true" @click="onBackButtonClick">ユーザ一覧に戻る</LinkButton>
     </HeaderArea>
     <MainContainer>
-        <FormArea v-on:submit="onSubmit">
-            <InputItem>
-                <label for="userId">ユーザーID
-                    <RequiredBadge />
-                </label>
+        <FormArea @submit="onSubmit">
+            <InputItem label="ユーザーID" labelFor="userId" :required="true">
                 <!-- TODO: データバインド -->
-                <InputText id="userId" name="userId" v-bind:readonly="true" value="yamada@xxx.co.jp" />
+                <InputText id="userId" name="userId" :readonly="true" value="yamada@xxx.co.jp" />
             </InputItem>
-            <InputItem>
-                <label for="password">パスワード
-                    <RequiredBadge />
-                </label>
-                <InputPassword id="password" name="password" v-bind:focus="true" />
+            <InputItem label="パスワード" labelFor="password" :required="true">
+                <InputPassword id="password" name="password" :focus="true" />
             </InputItem>
-            <InputItem>
-                <label for="userName">ユーザー名
-                    <RequiredBadge />
-                </label>
+            <InputItem label="ユーザー名" labelFor="userName" :required="true">
                 <!-- TODO: データバインド -->
                 <InputText id="userName" name="userName" value="山田太郎" />
             </InputItem>
-            <InputItem>
-                <label for="birthday">生年月日
-                    <RequiredBadge />
-                </label>
+            <InputItem label="生年月日" labelFor="birthday" :required="true">
                 <!-- TODO: データバインド -->
                 <InputDate id="birthday" name="birthday" value="1990-01-01" />
             </InputItem>
             <InputItem>
                 <!-- TODO: データバインド -->
-                <ToggleSwitch v-bind:enabled="isAdmin">管理者</ToggleSwitch>
+                <ToggleSwitch :enabled="isAdmin">管理者</ToggleSwitch>
             </InputItem>
             <InputItem></InputItem>
             <ButtonArea>
                 <SubmitButton>ユーザ更新</SubmitButton>
-                <SubmitButton v-bind:danger="true">ユーザ削除</SubmitButton>
+                <SubmitButton :danger="true">ユーザ削除</SubmitButton>
             </ButtonArea>
         </FormArea>
     </MainContainer>

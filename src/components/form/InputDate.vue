@@ -2,13 +2,18 @@
 import BaseInput from './BaseInput.vue';
 
 interface Props {
+    id?: string;
+    name?: string;
+    placeholder?: string;
     focus?: boolean;
     readonly?: boolean;
+    disabled?: boolean;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 
 <template>
-    <BaseInput type="date" v-bind:focus="props.focus" v-bind:readonly="props.readonly" />
+    <BaseInput type="date" :id="id" :name="name" :placeholder="placeholder" :focus="focus" :readonly="readonly"
+        :disabled="disabled" />
 </template>

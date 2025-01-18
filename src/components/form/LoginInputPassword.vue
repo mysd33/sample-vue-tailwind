@@ -2,12 +2,18 @@
 import InputPassword from './InputPassword.vue';
 
 interface Props {
+    id?: string;
+    name?: string;
+    placeholder?: string;
     focus?: boolean;
+    readonly?: boolean;
+    disabled?: boolean;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 
 <template>
-    <InputPassword v-bind:focus="props.focus" class="h-12 z-0 focus:z-10 rounded-none rounded-b-lg" />
+    <InputPassword :id="id" :name="name" :placeholder="placeholder" :focus="focus" :readonly="readonly"
+        :disabled="disabled" class="h-12 z-0 focus:z-10 rounded-none rounded-b-lg" />
 </template>
