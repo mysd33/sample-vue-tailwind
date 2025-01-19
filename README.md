@@ -48,12 +48,19 @@ npm run dev
 | ユーザ詳細画面 | ユーザの詳細情報の表示と情報更新するための画面。 | [画面](docs/img/screen/screen7.png) | [ソースコード](src/views/UserDetailView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userDetail.html) |
 
 ## 画面遷移図
-> [!WARNING]
-> 現在、作成中のため、全ての画面はありません。
-
 - [src/router/index.ts](src/router/index.ts)に画面遷移の設定が記述されています。
 
 ![画面遷移図](docs/img/screen-flow.png)
+
+## エラー時等の画面
+- エラー時にメッセージやバナー等表示できるように対応しています。
+
+| エラーの種類 | 画面イメージ |
+| ----------- | ----------- |
+| クライアント入力エラー時    | [画面](docs/img/screen/client-validation-error.png) |
+| サーバ入力エラー時         | |
+| サーバ業務エラー時         |
+| サーバシステムエラー時     |        
 
 ## 画面部品
 - [src/components/](src/components/)フォルダに入っています。
@@ -64,6 +71,7 @@ npm run dev
 | ヘッダ領域 | 画面ヘッダー部分の表示領域| [ソースコード](src/components/layout/HeaderArea.vue) |
 | メイン領域 | メインの表示領域 | [ソースコード](src/components/layout/MainContainer.vue) |
 | フォーム領域  | フォームの表示領域 | [ソースコード](src/components/form/FormArea.vue) |
+| 入力エラー用バナー | 入力エラー時のバナー表示領域 | [ソースコード](src/components/banner/ValidationErrorBanner.vue) |
 | 入力項目領域  | フォームの入力項目表示領域 | [ソースコード](src/components/form/InputItem.vue) |
 | 入力の基底部品 | 入力部品共通の基底のコンポーネント | [ソースコード](src/components/form/BaseInput.vue) |
 | テキスト入力 | テキスト入力部品 | [ソースコード](src/components/form/InputText.vue) |
