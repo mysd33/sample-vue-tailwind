@@ -2,17 +2,16 @@
 import BaseButton from './BaseButton.vue';
 
 interface Props {
-    // サイズを上書き可能    
     size?: string;
-    // danger属性を追加
     danger?: boolean;
+    name?: string;
 }
-const props = defineProps<Props>();
+defineProps<Props>();
 
 </script>
 
 <template>
-    <BaseButton type="submit" :size="props.size" :danger="props.danger">
+    <BaseButton type="submit" :size="size" :danger="danger" :name="name">
         <slot></slot>
     </BaseButton>
 </template>

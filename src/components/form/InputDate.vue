@@ -12,9 +12,10 @@ interface Props {
 }
 
 defineProps<Props>();
+const valueModel = defineModel('value');
 </script>
 
 <template>
     <BaseInput type="date" :id="id" :name="name" :placeholder="placeholder" :focus="focus" :readonly="readonly"
-        :disabled="disabled" :isError="isError" />
+        :disabled="disabled" :is-error="isError" v-model:value="valueModel" />
 </template>

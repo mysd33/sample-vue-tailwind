@@ -8,21 +8,37 @@ import { useRouter } from 'vue-router';
 import InputItem from '@/components/form/InputItem.vue';
 import ButtonArea from '@/components/button/ButtonArea.vue';
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue';
-import { ref } from 'vue';
+import { ref, type Ref } from 'vue';
 
 const router = useRouter();
 
-// TODO: 仮の入力エラー
-//const isValidationError = ref(true);
+const todoTitle = ref('');
+
+// TODO: バリデーションエラーの状態を管理するための変数を仮定義
 const isValidationError = ref(false);
+const errorMessages: Ref<string[], string[]> = ref([]);
 
 const onBackButtonClick = () => {
     router.push({ name: 'menu' });
 };
 
-const createTodo = () => {
-    console.log('TODOを作成します');
+const onSubmit = () => {
+    if (!isValid()) {
+        return;
+    }
+    console.log('TODO作成:' + todoTitle.value);
 };
+
+const isValid = (): boolean => {
+    // TODO: 入力チェックの仮実装
+    errorMessages.value = [];
+    if (todoTitle.value === '') {
+        isValidationError.value = true;
+        errorMessages.value.push('TODOタイトルは必須入力です。');
+        return false;
+    }
+    return true;
+}
 
 </script>
 
@@ -31,10 +47,10 @@ const createTodo = () => {
         <LinkButton :outline="true" @click="onBackButtonClick">メニューに戻る</LinkButton>
     </HeaderArea>
     <MainContainer>
-        <ValidationErrorBanner :isError="isValidationError" />
-        <form class="mb-3 flex flex-row gap-10" @submit.prevent="createTodo">
-            <InputItem class="basis-2/3">
-                <InputText id="todoTitle" name="todoTitle" :isError="isValidationError" />
+        <ValidationErrorBanner :is-error="isValidationError" />
+        <form class="mb-3 flex flex-row gap-10" @submit.prevent="onSubmit">
+            <InputItem class="basis-2/3 text-left" :errors="errorMessages">
+                <InputText id="todoTitle" name="todoTitle" :is-error="isValidationError" v-model:value="todoTitle" />
             </InputItem>
             <ButtonArea class="basis-1/3 text-left">
                 <SubmitButton>作成</SubmitButton>

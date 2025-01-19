@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
-import { ref } from 'vue';
 
-interface Props {
-    enabled: boolean
-}
-
-const props = defineProps<Props>()
-
-const switchOn = ref(props.enabled)
+const switchOn = defineModel("enabled");
 
 </script>
 <template>

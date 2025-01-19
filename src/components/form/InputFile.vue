@@ -12,6 +12,15 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const modelValue = defineModel("value");
+
+const onChanged = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    if (target.files) {
+        modelValue.value = target.files[0];
+    }
+};
+
 const borderColor = computed(() => {
     return props.isError ? 'border-red-600 focus:border-red-400 focus:ring-red-300/50 file:border-red-600 file:focus:border-red-400 file:focus:ring-red-300/50 errorIcon'
         : 'border-gray-300 focus:border-blue-400 focus:ring-blue-300/50 file:border-r-gray-300 file:focus:border-blue-400 file:focus:ring-blue-300/50';
@@ -21,7 +30,8 @@ const borderColor = computed(() => {
 <template>
     <input type="file"
         class="h-10 rounded-lg cursor-pointer bg-white border shadow-sm focus:ring file:h-10 file:border-l-0  file:border-solid file:border-t-0 file:border-b-0 file:border-r file:focus:ring focus:outline-none"
-        :id="id" :name="name" :placeholder="placeholder" :focus="focus" :disabled="disabled" :class="[borderColor]" />
+        :id="id" :name="name" :placeholder="placeholder" :focus="focus" :disabled="disabled" :class="[borderColor]"
+        @change="onChanged" />
 </template>
 
 <style scoped>

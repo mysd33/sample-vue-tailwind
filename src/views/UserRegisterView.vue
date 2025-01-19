@@ -12,28 +12,85 @@ import LinkButton from '@/components/button/LinkButton.vue';
 import SubmitButton from '@/components/button/SubmitButton.vue';
 
 import { useRouter } from 'vue-router';
-import { computed, ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue';
 
 const router = useRouter();
 
-// TODO: 仮のバインド
+const userId = ref('');
+const password = ref('');
+const userName = ref('');
+const birthday = ref('');
 const isAdmin = ref(false);
 
-// TODO: 仮の入力エラー
-//const isUserIdError = ref(true);
-//const userErrorsMessage = ref(['ユーザIDは必須入力です。']);
+// TODO: バリデーションエラーの状態を管理するための変数を仮定義
 const isUserIdError = ref(false);
-const userErrorsMessage = ref([]);
-const isValidationError = computed(() => isUserIdError.value);
+const userIdErrorsMessage: Ref<string[], string[]> = ref([]);
+const isPasswordError = ref(false);
+const passwordErrorsMessage: Ref<string[], string[]> = ref([]);
+const isUserNameError = ref(false);
+const userNameErrorsMessage: Ref<string[], string[]> = ref([]);
+const isBirthdayError = ref(false);
+const birthdayErrorsMessage: Ref<string[], string[]> = ref([]);
 
+
+const isValidationError = computed(() => {
+    return isUserIdError.value || isPasswordError.value || isUserNameError.value;
+});
 
 const onBackButtonClick = () => {
     router.push({ name: 'userList' });
 };
 const onSubmit = (): void => {
+    if (!isValid()) {
+        return;
+    }
     // TODO: 仮でメニューへ遷移
     router.push({ name: 'userList' });
+};
+
+const isValid = (): boolean => {
+    // TODO: 入力チェックの仮実装
+    console.log("userid:" + userId.value);
+    console.log("password:" + password.value);
+    console.log("userName:" + userName.value);
+    console.log("birthday:" + birthday.value);
+    console.log("isAdmin:" + isAdmin.value);
+    let isValid = true;
+    userIdErrorsMessage.value = [];
+    passwordErrorsMessage.value = [];
+    userNameErrorsMessage.value = [];
+    birthdayErrorsMessage.value = [];
+
+    if (userId.value === '') {
+        isUserIdError.value = true;
+        userIdErrorsMessage.value.push('ユーザIDは必須入力です。');
+        isValid = false;
+    } else {
+        isUserIdError.value = false;
+    }
+    if (password.value === '') {
+        isPasswordError.value = true;
+        passwordErrorsMessage.value.push('パスワードは必須入力です。');
+        isValid = false;
+    } else {
+        isPasswordError.value = false;
+    }
+    if (userName.value === '') {
+        isUserNameError.value = true;
+        userNameErrorsMessage.value.push('ユーザ名は必須入力です。');
+        isValid = false;
+    } else {
+        isUserNameError.value = false;
+    }
+    if (birthday.value === '') {
+        isBirthdayError.value = true;
+        birthdayErrorsMessage.value.push('生年月日は必須入力です。');
+        isValid = false;
+    } else {
+        isBirthdayError.value = false;
+    }
+    return isValid;
 };
 
 </script>
@@ -43,22 +100,22 @@ const onSubmit = (): void => {
         <LinkButton :outline="true" @click="onBackButtonClick">ユーザ一覧に戻る</LinkButton>
     </HeaderArea>
     <MainContainer>
-        <ValidationErrorBanner :isError="isValidationError" />
+        <ValidationErrorBanner :is-error="isValidationError" />
         <FormArea @submit="onSubmit">
-            <InputItem label="ユーザーID" labelFor="userId" :required="true" :errors="userErrorsMessage">
-                <InputText id="userId" name="userId" :focus="true" :isError="isUserIdError" />
+            <InputItem label="ユーザーID" labelFor="userId" :required="true" :errors="userIdErrorsMessage">
+                <InputText id="userId" name="userId" :focus="true" v-model:value="userId" :is-error="isUserIdError" />
             </InputItem>
-            <InputItem label="パスワード" labelFor="password" :required="true">
-                <InputPassword id="password" name="password" />
+            <InputItem label="パスワード" labelFor="password" :required="true" :errors="passwordErrorsMessage">
+                <InputPassword id="password" name="password" v-model:value="password" :is-error="isPasswordError" />
             </InputItem>
-            <InputItem label="ユーザー名" labelFor="userName" :required="true">
-                <InputText id="userName" name="userName" />
+            <InputItem label="ユーザー名" labelFor="userName" :required="true" :errors="userNameErrorsMessage">
+                <InputText id="userName" name="userName" v-model:value="userName" :is-error="isUserNameError" />
             </InputItem>
-            <InputItem label="生年月日" labelFor="birthday" :required="true" :errors="['生年月日は必須入力です。']">
-                <InputDate id="birthday" name="birthday" :isError="true" class="hoge" />
+            <InputItem label="生年月日" labelFor="birthday" :required="true" :errors="birthdayErrorsMessage">
+                <InputDate id="birthday" name="birthday" v-model:value="birthday" :is-error="isBirthdayError" />
             </InputItem>
             <InputItem>
-                <ToggleSwitch :enabled="isAdmin">管理者</ToggleSwitch>
+                <ToggleSwitch v-model:enabled="isAdmin">管理者</ToggleSwitch>
             </InputItem>
             <InputItem></InputItem>
             <ButtonArea>

@@ -7,38 +7,63 @@ import LoginInputPassword from '@/components/form/LoginInputPassword.vue';
 import SubmitButton from '@/components/button/SubmitButton.vue';
 import { useRouter } from 'vue-router';
 import InputItem from '@/components/form/InputItem.vue';
-import { computed, ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue';
 
 
 const router = useRouter();
 
-const onSubmit = (): void => {
-    // TODO: 入力チェックの実装
+const userId = ref('');
+const password = ref('');
 
+// TODO: バリデーションエラーの状態を管理するための変数を仮定義
+const isUserIdError = ref(false);
+const isPasswordError = ref(false);
+const errorMessages: Ref<string[], string[]> = ref([]);
+const isValidationError = computed(() => isUserIdError.value || isPasswordError.value);
+
+const isValid = (): boolean => {
+    // TODO: 入力チェックの仮実装
+    console.log("userid:" + userId.value);
+    console.log("password" + password.value);
+    let isValid = true;
+    errorMessages.value = [];
+    if (userId.value === '') {
+        isUserIdError.value = true;
+        errorMessages.value.push('ユーザIDは必須入力です。');
+        isValid = false;
+    } else {
+        isUserIdError.value = false;
+    }
+    if (password.value === '') {
+        isPasswordError.value = true;
+        errorMessages.value.push('パスワードは必須入力です。');
+        isValid = false;
+    } else {
+        isPasswordError.value = false;
+    }
+    return isValid;
+};
+
+const onSubmit = (): void => {
+    if (!isValid()) {
+        return;
+    }
     // TODO: 仮でメニューへ遷移
     router.push({ name: 'menu' });
 };
-
-const isUserIdError = ref(false);
-const isPasswordError = ref(false);
-const errorMessages = ref([]);
-// TODO: 仮で入力エラーメッセージ
-//const isUserIdError = ref(true);
-//const isPasswordError = ref(true);
-//const errorMessages = ref(['ユーザIDは必須入力です。', 'パスワードは必須入力です。']);
-const isValidationError = computed(() => isUserIdError.value || isPasswordError.value);
-
 </script>
 
 <template>
     <HeaderArea title="TODO管理アプリ" />
     <MainContainer>
         <LoginFormArea @submit="onSubmit">
-            <ValidationErrorBanner :isError="isValidationError" />
+            <ValidationErrorBanner :is-error="isValidationError" />
             <InputItem :errors="errorMessages">
-                <LoginInputText id="userId" name="userId" placeholder="ユーザID" :focus="true" :isError="isUserIdError" />
-                <LoginInputPassword id="password" name="password" placeholder="パスワード" :isError="isPasswordError" />
+                <LoginInputText id="userId" name="userId" placeholder="ユーザID" :focus="true" :is-error="isUserIdError"
+                    v-model:value="userId" />
+                <LoginInputPassword id="password" name="password" placeholder="パスワード" :is-error="isPasswordError"
+                    v-model:value="password" />
             </InputItem>
             <SubmitButton size="lg" class="mt-3">ログイン</SubmitButton>
         </LoginFormArea>

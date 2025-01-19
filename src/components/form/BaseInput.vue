@@ -14,6 +14,8 @@ interface Props {
 
 const props = defineProps<Props>();
 
+const valueModel = defineModel('value');
+
 const borderColor = computed(() => {
     return props.isError ? 'border-red-600 focus:border-red-400 focus:ring-red-300/50 errorIcon' : 'border-gray-300 focus:border-blue-400 focus:ring-blue-300/50';
 });
@@ -23,7 +25,7 @@ const borderColor = computed(() => {
 <template>
     <input :type="type" :id="id" :name="name" :placeholder="placeholder"
         class="h-10 rounded-lg cursor-pointer border shadow-sm  focus:ring read-only:bg-transparent read-only:border-transparent read-only:shadow-none read-only:px-0 read-only:focus:ring-transparent read-only:focus:border-transparent"
-        :autofocus="focus" :readonly="readonly" :disabled="disabled" :class="[borderColor]" />
+        :autofocus="focus" :readonly="readonly" :disabled="disabled" :class="[borderColor]" v-model="valueModel" />
 </template>
 
 

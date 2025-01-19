@@ -5,6 +5,7 @@ interface Props {
     size?: string;
     outline?: boolean;
     danger?: boolean;
+    name?: string;
 }
 const props = defineProps<Props>();
 
@@ -49,7 +50,7 @@ defineEmits(['click']);
 </script>
 
 <template>
-    <button class="px-3 rounded-md" :class="[height, textSize, colorSet]" @click="$emit('click')">
+    <button :name="name" class="px-3 rounded-md" :class="[height, textSize, colorSet]" @click="$emit('click')">
         <slot></slot>
     </button>
 </template>
