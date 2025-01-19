@@ -7,9 +7,14 @@ import LinkButton from '@/components/button/LinkButton.vue';
 import { useRouter } from 'vue-router';
 import InputItem from '@/components/form/InputItem.vue';
 import ButtonArea from '@/components/button/ButtonArea.vue';
+import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue';
+import { ref } from 'vue';
 
-const title = 'TODOリスト';
 const router = useRouter();
+
+// TODO: 仮の入力エラー
+//const isValidationError = ref(true);
+const isValidationError = ref(false);
 
 const onBackButtonClick = () => {
     router.push({ name: 'menu' });
@@ -22,13 +27,14 @@ const createTodo = () => {
 </script>
 
 <template>
-    <HeaderArea :title="title">
+    <HeaderArea title="TODOリスト">
         <LinkButton :outline="true" @click="onBackButtonClick">メニューに戻る</LinkButton>
     </HeaderArea>
     <MainContainer>
+        <ValidationErrorBanner :isError="isValidationError" />
         <form class="mb-3 flex flex-row gap-10" @submit.prevent="createTodo">
             <InputItem class="basis-2/3">
-                <InputText id="todoTitle" name="todoTitle" />
+                <InputText id="todoTitle" name="todoTitle" :isError="isValidationError" />
             </InputItem>
             <ButtonArea class="basis-1/3 text-left">
                 <SubmitButton>作成</SubmitButton>

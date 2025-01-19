@@ -4,8 +4,6 @@ import MainContainer from '@/components/layout/MainContainer.vue';
 import MenuButton from '@/components/button/MenuButton.vue';
 import { useRouter } from 'vue-router';
 
-const title = 'TODO管理アプリ メニュー';
-
 const router = useRouter();
 
 const onTodoMenuClicked = (): void => {
@@ -25,7 +23,7 @@ const onLogoutMenuClicked = (): void => {
 </script>
 
 <template>
-    <HeaderArea :title="title" />
+    <HeaderArea title="TODO管理アプリ メニュー" />
     <MainContainer>
         <div class="flex flex-col mx-auto">
             <MenuButton @click="onTodoMenuClicked">TODO管理</MenuButton>

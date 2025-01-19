@@ -7,6 +7,7 @@ interface Props {
     focus?: boolean;
     readonly?: boolean;
     disabled?: boolean;
+    isError?: boolean;
 }
 
 defineProps<Props>();
@@ -14,5 +15,5 @@ defineProps<Props>();
 
 <template>
     <BaseInput type="text" :id="id" :name="name" :placeholder="placeholder" :focus="focus" :readonly="readonly"
-        :disabled="disabled" />
+        :disabled="disabled" :isError="isError" />
 </template>

@@ -11,7 +11,6 @@ import ButtonArea from '@/components/button/ButtonArea.vue';
 import TableDataCol from '@/components/table/TableDataCol.vue';
 import { useRouter } from 'vue-router';
 
-const title = 'ユーザ管理';
 const router = useRouter();
 
 const onBackButtonClick = () => {
@@ -28,7 +27,7 @@ const onDetailButtonClicked = () => {
 </script>
 
 <template>
-    <HeaderArea :title="title">
+    <HeaderArea title="ユーザ管理">
         <LinkButton :outline="true" @click="onBackButtonClick">メニューに戻る</LinkButton>
     </HeaderArea>
     <MainContainer>
