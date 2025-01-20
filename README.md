@@ -60,12 +60,11 @@ npm run dev
 
 | メッセージ種類 | 画面イメージ |
 | ----------- | ----------- |
-| 確認時ダイアログメッセージ     | |
-| 正常完了時情報メッセージ     | |    
+| 確認時ダイアログメッセージ     | TBD |
+| 正常完了時情報メッセージ     | [画面](docs/img/screen/info-message.png) |    
 | クライアント入力エラーメッセージ    | [画面](docs/img/screen/client-validation-error.png) |
-| サーバ入力エラーメッセージ         | |
-| サーバ業務エラーメッセージ         |
-| サーバシステムエラーメッセージ     |        
+| サーバ入力エラー・業務エラーメッセージ         | [画面](docs/img/screen/server-business-error.png) |
+| サーバシステムエラー時エラーページ表示  | TBD |      
 
 ## 画面部品
 - [src/components/](src/components/)フォルダに入っています。
@@ -77,6 +76,7 @@ npm run dev
 | メイン領域 | メインの表示領域 | [ソースコード](src/components/layout/MainContainer.vue) |
 | フォーム領域  | フォームの表示領域 | [ソースコード](src/components/form/FormArea.vue) |
 | 入力エラー用バナー | 入力エラー時のバナー表示領域 | [ソースコード](src/components/banner/ValidationErrorBanner.vue) |
+| メッセージバナー | メッセージ表示用バナー表示領域 | [ソースコード](src/components/banner/MessageBanner.vue) |
 | 入力項目領域  | フォームの入力項目表示領域 | [ソースコード](src/components/form/InputItem.vue) |
 | 入力の基底部品 | 入力部品共通の基底のコンポーネント | [ソースコード](src/components/form/BaseInput.vue) |
 | テキスト入力 | テキスト入力部品 | [ソースコード](src/components/form/InputText.vue) |

@@ -14,6 +14,7 @@ import SubmitButton from '@/components/button/SubmitButton.vue';
 import { useRouter } from 'vue-router';
 import { computed, ref, type Ref } from 'vue';
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue';
+import MessageBanner from '@/components/banner/MessageBanner.vue';
 
 interface Props {
     id: string;
@@ -36,10 +37,13 @@ const isUserNameError = ref(false);
 const userNameErrorsMessage: Ref<string[], string[]> = ref([]);
 const isBirthdayError = ref(false);
 const birthdayErrorsMessage: Ref<string[], string[]> = ref([]);
-
 const isValidationError = computed(() => {
     return isPasswordError.value || isUserNameError.value || isBirthdayError.value;
 });
+
+// TODO: サーバエラーの状態を管理するための変数を仮定義
+const messageLevel = ref('');
+const message = ref('');
 
 const onBackButtonClick = () => {
     router.push({ name: 'userList' });
@@ -99,6 +103,7 @@ const isValid = (): boolean => {
     </HeaderArea>
     <MainContainer>
         <ValidationErrorBanner :is-error="isValidationError" />
+        <MessageBanner :message="message" :level="messageLevel" />
         <FormArea @submit="onSubmit">
             <InputItem label="ユーザーID" labelFor="userId">
                 <InputText id="userId" name="userId" :readonly="true" v-model:value="userId" />

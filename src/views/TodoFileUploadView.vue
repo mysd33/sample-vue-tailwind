@@ -10,13 +10,18 @@ import LinkButton from '@/components/button/LinkButton.vue';
 import { useRouter } from 'vue-router';
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue';
 import { ref, type Ref } from 'vue';
+import MessageBanner from '@/components/banner/MessageBanner.vue';
 
 const router = useRouter();
 const todoFile: Ref<File, File> = ref(new File([], ''));
 
 // TODO: バリデーションエラーの状態を管理するための変数を仮定義
 const isValidationError = ref(false);
-const errorMessages: Ref<string[], string[]> = ref([]);
+const validationErrorMessages: Ref<string[], string[]> = ref([]);
+
+// TODO: サーバエラーの状態を管理するための変数を仮定義
+const messageLevel = ref('');
+const message = ref('');
 
 const onBackButtonClick = () => {
     router.push({ name: 'menu' });
@@ -33,7 +38,7 @@ const isValid = (): boolean => {
     // TODO: 入力チェックの仮実装
     if (todoFile.value.name === '') {
         isValidationError.value = true;
-        errorMessages.value.push('TODOファイルは必須入力です。');
+        validationErrorMessages.value.push('TODOファイルは必須入力です。');
         return false;
     }
     return true;
@@ -48,8 +53,9 @@ const isValid = (): boolean => {
     </HeaderArea>
     <MainContainer>
         <ValidationErrorBanner :is-error="isValidationError" />
+        <MessageBanner :message="message" :level="messageLevel" />
         <form @submit.prevent="onSubmit" class="flex flex-col text-left">
-            <InputItem :errors="errorMessages">
+            <InputItem :errors="validationErrorMessages">
                 <label for="todoFile">Todoファイル
                     <RequiredBadge />
                 </label>

@@ -9,6 +9,7 @@ import InputItem from '@/components/form/InputItem.vue';
 import ButtonArea from '@/components/button/ButtonArea.vue';
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue';
 import { ref, type Ref } from 'vue';
+import MessageBanner from '@/components/banner/MessageBanner.vue';
 
 const router = useRouter();
 
@@ -16,7 +17,16 @@ const todoTitle = ref('');
 
 // TODO: バリデーションエラーの状態を管理するための変数を仮定義
 const isValidationError = ref(false);
-const errorMessages: Ref<string[], string[]> = ref([]);
+const validationErrorMessages: Ref<string[], string[]> = ref([]);
+
+// TODO: サーバエラーの状態を管理するための変数を仮定義
+//const messageLevel = ref('');
+//const message = ref('');
+const messageLevel = ref('info');
+const message = ref('作成しました。');
+//const messageLevel = ref('warn');
+//const message = ref('サービス呼び出し時にエラーが発生しました。しばらく経ってから実行してください。');
+
 
 const onBackButtonClick = () => {
     router.push({ name: 'menu' });
@@ -31,10 +41,10 @@ const onSubmit = () => {
 
 const isValid = (): boolean => {
     // TODO: 入力チェックの仮実装
-    errorMessages.value = [];
+    validationErrorMessages.value = [];
     if (todoTitle.value === '') {
         isValidationError.value = true;
-        errorMessages.value.push('TODOタイトルは必須入力です。');
+        validationErrorMessages.value.push('TODOタイトルは必須入力です。');
         return false;
     }
     return true;
@@ -48,8 +58,9 @@ const isValid = (): boolean => {
     </HeaderArea>
     <MainContainer>
         <ValidationErrorBanner :is-error="isValidationError" />
+        <MessageBanner :message="message" :level="messageLevel" />
         <form class="mb-3 flex flex-row gap-10" @submit.prevent="onSubmit">
-            <InputItem class="basis-2/3 text-left" :errors="errorMessages">
+            <InputItem class="basis-2/3 text-left" :errors="validationErrorMessages">
                 <InputText id="todoTitle" name="todoTitle" :is-error="isValidationError" v-model:value="todoTitle" />
             </InputItem>
             <ButtonArea class="basis-1/3 text-left">
