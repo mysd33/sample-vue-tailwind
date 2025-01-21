@@ -1,11 +1,9 @@
 <script setup lang="ts">
-
-defineEmits(['submit']);
-
+defineEmits(['submit'])
 </script>
 
 <template>
-    <form class="flex flex-col max-w-80 mx-auto" @submit.prevent="$emit('submit')">
-        <slot></slot>
-    </form>
+  <form class="mx-auto flex max-w-80 flex-col" @submit.prevent="$emit('submit')">
+    <slot></slot>
+  </form>
 </template>

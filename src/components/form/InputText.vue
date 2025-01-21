@@ -1,21 +1,28 @@
 <script setup lang="ts">
-import BaseInput from './BaseInput.vue';
+import BaseInput from './BaseInput.vue'
 interface Props {
-    id?: string;
-    name?: string;
-    placeholder?: string;
-    focus?: boolean;
-    readonly?: boolean;
-    disabled?: boolean;
-    isError?: boolean;
+  id?: string
+  name?: string
+  placeholder?: string
+  focus?: boolean
+  readonly?: boolean
+  disabled?: boolean
+  isError?: boolean
 }
-defineProps<Props>();
+defineProps<Props>()
 
-const valueModel = defineModel('value');
-
+const valueModel = defineModel<string>('value')
 </script>
 
 <template>
-    <BaseInput type="text" :id="id" :name="name" :placeholder="placeholder" :focus="focus" :readonly="readonly"
-        :disabled="disabled" :is-error="isError" v-model:value="valueModel" />
+  <BaseInput
+    type="text"
+    :id="id"
+    :name="name"
+    :placeholder="placeholder"
+    :focus="focus"
+    :readonly="readonly"
+    :disabled="disabled"
+    :is-error="isError"
+    v-model:value="valueModel" />
 </template>

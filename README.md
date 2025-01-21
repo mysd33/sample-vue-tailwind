@@ -168,3 +168,49 @@ import '@/style.css'
 const app = createApp(App)
 …
 ```
+
+## (参考) インストールするとよいVSCodeの拡張機能
+
+- [Vue - Official拡張機能](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+    - VSCodeで、vueファイルもインテリセンスが聞くようにsetting.jsonに以下を追記
+
+    ```json
+    "tailwindCSS.includeLanguages": {
+      "vue": "html"
+    },
+    ```
+
+- [Preitter - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+    - Prettierのプラグインとして、[Prettier plugin for Tailwind CSS](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)もインストールするとよい。
+
+    - .prettierrc.jsに以下の設定を追加すると、Tailwind CSSのクラス名のフォーマットが適用される。
+        - pluginsに"prettier-plugin-tailwindcss"を追加
+        - プラグインと直接関係ないが、bracketSameLineをtrueに設定して、閉じタグが同じ行に表示されるようにもしておく。        
+
+    ```json
+    {
+      …          
+      "bracketSameLine": true,
+      "plugins": ["prettier-plugin-tailwindcss"]
+    }
+    ```    
+
+    - .prettierignoreを追加して、markdownファイルに対するPrettierによる自動フォーマットを無効化
+    
+    ```json
+    *.md
+    ```    
+
+    - VSCodeでも自動保存時にPrettierでフォーマットされるように、settings.jsonに以下を追記
+
+    ```json
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    ```
+
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)

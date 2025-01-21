@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import XCircleIcon from '@/icons/XCircleIcon.vue';
+import XCircleIcon from '@/icons/XCircleIcon.vue'
 
 interface Props {
-    isError: boolean;
+  isError: boolean
 }
 
-defineProps<Props>();
-
+defineProps<Props>()
 </script>
 
 <template>
-    <div class="bg-red-500/20 border border-red-400 text-red-600 px-4 py-3 mb-4 rounded-lg flex flex-row content-center"
-        v-if="isError">
-        <div class="flex flex-row">
-            <XCircleIcon />
-            <span class="text-red-700 ml-3 mt-1">入力エラーです。</span>
-        </div>
+  <div
+    v-if="isError"
+    class="mb-4 flex flex-row content-center rounded-lg border border-red-400 bg-red-500/20 px-4 py-3 text-red-600">
+    <div class="flex flex-row">
+      <XCircleIcon />
+      <span class="ml-3 mt-1 text-red-700">入力エラーです。</span>
     </div>
+  </div>
 </template>

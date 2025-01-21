@@ -1,5 +1,5 @@
 <template>
-    <td scope="col" class="p-3 border border-gray-300">
-        <slot></slot>
-    </td>
+  <td scope="col" class="border border-gray-300 p-3">
+    <slot></slot>
+  </td>
 </template>

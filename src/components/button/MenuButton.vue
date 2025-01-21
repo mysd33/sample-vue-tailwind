@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import BaseButton from './BaseButton.vue';
+import BaseButton from './BaseButton.vue'
 
-defineEmits(['click']);
-
+defineEmits(['click'])
 </script>
 <template>
-    <BaseButton class="mt-12" size="lg" @click="$emit('click')">
-        <slot></slot>
-    </BaseButton>
+  <BaseButton class="mt-12" size="lg" @click="$emit('click')">
+    <slot></slot>
+  </BaseButton>
 </template>

@@ -1,17 +1,16 @@
 <script setup lang="ts">
-import BaseButton from './BaseButton.vue';
+import BaseButton from './BaseButton.vue'
 
 interface Props {
-    size?: string;
-    danger?: boolean;
-    name?: string;
+  size?: string
+  danger?: boolean
+  name?: string
 }
-defineProps<Props>();
-
+defineProps<Props>()
 </script>
 
 <template>
-    <BaseButton type="submit" :size="size" :danger="danger" :name="name">
-        <slot></slot>
-    </BaseButton>
+  <BaseButton type="submit" :size="size" :danger="danger" :name="name">
+    <slot></slot>
+  </BaseButton>
 </template>

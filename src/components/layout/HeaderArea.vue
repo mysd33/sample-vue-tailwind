@@ -1,25 +1,24 @@
 <script setup lang="ts">
-import LogoIcon from '@/icons/LogoIcon.vue';
+import LogoIcon from '@/icons/LogoIcon.vue'
 
 interface Props {
-    title: string;
+  title: string
 }
-defineProps<Props>();
-
+defineProps<Props>()
 </script>
 
 <template>
-    <header class="bg-white flex flex-row p-5 shadow-md">
-        <div class="flex">
-            <LogoIcon />
-            <h3 class="text-2xl ml-2">
-                {{ title }}
-            </h3>
-        </div>
-        <div class="relative ml-auto">
-            <!-- TODO: ログイン済みの場合に、ユーザ名を表示 -->
-            <!-- ようこそ, <strong>山田太郎</strong>さん! -->
-            <slot></slot>
-        </div>
-    </header>
+  <header class="flex flex-row bg-white p-5 shadow-md">
+    <div class="flex">
+      <LogoIcon />
+      <h3 class="ml-2 text-2xl">
+        {{ title }}
+      </h3>
+    </div>
+    <div class="relative ml-auto">
+      <!-- TODO: ログイン済みの場合に、ユーザ名を表示 -->
+      <!-- ようこそ, <strong>山田太郎</strong>さん! -->
+      <slot></slot>
+    </div>
+  </header>
 </template>

@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import BaseButton from './BaseButton.vue';
+import BaseButton from './BaseButton.vue'
 
 interface Props {
-    outline?: boolean;
+  outline?: boolean
 }
-defineProps<Props>();
+defineProps<Props>()
 
-defineEmits(['click']);
+defineEmits(['click'])
 </script>
-
 
 <!-- TODO* パスでリンク渡せないとダメかも。。。 -->
 <template>
-    <BaseButton @click="$emit('click')" :outline="outline">
-        <slot></slot>
-    </BaseButton>
+  <BaseButton @click="$emit('click')" :outline="outline">
+    <slot></slot>
+  </BaseButton>
 </template>
