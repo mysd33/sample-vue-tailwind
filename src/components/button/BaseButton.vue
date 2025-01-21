@@ -37,12 +37,12 @@ const textSize = computed(() => {
 
 const colorSet = computed(() => {
   if (props.danger) {
-    return 'bg-red-600 hover:bg-red-700 text-white'
+    return 'bg-red-600 hover:bg-red-700 text-white focus:border-red-400 focus:ring-red-300/50 '
   }
   if (props.outline) {
-    return 'border border-blue-600 bg-white text-blue-600 hover:border-transparent hover:bg-blue-600 hover:text-white'
+    return 'border border-blue-600 bg-white text-blue-600 hover:border-transparent hover:bg-blue-600 hover:text-white focus:border-blue-400 focus:ring-blue-300/50 focus:bg-blue-600 focus:text-white'
   }
-  return 'bg-blue-600 hover:bg-blue-700 text-white'
+  return 'bg-blue-600 hover:bg-blue-700 text-white focus:border-blue-400 focus:ring-blue-300/50'
 })
 
 defineEmits(['click'])
@@ -51,7 +51,7 @@ defineEmits(['click'])
 <template>
   <button
     :name="name"
-    class="rounded-md px-3"
+    class="rounded-md px-3 focus:outline-none focus:ring"
     :class="[height, textSize, colorSet]"
     @click="$emit('click')">
     <slot></slot>

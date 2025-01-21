@@ -33,7 +33,7 @@ const borderColor = computed(() => {
     :readonly="readonly"
     :disabled="disabled"
     :class="[borderColor]"
-    class="h-10 cursor-pointer rounded-lg border shadow-sm read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:ring read-only:focus:border-transparent read-only:focus:ring-transparent"
+    class="h-10 rounded-lg border shadow-sm read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:ring read-only:focus:border-transparent read-only:focus:ring-transparent"
     v-model="valueModel" />
 </template>
 

@@ -37,7 +37,7 @@ const borderColor = computed(() => {
     :focus="focus"
     :disabled="disabled"
     :class="[borderColor]"
-    class="h-10 cursor-pointer rounded-lg border bg-white shadow-sm file:h-10 file:border-b-0 file:border-l-0 file:border-r file:border-t-0 file:border-solid focus:outline-none focus:ring file:focus:ring"
+    class="h-10 cursor-pointer rounded-lg border bg-white shadow-sm file:h-10 file:border-b-0 file:border-l-0 file:border-r file:border-t-0 file:border-solid file:hover:cursor-pointer focus:outline-none focus:ring file:focus:ring"
     @change="onChanged" />
 </template>
 
