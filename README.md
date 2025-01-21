@@ -53,17 +53,19 @@ npm run dev
 ![画面遷移図](docs/img/screen-flow.png)
 
 ## メッセージ表示
-- 確認時のダイアログ、正常終了時やエラー時のメッセージおよびバナー等表示できるように対応しています。
+- 正常終了時やエラー時のメッセージおよびバナー等表示できるように対応しています。
+- また、比較対象の「Spring Boot + Thymeleaf + Bootstrap」では実装してませんが、モーダルダイアログの表示も試しています。
 
 > [!WARNING]
 > 現在、作成中です。
 
 | メッセージ種類 | 画面イメージ |
 | ----------- | ----------- |
-| 確認時ダイアログメッセージ     | TBD |
-| 正常完了時情報メッセージ     | [画面](docs/img/screen/info-message.png) |    
-| クライアント入力エラーメッセージ    | [画面](docs/img/screen/client-validation-error.png) |
-| サーバ入力エラー・業務エラーメッセージ         | [画面](docs/img/screen/server-business-error.png) |
+| 確認時モーダルダイアログ     | [画面](docs/img/screen/confirm-dialog.png) |
+| 完了時情報モーダルダイアログ     | [画面](docs/img/screen/info-dialog.png) |
+| 完了時情報メッセージ（バナー表示）     | [画面](docs/img/screen/info-message.png) |    
+| クライアント入力エラーメッセージ（バナー・入力項目のエラー表示）    | [画面](docs/img/screen/client-validation-error.png) |
+| サーバ入力エラー・業務エラーメッセージ（バナー表示）         | [画面](docs/img/screen/server-business-error.png) |
 | サーバシステムエラー時エラーページ表示  | TBD |      
 
 ## 画面部品
@@ -93,6 +95,9 @@ npm run dev
 | 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/button/SubmitButton.vue) |
 | テーブル | テーブルの表示領域、ヘッダー部、データ部 | [ソースコード](src/components/table/) |
 | ページネーションリンク | ページネーションのリンクボタン | [ソースコード](src/components/pagination/PaginationLink.vue) |
+| モーダルダイアログの基底部品 | ダイアログ共通の基底のコンポーネント | TBD |
+| 確認用モーダルダイアログ | 確認ダイアログ | [ソースコード](src/components/dialog/ConfirmModalDialog.vue) |
+| 情報モーダルダイアログ | 完了時等の情報ダイアログ | [ソースコード](src/components/dialog/ConfirmModalDialog.vue) |
 
 ## 追加したプラグイン・ライブラリ
 - Vueライブラリ

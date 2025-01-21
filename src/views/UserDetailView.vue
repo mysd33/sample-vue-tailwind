@@ -15,6 +15,8 @@ import { useRouter } from 'vue-router'
 import { computed, ref, type Ref } from 'vue'
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
 import MessageBanner from '@/components/banner/MessageBanner.vue'
+import ConfirmModalDialog from '@/components/dialog/ConfirmModalDialog.vue'
+import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
 
 interface Props {
   id: string
@@ -45,6 +47,10 @@ const isValidationError = computed(() => {
 const messageLevel = ref('')
 const message = ref('')
 
+// TODO: ダイアログの状態を管理するための変数を仮定義
+const isConfirmDialogOpen = ref(false)
+const isInformationDialogOpen = ref(false)
+
 const onBackButtonClick = () => {
   router.push({ name: 'userList' })
 }
@@ -55,7 +61,26 @@ const onSubmit = (event: SubmitEvent): void => {
     if (!isValid()) {
       return
     }
+    // TODO: 仮でメニューへ遷移
+    router.push({ name: 'userList' })
+  } else {
+    // 削除ボタンのときは確認ダイアログを表示
+    isConfirmDialogOpen.value = true
   }
+}
+
+const onConfirmDialogOKButtonClick = () => {
+  console.log('確認ダイアログのOKボタンがクリックされました。')
+  // 処理完了ダイアログを表示
+  isInformationDialogOpen.value = true
+}
+
+const onConfirmDialogCancelButtonClick = () => {
+  console.log('確認ダイアログのキャンセルボタンがクリックされました。')
+}
+
+const onInfoDialogOKButtonClick = () => {
+  console.log('完了ダイアログのOKボタンがクリックされました。')
   // TODO: 仮でメニューへ遷移
   router.push({ name: 'userList' })
 }
@@ -151,5 +176,16 @@ const isValid = (): boolean => {
         <SubmitButton name="delete" :danger="true">ユーザ削除</SubmitButton>
       </ButtonArea>
     </FormArea>
+    <ConfirmModalDialog
+      v-model:open="isConfirmDialogOpen"
+      title="ユーザ削除確認"
+      message="ユーザを削除してもいいですか？"
+      @ok-button-click="onConfirmDialogOKButtonClick"
+      @cancel-button-click="onConfirmDialogCancelButtonClick" />
+    <InformationModalDialog
+      v-model:open="isInformationDialogOpen"
+      title="ユーザ削除完了"
+      message="ユーザを削除しました。"
+      @ok-button-click="onInfoDialogOKButtonClick" />
   </MainContainer>
 </template>
