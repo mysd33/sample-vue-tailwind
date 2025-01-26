@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref, type Ref } from 'vue'
+import { useRouter } from 'vue-router'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import InputItem from '@/components/form/InputItem.vue'
@@ -7,13 +9,12 @@ import SubmitButton from '@/components/button/SubmitButton.vue'
 import InputFile from '@/components/form/InputFile.vue'
 import RequiredBadge from '@/icons/RequiredBadge.vue'
 import LinkButton from '@/components/button/LinkButton.vue'
-import { useRouter } from 'vue-router'
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
-import { ref, type Ref } from 'vue'
 import MessageBanner from '@/components/banner/MessageBanner.vue'
+import * as yup from 'yup'
+import { useForm } from 'vee-validate'
 
 const router = useRouter()
-const todoFile: Ref<File, File> = ref(new File([], ''))
 
 // TODO: バリデーションエラーの状態を管理するための変数を仮定義
 const isValidationError = ref(false)
@@ -23,25 +24,33 @@ const validationErrorMessages: Ref<string[], string[]> = ref([])
 const messageLevel = ref('')
 const message = ref('')
 
+// yup
+const schema = yup.object({
+  todoFile: yup.string().label('TODOファイル').required(),
+})
+
+// VeeValidate with yup
+const { values, errors, handleSubmit, defineField } = useForm({
+  validationSchema: schema,
+})
+
+const [todoFile] = defineField('todoFile')
+
+const onValidSubmit = () => {
+  console.log('TODO一括登録:' + todoFile.value)
+}
+
+const onInvalidSubmit = ({ errors }) => {
+  // TODO: リファクタリング
+  validationErrorMessages.value = [errors.todoFile]
+  isValidationError.value = errors.todoFile ? true : false
+}
+
+// handleSubmit時にバリデーション
+const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
+
 const onBackButtonClick = () => {
   router.push({ name: 'menu' })
-}
-
-const onSubmit = () => {
-  if (!isValid()) {
-    return
-  }
-  console.log('TODOファイルアップロード:' + todoFile.value)
-}
-
-const isValid = (): boolean => {
-  // TODO: 入力チェックの仮実装
-  if (todoFile.value.name === '') {
-    isValidationError.value = true
-    validationErrorMessages.value.push('TODOファイルは必須入力です。')
-    return false
-  }
-  return true
 }
 </script>
 

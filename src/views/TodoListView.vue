@@ -1,19 +1,19 @@
 <script setup lang="ts">
+import { ref, type Ref } from 'vue'
+import { useRouter } from 'vue-router'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import InputText from '@/components/form/InputText.vue'
 import SubmitButton from '@/components/button/SubmitButton.vue'
 import LinkButton from '@/components/button/LinkButton.vue'
-import { useRouter } from 'vue-router'
 import InputItem from '@/components/form/InputItem.vue'
 import ButtonArea from '@/components/button/ButtonArea.vue'
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
-import { ref, type Ref } from 'vue'
 import MessageBanner from '@/components/banner/MessageBanner.vue'
+import * as yup from 'yup'
+import { useForm } from 'vee-validate'
 
 const router = useRouter()
-
-const todoTitle = ref('')
 
 // TODO: バリデーションエラーの状態を管理するための変数を仮定義
 const isValidationError = ref(false)
@@ -27,26 +27,33 @@ const message = ref('')
 //const messageLevel = ref('warn');
 //const message = ref('サービス呼び出し時にエラーが発生しました。しばらく経ってから実行してください。');
 
-const onBackButtonClick = () => {
-  router.push({ name: 'menu' })
-}
+// yup
+const schema = yup.object({
+  todoTitle: yup.string().label('TODOタイトル').required(),
+})
 
-const onSubmit = () => {
-  if (!isValid()) {
-    return
-  }
+// VeeValidate with yup
+const { values, errors, handleSubmit, defineField } = useForm({
+  validationSchema: schema,
+})
+
+const [todoTitle] = defineField('todoTitle')
+
+const onValidSubmit = () => {
   console.log('TODO作成:' + todoTitle.value)
 }
 
-const isValid = (): boolean => {
-  // TODO: 入力チェックの仮実装
-  validationErrorMessages.value = []
-  if (todoTitle.value === '') {
-    isValidationError.value = true
-    validationErrorMessages.value.push('TODOタイトルは必須入力です。')
-    return false
-  }
-  return true
+const onInvalidSubmit = ({ errors }) => {
+  // TODO: リファクタリング
+  validationErrorMessages.value = [errors.todoTitle]
+  isValidationError.value = errors.todoTitle ? true : false
+}
+
+// handleSubmit時にバリデーション
+const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
+
+const onBackButtonClick = () => {
+  router.push({ name: 'menu' })
 }
 </script>
 

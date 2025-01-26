@@ -9,16 +9,15 @@ import { useRouter } from 'vue-router'
 import InputItem from '@/components/form/InputItem.vue'
 import { computed, ref, type Ref } from 'vue'
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
-import { useForm } from 'vee-validate'
 import * as yup from 'yup'
-import { messages } from '@/validation/messages_ja'
+import { useForm } from 'vee-validate'
 
 const router = useRouter()
 
 // TODO: バリデーションエラーの状態を管理するための変数を仮定義
 const isUserIdError = ref(false)
 const isPasswordError = ref(false)
-const errorMessages: Ref<string[], string[]> = ref([])
+const validationErrorMessages: Ref<string[], string[]> = ref([])
 const isValidationError = computed(() => isUserIdError.value || isPasswordError.value)
 
 // yup
@@ -28,7 +27,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { errors, handleSubmit, defineField } = useForm({
+const { values, errors, handleSubmit, defineField } = useForm({
   validationSchema: schema,
 })
 
@@ -43,8 +42,7 @@ const onValidSubmit = () => {
 }
 const onInvalidSubmit = ({ errors }) => {
   // TODO: リファクタリング
-  // errorsの値を配列に変換してerrorMessagesに格納
-  errorMessages.value = [errors.userId, errors.password]
+  validationErrorMessages.value = [errors.userId, errors.password]
   isUserIdError.value = errors.userId ? true : false
   isPasswordError.value = errors.password ? true : false
 }
@@ -58,7 +56,7 @@ const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
   <MainContainer>
     <LoginFormArea @submit="onSubmit">
       <ValidationErrorBanner :is-error="isValidationError" />
-      <InputItem :errors="errorMessages">
+      <InputItem :errors="validationErrorMessages">
         <LoginInputText
           id="userId"
           name="userId"
