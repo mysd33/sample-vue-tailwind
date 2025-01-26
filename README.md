@@ -104,7 +104,9 @@ npm run dev
     - [vue-router](https://router.vuejs.org/)
     - [pinia](https://pinia.vuejs.org/)        
     - [Headless UI](https://headlessui.com/v1/vue)
-    - [@heroicons/vue](https://github.com/tailwindlabs/heroicons?tab=readme-ov-file#vue)    
+    - [@heroicons/vue](https://github.com/tailwindlabs/heroicons?tab=readme-ov-file#vue)
+    - [VeeValidate](https://vee-validate.logaretm.com/v4/)   
+    - [@vee-validate/yup](https://vee-validate.logaretm.com/v4/guide/composition-api/getting-started/#validating-with-yup)
 
 - テストツール
     - [Vitest](https://vitest.dev/)

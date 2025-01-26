@@ -9,11 +9,11 @@ import { useRouter } from 'vue-router'
 import InputItem from '@/components/form/InputItem.vue'
 import { computed, ref, type Ref } from 'vue'
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
+import { useForm } from 'vee-validate'
+import * as yup from 'yup'
+import { messages } from '@/validation/messages_ja'
 
 const router = useRouter()
-
-const userId = ref('')
-const password = ref('')
 
 // TODO: バリデーションエラーの状態を管理するための変数を仮定義
 const isUserIdError = ref(false)
@@ -21,36 +21,36 @@ const isPasswordError = ref(false)
 const errorMessages: Ref<string[], string[]> = ref([])
 const isValidationError = computed(() => isUserIdError.value || isPasswordError.value)
 
-const isValid = (): boolean => {
-  // TODO: 入力チェックの仮実装
-  console.log('userid:' + userId.value)
-  console.log('password' + password.value)
-  let isValid = true
-  errorMessages.value = []
-  if (userId.value === '') {
-    isUserIdError.value = true
-    errorMessages.value.push('ユーザIDは必須入力です。')
-    isValid = false
-  } else {
-    isUserIdError.value = false
-  }
-  if (password.value === '') {
-    isPasswordError.value = true
-    errorMessages.value.push('パスワードは必須入力です。')
-    isValid = false
-  } else {
-    isPasswordError.value = false
-  }
-  return isValid
-}
+// yup
+const schema = yup.object({
+  userId: yup.string().label('ユーザID').required().email(),
+  password: yup.string().label('パスワード').required(),
+})
 
-const onSubmit = (): void => {
-  if (!isValid()) {
-    return
-  }
+// VeeValidate with yup
+const { errors, handleSubmit, defineField } = useForm({
+  validationSchema: schema,
+})
+
+const [userId] = defineField('userId')
+const [password] = defineField('password')
+
+const onValidSubmit = () => {
+  console.log('userId: ', userId.value)
+  console.log('password: ', password.value)
   // TODO: 仮でメニューへ遷移
   router.push({ name: 'menu' })
 }
+const onInvalidSubmit = ({ errors }) => {
+  // TODO: リファクタリング
+  // errorsの値を配列に変換してerrorMessagesに格納
+  errorMessages.value = [errors.userId, errors.password]
+  isUserIdError.value = errors.userId ? true : false
+  isPasswordError.value = errors.password ? true : false
+}
+
+// handleSubmit時にバリデーション
+const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
 </script>
 
 <template>
