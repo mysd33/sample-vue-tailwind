@@ -102,11 +102,17 @@ npm run dev
 ## 追加したプラグイン・ライブラリ
 - Vueライブラリ
     - [vue-router](https://router.vuejs.org/)
+        - 画面遷移制御に使用
     - [pinia](https://pinia.vuejs.org/)        
+        - 状態管理に使用
     - [Headless UI](https://headlessui.com/v1/vue)
+        - モーダルダイアログに使用
     - [@heroicons/vue](https://github.com/tailwindlabs/heroicons?tab=readme-ov-file#vue)
-    - [VeeValidate](https://vee-validate.logaretm.com/v4/)   
+        - アイコンに使用
+    - [VeeValidate](https://vee-validate.logaretm.com/v4/)       
+        - 入力チェックに使用
     - [@vee-validate/yup](https://vee-validate.logaretm.com/v4/guide/composition-api/getting-started/#validating-with-yup)
+        - 入力チェックに使用。yupと連携してVeeValidateを使用
 
 - テストツール
     - [Vitest](https://vitest.dev/)
