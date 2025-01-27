@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { computed, ref, type Ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
@@ -19,7 +19,6 @@ import ConfirmModalDialog from '@/components/dialog/ConfirmModalDialog.vue'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
-import BaseButton from '@/components/button/BaseButton.vue'
 
 interface Props {
   id: string
@@ -28,11 +27,7 @@ defineProps<Props>()
 
 const router = useRouter()
 
-const isValidationError = computed(() => {
-  return Object.keys(errors.value).length > 0
-})
-
-// TODO: サーバエラーの状態を管理するための変数を仮定義
+// TODO: バナーの状態を管理するための変数を仮定義
 const messageLevel = ref('')
 const message = ref('')
 
@@ -50,7 +45,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { values, errors, handleSubmit, defineField } = useForm({
+const { values, errors, validate, defineField } = useForm({
   validationSchema: schema,
 })
 
@@ -60,25 +55,31 @@ const [userName] = defineField('userName')
 const [birthday] = defineField('birthday')
 const [isAdmin] = defineField('isAdmin')
 
+const isValidationError = computed(() => {
+  return Object.keys(errors.value).length > 0
+})
+
 // TODO: 初期値設定
 userId.value = 'yamada@xxx.co.jp'
 userName.value = '山田太郎'
 birthday.value = '1990-01-01'
 isAdmin.value = true
 
-const onValidSubmit = () => {
-  console.log(values)
-  // TODO: 仮でメニューへ遷移
-  router.push({ name: 'userList' })
-}
-
-// handleSubmit時にバリデーション
-const onSubmit = handleSubmit(onValidSubmit)
-
-// 削除ボタンクリック時の処理の暫定定義
-const onDeleteButtonClick = () => {
-  // 削除ボタンのときは確認ダイアログを表示
-  isConfirmDialogOpen.value = true
+const onSubmit = (event: SubmitEvent): void => {
+  const button = event.submitter as HTMLButtonElement
+  if (button.name === 'update') {
+    // 更新ボタンのときは入力チェック
+    validate().then((result) => {
+      if (result.valid) {
+        console.log(values)
+        // TODO: 仮でメニューへ遷移
+        router.push({ name: 'userList' })
+      }
+    })
+  } else {
+    // 削除ボタンのときは確認ダイアログを表示
+    isConfirmDialogOpen.value = true
+  }
 }
 
 const onConfirmDialogOKButtonClick = () => {
@@ -141,10 +142,7 @@ const onBackButtonClick = () => {
       <InputItem></InputItem>
       <ButtonArea>
         <SubmitButton name="update">ユーザ更新</SubmitButton>
-        <!-- TODO 削除ボタンSubmit時の扱い -->
-        <BaseButton name="delete" :danger="true" @click="onDeleteButtonClick"
-          >ユーザ削除</BaseButton
-        >
+        <SubmitButton name="delete" :danger="true">ユーザ削除</SubmitButton>
       </ButtonArea>
     </FormArea>
     <ConfirmModalDialog
