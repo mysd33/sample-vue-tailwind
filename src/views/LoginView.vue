@@ -14,11 +14,13 @@ import { useForm } from 'vee-validate'
 
 const router = useRouter()
 
-// TODO: バリデーションエラーの状態を管理するための変数を仮定義
+// バリデーションエラーの状態を管理するための変数を定義
 const isUserIdError = ref(false)
 const isPasswordError = ref(false)
 const validationErrorMessages: Ref<string[], string[]> = ref([])
-const isValidationError = computed(() => isUserIdError.value || isPasswordError.value)
+const isValidationError = computed(() => {
+  return Object.keys(errors.value).length > 0
+})
 
 // yup
 const schema = yup.object({
@@ -41,7 +43,7 @@ const onValidSubmit = () => {
   router.push({ name: 'menu' })
 }
 const onInvalidSubmit = ({ errors }) => {
-  // TODO: リファクタリング
+  // ログイン画面のみメッセージの出力方法が違うので、ここでエラーメッセージを設定
   validationErrorMessages.value = [errors.userId, errors.password]
   isUserIdError.value = errors.userId ? true : false
   isPasswordError.value = errors.password ? true : false
