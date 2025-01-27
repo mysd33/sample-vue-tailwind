@@ -18,7 +18,7 @@ import MessageBanner from '@/components/banner/MessageBanner.vue'
 import ConfirmModalDialog from '@/components/dialog/ConfirmModalDialog.vue'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
 import * as yup from 'yup'
-import { useForm, validate } from 'vee-validate'
+import { useForm } from 'vee-validate'
 import BaseButton from '@/components/button/BaseButton.vue'
 
 interface Props {
@@ -28,15 +28,8 @@ defineProps<Props>()
 
 const router = useRouter()
 
-// TODO: バリデーションエラーの状態を管理するための変数を仮定義
-const isPasswordError = ref(false)
-const passwordErrorsMessage: Ref<string[], string[]> = ref([])
-const isUserNameError = ref(false)
-const userNameErrorsMessage: Ref<string[], string[]> = ref([])
-const isBirthdayError = ref(false)
-const birthdayErrorsMessage: Ref<string[], string[]> = ref([])
 const isValidationError = computed(() => {
-  return isPasswordError.value || isUserNameError.value || isBirthdayError.value
+  return Object.keys(errors.value).length > 0
 })
 
 // TODO: サーバエラーの状態を管理するための変数を仮定義
@@ -79,18 +72,8 @@ const onValidSubmit = () => {
   router.push({ name: 'userList' })
 }
 
-const onInvalidSubmit = ({ errors }) => {
-  // TODO: リファクタリング
-  passwordErrorsMessage.value = errors.password ? [errors.password] : []
-  isPasswordError.value = errors.password ? true : false
-  userNameErrorsMessage.value = errors.userName ? [errors.userName] : []
-  isUserNameError.value = errors.userName ? true : false
-  birthdayErrorsMessage.value = errors.birthday ? [errors.birthday] : []
-  isBirthdayError.value = errors.birthday ? true : false
-}
-
 // handleSubmit時にバリデーション
-const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
+const onSubmit = handleSubmit(onValidSubmit)
 
 // 削除ボタンクリック時の処理の暫定定義
 const onDeleteButtonClick = () => {
@@ -130,39 +113,27 @@ const onBackButtonClick = () => {
       <InputItem label="ユーザーID" labelFor="userId">
         <InputText id="userId" name="userId" :readonly="true" v-model:value="userId" />
       </InputItem>
-      <InputItem
-        label="パスワード"
-        labelFor="password"
-        :required="true"
-        :errors="passwordErrorsMessage">
+      <InputItem label="パスワード" labelFor="password" :required="true">
         <InputPassword
           id="password"
           name="password"
           :focus="true"
           v-model:value="password"
-          :is-error="isPasswordError" />
+          :error="errors.password" />
       </InputItem>
-      <InputItem
-        label="ユーザー名"
-        labelFor="userName"
-        :required="true"
-        :errors="userNameErrorsMessage">
+      <InputItem label="ユーザー名" labelFor="userName" :required="true">
         <InputText
           id="userName"
           name="userName"
           v-model:value="userName"
-          :is-error="isUserNameError" />
+          :error="errors.userName" />
       </InputItem>
-      <InputItem
-        label="生年月日"
-        labelFor="birthday"
-        :required="true"
-        :errors="birthdayErrorsMessage">
+      <InputItem label="生年月日" labelFor="birthday" :required="true">
         <InputDate
           id="birthday"
           name="birthday"
           v-model:value="birthday"
-          :is-error="isBirthdayError" />
+          :error="errors.birthday" />
       </InputItem>
       <InputItem>
         <ToggleSwitch v-model:enabled="isAdmin">管理者</ToggleSwitch>
@@ -170,7 +141,7 @@ const onBackButtonClick = () => {
       <InputItem></InputItem>
       <ButtonArea>
         <SubmitButton name="update">ユーザ更新</SubmitButton>
-        <!-- TODO クリック時の扱い -->
+        <!-- TODO 削除ボタンSubmit時の扱い -->
         <BaseButton name="delete" :danger="true" @click="onDeleteButtonClick"
           >ユーザ削除</BaseButton
         >

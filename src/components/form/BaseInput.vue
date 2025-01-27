@@ -10,6 +10,7 @@ interface Props {
   readonly?: boolean
   disabled?: boolean
   isError?: boolean
+  error?: string
 }
 
 const props = defineProps<Props>()
@@ -17,24 +18,42 @@ const props = defineProps<Props>()
 const valueModel = defineModel<string>('value')
 
 const borderColor = computed(() => {
-  return props.isError
+  return props.isError || props.error
     ? 'border-red-600 focus:border-red-400 focus:ring-red-300/50 errorIcon'
     : 'border-gray-300 focus:border-blue-400 focus:ring-blue-300/50'
 })
 </script>
 
 <template>
-  <input
-    :type="type"
-    :id="id"
-    :name="name"
-    :placeholder="placeholder"
-    :autofocus="focus"
-    :readonly="readonly"
-    :disabled="disabled"
-    :class="[borderColor]"
-    class="h-10 rounded-lg border shadow-sm read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:ring read-only:focus:border-transparent read-only:focus:ring-transparent"
-    v-model="valueModel" />
+  <template v-if="!error">
+    <input
+      :type="type"
+      :id="id"
+      :name="name"
+      :placeholder="placeholder"
+      :autofocus="focus"
+      :readonly="readonly"
+      :disabled="disabled"
+      :class="[borderColor]"
+      class="h-10 rounded-lg border shadow-sm read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:ring read-only:focus:border-transparent read-only:focus:ring-transparent"
+      v-model="valueModel" />
+  </template>
+  <template v-else>
+    <input
+      :type="type"
+      :id="id"
+      :name="name"
+      :placeholder="placeholder"
+      :autofocus="focus"
+      :readonly="readonly"
+      :disabled="disabled"
+      :class="[borderColor]"
+      class="h-10 rounded-lg border shadow-sm read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:ring read-only:focus:border-transparent read-only:focus:ring-transparent"
+      v-model="valueModel" />
+    <template v-if="isError || error">
+      <div class="flow flow-col m-1 text-sm text-red-600">{{ error }}</div>
+    </template>
+  </template>
 </template>
 
 <style scoped>

@@ -9,6 +9,7 @@ interface Props {
   readonly?: boolean
   disabled?: boolean
   isError?: boolean
+  error?: string
 }
 
 defineProps<Props>()
@@ -26,5 +27,6 @@ const valueModel = defineModel<string>('value')
     :readonly="readonly"
     :disabled="disabled"
     :is-error="isError"
+    :error="error"
     v-model:value="valueModel" />
 </template>
