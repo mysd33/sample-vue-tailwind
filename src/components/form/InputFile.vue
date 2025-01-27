@@ -8,6 +8,7 @@ interface Props {
   focus?: boolean
   disabled?: boolean
   isError?: boolean
+  error?: string
 }
 
 const props = defineProps<Props>()
@@ -22,7 +23,7 @@ const onChanged = (event: Event) => {
 }
 
 const borderColor = computed(() => {
-  return props.isError
+  return props.isError || props.error
     ? 'border-red-600 focus:border-red-400 focus:ring-red-300/50 file:border-red-600 file:focus:border-red-400 file:focus:ring-red-300/50 errorIcon'
     : 'border-gray-300 focus:border-blue-400 focus:ring-blue-300/50 file:border-r-gray-300 file:focus:border-blue-400 file:focus:ring-blue-300/50'
 })
@@ -39,6 +40,9 @@ const borderColor = computed(() => {
     :class="[borderColor]"
     class="h-10 cursor-pointer rounded-lg border bg-white shadow-sm file:h-10 file:border-b-0 file:border-l-0 file:border-r file:border-t-0 file:border-solid file:hover:cursor-pointer focus:outline-none focus:ring file:focus:ring"
     @change="onChanged" />
+  <template v-if="isError || error">
+    <div class="flow flow-col m-1 text-sm text-red-600">{{ error }}</div>
+  </template>
 </template>
 
 <style scoped>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, type Ref } from 'vue'
+import { computed, ref, type Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
@@ -15,10 +15,6 @@ import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 
 const router = useRouter()
-
-// TODO: バリデーションエラーの状態を管理するための変数を仮定義
-const isValidationError = ref(false)
-const validationErrorMessages: Ref<string[], string[]> = ref([])
 
 // TODO: サーバエラーの状態を管理するための変数を仮定義
 const messageLevel = ref('')
@@ -36,18 +32,16 @@ const { values, errors, handleSubmit, defineField } = useForm({
 
 const [todoFile] = defineField('todoFile')
 
+const isValidationError = computed(() => {
+  return Object.keys(errors.value).length > 0
+})
+
 const onValidSubmit = () => {
   console.log('TODO一括登録:' + todoFile.value)
 }
 
-const onInvalidSubmit = ({ errors }) => {
-  // TODO: リファクタリング
-  validationErrorMessages.value = [errors.todoFile]
-  isValidationError.value = errors.todoFile ? true : false
-}
-
 // handleSubmit時にバリデーション
-const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
+const onSubmit = handleSubmit(onValidSubmit)
 
 const onBackButtonClick = () => {
   router.push({ name: 'menu' })
@@ -62,7 +56,7 @@ const onBackButtonClick = () => {
     <ValidationErrorBanner :is-error="isValidationError" />
     <MessageBanner :message="message" :level="messageLevel" />
     <form @submit.prevent="onSubmit" class="flex flex-col text-left">
-      <InputItem :errors="validationErrorMessages">
+      <InputItem>
         <label for="todoFile"
           >Todoファイル
           <RequiredBadge />
@@ -71,8 +65,8 @@ const onBackButtonClick = () => {
           id="todoFile"
           name="todoFile"
           :focus="true"
-          :is-error="isValidationError"
-          v-model:value="todoFile" />
+          v-model:value="todoFile"
+          :error="errors.todoFile" />
       </InputItem>
       <ButtonArea class="mt-4">
         <SubmitButton>登録</SubmitButton>
