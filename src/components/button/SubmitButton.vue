@@ -2,9 +2,18 @@
 import BaseButton from './BaseButton.vue'
 
 interface Props {
-  size?: string
-  danger?: boolean
+  /**
+   * ボタンのname属性
+   */
   name?: string
+  /**
+   * ボタンのサイズ（sm, md, lg）
+   */
+  size?: string
+  /**
+   * 重要な（危険）な操作を行うボタンかどうか
+   */
+  danger?: boolean
 }
 defineProps<Props>()
 </script>

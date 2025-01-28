@@ -27,8 +27,19 @@ npm run dev
 
 - ブラウザで[http://localhost:5173/](http://localhost:5173/)アクセス
 
+## StoryBookの起動方法
+- GitHub Pagesに[StoryBook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイして見られるように対応していますが、ローカルで起動する場合は以下の通り。
+
+```sh
+npm run storybook
+```
+
+- ブラウザで[http://localhost:6006/](http://localhost:6006/)にアクセス
+
+
 ## 画面一覧
 > [!WARNING]
+
 > 現在、作成中です。Vue.jsとTailwind CSSを使ったSPAの画面は、まだモックアップレベルの実装なので、比較の際、ご注意ください。
 
 > [!NOTE]
@@ -72,7 +83,7 @@ npm run dev
 - [src/components/](src/components/)フォルダに入っています。
 - 作成している画面部品は以下の通り。
 
-- GitHub Pagesに[StoryBook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/components-button-submitbutton--docs)をデプロイして見られるように対応中です。
+- GitHub Pagesに[StoryBook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイして見られるように対応しました。
 
 | 画面部品 | 説明 | ソースコード | StoryBook |
 | ---- | ---- | ---- | ---- |

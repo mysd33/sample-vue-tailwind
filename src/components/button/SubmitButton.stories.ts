@@ -2,6 +2,12 @@ import type { Meta, StoryObj } from '@storybook/vue3'
 
 import SubmitButton from './SubmitButton.vue'
 
+/**
+ * ## 送信ボタンのコンポーネント
+ *
+ * - フォームの送信ボタンを提供するコンポーネントです。
+ * - ボタンのサイズ、重要（危険）な操作かといった属性を設定できます。
+ */
 const meta: Meta<typeof SubmitButton> = {
   component: SubmitButton,
   tags: ['autodocs'],
@@ -10,6 +16,9 @@ const meta: Meta<typeof SubmitButton> = {
 export default meta
 type Story = StoryObj<typeof SubmitButton>
 
+/**
+ * 小さいサイズのボタン
+ */
 export const Small: Story = {
   render: (args) => ({
     components: { SubmitButton },
@@ -23,6 +32,9 @@ export const Small: Story = {
   },
 }
 
+/**
+ * 中サイズのボタン
+ */
 export const Medium: Story = {
   render: (args) => ({
     components: { SubmitButton },
@@ -36,6 +48,9 @@ export const Medium: Story = {
   },
 }
 
+/**
+ * 大きいサイズのボタン
+ */
 export const Large: Story = {
   render: (args) => ({
     components: { SubmitButton },
@@ -49,6 +64,9 @@ export const Large: Story = {
   },
 }
 
+/**
+ * 重要（危険）な操作を行うボタン
+ */
 export const Danger: Story = {
   render: (args) => ({
     components: { SubmitButton },
