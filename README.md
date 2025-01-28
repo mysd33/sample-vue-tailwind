@@ -72,32 +72,34 @@ npm run dev
 - [src/components/](src/components/)フォルダに入っています。
 - 作成している画面部品は以下の通り。
 
-| 画面部品 | 説明 | ソースコード |
-| ---- | ---- | ---- |
-| ヘッダ領域 | 画面ヘッダー部分の表示領域| [ソースコード](src/components/layout/HeaderArea.vue) |
-| メイン領域 | メインの表示領域 | [ソースコード](src/components/layout/MainContainer.vue) |
-| フォーム領域  | フォームの表示領域 | [ソースコード](src/components/form/FormArea.vue) |
-| 入力エラー用バナー | 入力エラー時のバナー表示領域 | [ソースコード](src/components/banner/ValidationErrorBanner.vue) |
-| メッセージバナー | メッセージ表示用バナー表示領域 | [ソースコード](src/components/banner/MessageBanner.vue) |
-| 入力項目領域  | フォームの入力項目表示領域 | [ソースコード](src/components/form/InputItem.vue) |
-| 入力の基底部品 | 入力部品共通の基底のコンポーネント | [ソースコード](src/components/form/BaseInput.vue) |
-| テキスト入力 | テキスト入力部品 | [ソースコード](src/components/form/InputText.vue) |
-| テキスト入力（ログイン画面用） | ログイン画面のレイアウトに合わせたテキスト入力部品 | [ソースコード](src/components/form/LoginInputText.vue) |
-| パスワード入力 | パスワード入力部品 | [ソースコード](src/components/form/InputPassword.vue) |
-| パスワード入力（ログイン画面用） | ログイン画面のレイアウトに合わせたパスワード入力部品 | [ソースコード](src/components/form/LoginInputPassword.vue) |
-| 日付入力 | 日付入力部品 | [ソースコード](src/components/form/InputDate.vue) |
-| トグルスイッチ | トグルの入力部品　| [ソースコード](src/components/form/ToggleSwitch.vue) |
-| ファイル入力 | ファイルアップロード入力部品 | [ソースコード](src/components/form/InputFile.vue) |
-| ボタン領域 | ボタンを並べて表示する領域 | [ソースコード](src/components/button/ButtonArea.vue) |
-| ボタンの基底部品 | ボタン共通の基底のコンポーネント| [ソースコード](src/components/button/BaseButton.vue) |
-| メニューボタン | メニュー画面のレイアウトに合わせたリンクボタン | [ソースコード](src/components/button/MenuButton.vue) |
-| リンクボタン | 画面遷移のリンクボタン | [ソースコード](src/components/button/LinkButton.vue) |
-| 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/button/SubmitButton.vue) |
-| テーブル | テーブルの表示領域、ヘッダー部、データ部 | [ソースコード](src/components/table/) |
-| ページネーションリンク | ページネーションのリンクボタン | [ソースコード](src/components/pagination/PaginationLink.vue) |
-| モーダルダイアログの基底部品 | ダイアログ共通の基底のコンポーネント | TBD |
-| 確認用モーダルダイアログ | 確認ダイアログ | [ソースコード](src/components/dialog/ConfirmModalDialog.vue) |
-| 情報モーダルダイアログ | 完了時等の情報ダイアログ | [ソースコード](src/components/dialog/ConfirmModalDialog.vue) |
+- GitHub Pagesに[StoryBook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/components-button-submitbutton--docs)をデプロイして見られるように対応中です。
+
+| 画面部品 | 説明 | ソースコード | StoryBook |
+| ---- | ---- | ---- | ---- |
+| ヘッダ領域 | 画面ヘッダー部分の表示領域| [ソースコード](src/components/layout/HeaderArea.vue) | TBD |
+| メイン領域 | メインの表示領域 | [ソースコード](src/components/layout/MainContainer.vue) | TBD |
+| フォーム領域  | フォームの表示領域 | [ソースコード](src/components/form/FormArea.vue) | TBD |
+| 入力エラー用バナー | 入力エラー時のバナー表示領域 | [ソースコード](src/components/banner/ValidationErrorBanner.vue) | TBD |
+| メッセージバナー | メッセージ表示用バナー表示領域 | [ソースコード](src/components/banner/MessageBanner.vue) | TBD |
+| 入力項目領域  | フォームの入力項目表示領域 | [ソースコード](src/components/form/InputItem.vue) | TBD |
+| 入力の基底部品 | 入力部品共通の基底のコンポーネント | [ソースコード](src/components/form/BaseInput.vue) | TBD |
+| テキスト入力 | テキスト入力部品 | [ソースコード](src/components/form/InputText.vue) | TBD |
+| テキスト入力（ログイン画面用） | ログイン画面のレイアウトに合わせたテキスト入力部品 | [ソースコード](src/components/form/LoginInputText.vue) | TBD |
+| パスワード入力 | パスワード入力部品 | [ソースコード](src/components/form/InputPassword.vue) | TBD |
+| パスワード入力（ログイン画面用） | ログイン画面のレイアウトに合わせたパスワード入力部品 | [ソースコード](src/components/form/LoginInputPassword.vue) | TBD |
+| 日付入力 | 日付入力部品 | [ソースコード](src/components/form/InputDate.vue) | TBD |
+| トグルスイッチ | トグルの入力部品　| [ソースコード](src/components/form/ToggleSwitch.vue) | TBD |
+| ファイル入力 | ファイルアップロード入力部品 | [ソースコード](src/components/form/InputFile.vue) | TBD |
+| ボタン領域 | ボタンを並べて表示する領域 | [ソースコード](src/components/button/ButtonArea.vue) | TBD |
+| ボタンの基底部品 | ボタン共通の基底のコンポーネント| [ソースコード](src/components/button/BaseButton.vue) | TBD |
+| メニューボタン | メニュー画面のレイアウトに合わせたリンクボタン | [ソースコード](src/components/button/MenuButton.vue) | TBD |
+| リンクボタン | 画面遷移のリンクボタン | [ソースコード](src/components/button/LinkButton.vue) | TBD |
+| 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/button/SubmitButton.vue) | [StoryBook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/components-button-submitbutton--docs) | TBD |
+| テーブル | テーブルの表示領域、ヘッダー部、データ部 | [ソースコード](src/components/table/) | TBD |
+| ページネーションリンク | ページネーションのリンクボタン | [ソースコード](src/components/pagination/PaginationLink.vue) | TBD |
+| モーダルダイアログの基底部品 | ダイアログ共通の基底のコンポーネント | TBD | TBD |
+| 確認用モーダルダイアログ | 確認ダイアログ | [ソースコード](src/components/dialog/ConfirmModalDialog.vue) | TBD |
+| 情報モーダルダイアログ | 完了時等の情報ダイアログ | [ソースコード](src/components/dialog/ConfirmModalDialog.vue) | TBD |
 
 ## 追加したプラグイン・ライブラリ
 - Vueライブラリ
