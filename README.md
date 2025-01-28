@@ -112,7 +112,10 @@ npm run dev
     - [VeeValidate](https://vee-validate.logaretm.com/v4/)       
         - 入力チェックに使用
     - [@vee-validate/yup](https://vee-validate.logaretm.com/v4/guide/composition-api/getting-started/#validating-with-yup)
-        - 入力チェックに使用。yupと連携してVeeValidateを使用
+        - 入力チェックに使用。yupと連携してVeeValidateを使用        
+- StoryBook
+    - [Storybook](https://storybook.js.org/)
+
 
 - テストツール
     - [Vitest](https://vitest.dev/)
@@ -181,6 +184,27 @@ import '@/style.css'
 const app = createApp(App)
 …
 ```
+
+- StoryBookのセットアップ
+
+```sh
+# storybookの初期化
+npx storybook@latest init
+```
+
+- サンプルで作られるstoriesフォルダは削除してよい
+
+```sh
+# TailwindCSSの設定を追加
+npx storybook@latest add @storybook/addon-styling-webpack
+```
+
+- .storybook/preview.jsに、以下を追記
+
+```js
+import '@/style.css'
+```
+
 
 ## (参考) インストールするとよいVSCodeの拡張機能
 
