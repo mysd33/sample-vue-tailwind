@@ -115,7 +115,7 @@ npm run dev
         - 入力チェックに使用
     - [@vee-validate/yup](https://vee-validate.logaretm.com/v4/guide/composition-api/getting-started/#validating-with-yup)
         - 入力チェックに使用。yupと連携してVeeValidateを使用        
-- StoryBook
+- Storybook
     - [Storybook](https://storybook.js.org/)
 
 
@@ -218,7 +218,7 @@ export default {
 
 ```
 
-### StoryBookのセットアップ
+### Storybookのセットアップ
 - 以下のコマンドを実行
 
 ```sh
@@ -238,6 +238,17 @@ npx storybook@latest add @storybook/addon-styling-webpack
 ```js
 import '@/style.css'
 ```
+
+### Github Pagesを使ってStorybookを公開する設定
+- Github Pagesを使ってStorybookを公開したい場合は、[Storybookのドキュメント](https://storybook.js.org/docs/sharing/publish-storybook#publish-storybook-to-other-services)や[Deploy Storybook to GitHub Pagesのドキュメント](https://github.com/bitovi/github-actions-storybook-to-github-pages)を参考に以下の設定を行う。
+
+    - 「.github/workflows」フォルダにGitHub Actionsのワークフローを作成
+        - [ワークフローの記載例（deploy-github-pages.yml）](.github/workflows/deploy-github-pages.yml)
+
+    - GitHubのリポジトリの「Settings」の「Pages」にて、GitHub Pagesの設定を行う
+        - 「Build and deployment」の「Source」を「GitHub Actions」に設定
+        - ワークフローが正常に終了すると、「https://(ユーザ名).github.io/(リポジトリ名)」というURLでStoryBookが公開される
+            - 本サンプルでは「https://mysd33.github.io/sample-vue-tailwind」というURLで公開されている
 
 ### その他、ライブラリインストール
 - 以下のコマンドで、上記の手順ではインストールされないライブラリをインストール
