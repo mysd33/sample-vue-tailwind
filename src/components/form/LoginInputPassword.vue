@@ -25,6 +25,10 @@ const valueModel = defineModel<string>('value')
     :readonly="readonly"
     :disabled="disabled"
     :is-error="isError"
-    class="z-0 h-12 rounded-none rounded-b-lg focus:z-10"
+    :class="{
+      'z-0': !isError,
+      'z-10': isError,
+    }"
+    class="h-12 rounded-none rounded-b-lg focus:z-20"
     v-model:value="valueModel" />
 </template>
