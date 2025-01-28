@@ -124,15 +124,19 @@ npm run dev
     - [Cypress](https://www.cypress.io/)
 
 - TailWind CSSプラグイン
-    - [@tailwindcss/forms](https://www.cypress.io/)
+    - [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms)
 
 ## (参考) ブランクプロジェクトのセットアップ方法
 - Vue.jsとTailwind CSSを使ったブランクプロジェクトの作成手順は以下の通り
 
+### Vueのプロジェクト作成
+
+- vue-cliを使ってプロジェクトを作成
+
 ```sh
-# vue-cliを使ってプロジェクトを作成
 npm create vue@latest
 
+# 以下の通り選択
 Project name: ... sample-vue-tailwind
 Add TypeScript? ... Yes
 Add JSX Support? ... No
@@ -142,7 +146,13 @@ Add Vitest for Unit Testing? ... Yes
 Add an End-to-End Testing Solution? » Cypress
 Add ESLint for code quality? » Yes
 Add Prettier for code formatting? ... Yes
+```
 
+### Tailwind CSSの導入
+
+- 以下のコマンド実行
+
+```sh
 # プロジェクトのディレクトリに移動
 cd sample-vue-tailwind
 
@@ -187,17 +197,39 @@ const app = createApp(App)
 …
 ```
 
-- StoryBookのセットアップ
+### tailwindcss/formsのインストール
+
+- 以下のコマンドを実行
+
+```sh
+npm install -D @tailwindcss/forms
+```
+
+- tailwind.config.jsのpluginsの設定に@tailwindcss/formsを追加
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+…
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
+}
+
+```
+
+### StoryBookのセットアップ
+- 以下のコマンドを実行
 
 ```sh
 # storybookの初期化
 npx storybook@latest init
 ```
 
-- サンプルで作られるstoriesフォルダは削除してよい
+- 「stories」フォルダは、サンプルのコンポーネントとストーリーなので、学習後、不要になったら削除してよい
 
 ```sh
-# TailwindCSSの設定を追加
+# TailwindCSSと統合するための設定を追加
 npx storybook@latest add @storybook/addon-styling-webpack
 ```
 
@@ -205,6 +237,21 @@ npx storybook@latest add @storybook/addon-styling-webpack
 
 ```js
 import '@/style.css'
+```
+
+### その他、ライブラリインストール
+- 以下のコマンドで、上記の手順ではインストールされないライブラリをインストール
+    
+```sh
+# Headlress UI
+npm install @headlessui/vue
+
+# Heroicons
+npm install @heroicons/vue
+
+# VeeValidate
+npm install vee-validate
+npm install @vee-validate/yup
 ```
 
 
