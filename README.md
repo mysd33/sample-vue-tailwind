@@ -27,8 +27,8 @@ npm run dev
 
 - ブラウザで[http://localhost:5173/](http://localhost:5173/)アクセス
 
-## StoryBookの起動方法
-- GitHub Pagesに[StoryBook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイして見られるように対応していますが、ローカルで起動する場合は以下の通り。
+## Storybookの起動方法
+- GitHub Pagesに[Storybook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイして見られるように対応していますが、ローカルで起動する場合は以下の通り。
 
 ```sh
 npm run storybook
@@ -49,7 +49,6 @@ npx vitest run
 
 ## 画面一覧
 > [!WARNING]
-
 > 現在、作成中です。Vue.jsとTailwind CSSを使ったSPAの画面は、まだモックアップレベルの実装なので、比較の際、ご注意ください。
 
 > [!NOTE]
@@ -58,18 +57,18 @@ npx vitest run
 - [src/views](src/views/)フォルダに入っています。
 - 作成している画面は以下の通り。
 
-- 現状、静的な画面は、GitHub Pagesに[StoryBook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイしてプレビュー見られます。
-    - 今後、動的に表示するよう実装すると、StoryBookだとうまく表示できないかもです。
+- 現状、静的な画面は、GitHub Pagesに[Storybook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイしてプレビュー見られます。
+    - 今後、動的に表示するよう実装すると、Storybookだとうまく表示できないかもです。
 
-| 画面名 | 説明 | 画面イメージ | Vue+TailWindソースコード | （参考比較）Thymeleaf+Bootstrapソースコード |
+| 画面名 | 説明 | 画面イメージ | Storybook | Vue+TailWindソースコード | （参考比較）Thymeleaf+Bootstrapソースコード |
 | ---- | ---- | ---- | ---- | ---- |
-| ログイン画面 | トップページの画面で、ユーザがログインするための画面。 | [画面](docs/img/screen/screen1.png) | [ソースコード](src/views/LoginView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/login/login.html) |
-| メニュー画面 | メニュー画面。ログインユーザのロールによって管理者メニューの表示有無が切り替わる。 | [画面](docs/img/screen/screen2.png) | [ソースコード](src/views/MenuView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/menu/menu.html) |
-| Todo管理画面 | Todoリストの一覧表示、登録、完了、削除といった操作を実施できる画面。 | [画面](docs/img/screen/screen3.png)  | [ソースコード](src/views/TodoListView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/todoList.html) |
-| Todo一括登録画面 | Todoリストを記載したCSVファイルをアップロードし、非同期でTodoリストを登録できる画面。 | [画面](docs/img/screen/screen4.png) | [ソースコード](src/views/TodoFileUploadView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/upload.html)  |
-| ユーザ一覧画面 | 登録されているユーザを一覧表示&CSVファイルダウンロードできる画面。 | [画面](docs/img/screen/screen5.png) | [ソースコード](src/views/UserListView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userList.html) |
-| ユーザ登録画面 | ユーザを新規登録するための画面。 | [画面](docs/img/screen/screen6.png) | [ソースコード](src/views/UserRegisterView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/regist.html) |
-| ユーザ詳細画面 | ユーザの詳細情報の表示と情報更新するための画面。 | [画面](docs/img/screen/screen7.png) | [ソースコード](src/views/UserDetailView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userDetail.html) |
+| ログイン画面 | トップページの画面で、ユーザがログインするための画面。 | [画面](docs/img/screen/screen1.png) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/views-loginview--docs) | [ソースコード](src/views/LoginView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/login/login.html) |
+| メニュー画面 | メニュー画面。ログインユーザのロールによって管理者メニューの表示有無が切り替わる。 | [画面](docs/img/screen/screen2.png) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/views-menuview--docs) | [ソースコード](src/views/MenuView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/menu/menu.html) |
+| Todo管理画面 | Todoリストの一覧表示、登録、完了、削除といった操作を実施できる画面。 | [画面](docs/img/screen/screen3.png)  | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/views-todolistview--docs) | [ソースコード](src/views/TodoListView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/todoList.html) |
+| Todo一括登録画面 | Todoリストを記載したCSVファイルをアップロードし、非同期でTodoリストを登録できる画面。 | [画面](docs/img/screen/screen4.png) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/views-todofileuploadview--docs) | [ソースコード](src/views/TodoFileUploadView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/upload.html)  |
+| ユーザ一覧画面 | 登録されているユーザを一覧表示&CSVファイルダウンロードできる画面。 | [画面](docs/img/screen/screen5.png) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/views-userlistview--docs) | [ソースコード](src/views/UserListView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userList.html) |
+| ユーザ登録画面 | ユーザを新規登録するための画面。 | [画面](docs/img/screen/screen6.png) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/views-userregisterview--docs) | [ソースコード](src/views/UserRegisterView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/regist.html) |
+| ユーザ詳細画面 | ユーザの詳細情報の表示と情報更新するための画面。 | [画面](docs/img/screen/screen7.png) | [ソースコード](src/views/UserDetailView.vue) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/views-userregisterview--docs) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userDetail.html) |
 
 ## 画面遷移図
 - [src/router/index.ts](src/router/index.ts)に画面遷移の設定が記述されています。
@@ -96,9 +95,9 @@ npx vitest run
 - [src/components/](src/components/)フォルダに入っています。
 - 作成している画面部品は以下の通り。
 
-- GitHub Pagesに[StoryBook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイして見られるように対応しました。
+- GitHub Pagesに[Storybook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイして見られるように対応しました。
 
-| 画面部品 | 説明 | ソースコード | StoryBook |
+| 画面部品 | 説明 | ソースコード | Storybook |
 | ---- | ---- | ---- | ---- |
 | ヘッダ領域 | 画面ヘッダー部分の表示領域| [ソースコード](src/components/layout/HeaderArea.vue) | TBD |
 | メイン領域 | メインの表示領域 | [ソースコード](src/components/layout/MainContainer.vue) | TBD |
@@ -118,7 +117,7 @@ npx vitest run
 | ボタンの基底部品 | ボタン共通の基底のコンポーネント| [ソースコード](src/components/button/BaseButton.vue) | TBD |
 | メニューボタン | メニュー画面のレイアウトに合わせたリンクボタン | [ソースコード](src/components/button/MenuButton.vue) | TBD |
 | リンクボタン | 画面遷移のリンクボタン | [ソースコード](src/components/button/LinkButton.vue) | TBD |
-| 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/button/SubmitButton.vue) | [StoryBook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/components-button-submitbutton--docs) | TBD |
+| 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/button/SubmitButton.vue) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/components-button-submitbutton--docs) | TBD |
 | テーブル | テーブルの表示領域、ヘッダー部、データ部 | [ソースコード](src/components/table/) | TBD |
 | ページネーションリンク | ページネーションのリンクボタン | [ソースコード](src/components/pagination/PaginationLink.vue) | TBD |
 | モーダルダイアログの基底部品 | ダイアログ共通の基底のコンポーネント | TBD | TBD |
@@ -272,7 +271,7 @@ import '@/style.css'
 
     - GitHubのリポジトリの「Settings」の「Pages」にて、GitHub Pagesの設定を行う
         - 「Build and deployment」の「Source」を「GitHub Actions」に設定
-        - ワークフローが正常に終了すると、「https://(ユーザ名).github.io/(リポジトリ名)」というURLでStoryBookが公開される
+        - ワークフローが正常に終了すると、「https://(ユーザ名).github.io/(リポジトリ名)」というURLでStorybookが公開される
             - 本サンプルでは「https://mysd33.github.io/sample-vue-tailwind」というURLで公開されている
 
 ### その他、ライブラリインストール
