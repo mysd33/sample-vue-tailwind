@@ -36,6 +36,16 @@ npm run storybook
 
 - ブラウザで[http://localhost:6006/](http://localhost:6006/)にアクセス
 
+## Vitestによるユニットテストの実行方法
+
+```sh
+# ファイル変更待ちで継続的にテスト実行する場合
+npm run test:unit
+
+# 一回実行して終了する場合
+npx vitest run
+```
+
 
 ## 画面一覧
 > [!WARNING]
@@ -47,6 +57,9 @@ npm run storybook
 
 - [src/views](src/views/)フォルダに入っています。
 - 作成している画面は以下の通り。
+
+- 現状、静的な画面は、GitHub Pagesに[StoryBook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイしてプレビュー見られます。
+    - 今後、動的に表示するよう実装すると、StoryBookだとうまく表示できないかもです。
 
 | 画面名 | 説明 | 画面イメージ | Vue+TailWindソースコード | （参考比較）Thymeleaf+Bootstrapソースコード |
 | ---- | ---- | ---- | ---- | ---- |
@@ -132,6 +145,7 @@ npm run storybook
 
 - テストツール
     - [Vitest](https://vitest.dev/)
+    - [Vue Test Utils](https://test-utils.vuejs.org/)
     - [Cypress](https://www.cypress.io/)
 
 - TailWind CSSプラグイン
@@ -274,6 +288,9 @@ npm install @heroicons/vue
 # VeeValidate
 npm install vee-validate
 npm install @vee-validate/yup
+
+# Vue Test Utils
+npm install --save-dev @vue/test-utils
 ```
 
 

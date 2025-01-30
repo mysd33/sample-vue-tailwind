@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/vue3'
 import LoginView from './LoginView.vue'
 
 /**
- * ## ログイン画面のコンポーネント
+ * ## ログイン画面
  */
 const meta: Meta<typeof LoginView> = {
   component: LoginView,
