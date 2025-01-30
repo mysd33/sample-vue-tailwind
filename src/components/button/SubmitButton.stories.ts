@@ -11,6 +11,13 @@ import SubmitButton from './SubmitButton.vue'
 const meta: Meta<typeof SubmitButton> = {
   component: SubmitButton,
   tags: ['autodocs'],
+  render: (args) => ({
+    components: { SubmitButton },
+    setup() {
+      return { args }
+    },
+    template: '<SubmitButton v-bind="args">{{ args.default }}</SubmitButton>',
+  }),
 }
 
 export default meta
@@ -20,15 +27,9 @@ type Story = StoryObj<typeof SubmitButton>
  * 小さいサイズのボタン
  */
 export const Small: Story = {
-  render: (args) => ({
-    components: { SubmitButton },
-    setup() {
-      return { args }
-    },
-    template: '<SubmitButton v-bind="args">Submit</SubmitButton>',
-  }),
   args: {
     size: 'sm',
+    default: '送信',
   },
 }
 
@@ -36,15 +37,9 @@ export const Small: Story = {
  * 中サイズのボタン
  */
 export const Medium: Story = {
-  render: (args) => ({
-    components: { SubmitButton },
-    setup() {
-      return { args }
-    },
-    template: '<SubmitButton v-bind="args">Submit</SubmitButton>',
-  }),
   args: {
     size: 'md',
+    default: '送信',
   },
 }
 
@@ -52,15 +47,9 @@ export const Medium: Story = {
  * 大きいサイズのボタン
  */
 export const Large: Story = {
-  render: (args) => ({
-    components: { SubmitButton },
-    setup() {
-      return { args }
-    },
-    template: '<SubmitButton v-bind="args">Submit</SubmitButton>',
-  }),
   args: {
     size: 'lg',
+    default: '送信',
   },
 }
 
@@ -68,15 +57,9 @@ export const Large: Story = {
  * 重要（危険）な操作を行うボタン
  */
 export const Danger: Story = {
-  render: (args) => ({
-    components: { SubmitButton },
-    setup() {
-      return { args }
-    },
-    template: '<SubmitButton v-bind="args">Submit</SubmitButton>',
-  }),
   args: {
     size: 'md',
     danger: true,
+    default: '削除',
   },
 }

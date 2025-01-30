@@ -139,9 +139,9 @@ npx vitest run
         - 入力チェックに使用
     - [@vee-validate/yup](https://vee-validate.logaretm.com/v4/guide/composition-api/getting-started/#validating-with-yup)
         - 入力チェックに使用。yupと連携してVeeValidateを使用        
+
 - Storybook
     - [Storybook](https://storybook.js.org/)
-
 
 - テストツール
     - [Vitest](https://vitest.dev/)
