@@ -6,7 +6,14 @@ interface Props {
 }
 defineProps<Props>()
 
-defineEmits(['click'])
+interface Emits {
+  /**
+   * ボタンクリック時
+   */
+  (event: 'click'): void
+}
+
+defineEmits<Emits>()
 </script>
 
 <!-- TODO* パスでリンク渡せないとダメかも。。。 -->

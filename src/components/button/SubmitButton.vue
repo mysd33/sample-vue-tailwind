@@ -9,7 +9,7 @@ interface Props {
   /**
    * ボタンのサイズ（sm, md, lg）
    */
-  size?: string
+  size?: 'sm' | 'md' | 'lg' | undefined
   /**
    * 重要な（危険）な操作を行うボタンかどうか
    */

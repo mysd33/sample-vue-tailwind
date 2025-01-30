@@ -2,10 +2,26 @@
 import { computed } from 'vue'
 
 interface Props {
-  size?: string
-  outline?: boolean
-  danger?: boolean
+  /**
+   * ボタンのname属性
+   */
   name?: string
+  /**
+   * ボタンのtype属性
+   */
+  type?: 'submit' | 'button' | 'reset' | undefined
+  /**
+   * ボタンのサイズ（sm, md, lg）
+   */
+  size?: 'sm' | 'md' | 'lg' | undefined
+  /**
+   * アウトラインボタンかどうか
+   */
+  outline?: boolean
+  /**
+   * 重要な（危険）な操作を行うボタンかどうか
+   */
+  danger?: boolean
 }
 const props = defineProps<Props>()
 
@@ -45,11 +61,19 @@ const colorSet = computed(() => {
   return 'bg-blue-600 hover:bg-blue-700 text-white focus:border-blue-400 focus:ring-blue-300/50'
 })
 
-defineEmits(['click'])
+interface Emits {
+  /**
+   * ボタンクリック時
+   */
+  (event: 'click'): void
+}
+
+defineEmits<Emits>()
 </script>
 
 <template>
   <button
+    :type="type"
     :name="name"
     class="rounded-md px-3 focus:outline-none focus:ring"
     :class="[height, textSize, colorSet]"
