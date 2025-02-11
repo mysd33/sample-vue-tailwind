@@ -62,7 +62,7 @@ npx vitest run
 | 画面名 | 説明 | 画面イメージ | Storybook | Vue+TailWindソースコード | （参考比較）Thymeleaf+Bootstrapソースコード |
 | ---- | ---- | ---- | ---- | ---- | ---- |
 | ログイン画面 | トップページの画面で、ユーザがログインするための画面。 | [画面](docs/img/screen/screen1.png) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/story/usecases-login-views-loginview--default) | [ソースコード](src/usecases/login/views/LoginView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/login/login.html) |
-| メニュー画面 | メニュー画面。ログインユーザのロールによって管理者メニューの表示有無が切り替わる。 | [画面](docs/img/screen/screen2.png) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/story/usecases-menu-views-menuview--default) | [ソースコード](src/usecases/menu/views/MenuView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/menu/menu.html) |
+| メニュー画面 | メニュー画面。ログインユーザのロールによって管理者メニューの表示有無が切り替わる。 | [画面](docs/img/screen/screen2.png) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/story/usecases-login-views-menuview--default) | [ソースコード](src/usecases/login/views/MenuView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/menu/menu.html) |
 | Todo管理画面 | Todoリストの一覧表示、登録、完了、削除といった操作を実施できる画面。 | [画面](docs/img/screen/screen3.png)  | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/story/usecases-todo-views-todolistview--default) | [ソースコード](src/usecases/todo/views/TodoListView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/todoList.html) |
 | Todo一括登録画面 | Todoリストを記載したCSVファイルをアップロードし、非同期でTodoリストを登録できる画面。 | [画面](docs/img/screen/screen4.png) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/story/usecases-todo-views-todofileuploadview--default) | [ソースコード](src/usecases/todo/views/TodoFileUploadView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/todo/upload.html)  |
 | ユーザ一覧画面 | 登録されているユーザを一覧表示&CSVファイルダウンロードできる画面。 | [画面](docs/img/screen/screen5.png) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/story/usecases-user-views-userlistview--default) | [ソースコード](src/usecases/user/views/UserListView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userList.html) |
@@ -130,6 +130,7 @@ npx vitest run
     - [pinia](https://pinia.vuejs.org/)        
         - 状態管理に使用
     - [Pinia Plugin Persistedstate](https://prazdevs.github.io/pinia-plugin-persistedstate/)
+        - Piniaで管理する状態をWebStorageに永続化するために使用
     - [Headless UI](https://headlessui.com/v1/vue)
         - モーダルダイアログに使用
     - [@heroicons/vue](https://github.com/tailwindlabs/heroicons?tab=readme-ov-file#vue)
