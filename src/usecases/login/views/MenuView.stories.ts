@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-import MenuView from '@/usecases/menu/views/MenuView.vue'
+import MenuView from '@/usecases/login/views/MenuView.vue'
 
 /**
  * ## メニュー画面

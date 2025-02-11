@@ -129,6 +129,7 @@ npx vitest run
         - 画面遷移制御に使用
     - [pinia](https://pinia.vuejs.org/)        
         - 状態管理に使用
+    - [Pinia Plugin Persistedstate](https://prazdevs.github.io/pinia-plugin-persistedstate/)
     - [Headless UI](https://headlessui.com/v1/vue)
         - モーダルダイアログに使用
     - [@heroicons/vue](https://github.com/tailwindlabs/heroicons?tab=readme-ov-file#vue)
@@ -302,6 +303,18 @@ npm install @vee-validate/yup
 
 # Vue Test Utils
 npm install --save-dev @vue/test-utils
+
+# Pinia Plugin Persistedstate
+npm install pinia-plugin-persistedstate
+```
+
+- main.tsに以下を追記
+
+```ts
+// Pinia Plugin Persistedstateプラグインの設定を追加するよう修正
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia)
 ```
 
 

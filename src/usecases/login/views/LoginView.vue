@@ -12,9 +12,14 @@ import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 import { LoginService } from '@/usecases/login/services/LoginService'
+import MessageBanner from '@/components/banner/MessageBanner.vue'
 
 const router = useRouter()
 const loginService = new LoginService()
+
+// TODO: サーバエラーの状態を管理するための変数を仮定義
+const messageLevel = ref('')
+const message = ref('')
 
 // バリデーションエラーの状態を管理するための変数を定義
 const isUserIdError = ref(false)
@@ -41,15 +46,25 @@ const [password] = defineField('password')
 const onValidSubmit = () => {
   console.log('userId: ', userId.value)
   console.log('password: ', password.value)
+  // エラーメッセージのクリア
+  validationErrorMessages.value = []
+  isUserIdError.value = false
+  isPasswordError.value = false
 
   // ログイン処理
-  loginService.login(userId.value, password.value)
-  // TODO: ログイン失敗時の処理の追加
-
-  router.push({ name: 'menu' })
+  const result = loginService.login(userId.value, password.value)
+  // TODO: 戻り値のあり方（仮置きでログイン結果booleanで返しているが、業務例外の検討）
+  if (result) {
+    // ログイン成功時はメニュー画面に遷移
+    router.push({ name: 'menu' })
+    return
+  }
+  // ログインエラーのメッセージを設定
+  messageLevel.value = 'error'
+  message.value = 'ユーザ名かパスワードが正しくありません'
 }
 const onInvalidSubmit = ({ errors }) => {
-  // ログイン画面のみメッセージの出力方法が違うので、ここでエラーメッセージを設定
+  // ログイン画面のみ入力エラーメッセージの出力方法が違うので、ここでエラーメッセージを設定
   validationErrorMessages.value = [errors.userId, errors.password]
   isUserIdError.value = errors.userId ? true : false
   isPasswordError.value = errors.password ? true : false
@@ -62,8 +77,9 @@ const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
 <template>
   <HeaderArea title="TODO管理アプリ" />
   <MainContainer>
+    <ValidationErrorBanner :is-error="isValidationError" />
+    <MessageBanner :message="message" :level="messageLevel" />
     <LoginFormArea @submit="onSubmit">
-      <ValidationErrorBanner :is-error="isValidationError" />
       <InputItem :errors="validationErrorMessages">
         <LoginInputText
           id="userId"

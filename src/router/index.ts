@@ -17,7 +17,7 @@ const router = createRouter({
       // メニュー画面
       path: '/menu',
       name: 'menu',
-      component: () => import('@/usecases/menu/views/MenuView.vue'),
+      component: () => import('@/usecases/login/views/MenuView.vue'),
     },
     {
       // TODO管理画面
@@ -63,6 +63,7 @@ router.beforeEach((to, from, next) => {
     const userStore = useUserStore()
     if (userStore.isLoggedIn) {
       next({ name: 'menu' })
+      return
     }
   }
 
