@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-import TodoListView from './TodoListView.vue'
+import TodoListView from '@/usecases/todo/views/TodoListView.vue'
 
 /**
  * ## Todo管理画面

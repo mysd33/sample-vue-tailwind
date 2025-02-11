@@ -1,6 +1,6 @@
 import type * as yup from 'yup'
 
-// TODO: エラーメッセージの見直し
+// TODO: 入力エラーメッセージを必要に応じて修正する
 
 export const mixed: yup.LocaleObject['mixed'] = {
   default: ({ label }) => (label ? label + 'の' : '') + '値が不正です。',

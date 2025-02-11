@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import XCircleIcon from '@/icons/XCircleIcon.vue'
+import XCircleIcon from '@/components/icons/XCircleIcon.vue'
 
 interface Props {
   isError: boolean

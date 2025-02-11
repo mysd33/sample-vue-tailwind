@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import LoginView from '@/views/LoginView.vue'
+import LoginView from '@/usecases/login/views/LoginView.vue'
 import { useUserStore } from '@/stores/userStore'
 
 const router = createRouter({
@@ -17,37 +17,37 @@ const router = createRouter({
       // メニュー画面
       path: '/menu',
       name: 'menu',
-      component: () => import('@/views/MenuView.vue'),
+      component: () => import('@/usecases/menu/views/MenuView.vue'),
     },
     {
       // TODO管理画面
       path: '/todo',
       name: 'todo',
-      component: () => import('@/views/TodoListView.vue'),
+      component: () => import('@/usecases/todo/views/TodoListView.vue'),
     },
     {
       // TODO一括登録
       path: '/todoFile/upload',
       name: 'todoFileUpload',
-      component: () => import('@/views/TodoFileUploadView.vue'),
+      component: () => import('@/usecases/todo/views/TodoFileUploadView.vue'),
     },
     {
       // ユーザー管理画面
       path: '/users',
       name: 'userList',
-      component: () => import('@/views/UserListView.vue'),
+      component: () => import('@/usecases/user/views/UserListView.vue'),
     },
     {
       // ユーザ登録画面
       path: '/newuser',
       name: 'newUser',
-      component: () => import('@/views/UserRegisterView.vue'),
+      component: () => import('@/usecases/user/views/UserRegisterView.vue'),
     },
     {
       // ユーザ詳細画面
       path: '/users/:id',
       name: 'userDetail',
-      component: () => import('@/views/UserDetailView.vue'),
+      component: () => import('@/usecases/user/views/UserDetailView.vue'),
       props: (routes) => {
         return {
           id: routes.params.id,

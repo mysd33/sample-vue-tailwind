@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-import UserListView from './UserListView.vue'
+import UserListView from '@/usecases/user/views/UserListView.vue'
 
 /**
  * ## Todo管理画面

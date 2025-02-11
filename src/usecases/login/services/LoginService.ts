@@ -1,4 +1,4 @@
-import { UserRepository } from '@/repositories/UserRepository'
+import { UserRepository } from '@/usecases/common/repositories/UserRepository'
 import { useUserStore } from '@/stores/userStore'
 
 export class LoginService {

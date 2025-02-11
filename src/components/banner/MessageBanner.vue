@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import XCircleIcon from '@/icons/XCircleIcon.vue'
-import EyeIcon from '@/icons/EyeIcon.vue'
+import XCircleIcon from '@/components/icons/XCircleIcon.vue'
+import EyeIcon from '@/components/icons/EyeIcon.vue'
 
 import { computed } from 'vue'
-import CheckCircleIcon from '@/icons/CheckCircleIcon.vue'
+import CheckCircleIcon from '@/components/icons/CheckCircleIcon.vue'
 
 interface Props {
   message?: string

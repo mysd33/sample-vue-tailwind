@@ -1,4 +1,4 @@
-import type { User } from '@/models/user'
+import type { User } from '@/usecases/common/models/user'
 
 export class UserRepository {
   public login(id: string, password: string): User | null {

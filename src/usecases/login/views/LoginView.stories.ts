@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-import LoginView from './LoginView.vue'
+import LoginView from '@/usecases/login/views/LoginView.vue'
 
 /**
  * ## ログイン画面

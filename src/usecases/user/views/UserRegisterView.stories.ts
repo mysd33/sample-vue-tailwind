@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-import UserRegisterView from './UserRegisterView.vue'
+import UserRegisterView from '@/usecases/user/views/UserRegisterView.vue'
 
 /**
  * ## Todo管理画面

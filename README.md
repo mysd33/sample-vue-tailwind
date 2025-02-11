@@ -250,7 +250,7 @@ export default {
 npx storybook@latest init
 ```
 
-- 「stories」フォルダは、サンプルのコンポーネントとストーリーなので、学習後、不要になったら削除してよい
+- 「stories」、「storybook-static」フォルダは、サンプルのコンポーネントとストーリーなので、学習後、不要になったら削除してよい
 
 ```sh
 # TailwindCSSと統合するための設定を追加
@@ -260,7 +260,20 @@ npx storybook@latest add @storybook/addon-styling-webpack
 - .storybook/preview.jsに、以下を追記
 
 ```js
+…
+// Tailwind CSSの設定を読み込む
 import '@/style.css'
+
+// Piniaの有効化
+import { createPinia } from 'pinia'
+import { App } from 'vue'
+
+const pinia = createPinia()
+setup((app: App) => {
+  app.use(pinia)
+})
+
+…
 ```
 
 ### Github Pagesを使ってStorybookを公開する設定

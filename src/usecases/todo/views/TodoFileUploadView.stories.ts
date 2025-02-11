@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-import TodoFileUploadView from './TodoFileUploadView.vue'
+import TodoFileUploadView from '@/usecases/todo/views/TodoFileUploadView.vue'
 /**
  * ## Todo管理画面
  */

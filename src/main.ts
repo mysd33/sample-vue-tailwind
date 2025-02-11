@@ -5,7 +5,7 @@ import App from './App.vue'
 import router from './router'
 import '@/style.css'
 import { setLocale } from 'yup'
-import * as ja from '@/validation/messages_ja'
+import * as ja from '@/usecases/common/validation/validation_messages_ja'
 import { configure } from 'vee-validate'
 
 const app = createApp(App)

@@ -11,7 +11,7 @@ import { computed, ref, type Ref } from 'vue'
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
-import { LoginService } from '@/services/LoginService'
+import { LoginService } from '@/usecases/login/services/LoginService'
 
 const router = useRouter()
 const loginService = new LoginService()
