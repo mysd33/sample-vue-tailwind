@@ -26,7 +26,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { values, errors, handleSubmit, defineField } = useForm({
+const { values, errors, handleSubmit, isSubmitting, defineField } = useForm({
   validationSchema: schema,
 })
 
@@ -69,7 +69,7 @@ const onBackButtonClick = () => {
           :error="errors.todoFile" />
       </InputItem>
       <ButtonArea class="mt-4">
-        <SubmitButton>登録</SubmitButton>
+        <SubmitButton :disabled="isSubmitting">登録</SubmitButton>
       </ButtonArea>
     </form>
   </MainContainer>

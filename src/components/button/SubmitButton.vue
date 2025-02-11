@@ -14,12 +14,16 @@ interface Props {
    * 重要な（危険）な操作を行うボタンかどうか
    */
   danger?: boolean
+  /*
+   * ボタンが無効かどうか
+   */
+  disabled?: boolean
 }
 defineProps<Props>()
 </script>
 
 <template>
-  <BaseButton type="submit" :size="size" :danger="danger" :name="name">
+  <BaseButton type="submit" :size="size" :danger="danger" :name="name" :disabled="disabled">
     <slot></slot>
   </BaseButton>
 </template>

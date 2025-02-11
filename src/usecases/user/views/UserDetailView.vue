@@ -45,7 +45,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { values, errors, validate, defineField } = useForm({
+const { values, errors, validate, isSubmitting, defineField } = useForm({
   validationSchema: schema,
 })
 
@@ -141,8 +141,10 @@ const onBackButtonClick = () => {
       </InputItem>
       <InputItem></InputItem>
       <ButtonArea>
-        <SubmitButton name="update">ユーザ更新</SubmitButton>
-        <SubmitButton name="delete" :danger="true">ユーザ削除</SubmitButton>
+        <SubmitButton name="update" :disabled="isSubmitting">ユーザ更新</SubmitButton>
+        <SubmitButton name="delete" :danger="true" :disabled="isSubmitting"
+          >ユーザ削除</SubmitButton
+        >
       </ButtonArea>
     </FormArea>
     <ConfirmModalDialog

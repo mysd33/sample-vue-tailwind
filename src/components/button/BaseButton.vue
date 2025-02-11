@@ -22,6 +22,10 @@ interface Props {
    * 重要な（危険）な操作を行うボタンかどうか
    */
   danger?: boolean
+  /*
+   * ボタンが無効かどうか
+   */
+  disabled?: boolean
 }
 const props = defineProps<Props>()
 
@@ -75,8 +79,9 @@ defineEmits<Emits>()
   <button
     :type="type"
     :name="name"
-    class="rounded-md px-3 focus:outline-none focus:ring"
+    class="rounded-md px-3 focus:outline-none focus:ring disabled:opacity-50"
     :class="[height, textSize, colorSet]"
+    :disabled="disabled"
     @click="$emit('click')">
     <slot></slot>
   </button>

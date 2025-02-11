@@ -36,7 +36,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { values, errors, handleSubmit, defineField } = useForm({
+const { values, errors, handleSubmit, isSubmitting, defineField } = useForm({
   validationSchema: schema,
 })
 
@@ -44,24 +44,25 @@ const [userId] = defineField('userId')
 const [password] = defineField('password')
 
 const onValidSubmit = () => {
-  console.log('userId: ', userId.value)
-  console.log('password: ', password.value)
   // エラーメッセージのクリア
   validationErrorMessages.value = []
   isUserIdError.value = false
   isPasswordError.value = false
 
-  // ログイン処理
-  const result = loginService.login(userId.value, password.value)
-  // TODO: 戻り値のあり方（仮置きでログイン結果booleanで返しているが、業務例外の検討）
-  if (result) {
-    // ログイン成功時はメニュー画面に遷移
-    router.push({ name: 'menu' })
-    return
+  try {
+    // ログイン処理
+    const result = loginService.login(userId.value, password.value)
+    // TODO: 戻り値のあり方（仮置きでログイン結果booleanで返しているが、業務例外の検討）
+    if (result) {
+      // ログイン成功時はメニュー画面に遷移
+      router.push({ name: 'menu' })
+      return
+    }
+    // ログインエラーのメッセージを設定
+    messageLevel.value = 'error'
+    message.value = 'ユーザ名かパスワードが正しくありません'
+  } finally {
   }
-  // ログインエラーのメッセージを設定
-  messageLevel.value = 'error'
-  message.value = 'ユーザ名かパスワードが正しくありません'
 }
 const onInvalidSubmit = ({ errors }) => {
   // ログイン画面のみ入力エラーメッセージの出力方法が違うので、ここでエラーメッセージを設定
@@ -95,7 +96,7 @@ const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
           :is-error="isPasswordError"
           v-model:value="password" />
       </InputItem>
-      <SubmitButton size="lg" class="mt-3">ログイン</SubmitButton>
+      <SubmitButton size="lg" class="mt-3" :disabled="isSubmitting">ログイン</SubmitButton>
     </LoginFormArea>
   </MainContainer>
 </template>

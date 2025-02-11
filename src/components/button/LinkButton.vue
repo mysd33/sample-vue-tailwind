@@ -2,7 +2,14 @@
 import BaseButton from './BaseButton.vue'
 
 interface Props {
+  /**
+   * アウトラインボタンかどうか
+   */
   outline?: boolean
+  /**
+   * ボタンが無効かどうか
+   */
+  disabled?: boolean
 }
 defineProps<Props>()
 
@@ -18,7 +25,7 @@ defineEmits<Emits>()
 
 <!-- TODO* パスでリンク渡せないとダメかも。。。 -->
 <template>
-  <BaseButton @click="$emit('click')" :outline="outline">
+  <BaseButton @click="$emit('click')" :outline="outline" :disabled="disabled">
     <slot></slot>
   </BaseButton>
 </template>
