@@ -2,8 +2,9 @@ import { defineStore, type StateTree } from 'pinia'
 import { computed, ref } from 'vue'
 import type { User } from '@/usecases/common/models/user'
 
-// TODO: セッションストレージ等への永続化の実装
-
+/**
+ * ユーザ情報の管理するStore
+ */
 export const useUserStore = defineStore(
   'user',
   () => {

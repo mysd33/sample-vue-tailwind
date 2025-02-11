@@ -11,11 +11,11 @@ import { computed, ref, type Ref } from 'vue'
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
-import { LoginService } from '@/usecases/login/services/LoginService'
+import { AuthenticationService } from '@/usecases/login/services/AuthenticationService'
 import MessageBanner from '@/components/banner/MessageBanner.vue'
 
 const router = useRouter()
-const loginService = new LoginService()
+const authenticationService = new AuthenticationService()
 
 // TODO: サーバエラーの状態を管理するための変数を仮定義
 const messageLevel = ref('')
@@ -43,28 +43,31 @@ const { values, errors, handleSubmit, isSubmitting, defineField } = useForm({
 const [userId] = defineField('userId')
 const [password] = defineField('password')
 
-const onValidSubmit = () => {
-  // エラーメッセージのクリア
+const onValidSubmit = async () => {
+  // TODO: エラーメッセージのクリアの方法を検討
   validationErrorMessages.value = []
   isUserIdError.value = false
   isPasswordError.value = false
+  message.value = ''
+  messageLevel.value = ''
 
-  try {
-    // ログイン処理
-    const result = loginService.login(userId.value, password.value)
-    // TODO: 戻り値のあり方（仮置きでログイン結果booleanで返しているが、業務例外の検討）
-    if (result) {
-      // ログイン成功時はメニュー画面に遷移
-      router.push({ name: 'menu' })
-      return
-    }
-    // ログインエラーのメッセージを設定
-    messageLevel.value = 'error'
-    message.value = 'ユーザ名かパスワードが正しくありません'
-  } finally {
+  // ログイン処理
+  const result = await authenticationService.login(userId.value, password.value)
+  // TODO: 戻り値のあり方（仮置きでログイン結果booleanで返しているが、業務例外の検討）
+  if (result) {
+    // ログイン成功時はメニュー画面に遷移
+    router.push({ name: 'menu' })
+    return
   }
+  // ログインエラーのメッセージを設定
+  messageLevel.value = 'error'
+  message.value = 'ユーザ名かパスワードが正しくありません'
 }
 const onInvalidSubmit = ({ errors }) => {
+  // TODO: エラーメッセージのクリアの方法を検討
+  isPasswordError.value = false
+  message.value = ''
+  messageLevel.value = ''
   // ログイン画面のみ入力エラーメッセージの出力方法が違うので、ここでエラーメッセージを設定
   validationErrorMessages.value = [errors.userId, errors.password]
   isUserIdError.value = errors.userId ? true : false

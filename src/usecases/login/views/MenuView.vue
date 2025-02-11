@@ -3,10 +3,10 @@ import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import MenuButton from '@/components/button/MenuButton.vue'
 import { useRouter } from 'vue-router'
-import { LoginService } from '@/usecases/login/services/LoginService'
+import { AuthenticationService } from '@/usecases/login/services/AuthenticationService'
 
 const router = useRouter()
-const loginService = new LoginService()
+const loginService = new AuthenticationService()
 
 const onTodoMenuClicked = (): void => {
   router.push({ name: 'todo' })

@@ -1,7 +1,7 @@
+// 入力エラーメッセージの日本語メッセージ設定
 import type * as yup from 'yup'
 
 // TODO: 入力エラーメッセージを必要に応じて修正する
-
 export const mixed: yup.LocaleObject['mixed'] = {
   default: ({ label }) => (label ? label + 'の' : '') + '値が不正です。',
   required: ({ label }) => (label ? label + 'は' : '') + '必須入力です。',

@@ -1,10 +1,22 @@
 import type { User } from '@/usecases/common/models/user'
 
+/**
+ * ユーザ情報の管理するRepositoryクラス
+ */
 export class UserRepository {
-  public login(id: string, password: string): User | null {
+  /**
+   * ユーザ情報を取得する
+   * @param id ユーザID
+   * @param password パスワード
+   * @returns ユーザ情報
+   */
+  public async findUser(id: string, password: string): Promise<User | null> {
     // TODO: サーバ側のユーザ認証処理を呼び出す
-    // 仮実装として、常に成功とする
 
+    // サーバ処理を疑似するため、1秒待機
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    // スタブ実装として、以下のユーザのみ認証成功とする
     if (id === 'yamada@xxx.co.jp' && password === 'password') {
       return {
         id: id,
@@ -12,7 +24,6 @@ export class UserRepository {
         firstName: '太郎',
       }
     }
-
     if (id === 'tamura@xxx.co.jp' && password === 'password') {
       return {
         id: id,
@@ -20,8 +31,7 @@ export class UserRepository {
         firstName: '一郎',
       }
     }
-
-    // TODO: 認証失敗の戻り値の検討
+    // TODO: 認証エラーの扱いの検討、現状nullを返す
     return null
   }
 }
