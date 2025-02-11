@@ -11,8 +11,10 @@ import { computed, ref, type Ref } from 'vue'
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
+import { LoginService } from '@/services/LoginService'
 
 const router = useRouter()
+const loginService = new LoginService()
 
 // バリデーションエラーの状態を管理するための変数を定義
 const isUserIdError = ref(false)
@@ -39,7 +41,11 @@ const [password] = defineField('password')
 const onValidSubmit = () => {
   console.log('userId: ', userId.value)
   console.log('password: ', password.value)
-  // TODO: 仮でメニューへ遷移
+
+  // ログイン処理
+  loginService.login(userId.value, password.value)
+  // TODO: ログイン失敗時の処理の追加
+
   router.push({ name: 'menu' })
 }
 const onInvalidSubmit = ({ errors }) => {

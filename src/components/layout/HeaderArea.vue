@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import LogoIcon from '@/icons/LogoIcon.vue'
+import { useUserStore } from '@/stores/userStore'
+import { storeToRefs } from 'pinia'
 
 interface Props {
   title: string
 }
 defineProps<Props>()
+
+const usersStore = useUserStore()
+const { userName } = storeToRefs(usersStore)
 </script>
 
 <template>
@@ -16,9 +21,11 @@ defineProps<Props>()
       </h3>
     </div>
     <div class="relative ml-auto">
-      <!-- TODO: ログイン済みの場合に、ユーザ名を表示 -->
-      <!-- ようこそ, <strong>山田太郎</strong>さん! -->
-      <slot></slot>
+      <template v-if="userName">
+        ようこそ, <strong>{{ userName }}</strong
+        >さん!
+        <slot></slot>
+      </template>
     </div>
   </header>
 </template>
