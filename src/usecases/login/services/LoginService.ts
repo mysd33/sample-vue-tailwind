@@ -1,5 +1,5 @@
 import { UserRepository } from '@/usecases/common/repositories/UserRepository'
-import { useUserStore } from '@/stores/userStore'
+import { useUserStore } from '@/usecases/common/stores/userStore'
 
 export class LoginService {
   private userRepository = new UserRepository()

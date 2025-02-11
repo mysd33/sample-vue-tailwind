@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import LogoIcon from '@/components/icons/LogoIcon.vue'
-import { useUserStore } from '@/stores/userStore'
+import { useUserStore } from '@/usecases/common/stores/userStore'
 import { storeToRefs } from 'pinia'
 
 interface Props {

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/usecases/common/stores/userStore'
 import LoginView from '@/usecases/login/views/LoginView.vue'
-import { useUserStore } from '@/stores/userStore'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
