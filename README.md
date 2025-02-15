@@ -353,6 +353,9 @@ npx @tailwindcss/upgrade
 - gitでの変更差分を確認し、動作確認
     - このサンプルAPの場合は、手動で変更はまったく必要なかった
 
+- upgrade toolによるgitの変更差分は[こちら](https://github.com/mysd33/sample-vue-tailwind/commit/9af2589efd63d822eec20fe7f4ce42727f64f851)
+
+
 ## (参考) インストールするとよいVSCodeの拡張機能
 
 - [Vue - Official拡張機能](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
