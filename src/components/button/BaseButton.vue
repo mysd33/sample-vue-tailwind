@@ -79,7 +79,7 @@ defineEmits<Emits>()
   <button
     :type="type"
     :name="name"
-    class="rounded-md px-3 focus:outline-none focus:ring disabled:opacity-50"
+    class="rounded-md px-3 focus:outline-hidden focus:ring-3 disabled:opacity-50"
     :class="[height, textSize, colorSet]"
     :disabled="disabled"
     @click="$emit('click')">

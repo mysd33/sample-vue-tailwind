@@ -35,7 +35,7 @@ const borderColor = computed(() => {
       :readonly="readonly"
       :disabled="disabled"
       :class="[borderColor]"
-      class="h-10 rounded-lg border shadow-sm read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:ring read-only:focus:border-transparent read-only:focus:ring-transparent"
+      class="h-10 rounded-lg border shadow-xs read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:ring-3 read-only:focus:border-transparent read-only:focus:ring-transparent"
       v-model="valueModel" />
   </template>
   <template v-else>
@@ -48,7 +48,7 @@ const borderColor = computed(() => {
       :readonly="readonly"
       :disabled="disabled"
       :class="[borderColor]"
-      class="h-10 rounded-lg border shadow-sm read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:ring read-only:focus:border-transparent read-only:focus:ring-transparent"
+      class="h-10 rounded-lg border shadow-xs read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:ring-3 read-only:focus:border-transparent read-only:focus:ring-transparent"
       v-model="valueModel" />
     <template v-if="isError || error">
       <div class="flow flow-col m-1 text-sm text-red-600">{{ error }}</div>

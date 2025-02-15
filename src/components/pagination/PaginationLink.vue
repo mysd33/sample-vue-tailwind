@@ -8,7 +8,7 @@
   <div class="flex items-center justify-between border-t border-gray-200 py-3">
     <div>
       <nav
-        class="isolate inline-flex -space-x-px rounded-md bg-white shadow-sm"
+        class="isolate inline-flex -space-x-px rounded-md bg-white shadow-xs"
         aria-label="Pagination">
         <a
           href="#"

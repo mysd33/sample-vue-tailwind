@@ -173,17 +173,35 @@ Add ESLint for code quality? » Yes
 Add Prettier for code formatting? ... Yes
 ```
 
-### Tailwind CSSの導入
+### Tailwind CSS ver3の導入
+> [!NOTE]
+>
+> サンプルAPのプロジェクト作成時はTailwind CSS ver3だったため、そのインストール手順をベースに記載しています。
+> ver3からver4への移行は、[Tailwind CSS ver4移行](#参考-tailwind-css-ver4移行)を参考にしてください。
+> 
+> ver4を最初から導入する場合は、Tailwind CSSのドキュメントを参考にしてください。ver3では[PostCSSを使用したインストール手順](https://v3.tailwindcss.com/docs/guides/vite#vue)だったため、upgrade toolを使った結果と同じだった[Tailwind CSSのInstallation - Using PostCSS](https://tailwindcss.com/docs/installation/using-postcss)のインストール手順を参照するか、ver4からは[Tailwind CSSのInstallation - Using Vite](https://tailwindcss.com/docs/installation/using-vite)のViteを使ったインストール手順もできるかもしれません。
+>
 
 - 以下のコマンド実行
 
 ```sh
 # プロジェクトのディレクトリに移動
 cd sample-vue-tailwind
+```
 
+```sh
 # Tailwind CSS等のインストール
 npm install -D tailwindcss postcss autoprefixer
+```
 
+> [!NOTE]
+> 現在だと、ver4が出たため@3を指定する必要がある
+> 
+> ```sh 
+> npm install -D tailwindcss@3 postcss autoprefixer
+> ```
+
+```sh
 # tailwind.config.js、postcss.config.jsの作成
 npx tailwindcss init -p
 ```
@@ -318,17 +336,38 @@ pinia.use(piniaPluginPersistedstate)
 app.use(pinia)
 ```
 
+### (参考) Tailwind CSS ver4移行
+
+> [!NOTE]
+> 本サンプルAPを作成当初Tailwind CSS ver3で作成していたが、ver4への移行したため、その手順を記載しておく
+>
+
+- [Tailwind CSSのUpgrade guide](https://tailwindcss.com/docs/upgrade-guide)に従い、以下の通り移行
+
+- upgrade toolの実行
+
+```sh
+npx @tailwindcss/upgrade
+```
+
+- gitでの変更差分を確認し、動作確認
+    - このサンプルAPの場合は、手動で変更はまったく必要なかった
 
 ## (参考) インストールするとよいVSCodeの拡張機能
 
 - [Vue - Official拡張機能](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 
 - [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
-    - VSCodeで、vueファイルもインテリセンスが聞くようにsetting.jsonに以下を追記
+    - setting.jsonに以下を追記
+        - VSCodeで、vueファイルもインテリセンスが効くようにtailwindCSS.includeLanguagesを設定
+        - cssファイル中の@pluginや@applyに警告がでないように、files.associationsを設定
 
     ```json
     "tailwindCSS.includeLanguages": {
       "vue": "html"
+    },
+    "files.associations": {
+      "*.css": "tailwindcss"
     },
     ```
 
