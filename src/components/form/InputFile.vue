@@ -38,7 +38,7 @@ const borderColor = computed(() => {
     :focus="focus"
     :disabled="disabled"
     :class="[borderColor]"
-    class="h-10 cursor-pointer rounded-lg border bg-white shadow-xs file:h-10 file:border-b-0 file:border-l-0 file:border-r file:border-t-0 file:border-solid file:hover:cursor-pointer focus:outline-hidden focus:ring-3 file:focus:ring-3"
+    class="h-10 cursor-pointer rounded-lg border bg-white shadow-xs file:mr-3 file:h-10 file:border-t-0 file:border-r file:border-b-0 file:border-l-0 file:border-solid file:bg-gray-100 file:px-3 hover:file:cursor-pointer hover:file:bg-gray-200 focus:ring-3 focus:outline-hidden file:focus:ring-3"
     @change="onChanged" />
   <template v-if="isError || error">
     <div class="flow flow-col m-1 text-sm text-red-600">{{ error }}</div>
