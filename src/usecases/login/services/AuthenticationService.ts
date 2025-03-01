@@ -2,11 +2,12 @@ import { UserRepository } from '@/usecases/common/repositories/UserRepository'
 import { useUserStore } from '@/usecases/common/stores/userStore'
 
 /**
- * 認証機能を管理するServiceクラス
+ * 認証機能を提供するServiceクラス
  */
 export class AuthenticationService {
-  private userRepository = new UserRepository()
   private userStore = useUserStore()
+
+  constructor(private userRepository: UserRepository) {}
 
   /**
    * ログイン処理

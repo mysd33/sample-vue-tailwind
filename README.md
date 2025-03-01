@@ -261,6 +261,11 @@ export default {
 
 ```
 
+> [!NOTE]
+> ver3での設定方法です。  
+> ver4だと、tailwind.config.jsがなくなり、指定方法がCSSファイルに変わったので注意してください。
+> 
+
 ### Storybookのセットアップ
 - 以下のコマンドを実行
 
@@ -290,6 +295,11 @@ import { App } from 'vue'
 const pinia = createPinia()
 setup((app: App) => {
   app.use(pinia)
+
+  // VeeValidateのエラーのグローバル設定
+  configure({
+    validateOnModelUpdate: false,
+  })  
 })
 
 …
@@ -325,6 +335,9 @@ npm install --save-dev @vue/test-utils
 
 # Pinia Plugin Persistedstate
 npm install pinia-plugin-persistedstate
+
+# uuid
+npm install uuid
 ```
 
 - main.tsに以下を追記

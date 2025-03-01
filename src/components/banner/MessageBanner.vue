@@ -19,27 +19,27 @@ const isError = computed(() => props.level === 'error')
 
 <template>
   <div
-    class="mb-4 flex flex-row content-center rounded-lg border border-green-400 bg-green-600/20 px-4 py-3 text-green-600"
+    class="mb-4 flex flex-row content-center rounded-lg border border-green-950/20 bg-green-600/20 px-4 py-3"
     v-if="message && isInfo">
     <div class="flex flex-row">
       <CheckCircleIcon />
-      <span class="ml-3 mt-1 text-green-700">{{ message }}</span>
+      <span class="mt-1 ml-3 text-green-950">{{ message }}</span>
     </div>
   </div>
   <div
-    class="mb-4 flex flex-row content-center rounded-lg border border-amber-400 bg-amber-100 px-4 py-3 text-amber-600"
+    class="mb-4 flex flex-row content-center rounded-lg border border-amber-950/20 bg-amber-500/20 px-4 py-3"
     v-if="message && isWarn">
     <div class="flex flex-row">
       <EyeIcon />
-      <span class="ml-3 mt-1 text-amber-700">{{ message }}</span>
+      <span class="mt-1 ml-3 text-amber-950">{{ message }}</span>
     </div>
   </div>
   <div
-    class="mb-4 flex flex-row content-center rounded-lg border border-red-400 bg-red-500/20 px-4 py-3 text-red-600"
+    class="mb-4 flex flex-row content-center rounded-lg border border-red-950/20 bg-red-500/20 px-4 py-3"
     v-if="message && isError">
     <div class="flex flex-row">
       <XCircleIcon />
-      <span class="ml-3 mt-1 text-red-700">{{ message }}</span>
+      <span class="mt-1 ml-3 text-red-950">{{ message }}</span>
     </div>
   </div>
 </template>

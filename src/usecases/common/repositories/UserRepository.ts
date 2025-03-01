@@ -1,7 +1,7 @@
 import type { User } from '@/usecases/common/models/user'
 
 /**
- * ユーザ情報の管理するRepositoryクラス
+ * ユーザ情報を管理するRepositoryクラス
  */
 export class UserRepository {
   /**
@@ -13,7 +13,7 @@ export class UserRepository {
   public async findUser(id: string, password: string): Promise<User | null> {
     // TODO: サーバ側のユーザ認証処理を呼び出す
 
-    // サーバ処理を疑似するため、1秒待機
+    // サーバ処理を疑似するため、0.5秒待機
     await new Promise((resolve) => setTimeout(resolve, 1000))
 
     // スタブ実装として、以下のユーザのみ認証成功とする

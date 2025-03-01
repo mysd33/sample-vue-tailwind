@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, type Ref } from 'vue'
+import { computed, onMounted, ref, type Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
@@ -12,16 +12,22 @@ import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue
 import MessageBanner from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
+import { TodoRepository } from '@/usecases/todo/repositories/TodoRepository'
+import { TodoService } from '@/usecases/todo/services/TodoService'
+import type { Todo } from '@/usecases/todo/models/todo'
 
 const router = useRouter()
+const todoRepository = new TodoRepository()
+const todoService = new TodoService(todoRepository)
+
+const todos = ref<Todo[]>([])
 
 // TODO: サーバエラーの状態を管理するための変数を仮定義
 const messageLevel = ref('')
 const message = ref('')
-//const messageLevel = ref('warn');
-//const message = ref('サービス呼び出し時にエラーが発生しました。しばらく経ってから実行してください。');
 
-// yup
+// VeeValidate with yup
+// yupによる入力チェック
 const schema = yup.object({
   todoTitle: yup.string().label('TODOタイトル').required(),
 })
@@ -36,17 +42,72 @@ const [todoTitle] = defineField('todoTitle')
 const isValidationError = computed(() => {
   return Object.keys(errors.value).length > 0
 })
-
-const onValidSubmit = () => {
+// 入力チェック成功時
+const onValidSubmit = async () => {
   console.log('TODO作成:' + todoTitle.value)
-  // TODO: 仮でバナー表示
-  //messageLevel.value = 'info'
-  //message.value = '作成しました。'
+  // TODOの作成処理
+  todoService
+    .create(todoTitle.value)
+    .then(() => {
+      // TODO一覧を再取得
+      todoService.findAll().then((result) => {
+        todos.value = result
+      })
+      messageLevel.value = 'info'
+      message.value = '作成しました。'
+      todoTitle.value = ''
+    })
+    .catch(() => {
+      //TODO: 業務エラーハンドリング、メッセージ取得
+      messageLevel.value = 'warn'
+      message.value =
+        'サービス呼び出し時にエラーが発生しました。しばらく経ってから実行してください。'
+    })
+}
+// 入力チェック失敗時
+const onInvalidSubmit = () => {
+  // TODO: 入力エラーと、業務エラーのメッセージ領域を統一すればこの処理が不要になる
+  messageLevel.value = ''
+  message.value = ''
+}
+// 作成ボタン（Submit）時の処理
+const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
+
+// 完了ボタン時の処理
+const onClickFinishButton = (todoId?: string) => {
+  // TODO: 二重送信防止のフラグを設定
+
+  // TODOの完了処理
+  todoService.finish(todoId!).then(() => {
+    // TODO一覧を再取得
+    todoService.findAll().then((result) => {
+      todos.value = result
+    })
+    messageLevel.value = 'info'
+    message.value = '完了しました。'
+  })
 }
 
-// handleSubmit時にバリデーション
-const onSubmit = handleSubmit(onValidSubmit)
+// 削除ボタン時の処理
+const onClickDeleteButton = (todoId?: string) => {
+  // TODO: 二重送信防止のフラグを設定
+  // TODOの削除処理
+  todoService.delete(todoId!).then(() => {
+    // TODO一覧を再取得
+    todoService.findAll().then((result) => {
+      todos.value = result
+    })
+    messageLevel.value = 'info'
+    message.value = '削除しました。'
+  })
+}
 
+// 初期表示の処理
+onMounted(async () => {
+  // TODO一覧を取得
+  todos.value = await todoService.findAll()
+})
+// 戻るボタン押下時の処理
 const onBackButtonClick = () => {
   router.push({ name: 'menu' })
 }
@@ -59,6 +120,7 @@ const onBackButtonClick = () => {
   <MainContainer>
     <ValidationErrorBanner :is-error="isValidationError" />
     <MessageBanner :message="message" :level="messageLevel" />
+    <!-- TODO: SimpleFormAreatというコンポーネント化  -->
     <form class="mb-3 flex flex-row gap-10" @submit.prevent="onSubmit">
       <InputItem class="basis-2/3 text-left">
         <InputText
@@ -74,11 +136,14 @@ const onBackButtonClick = () => {
     <hr />
     <div class="mt-3 text-left">
       <ul class="list-disc">
-        <li class="ml-10">
+        <li v-for="todo in todos" :key="todo.id" class="ml-10">
           <ButtonArea>
-            <span class="pt-2">牛乳を買う</span>
-            <LinkButton>完了</LinkButton>
-            <LinkButton>削除</LinkButton>
+            <span class="pt-2" :class="{ 'line-through': todo.finished }">{{ todo.title }}</span>
+            <!-- TODO: LinkButtonという名前じゃないButtonで定義しなおす -->
+            <LinkButton v-if="!todo.finished" :linked-key="todo.id" @click="onClickFinishButton"
+              >完了</LinkButton
+            >
+            <LinkButton :linked-key="todo.id" @click="onClickDeleteButton">削除</LinkButton>
           </ButtonArea>
         </li>
       </ul>

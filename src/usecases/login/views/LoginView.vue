@@ -13,9 +13,11 @@ import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 import { AuthenticationService } from '@/usecases/login/services/AuthenticationService'
 import MessageBanner from '@/components/banner/MessageBanner.vue'
+import { UserRepository } from '@/usecases/common/repositories/UserRepository'
 
 const router = useRouter()
-const authenticationService = new AuthenticationService()
+const userRepository = new UserRepository()
+const authenticationService = new AuthenticationService(userRepository)
 
 // TODO: サーバエラーの状態を管理するための変数を仮定義
 const messageLevel = ref('')

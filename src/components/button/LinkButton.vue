@@ -10,22 +10,26 @@ interface Props {
    * ボタンが無効かどうか
    */
   disabled?: boolean
+  /**
+   * リンク先のキー情報
+   */
+  linkedKey?: string
 }
+
 defineProps<Props>()
 
 interface Emits {
   /**
    * ボタンクリック時
    */
-  (event: 'click'): void
+  (event: 'click', key?: string): void
 }
 
 defineEmits<Emits>()
 </script>
 
-<!-- TODO* パスでリンク渡せないとダメかも。。。 -->
 <template>
-  <BaseButton @click="$emit('click')" :outline="outline" :disabled="disabled">
+  <BaseButton :outline="outline" :disabled="disabled" @click="$emit('click', linkedKey)">
     <slot></slot>
   </BaseButton>
 </template>
