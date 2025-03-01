@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import BaseButton from './BaseButton.vue'
+import { useRouter } from 'vue-router'
+import LinkButton from './LinkButton.vue'
 
 interface Props {
+  /**
+   * 遷移先のビュー名
+   */
+  forwardViewName?: string
+  /**
+   * アウトラインボタンかどうか
+   */
   outline?: boolean
   /**
    * ボタンが無効かどうか
@@ -18,8 +26,15 @@ interface Emits {
 }
 defineEmits<Emits>()
 </script>
+
 <template>
-  <BaseButton class="mt-12" size="lg" :disabled="disabled" @click="$emit('click')">
+  <LinkButton
+    class="mt-12"
+    size="lg"
+    :disabled="disabled"
+    :outline="outline"
+    @click="$emit('click')"
+    :forward-view-name="forwardViewName">
     <slot></slot>
-  </BaseButton>
+  </LinkButton>
 </template>

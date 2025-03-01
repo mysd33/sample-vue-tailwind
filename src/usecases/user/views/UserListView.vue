@@ -10,15 +10,10 @@ import LinkButton from '@/components/button/LinkButton.vue'
 import ButtonArea from '@/components/button/ButtonArea.vue'
 import TableDataCol from '@/components/table/TableDataCol.vue'
 import { useRouter } from 'vue-router'
+import ActionButton from '@/components/button/ActionButton.vue'
 
 const router = useRouter()
 
-const onBackButtonClick = () => {
-  router.push({ name: 'menu' })
-}
-const onNewUserButonClicked = () => {
-  router.push({ name: 'newUser' })
-}
 const onDetailButtonClicked = () => {
   // 仮のidで遷移
   router.push({ name: 'userDetail', params: { id: 1 } })
@@ -27,7 +22,7 @@ const onDetailButtonClicked = () => {
 
 <template>
   <HeaderArea title="ユーザ管理">
-    <LinkButton :outline="true" @click="onBackButtonClick">メニューに戻る</LinkButton>
+    <LinkButton :outline="true" forward-view-name="menu">メニューに戻る</LinkButton>
   </HeaderArea>
   <MainContainer>
     <!-- TODO: テーブルの部品化検討中 -->
@@ -74,7 +69,7 @@ const onDetailButtonClicked = () => {
           <TableDataCol>38</TableDataCol>
           <TableDataCol>-</TableDataCol>
           <TableDataCol>
-            <LinkButton>詳細</LinkButton>
+            <LinkButton @click="onDetailButtonClicked">詳細</LinkButton>
           </TableDataCol>
         </TableDataRow>
         <TableDataRow>
@@ -108,8 +103,8 @@ const onDetailButtonClicked = () => {
     </div>
     <br />
     <ButtonArea>
-      <LinkButton>CSV出力</LinkButton>
-      <LinkButton @click="onNewUserButonClicked">新規ユーザ登録</LinkButton>
+      <ActionButton>CSV出力</ActionButton>
+      <LinkButton forward-view-name="newUser">新規ユーザ登録</LinkButton>
     </ButtonArea>
   </MainContainer>
 </template>

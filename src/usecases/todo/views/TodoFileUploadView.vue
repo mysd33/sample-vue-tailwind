@@ -42,15 +42,11 @@ const onValidSubmit = () => {
 
 // handleSubmit時にバリデーション
 const onSubmit = handleSubmit(onValidSubmit)
-
-const onBackButtonClick = () => {
-  router.push({ name: 'menu' })
-}
 </script>
 
 <template>
   <HeaderArea title="TODO一括登録">
-    <LinkButton :outline="true" @click="onBackButtonClick">メニューに戻る</LinkButton>
+    <LinkButton :outline="true" forward-view-name="menu">メニューに戻る</LinkButton>
   </HeaderArea>
   <MainContainer>
     <ValidationErrorBanner :is-error="isValidationError" />

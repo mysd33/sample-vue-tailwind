@@ -97,15 +97,11 @@ const onInfoDialogOKButtonClick = () => {
   // TODO: 仮でメニューへ遷移
   router.push({ name: 'userList' })
 }
-
-const onBackButtonClick = () => {
-  router.push({ name: 'userList' })
-}
 </script>
 
 <template>
   <HeaderArea title="ユーザ詳細">
-    <LinkButton :outline="true" @click="onBackButtonClick">ユーザ一覧に戻る</LinkButton>
+    <LinkButton :outline="true" forward-view-name="userList">ユーザ一覧に戻る</LinkButton>
   </HeaderArea>
   <MainContainer>
     <ValidationErrorBanner :is-error="isValidationError" />

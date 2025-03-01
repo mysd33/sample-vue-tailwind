@@ -55,15 +55,11 @@ const onValidSubmit = () => {
 
 // handleSubmit時にバリデーション
 const onSubmit = handleSubmit(onValidSubmit)
-
-const onBackButtonClick = () => {
-  router.push({ name: 'userList' })
-}
 </script>
 
 <template>
   <HeaderArea title="ユーザ登録">
-    <LinkButton :outline="true" @click="onBackButtonClick">ユーザ一覧に戻る</LinkButton>
+    <LinkButton :outline="true" forward-view-name="userList">ユーザ一覧に戻る</LinkButton>
   </HeaderArea>
   <MainContainer>
     <ValidationErrorBanner :is-error="isValidationError" />

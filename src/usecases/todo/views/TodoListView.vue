@@ -15,6 +15,7 @@ import { useForm } from 'vee-validate'
 import { TodoRepository } from '@/usecases/todo/repositories/TodoRepository'
 import { TodoService } from '@/usecases/todo/services/TodoService'
 import type { Todo } from '@/usecases/todo/models/todo'
+import ActionButton from '@/components/button/ActionButton.vue'
 
 const router = useRouter()
 const todoRepository = new TodoRepository()
@@ -107,15 +108,11 @@ onMounted(async () => {
   // TODO一覧を取得
   todos.value = await todoService.findAll()
 })
-// 戻るボタン押下時の処理
-const onBackButtonClick = () => {
-  router.push({ name: 'menu' })
-}
 </script>
 
 <template>
   <HeaderArea title="TODOリスト">
-    <LinkButton :outline="true" @click="onBackButtonClick">メニューに戻る</LinkButton>
+    <LinkButton :outline="true" forward-view-name="menu">メニューに戻る</LinkButton>
   </HeaderArea>
   <MainContainer>
     <ValidationErrorBanner :is-error="isValidationError" />
@@ -139,11 +136,10 @@ const onBackButtonClick = () => {
         <li v-for="todo in todos" :key="todo.id" class="ml-10">
           <ButtonArea>
             <span class="pt-2" :class="{ 'line-through': todo.finished }">{{ todo.title }}</span>
-            <!-- TODO: LinkButtonという名前じゃないButtonで定義しなおす -->
-            <LinkButton v-if="!todo.finished" :linked-key="todo.id" @click="onClickFinishButton"
-              >完了</LinkButton
+            <ActionButton v-if="!todo.finished" :actionKey="todo.id" @click="onClickFinishButton"
+              >完了</ActionButton
             >
-            <LinkButton :linked-key="todo.id" @click="onClickDeleteButton">削除</LinkButton>
+            <ActionButton :actionKey="todo.id" @click="onClickDeleteButton">削除</ActionButton>
           </ButtonArea>
         </li>
       </ul>

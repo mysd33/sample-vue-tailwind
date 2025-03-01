@@ -31,7 +31,7 @@ export class AuthenticationService {
   /**
    * ログアウト処理
    */
-  public logout(): void {
+  public async logout(): Promise<void> {
     console.log(`ログアウト: ${this.userStore.$id}`)
     // ログアウト時にユーザ情報をクリア
     this.userStore.clear()
