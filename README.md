@@ -301,6 +301,9 @@ setup((app: App) => {
   configure({
     validateOnModelUpdate: false,
   })  
+
+  // yupの入力エラーメッセージの日本語化
+  setLocale(ja.messages)  
 })
 
 …
