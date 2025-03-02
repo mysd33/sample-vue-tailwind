@@ -15,5 +15,10 @@ export interface User {
    */
   firstName: string
 
-  // TODO: ユーザ認証情報の追加
+  /**
+   * パスワード
+   */
+  password: string
+
+  // TODO: ユーザ認可情報の追加
 }

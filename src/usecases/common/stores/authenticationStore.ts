@@ -6,7 +6,7 @@ import type { User } from '@/usecases/common/models/user'
  * ログイン済ユーザの認証情報を管理するStore
  */
 export const useAuthenticationStore = defineStore(
-  'user',
+  'authentication',
   () => {
     const user = ref<User | null>(null)
 
@@ -36,6 +36,8 @@ export const useAuthenticationStore = defineStore(
       storage: localStorage,
       // セッションストレージの場合
       // storage: sessionStorage,
+
+      // 開発者ツール上、すぐにユーザ情報を見たい場合はコメントアウトするとよい
       serializer: {
         deserialize: (value): StateTree => {
           // Base64デコードして復号化

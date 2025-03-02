@@ -54,16 +54,17 @@ const onValidSubmit = async () => {
   messageLevel.value = ''
 
   // ログイン処理
-  const result = await authenticationService.login(userId.value, password.value)
-  // TODO: 戻り値のあり方（仮置きでログイン結果booleanで返しているが、業務例外の検討）
-  if (result) {
+  try {
+    await authenticationService.login(userId.value, password.value)
     // ログイン成功時はメニュー画面に遷移
     router.push({ name: 'menu' })
     return
+  } catch (e) {
+    // ログインエラーのメッセージを設定
+    // warnレベルだが、ログインエラーは赤で表示させたいのでerrorで設定
+    messageLevel.value = 'error'
+    message.value = e.message
   }
-  // ログインエラーのメッセージを設定
-  messageLevel.value = 'error'
-  message.value = 'ユーザ名かパスワードが正しくありません'
 }
 const onInvalidSubmit = ({ errors }) => {
   // TODO: エラーメッセージのクリアの方法を検討
