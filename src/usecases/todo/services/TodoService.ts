@@ -1,5 +1,5 @@
-import type { Todo } from '../models/todo'
-import { TodoRepository } from '../repositories/TodoRepository'
+import type { Todo } from '@/usecases/todo/models/Todo'
+import { TodoRepository } from '@/usecases/todo/repositories/TodoRepository'
 
 /**
  * TODOリスト機能を提供するサービス

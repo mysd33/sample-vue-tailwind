@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import TableArea from '@/components/table/TableArea.vue'
@@ -11,13 +12,33 @@ import ButtonArea from '@/components/button/ButtonArea.vue'
 import TableDataCol from '@/components/table/TableDataCol.vue'
 import { useRouter } from 'vue-router'
 import ActionButton from '@/components/button/ActionButton.vue'
+import { UserRepository } from '@/usecases/common/repositories/UserRepository'
+import type { User } from '@/usecases/common/models/User'
+import { UserService } from '@/usecases/user/services/UserService'
+import { formatDate, calcAge } from '@/usecases/common/utils/date_utils'
+import { Pageable } from '@/components/pagination/pagination'
+
+const pageSize = 5
+
+const userRepository = new UserRepository()
+const userService = new UserService(userRepository)
+
+const users = ref<User[]>([])
+const totalCount = ref(0)
 
 const router = useRouter()
-
 const onDetailButtonClicked = () => {
   // 仮のidで遷移
   router.push({ name: 'userDetail', params: { id: 1 } })
 }
+
+// 初期表示処理
+onMounted(async () => {
+  // ユーザ一覧を取得
+  const userPage = await userService.findAllForPageNation(new Pageable(pageSize, 0))
+  users.value = userPage.content
+  totalCount.value = userPage.totalElements
+})
 </script>
 
 <template>
@@ -25,7 +46,6 @@ const onDetailButtonClicked = () => {
     <LinkButton :outline="true" forward-view-name="menu">メニューに戻る</LinkButton>
   </HeaderArea>
   <MainContainer>
-    <!-- TODO: テーブルの部品化検討中 -->
     <TableArea>
       <template v-slot:thead>
         <TableHeaderRow>
@@ -39,57 +59,13 @@ const onDetailButtonClicked = () => {
         </TableHeaderRow>
       </template>
       <template v-slot:tbody>
-        <TableDataRow>
-          <TableDataCol>1</TableDataCol>
-          <TableDataCol>yamada@xxx.co.jp</TableDataCol>
-          <TableDataCol>山田太郎</TableDataCol>
-          <TableDataCol>1990/01/01</TableDataCol>
-          <TableDataCol>35</TableDataCol>
-          <TableDataCol>○</TableDataCol>
-          <TableDataCol>
-            <LinkButton @click="onDetailButtonClicked">詳細</LinkButton>
-          </TableDataCol>
-        </TableDataRow>
-        <TableDataRow>
-          <TableDataCol>2</TableDataCol>
-          <TableDataCol>tamura@xxx.co.jp</TableDataCol>
-          <TableDataCol>田村</TableDataCol>
-          <TableDataCol>1986/11/05</TableDataCol>
-          <TableDataCol>38</TableDataCol>
-          <TableDataCol>-</TableDataCol>
-          <TableDataCol>
-            <LinkButton @click="onDetailButtonClicked">詳細</LinkButton>
-          </TableDataCol>
-        </TableDataRow>
-        <TableDataRow>
-          <TableDataCol>3</TableDataCol>
-          <TableDataCol>tamura2@xxx.co.jp</TableDataCol>
-          <TableDataCol>田村2</TableDataCol>
-          <TableDataCol>1986/11/05</TableDataCol>
-          <TableDataCol>38</TableDataCol>
-          <TableDataCol>-</TableDataCol>
-          <TableDataCol>
-            <LinkButton @click="onDetailButtonClicked">詳細</LinkButton>
-          </TableDataCol>
-        </TableDataRow>
-        <TableDataRow>
-          <TableDataCol>4</TableDataCol>
-          <TableDataCol>tamura3@xxx.co.jp</TableDataCol>
-          <TableDataCol>田村3</TableDataCol>
-          <TableDataCol>1986/11/05</TableDataCol>
-          <TableDataCol>38</TableDataCol>
-          <TableDataCol>-</TableDataCol>
-          <TableDataCol>
-            <LinkButton @click="onDetailButtonClicked">詳細</LinkButton>
-          </TableDataCol>
-        </TableDataRow>
-        <TableDataRow>
-          <TableDataCol>5</TableDataCol>
-          <TableDataCol>tamura4@xxx.co.jp</TableDataCol>
-          <TableDataCol>田村4</TableDataCol>
-          <TableDataCol>1986/11/05</TableDataCol>
-          <TableDataCol>38</TableDataCol>
-          <TableDataCol>-</TableDataCol>
+        <TableDataRow v-for="(user, index) in users" :key="user.id">
+          <TableDataCol>{{ index + 1 }}</TableDataCol>
+          <TableDataCol>{{ user.id }}</TableDataCol>
+          <TableDataCol>{{ user.lastName }}{{ user.firstName }}</TableDataCol>
+          <TableDataCol>{{ formatDate(user.birthday) }}</TableDataCol>
+          <TableDataCol>{{ calcAge(user.birthday) }}</TableDataCol>
+          <TableDataCol>{{ user.isAdmin ? '○' : '-' }}</TableDataCol>
           <TableDataCol>
             <LinkButton @click="onDetailButtonClicked">詳細</LinkButton>
           </TableDataCol>
@@ -99,7 +75,7 @@ const onDetailButtonClicked = () => {
     <PaginationLink />
 
     <div class="my-2 text-left">
-      <label>合計: 11件</label>
+      <label>合計: {{ totalCount }}件</label>
     </div>
     <br />
     <ButtonArea>

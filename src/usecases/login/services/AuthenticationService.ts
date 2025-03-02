@@ -15,7 +15,7 @@ export class AuthenticationService {
    * @param password パスワード
    */
   public async login(id: string, password: string): Promise<void> {
-    const user = await this.userRepository.findOne(id, password)
+    const user = await this.userRepository.authenticate(id, password)
 
     if (user) {
       console.log(

@@ -16,9 +16,17 @@ export interface User {
   firstName: string
 
   /**
+   * 誕生日
+   */
+  birthday: Date
+
+  /**
+   * 管理者フラグ
+   */
+  isAdmin: boolean
+
+  /**
    * パスワード
    */
   password: string
-
-  // TODO: ユーザ認可情報の追加
 }

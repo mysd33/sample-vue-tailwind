@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue'
-import type { User } from '@/usecases/common/models/user'
+import type { User } from '@/usecases/common/models/User'
 import { defineStore, type StateTree } from 'pinia'
 
 /**
@@ -19,12 +19,20 @@ export const useUserDummyStore = defineStore(
 
     // ユーザを追加
     function add(user: User) {
+      // 既に存在する場合は更新
+      const index = users.value.findIndex((u) => u.id === user.id)
+      if (index !== -1) {
+        users.value[index] = user
+        return
+      }
       users.value.push(user)
     }
 
     // ユーザリストを追加
     function addList(newUsers: User[]) {
-      users.value.push(...newUsers)
+      newUsers.forEach((user) => {
+        add(user)
+      })
     }
 
     // ユーザを更新

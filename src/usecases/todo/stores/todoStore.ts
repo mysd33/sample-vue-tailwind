@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue'
-import type { Todo } from '@/usecases/todo/models/todo'
+import type { Todo } from '@/usecases/todo/models/Todo'
 import { defineStore } from 'pinia'
 
 /**
@@ -19,12 +19,20 @@ export const useTodoDummyStore = defineStore(
 
     // TODOを追加
     function add(todo: Todo) {
+      // 既に存在する場合は更新
+      const index = todos.value.findIndex((t) => t.id === todo.id)
+      if (index !== -1) {
+        todos.value[index] = todo
+        return
+      }
       todos.value.push(todo)
     }
 
     // TODOリストを追加
     function addList(newTodos: Todo[]) {
-      todos.value.push(...newTodos)
+      newTodos.forEach((todo) => {
+        add(todo)
+      })
     }
 
     // TODOを更新

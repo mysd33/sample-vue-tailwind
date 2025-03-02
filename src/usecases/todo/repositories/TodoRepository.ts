@@ -2,7 +2,7 @@
  * Todoリストを管理するRepositoryクラス
  */
 import { useTodoDummyStore } from '@/usecases/todo/stores/todoStore'
-import type { Todo } from '@/usecases/todo/models/todo'
+import type { Todo } from '@/usecases/todo/models/Todo'
 import { generateUUID } from '@/usecases/common/utils/id_utils'
 
 const sleepTime = 500

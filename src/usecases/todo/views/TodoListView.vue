@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, type Ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, onMounted, ref } from 'vue'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import InputText from '@/components/form/InputText.vue'
@@ -14,10 +13,9 @@ import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 import { TodoRepository } from '@/usecases/todo/repositories/TodoRepository'
 import { TodoService } from '@/usecases/todo/services/TodoService'
-import type { Todo } from '@/usecases/todo/models/todo'
+import type { Todo } from '@/usecases/todo/models/Todo'
 import ActionButton from '@/components/button/ActionButton.vue'
 
-const router = useRouter()
 const todoRepository = new TodoRepository()
 const todoService = new TodoService(todoRepository)
 
@@ -34,7 +32,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { values, errors, handleSubmit, isSubmitting, defineField } = useForm({
+const { errors, handleSubmit, isSubmitting, defineField } = useForm({
   validationSchema: schema,
 })
 
