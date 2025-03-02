@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import LogoIcon from '@/components/icons/LogoIcon.vue'
-import { useUserStore } from '@/usecases/common/stores/userStore'
+import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 import { storeToRefs } from 'pinia'
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 defineProps<Props>()
 
-const usersStore = useUserStore()
+const usersStore = useAuthenticationStore()
 const { userName } = storeToRefs(usersStore)
 </script>
 

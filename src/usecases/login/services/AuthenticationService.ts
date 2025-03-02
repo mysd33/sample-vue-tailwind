@@ -1,11 +1,11 @@
 import { UserRepository } from '@/usecases/common/repositories/UserRepository'
-import { useUserStore } from '@/usecases/common/stores/userStore'
+import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 
 /**
  * 認証機能を提供するServiceクラス
  */
 export class AuthenticationService {
-  private userStore = useUserStore()
+  private authenticationStore = useAuthenticationStore()
 
   constructor(private userRepository: UserRepository) {}
 
@@ -19,9 +19,11 @@ export class AuthenticationService {
     const user = await this.userRepository.findUser(id, password)
 
     if (user) {
-      console.log(`ログイン成功: ${this.userStore.$id} : ${user.lastName} ${user.firstName}`)
+      console.log(
+        `ログイン成功: ${this.authenticationStore.$id} : ${user.lastName} ${user.firstName}`,
+      )
       // ログイン成功時にユーザ情報を保存
-      this.userStore.user = user
+      this.authenticationStore.user = user
       return true
     }
     // TODO: ログイン失敗時の戻り値・例外の検討（仮置きでbooleanを返している）
@@ -32,8 +34,8 @@ export class AuthenticationService {
    * ログアウト処理
    */
   public async logout(): Promise<void> {
-    console.log(`ログアウト: ${this.userStore.$id}`)
+    console.log(`ログアウト: ${this.authenticationStore.$id}`)
     // ログアウト時にユーザ情報をクリア
-    this.userStore.clear()
+    this.authenticationStore.clear()
   }
 }

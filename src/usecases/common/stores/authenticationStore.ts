@@ -3,9 +3,9 @@ import { computed, ref } from 'vue'
 import type { User } from '@/usecases/common/models/user'
 
 /**
- * ユーザ情報の管理するStore
+ * ログイン済ユーザの認証情報を管理するStore
  */
-export const useUserStore = defineStore(
+export const useAuthenticationStore = defineStore(
   'user',
   () => {
     const user = ref<User | null>(null)

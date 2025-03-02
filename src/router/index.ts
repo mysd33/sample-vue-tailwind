@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/usecases/common/stores/userStore'
+import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 import LoginView from '@/usecases/login/views/LoginView.vue'
 
 const router = createRouter({
@@ -60,8 +60,8 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // ログイン画面に遷移しようとする場合に、ログイン済みの場合はメニュー画面に遷移する
   if (to.name === 'home') {
-    const userStore = useUserStore()
-    if (userStore.isLoggedIn) {
+    const authenticationStore = useAuthenticationStore()
+    if (authenticationStore.isLoggedIn) {
       next({ name: 'menu' })
       return
     }
@@ -69,8 +69,8 @@ router.beforeEach((to, from, next) => {
 
   // ログイン要の画面に直遷移しようとする場合に、ログイン済みかどうかをチェックする
   if (!to.meta.allowsNotAuth) {
-    const userStore = useUserStore()
-    if (!userStore.isLoggedIn) {
+    const authenticationStore = useAuthenticationStore()
+    if (!authenticationStore.isLoggedIn) {
       next({ name: 'home' })
     }
   }
