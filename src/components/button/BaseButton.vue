@@ -22,7 +22,7 @@ interface Props {
    * 重要な（危険）な操作を行うボタンかどうか
    */
   danger?: boolean
-  /*
+  /**
    * ボタンが無効かどうか
    */
   disabled?: boolean
