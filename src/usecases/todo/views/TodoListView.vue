@@ -48,13 +48,14 @@ const onValidSubmit = async () => {
   todoService
     .create(todoTitle.value)
     .then(() => {
-      // TODO一覧を再取得
-      todoService.findAll().then((result) => {
-        todos.value = result
-      })
+      todoTitle.value = ''
       messageLevel.value = 'info'
       message.value = '作成しました。'
-      todoTitle.value = ''
+      // TODO一覧を再取得
+      return todoService.findAll()
+    })
+    .then((result) => {
+      todos.value = result
     })
     .catch(() => {
       //TODO: 業務エラーハンドリング、メッセージ取得
@@ -74,31 +75,34 @@ const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
 
 // 完了ボタン時の処理
 const onClickFinishButton = (todoId?: string) => {
-  // TODO: 二重送信防止のフラグを設定
-
   // TODOの完了処理
-  todoService.finish(todoId!).then(() => {
-    // TODO一覧を再取得
-    todoService.findAll().then((result) => {
+  todoService
+    .finish(todoId!)
+    .then(() => {
+      messageLevel.value = 'info'
+      message.value = '完了しました。'
+      // TODO一覧を再取得
+      return todoService.findAll()
+    })
+    .then((result) => {
       todos.value = result
     })
-    messageLevel.value = 'info'
-    message.value = '完了しました。'
-  })
 }
 
 // 削除ボタン時の処理
 const onClickDeleteButton = (todoId?: string) => {
-  // TODO: 二重送信防止のフラグを設定
   // TODOの削除処理
-  todoService.delete(todoId!).then(() => {
-    // TODO一覧を再取得
-    todoService.findAll().then((result) => {
+  todoService
+    .delete(todoId!)
+    .then(() => {
+      messageLevel.value = 'info'
+      message.value = '削除しました。'
+      // TODO一覧を再取得
+      return todoService.findAll()
+    })
+    .then((result) => {
       todos.value = result
     })
-    messageLevel.value = 'info'
-    message.value = '削除しました。'
-  })
 }
 
 // 初期表示の処理
