@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import TableArea from '@/components/table/TableArea.vue'
@@ -16,15 +16,15 @@ import { UserRepository } from '@/usecases/common/repositories/UserRepository'
 import type { User } from '@/usecases/common/models/User'
 import { UserService } from '@/usecases/user/services/UserService'
 import { formatDate, calcAge } from '@/usecases/common/utils/date_utils'
-import { Pageable } from '@/components/pagination/pagination'
+import { Page, Pageable } from '@/components/pagination/pagination'
 
+//TODO: 設定ファイルに切り出しできるようにする
 const pageSize = 5
 
 const userRepository = new UserRepository()
 const userService = new UserService(userRepository)
 
-const users = ref<User[]>([])
-const totalCount = ref(0)
+const userPage = ref<Page<User>>()
 
 const router = useRouter()
 const onDetailButtonClicked = () => {
@@ -35,10 +35,13 @@ const onDetailButtonClicked = () => {
 // 初期表示処理
 onMounted(async () => {
   // ユーザ一覧を取得
-  const userPage = await userService.findAllForPageNation(new Pageable(pageSize, 0))
-  users.value = userPage.content
-  totalCount.value = userPage.totalElements
+  userPage.value = await userService.findAllForPageNation(new Pageable(pageSize, 0, 0))
 })
+
+//　ページング処理
+const onPageClicked = async (pageable: Pageable) => {
+  userPage.value = await userService.findAllForPageNation(pageable)
+}
 </script>
 
 <template>
@@ -58,8 +61,8 @@ onMounted(async () => {
           <TableHeaderCol></TableHeaderCol>
         </TableHeaderRow>
       </template>
-      <template v-slot:tbody>
-        <TableDataRow v-for="(user, index) in users" :key="user.id">
+      <template v-slot:tbody v-if="userPage">
+        <TableDataRow v-for="(user, index) in userPage.content" :key="user.id">
           <TableDataCol>{{ index + 1 }}</TableDataCol>
           <TableDataCol>{{ user.id }}</TableDataCol>
           <TableDataCol>{{ user.lastName }}{{ user.firstName }}</TableDataCol>
@@ -72,10 +75,14 @@ onMounted(async () => {
         </TableDataRow>
       </template>
     </TableArea>
-    <PaginationLink />
+    <PaginationLink
+      v-if="userPage"
+      :pageSize="pageSize"
+      :page="userPage"
+      @onClick="onPageClicked" />
 
     <div class="my-2 text-left">
-      <label>合計: {{ totalCount }}件</label>
+      <label>合計: {{ userPage ? userPage.totalElements : 0 }}件</label>
     </div>
     <br />
     <ButtonArea>

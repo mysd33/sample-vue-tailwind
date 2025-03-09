@@ -135,6 +135,7 @@ onMounted(async () => {
     <hr />
     <div class="mt-3 text-left">
       <ul class="list-disc">
+        <!-- TODO: 一行ごとにコンポーネント化しないとだめかも。。。-->
         <li v-for="todo in todos" :key="todo.id" class="ml-10">
           <ButtonArea>
             <span class="pt-2" :class="{ 'line-through': todo.finished }">{{ todo.title }}</span>

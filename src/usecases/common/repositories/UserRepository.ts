@@ -140,6 +140,6 @@ export class UserRepository {
     await new Promise((resolve) => setTimeout(resolve, sleepTime))
     const users = this.usersDummyStore.users.slice(offset, offset + pageSize)
     const totalSize = this.usersDummyStore.users.length
-    return new Page(users, totalSize)
+    return new Page(pageable.pageNumber, users, totalSize)
   }
 }
