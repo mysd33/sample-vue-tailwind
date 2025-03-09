@@ -2,7 +2,7 @@
 // 参考
 // https://tailwindui.com/components/application-ui/navigation/pagination を参考に作成
 
-import { defineProps, defineEmits, computed } from 'vue'
+import { defineProps, defineEmits } from 'vue'
 import { Pageable, Page } from '@/components/pagination/pagination'
 
 // Propsのインターフェース定義
@@ -31,17 +31,12 @@ const props = defineProps<Props<T>>()
 // エミットの定義
 const emit = defineEmits<Emits>()
 
-// 総ページ数を計算するcomputedプロパティ
-const totalPages = computed(() => {
-  return Math.ceil(props.page.totalElements / props.pageSize)
-})
-
 // ページリンクがクリックされたときのハンドラ
 function handleClick(pageIndex: number) {
-  // クリックされたページ番号からオフセットを計算
+  // クリックされたページ番号をもとに、Pageableを作成してイベントを発火
+  // ページ数は0から始まるため、ページ番号から1を引いている
   const pageNumber = pageIndex - 1
-  const offset = pageNumber * props.pageSize
-  emit('onClick', new Pageable(props.pageSize, pageNumber, offset))
+  emit('onClick', new Pageable(props.pageSize, pageNumber))
 }
 </script>
 
@@ -66,7 +61,7 @@ function handleClick(pageIndex: number) {
           <span>前へ</span>
         </a>
         <a
-          v-for="pageIndex in totalPages"
+          v-for="pageIndex in page.getTotalPages()"
           :key="pageIndex"
           href="#"
           :aria-current="page.isCurrent(pageIndex - 1) ? 'page' : undefined"
@@ -90,7 +85,7 @@ function handleClick(pageIndex: number) {
           href="#"
           class="text-md relative inline-flex items-center rounded-r-md px-2 py-2 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0"
           :class="page.isLast() ? 'bg-gray-200 text-gray-500' : 'text-blue-600 hover:bg-gray-50'"
-          @click.prevent.stop="handleClick(totalPages)">
+          @click.prevent.stop="handleClick(page.getTotalPages())">
           <span>最後へ</span>
         </a>
       </nav>

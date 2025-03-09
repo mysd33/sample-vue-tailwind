@@ -63,6 +63,10 @@ export class Page<T> {
  * ページネーションの情報を保持するクラス
  */
 export class Pageable {
+  /**
+   * 現在ページ数の基づくオフセット（検索結果を返却する際の開始位置）
+   */
+  public offset: number
   constructor(
     /**
      * ページサイズ（1ページ当たりの表示件数）
@@ -72,9 +76,8 @@ export class Pageable {
      * 現在のページ数
      */
     public pageNumber: number,
-    /**
-     * 現在ページ数の基づくオフセット（検索結果を返却する際の開始位置）
-     */
-    public offset: number,
-  ) {}
+  ) {
+    // ページ数からオフセットを計算
+    this.offset = pageNumber * pageSize
+  }
 }
