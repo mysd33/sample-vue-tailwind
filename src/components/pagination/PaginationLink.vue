@@ -52,7 +52,11 @@ function handleClick(pageIndex: number) {
         <a
           href="#"
           class="text-md relative inline-flex items-center rounded-l-md px-2 py-2 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0"
-          :class="page.isFirst() ? 'bg-gray-200 text-gray-500' : 'text-blue-600 hover:bg-gray-50'"
+          :class="
+            page.isFirst()
+              ? 'cursor-default bg-gray-200 text-gray-500'
+              : 'text-blue-600 hover:bg-gray-50'
+          "
           @click.prevent.stop="
             () => {
               if (!page.isFirst()) handleClick(1)
@@ -63,7 +67,11 @@ function handleClick(pageIndex: number) {
         <a
           href="#"
           class="text-md relative inline-flex items-center px-2 py-2 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0"
-          :class="page.isFirst() ? 'bg-gray-200 text-gray-500' : 'text-blue-600 hover:bg-gray-50'"
+          :class="
+            page.isFirst()
+              ? 'cursor-default bg-gray-200 text-gray-500'
+              : 'text-blue-600 hover:bg-gray-50'
+          "
           @click.prevent.stop="
             () => {
               if (!page.isFirst()) handleClick(page.pageNumber)
@@ -88,7 +96,11 @@ function handleClick(pageIndex: number) {
         <a
           href="#"
           class="text-md relative inline-flex items-center px-2 py-2 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0"
-          :class="page.isLast() ? 'bg-gray-200 text-gray-500' : 'text-blue-600 hover:bg-gray-50'"
+          :class="
+            page.isLast()
+              ? 'cursor-default bg-gray-200 text-gray-500'
+              : 'text-blue-600 hover:bg-gray-50'
+          "
           @click.prevent.stop="
             () => {
               if (!page.isLast()) handleClick(page.pageNumber + 2)
@@ -99,7 +111,11 @@ function handleClick(pageIndex: number) {
         <a
           href="#"
           class="text-md relative inline-flex items-center rounded-r-md px-2 py-2 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0"
-          :class="page.isLast() ? 'bg-gray-200 text-gray-500' : 'text-blue-600 hover:bg-gray-50'"
+          :class="
+            page.isLast()
+              ? 'cursor-default bg-gray-200 text-gray-500'
+              : 'text-blue-600 hover:bg-gray-50'
+          "
           @click.prevent.stop="
             () => {
               if (!page.isLast()) handleClick(page.getTotalPages())
