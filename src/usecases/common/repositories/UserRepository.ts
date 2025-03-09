@@ -1,4 +1,4 @@
-import { Page, type Pageable } from '@/components/pagination/pagination'
+import { Page, Pageable } from '@/components/pagination/pagination'
 import type { User } from '@/usecases/common/models/User'
 import { useUserDummyStore } from '@/usecases/common/stores/usersStore'
 
@@ -140,6 +140,8 @@ export class UserRepository {
     await new Promise((resolve) => setTimeout(resolve, sleepTime))
     const users = this.usersDummyStore.users.slice(offset, offset + pageSize)
     const totalSize = this.usersDummyStore.users.length
-    return new Page(pageable.pageNumber, users, totalSize)
+
+    // ページ情報を返却
+    return new Page(pageable, users, totalSize)
   }
 }

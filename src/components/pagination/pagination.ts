@@ -2,12 +2,19 @@
  * ページの情報を保持するクラス
  */
 export class Page<T> {
+  /**
+   * ページサイズ（1ページ当たりの表示件数）
+   */
+  public pageSize: number
+  /**
+   * 現在のページ数
+   */
+  public pageNumber: number
   constructor(
-    //TODO: Pageableを持たせるように修正するか検討
     /**
-     * 現在のページ数
+     * ページネーション情報
      */
-    public pageNumber: number,
+    pageable: Pageable,
     /**
      * ページの表示内容（検索結果）
      */
@@ -16,7 +23,40 @@ export class Page<T> {
      * 総件数
      */
     public totalElements: number,
-  ) {}
+  ) {
+    this.pageSize = pageable.pageSize
+    this.pageNumber = pageable.pageNumber
+  }
+
+  /**
+   * 最初のページかどうかを判定する
+   */
+  public isFirst(): boolean {
+    return this.pageNumber === 0
+  }
+
+  /**
+   * 指定ページ数が現在のページかどうかを判定する
+   *
+   * @param pageNumber ページ数
+   */
+  public isCurrent(pageNumber: number): boolean {
+    return this.pageNumber === pageNumber
+  }
+
+  /**
+   * 最後のページかどうかを判定する
+   */
+  public isLast(): boolean {
+    return this.pageNumber === this.getTotalPages() - 1
+  }
+
+  /**
+   * 総ページ数を取得する
+   */
+  public getTotalPages(): number {
+    return Math.ceil(this.totalElements / this.pageSize)
+  }
 }
 
 /**
