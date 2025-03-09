@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import LogoIcon from '@/components/icons/LogoIcon.vue'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
-import { storeToRefs } from 'pinia'
 
 interface Props {
   title: string
