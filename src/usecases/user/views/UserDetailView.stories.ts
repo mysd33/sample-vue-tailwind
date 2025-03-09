@@ -14,5 +14,5 @@ export default meta
 type Story = StoryObj<typeof UserDetailView>
 
 export const Default: Story = {
-  args: {},
+  args: { id: 'yamada@xxx.co.jp' },
 }
