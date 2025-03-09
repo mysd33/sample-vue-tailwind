@@ -8,8 +8,7 @@ interface Props {
 }
 defineProps<Props>()
 
-const usersStore = useAuthenticationStore()
-const { userName } = storeToRefs(usersStore)
+const authStore = useAuthenticationStore()
 </script>
 
 <template>
@@ -21,8 +20,8 @@ const { userName } = storeToRefs(usersStore)
       </h3>
     </div>
     <div class="relative ml-auto">
-      <template v-if="userName">
-        ようこそ, <strong>{{ userName }}</strong
+      <template v-if="authStore.isLoggedIn">
+        ようこそ, <strong>{{ authStore.user?.name }}</strong
         >さん!
         <slot></slot>
       </template>

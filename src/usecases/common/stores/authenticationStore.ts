@@ -10,14 +10,6 @@ export const useAuthenticationStore = defineStore(
   () => {
     const user = ref<User | null>(null)
 
-    // ユーザ名を返す算出プロパティ
-    const userName = computed((): string => {
-      if (!user.value) {
-        return ''
-      }
-      return `${user.value.lastName} ${user.value.firstName}`
-    })
-
     // ログイン済みかどうかを返す算出プロパティ
     const isLoggedIn = computed((): boolean => {
       return !!user.value
@@ -28,7 +20,7 @@ export const useAuthenticationStore = defineStore(
       user.value = null
     }
 
-    return { user, userName, isLoggedIn, clear }
+    return { user, isLoggedIn, clear }
   },
   {
     // 永続化の設定
