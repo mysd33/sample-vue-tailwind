@@ -15,4 +15,8 @@ export class UserService {
   public async findAllForPageNation(pageable: Pageable): Promise<Page<User>> {
     return this.userRepository.findAllForPagination(pageable)
   }
+
+  public async findOne(id: string): Promise<User | null> {
+    return this.userRepository.findOne(id)
+  }
 }

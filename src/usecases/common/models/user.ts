@@ -7,14 +7,9 @@ export interface User {
    */
   id: string
   /**
-   * 姓
+   * 名前
    */
-  lastName: string
-  /**
-   * 名
-   */
-  firstName: string
-
+  name: string
   /**
    * 誕生日
    */

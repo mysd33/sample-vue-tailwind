@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, type Ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import TableArea from '@/components/table/TableArea.vue'
@@ -27,20 +27,22 @@ const userService = new UserService(userRepository)
 const userPage = ref<Page<User>>()
 
 const router = useRouter()
-const onDetailButtonClicked = () => {
-  // 仮のidで遷移
-  router.push({ name: 'userDetail', params: { id: 1 } })
-}
 
 // 初期表示処理
 onMounted(async () => {
   // ユーザ一覧を取得
-  userPage.value = await userService.findAllForPageNation(new Pageable(pageSize, 0, 0))
+  userPage.value = await userService.findAllForPageNation(new Pageable(pageSize, 0))
 })
 
-//　ページング処理
+// ページング処理
 const onPageClicked = async (pageable: Pageable) => {
   userPage.value = await userService.findAllForPageNation(pageable)
+}
+
+// 詳細ボタンクリック時の処理
+const onDetailButtonClicked = (id: string) => {
+  // クリックされたユーザIDをパラメータにして詳細画面に遷移
+  router.push({ name: 'userDetail', params: { id: id } })
 }
 </script>
 
@@ -65,12 +67,12 @@ const onPageClicked = async (pageable: Pageable) => {
         <TableDataRow v-for="(user, index) in userPage.content" :key="user.id">
           <TableDataCol>{{ index + 1 }}</TableDataCol>
           <TableDataCol>{{ user.id }}</TableDataCol>
-          <TableDataCol>{{ user.lastName }}{{ user.firstName }}</TableDataCol>
+          <TableDataCol>{{ user.name }}</TableDataCol>
           <TableDataCol>{{ formatDate(user.birthday) }}</TableDataCol>
           <TableDataCol>{{ calcAge(user.birthday) }}</TableDataCol>
           <TableDataCol>{{ user.isAdmin ? '○' : '-' }}</TableDataCol>
           <TableDataCol>
-            <LinkButton @click="onDetailButtonClicked">詳細</LinkButton>
+            <LinkButton @click="onDetailButtonClicked(user.id)">詳細</LinkButton>
           </TableDataCol>
         </TableDataRow>
       </template>

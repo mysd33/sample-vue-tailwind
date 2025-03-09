@@ -16,88 +16,77 @@ export class UserRepository {
     this.usersDummyStore.addList([
       {
         id: 'yamada@xxx.co.jp',
-        lastName: '山田',
-        firstName: '太郎',
+        name: '山田太郎',
         birthday: new Date('1990-01-01'),
         password: 'password',
         isAdmin: true,
       },
       {
         id: 'tamura@xxx.co.jp',
-        lastName: '田村',
-        firstName: '一郎',
+        name: '田村一郎',
         birthday: new Date('1986-11-05'),
         password: 'password',
         isAdmin: false,
       },
       {
         id: 'tamura2@xxx.co.jp',
-        lastName: '田村',
-        firstName: '二郎',
+        name: '田村二郎',
         birthday: new Date('1986-11-05'),
         password: 'password',
         isAdmin: false,
       },
       {
         id: 'tamura3@xxx.co.jp',
-        lastName: '田村',
-        firstName: '三郎',
+        name: '田村三郎',
         birthday: new Date('1986-11-05'),
         password: 'password',
         isAdmin: false,
       },
       {
         id: 'tamura4@xxx.co.jp',
-        lastName: '田村',
-        firstName: '四郎',
+        name: '田村四郎',
         birthday: new Date('1986-11-05'),
         password: 'password',
         isAdmin: false,
       },
       {
         id: 'tamura5@xxx.co.jp',
-        lastName: '田村',
-        firstName: '五郎',
+        name: '田村五郎',
         birthday: new Date('1986-11-05'),
         password: 'password',
         isAdmin: false,
       },
       {
         id: 'tamura6@xxx.co.jp',
-        lastName: '田村',
-        firstName: '六郎',
+        name: '田村六郎',
         birthday: new Date('1986-11-05'),
         password: 'password',
         isAdmin: false,
       },
       {
         id: 'tamura7@xxx.co.jp',
-        lastName: '田村',
-        firstName: '七郎',
+        name: '田村七郎',
         birthday: new Date('1986-11-05'),
         password: 'password',
         isAdmin: false,
       },
       {
         id: 'tamura8@xxx.co.jp',
-        lastName: '田村',
-        firstName: '七郎',
+        name: '田村八郎',
         birthday: new Date('1986-11-05'),
         password: 'password',
         isAdmin: false,
       },
       {
         id: 'tamura9@xxx.co.jp',
-        lastName: '田村',
-        firstName: '七郎',
+        name: '田村九郎',
         birthday: new Date('1986-11-05'),
         password: 'password',
         isAdmin: false,
       },
       {
         id: 'tamura10@xxx.co.jp',
-        lastName: '田村',
-        firstName: '七郎',
+        name: '田村十郎',
         birthday: new Date('1986-11-05'),
         password: 'password',
         isAdmin: false,
@@ -143,5 +132,11 @@ export class UserRepository {
 
     // ページ情報を返却
     return new Page(pageable, users, totalSize)
+  }
+
+  public async findOne(id: string): Promise<User | null> {
+    // サーバ処理を疑似するため、0.5秒待機
+    await new Promise((resolve) => setTimeout(resolve, sleepTime))
+    return this.usersDummyStore.find(id) as User | null
   }
 }

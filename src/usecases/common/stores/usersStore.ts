@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import type { User } from '@/usecases/common/models/User'
 import { defineStore, type StateTree } from 'pinia'
 
@@ -13,9 +13,9 @@ export const useUserDummyStore = defineStore(
     const users = ref<User[]>([])
 
     // IDが一致するユーザを取得
-    const find = computed((userId) => {
+    function find(userId: string): User | undefined {
       return users.value.find((u) => u.id === userId)
-    })
+    }
 
     // ユーザを追加
     function add(user: User) {

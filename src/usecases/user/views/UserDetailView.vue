@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
@@ -19,11 +19,17 @@ import ConfirmModalDialog from '@/components/dialog/ConfirmModalDialog.vue'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
+import { UserRepository } from '@/usecases/common/repositories/UserRepository'
+import { UserService } from '@/usecases/user/services/UserService'
+import { formatDateWithHyphen } from '@/usecases/common/utils/date_utils'
 
 interface Props {
   id: string
 }
-defineProps<Props>()
+const props = defineProps<Props>()
+
+const userRepository = new UserRepository()
+const userService = new UserService(userRepository)
 
 const router = useRouter()
 
@@ -59,11 +65,18 @@ const isValidationError = computed(() => {
   return Object.keys(errors.value).length > 0
 })
 
-// TODO: 初期値設定
-userId.value = 'yamada@xxx.co.jp'
-userName.value = '山田太郎'
-birthday.value = '1990-01-01'
-isAdmin.value = true
+// 初期表示処理
+onMounted(async () => {
+  console.log('id: ' + props.id)
+  const user = await userService.findOne(props.id)
+  // userがnull出なければ値をセット
+  if (user) {
+    userId.value = user.id
+    userName.value = user.name
+    birthday.value = formatDateWithHyphen(user.birthday)
+    isAdmin.value = user.isAdmin
+  }
+})
 
 const onSubmit = (event: SubmitEvent): void => {
   const button = event.submitter as HTMLButtonElement
@@ -118,7 +131,7 @@ const onInfoDialogOKButtonClick = () => {
           v-model:value="password"
           :error="errors.password" />
       </InputItem>
-      <InputItem label="ユーザー名" labelFor="userName" :required="true">
+      <InputItem label="ユーザ名" labelFor="userName" :required="true">
         <InputText
           id="userName"
           name="userName"
