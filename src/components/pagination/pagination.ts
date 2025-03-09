@@ -76,6 +76,9 @@ export class Pageable {
      * 現在のページ数
      */
     public pageNumber: number,
+
+    //TODO: ソート条件を追加する
+    //public sort: "asc" | "desc" = "asc",
   ) {
     // ページ数からオフセットを計算
     this.offset = pageNumber * pageSize

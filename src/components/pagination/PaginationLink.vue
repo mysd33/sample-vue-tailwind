@@ -15,6 +15,9 @@ interface Props<T> {
    * 検索結果のページ情報
    */
   page: Page<T>
+
+  //TODO: 最大表示ページ数を指定できるようにする
+  maxDisplayPage?: number
 }
 
 // Emitsのインターフェース定義
@@ -50,14 +53,22 @@ function handleClick(pageIndex: number) {
           href="#"
           class="text-md relative inline-flex items-center rounded-l-md px-2 py-2 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0"
           :class="page.isFirst() ? 'bg-gray-200 text-gray-500' : 'text-blue-600 hover:bg-gray-50'"
-          @click.prevent.stop="handleClick(1)">
+          @click.prevent.stop="
+            () => {
+              if (!page.isFirst()) handleClick(1)
+            }
+          ">
           <span>最初へ</span>
         </a>
         <a
           href="#"
           class="text-md relative inline-flex items-center px-2 py-2 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0"
           :class="page.isFirst() ? 'bg-gray-200 text-gray-500' : 'text-blue-600 hover:bg-gray-50'"
-          @click.prevent.stop="handleClick(page.pageNumber)">
+          @click.prevent.stop="
+            () => {
+              if (!page.isFirst()) handleClick(page.pageNumber)
+            }
+          ">
           <span>前へ</span>
         </a>
         <a
@@ -78,14 +89,22 @@ function handleClick(pageIndex: number) {
           href="#"
           class="text-md relative inline-flex items-center px-2 py-2 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0"
           :class="page.isLast() ? 'bg-gray-200 text-gray-500' : 'text-blue-600 hover:bg-gray-50'"
-          @click.prevent.stop="handleClick(page.pageNumber + 2)">
+          @click.prevent.stop="
+            () => {
+              if (!page.isLast()) handleClick(page.pageNumber + 2)
+            }
+          ">
           <span>次へ</span>
         </a>
         <a
           href="#"
           class="text-md relative inline-flex items-center rounded-r-md px-2 py-2 ring-1 ring-gray-300 ring-inset focus:z-20 focus:outline-offset-0"
           :class="page.isLast() ? 'bg-gray-200 text-gray-500' : 'text-blue-600 hover:bg-gray-50'"
-          @click.prevent.stop="handleClick(page.getTotalPages())">
+          @click.prevent.stop="
+            () => {
+              if (!page.isLast()) handleClick(page.getTotalPages())
+            }
+          ">
           <span>最後へ</span>
         </a>
       </nav>
