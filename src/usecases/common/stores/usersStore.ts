@@ -47,7 +47,7 @@ export const useUserDummyStore = defineStore(
     function remove(userId: string) {
       const index = users.value.findIndex((u) => u.id === userId)
       if (index !== -1) {
-        users.value.splice(index, 1)
+        users.value = users.value.filter((u) => u.id !== userId)
       }
     }
 

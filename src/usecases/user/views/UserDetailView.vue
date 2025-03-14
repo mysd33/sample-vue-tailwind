@@ -51,7 +51,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { values, errors, validate, isSubmitting, defineField } = useForm({
+const { values, errors, handleSubmit, isSubmitting, defineField } = useForm({
   validationSchema: schema,
 })
 
@@ -78,25 +78,23 @@ onMounted(async () => {
   }
 })
 
-const onSubmit = (event: SubmitEvent): void => {
-  const button = event.submitter as HTMLButtonElement
-  if (button.name === 'update') {
-    // 更新ボタンのときは入力チェック
-    validate().then((result) => {
-      if (result.valid) {
-        console.log(values)
-        // TODO: 仮でメニューへ遷移
-        router.push({ name: 'userList' })
-      }
-    })
-  } else {
-    // 削除ボタンのときは確認ダイアログを表示
-    isConfirmDialogOpen.value = true
-  }
+// 更新ボタンクリック時の処理
+const onClickUpdateButton = handleSubmit(() => {
+  console.log(values)
+  // TODO:更新処理の実装
+  // TODO: 仮でメニューへ遷移
+  router.push({ name: 'userList' })
+})
+
+// 削除ボタンクリック時の処理
+const onClickDeleteButton = () => {
+  isConfirmDialogOpen.value = true
 }
 
 const onConfirmDialogOKButtonClick = () => {
   console.log('確認ダイアログのOKボタンがクリックされました。')
+  // TODO: 削除処理の実装
+
   // 処理完了ダイアログを表示
   isInformationDialogOpen.value = true
 }
@@ -119,7 +117,7 @@ const onInfoDialogOKButtonClick = () => {
   <MainContainer>
     <ValidationErrorBanner :is-error="isValidationError" />
     <MessageBanner :message="message" :level="messageLevel" />
-    <FormArea @submit="onSubmit">
+    <FormArea>
       <InputItem label="ユーザーID" labelFor="userId">
         <InputText id="userId" name="userId" :readonly="true" v-model:value="userId" />
       </InputItem>
@@ -150,8 +148,10 @@ const onInfoDialogOKButtonClick = () => {
       </InputItem>
       <InputItem></InputItem>
       <ButtonArea>
-        <SubmitButton name="update" :disabled="isSubmitting">ユーザ更新</SubmitButton>
-        <SubmitButton name="delete" :danger="true" :disabled="isSubmitting"
+        <SubmitButton :disabled="isSubmitting" @click="onClickUpdateButton"
+          >ユーザ更新</SubmitButton
+        >
+        <SubmitButton :danger="true" :disabled="isSubmitting" @click="onClickDeleteButton"
           >ユーザ削除</SubmitButton
         >
       </ButtonArea>

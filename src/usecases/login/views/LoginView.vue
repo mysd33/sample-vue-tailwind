@@ -38,7 +38,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { values, errors, handleSubmit, isSubmitting, defineField } = useForm({
+const { errors, handleSubmit, isSubmitting, defineField } = useForm({
   validationSchema: schema,
 })
 
@@ -47,6 +47,7 @@ const [password] = defineField('password')
 
 const onValidSubmit = async () => {
   // TODO: エラーメッセージのクリアの方法を検討
+  // resetFormつかえないか？
   validationErrorMessages.value = []
   isUserIdError.value = false
   isPasswordError.value = false

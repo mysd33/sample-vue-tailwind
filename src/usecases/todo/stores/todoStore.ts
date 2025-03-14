@@ -47,7 +47,7 @@ export const useTodoDummyStore = defineStore(
     function remove(todoId: string) {
       const index = todos.value.findIndex((t) => t.id === todoId)
       if (index !== -1) {
-        todos.value.splice(index, 1)
+        todos.value = todos.value.filter((t) => t.id !== todoId)
       }
     }
 

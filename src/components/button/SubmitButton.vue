@@ -20,10 +20,22 @@ interface Props {
   disabled?: boolean
 }
 defineProps<Props>()
+
+interface Emits {
+  (event: 'click'): void
+}
+
+defineEmits<Emits>()
 </script>
 
 <template>
-  <BaseButton type="submit" :size="size" :danger="danger" :name="name" :disabled="disabled">
+  <BaseButton
+    type="submit"
+    :size="size"
+    :danger="danger"
+    :name="name"
+    :disabled="disabled"
+    @click="$emit('click')">
     <slot></slot>
   </BaseButton>
 </template>

@@ -14,7 +14,7 @@ import { useForm } from 'vee-validate'
 import { TodoRepository } from '@/usecases/todo/repositories/TodoRepository'
 import { TodoService } from '@/usecases/todo/services/TodoService'
 import type { Todo } from '@/usecases/todo/models/Todo'
-import TodoItem from './TodoItem.vue' // 新しいコンポーネントをインポート
+import TodoItem from '@/usecases/todo/views/TodoItem.vue'
 
 const todoRepository = new TodoRepository()
 const todoService = new TodoService(todoRepository)
@@ -45,7 +45,7 @@ const isValidationError = computed(() => {
 const onValidSubmit = async () => {
   console.log('TODO作成:' + todoTitle.value)
   // TODOの作成処理
-  todoService
+  await todoService
     .create(todoTitle.value)
     .then(() => {
       todoTitle.value = ''
@@ -73,36 +73,26 @@ const onInvalidSubmit = () => {
 // 作成ボタン（Submit）時の処理
 const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
 
-// 完了ボタン時の処理
-const onClickFinishButton = (todoId?: string) => {
-  // TODOの完了処理
-  todoService
-    .finish(todoId!)
-    .then(() => {
-      messageLevel.value = 'info'
-      message.value = '完了しました。'
-      // TODO一覧を再取得
-      return todoService.findAll()
-    })
-    .then((result) => {
-      todos.value = result
-    })
+// 完了処理完了時
+const onFinish = async (todoId: string) => {
+  console.log('TODO完了:' + todoId)
+  // TODO一覧を再取得
+  await todoService.findAll().then((result) => {
+    todos.value = result
+    messageLevel.value = 'info'
+    message.value = '完了しました。'
+  })
 }
 
-// 削除ボタン時の処理
-const onClickDeleteButton = (todoId?: string) => {
-  // TODOの削除処理
-  todoService
-    .delete(todoId!)
-    .then(() => {
-      messageLevel.value = 'info'
-      message.value = '削除しました。'
-      // TODO一覧を再取得
-      return todoService.findAll()
-    })
-    .then((result) => {
-      todos.value = result
-    })
+// 削除処理完了時
+const onDelete = async (todoId: string) => {
+  console.log('TODO削除:' + todoId)
+  // TODO一覧を再取得
+  await todoService.findAll().then((result) => {
+    todos.value = result
+    messageLevel.value = 'info'
+    message.value = '削除しました。'
+  })
 }
 
 // 初期表示の処理
@@ -119,8 +109,8 @@ onMounted(async () => {
   <MainContainer>
     <ValidationErrorBanner :is-error="isValidationError" />
     <MessageBanner :message="message" :level="messageLevel" />
-    <!-- TODO: SimpleFormAreatというコンポーネント化  -->
-    <form class="mb-3 flex flex-row gap-10" @submit.prevent="onSubmit">
+    <!-- TODO: SimpleFormAreaというコンポーネント化  -->
+    <form class="mb-3 flex flex-row gap-10" @submit="onSubmit">
       <InputItem class="basis-2/3 text-left">
         <InputText
           id="todoTitle"
@@ -136,7 +126,7 @@ onMounted(async () => {
     <div class="mt-3 text-left">
       <ul class="list-disc">
         <li v-for="todo in todos" :key="todo.id" class="ml-10">
-          <TodoItem :todo="todo" @finish="onClickFinishButton" @delete="onClickDeleteButton" />
+          <TodoItem :todo="todo" :service="todoService" @finish="onFinish" @delete="onDelete" />
         </li>
       </ul>
     </div>

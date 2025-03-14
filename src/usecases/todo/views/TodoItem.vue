@@ -1,37 +1,54 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
-import ActionButton from '@/components/button/ActionButton.vue'
+import { useForm } from 'vee-validate'
+import FormArea from '@/components/form/FormArea.vue'
 import ButtonArea from '@/components/button/ButtonArea.vue'
+import SubmitButton from '@/components/button/SubmitButton.vue'
 import type { Todo } from '@/usecases/todo/models/Todo'
+import type { TodoService } from '@/usecases/todo/services/TodoService'
 
 interface Props {
   todo: Todo
+  service: TodoService
 }
-defineProps<Props>()
+const props = defineProps<Props>()
 
 interface Emits {
   (event: 'finish', todoId: string): void
   (event: 'delete', todoId: string): void
 }
 
-const emits = defineEmits<Emits>()
+const emit = defineEmits<Emits>()
 
-const onClickFinishButton = (key?: string) => {
-  emits('finish', key!)
-}
+const { handleSubmit, isSubmitting } = useForm()
 
-const onClickDeleteButton = (key?: string) => {
-  emits('delete', key!)
-}
+// 完了ボタン時の処理
+const onClickFinishButton = handleSubmit(async () => {
+  // TODOの完了処理
+  await props.service.finish(props.todo.id!).then(() => {
+    emit('finish', props.todo.id!)
+  })
+})
+
+// 削除ボタン時の処理
+const onClickDeleteButton = handleSubmit(async () => {
+  // TODOの削除処理
+  await props.service.delete(props.todo.id!).then(() => {
+    emit('delete', props.todo.id!)
+  })
+})
 </script>
 
-<!-- TODO: formに変えてVeeValidateのisSubmittingを使う -->
+<!-- ボタンごとにクライアント処理を分けるために@submitではなく各ボタンの@clickにイベントを関連付け -->
 <template>
-  <ButtonArea>
-    <span class="pt-2" :class="{ 'line-through': todo.finished }">{{ todo.title }}</span>
-    <ActionButton v-if="!todo.finished" :actionKey="todo.id" @click="onClickFinishButton"
-      >完了</ActionButton
-    >
-    <ActionButton :actionKey="todo.id" @click="onClickDeleteButton">削除</ActionButton>
-  </ButtonArea>
+  <FormArea>
+    <ButtonArea>
+      <span class="pt-2" :class="{ 'line-through': todo.finished }">{{ todo.title }}</span>
+
+      <SubmitButton v-if="!todo.finished" :disabled="isSubmitting" @click="onClickFinishButton"
+        >完了</SubmitButton
+      >
+      <SubmitButton :disabled="isSubmitting" @click="onClickDeleteButton">削除</SubmitButton>
+    </ButtonArea>
+  </FormArea>
 </template>

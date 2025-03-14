@@ -5,7 +5,7 @@ import { useTodoDummyStore } from '@/usecases/todo/stores/todoStore'
 import type { Todo } from '@/usecases/todo/models/Todo'
 import { generateUUID } from '@/usecases/common/utils/id_utils'
 
-const sleepTime = 500
+const sleepTime = 300
 
 export class TodoRepository {
   private todoDummyStore = useTodoDummyStore()
@@ -71,9 +71,9 @@ export class TodoRepository {
    */
   public async delete(id: string): Promise<void> {
     // TODO: サーバ側のTODO作成処理を呼び出す
-
     // サーバ処理を疑似するため待機
     await new Promise((resolve) => setTimeout(resolve, sleepTime))
+
     this.todoDummyStore.remove(id)
   }
 }
