@@ -14,7 +14,7 @@ import { useForm } from 'vee-validate'
 import { TodoRepository } from '@/usecases/todo/repositories/TodoRepository'
 import { TodoService } from '@/usecases/todo/services/TodoService'
 import type { Todo } from '@/usecases/todo/models/Todo'
-import ActionButton from '@/components/button/ActionButton.vue'
+import TodoItem from './TodoItem.vue' // 新しいコンポーネントをインポート
 
 const todoRepository = new TodoRepository()
 const todoService = new TodoService(todoRepository)
@@ -135,15 +135,8 @@ onMounted(async () => {
     <hr />
     <div class="mt-3 text-left">
       <ul class="list-disc">
-        <!-- TODO: 一行ごとにコンポーネント化しないとだめかも。。。-->
         <li v-for="todo in todos" :key="todo.id" class="ml-10">
-          <ButtonArea>
-            <span class="pt-2" :class="{ 'line-through': todo.finished }">{{ todo.title }}</span>
-            <ActionButton v-if="!todo.finished" :actionKey="todo.id" @click="onClickFinishButton"
-              >完了</ActionButton
-            >
-            <ActionButton :actionKey="todo.id" @click="onClickDeleteButton">削除</ActionButton>
-          </ButtonArea>
+          <TodoItem :todo="todo" @finish="onClickFinishButton" @delete="onClickDeleteButton" />
         </li>
       </ul>
     </div>
