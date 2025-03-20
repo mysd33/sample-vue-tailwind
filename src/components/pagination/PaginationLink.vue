@@ -2,7 +2,7 @@
 // 参考
 // https://tailwindui.com/components/application-ui/navigation/pagination を参考に作成
 
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, computed } from 'vue'
 import { Pageable, Page } from '@/components/pagination/pagination'
 
 // Propsのインターフェース定義
@@ -16,9 +16,31 @@ interface Props<T> {
    */
   page: Page<T>
 
-  //TODO: 最大表示ページ数を指定できるようにする
-  maxDisplayPage?: number
+  /**
+   * 最大表示ページ数
+   */
+  maxDisplayPage: number
 }
+
+// プロパティの定義
+const props = withDefaults(defineProps<Props<T>>(), {
+  // 最大ページ数デフォルト値
+  maxDisplayPage: 5,
+})
+
+// ページ番号のリスト
+const sequence = computed<number[]>(() => {
+  const maxDisplayPage = props.maxDisplayPage
+  const totalPages = props.page.getTotalPages()
+  const currentPage = props.page.pageNumber + 1
+  let begin = Math.max(1, currentPage - Math.floor(maxDisplayPage / 2))
+  let end = begin + maxDisplayPage - 1
+  if (end > totalPages - 1) {
+    end = totalPages
+    begin = Math.max(1, end - (maxDisplayPage - 1))
+  }
+  return Array.from({ length: end - begin + 1 }, (_, i) => begin + i)
+})
 
 // Emitsのインターフェース定義
 interface Emits {
@@ -27,9 +49,6 @@ interface Emits {
    */
   (e: 'onClick', pageable: Pageable): void
 }
-
-// プロパティの定義
-const props = defineProps<Props<T>>()
 
 // エミットの定義
 const emit = defineEmits<Emits>()
@@ -79,8 +98,9 @@ function handleClick(pageIndex: number) {
           ">
           <span>前へ</span>
         </a>
+        <!-- TODO: ページネーションの中央に「…」を表示できるようにする -->
         <a
-          v-for="pageIndex in page.getTotalPages()"
+          v-for="pageIndex in sequence"
           :key="pageIndex"
           href="#"
           :aria-current="page.isCurrent(pageIndex - 1) ? 'page' : undefined"
