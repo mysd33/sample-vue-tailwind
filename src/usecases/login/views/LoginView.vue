@@ -14,6 +14,11 @@ import { useForm } from 'vee-validate'
 import { AuthenticationService } from '@/usecases/login/services/AuthenticationService'
 import MessageBanner from '@/components/banner/MessageBanner.vue'
 import { UserRepository } from '@/usecases/common/repositories/UserRepository'
+import TableArea from '@/components/table/TableArea.vue'
+import TableHeaderRow from '@/components/table/TableHeaderRow.vue'
+import TableHeaderCol from '@/components/table/TableHeaderCol.vue'
+import TableDataRow from '@/components/table/TableDataRow.vue'
+import TableDataCol from '@/components/table/TableDataCol.vue'
 
 const router = useRouter()
 const userRepository = new UserRepository()
@@ -64,7 +69,13 @@ const onValidSubmit = async () => {
     // ログインエラーのメッセージを設定
     // warnレベルだが、ログインエラーは赤で表示させたいのでerrorで設定
     messageLevel.value = 'error'
-    message.value = e.message
+    if (e instanceof Error) {
+      message.value = e.message
+      return
+    } else {
+      message.value = 'エラーが発生しました'
+      return
+    }
   }
 }
 const onInvalidSubmit = ({ errors }) => {
@@ -105,5 +116,32 @@ const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
       </InputItem>
       <SubmitButton size="lg" class="mt-3" :disabled="isSubmitting">ログイン</SubmitButton>
     </LoginFormArea>
+    <div class="mx-auto max-w-120">
+      <p class="mt-5 mb-2">※テストユーザでログインできます</p>
+      <TableArea>
+        <template v-slot:thead>
+          <TableHeaderRow>
+            <TableHeaderCol>ユーザID</TableHeaderCol>
+            <TableHeaderCol>ユーザ名</TableHeaderCol>
+            <TableHeaderCol>パスワード</TableHeaderCol>
+            <TableHeaderCol>管理者</TableHeaderCol>
+          </TableHeaderRow>
+        </template>
+        <template v-slot:tbody>
+          <TableDataRow>
+            <TableDataCol>yamada@xxx.co.jp</TableDataCol>
+            <TableDataCol>山田太郎</TableDataCol>
+            <TableDataCol>password</TableDataCol>
+            <TableDataCol>○</TableDataCol>
+          </TableDataRow>
+          <TableDataRow>
+            <TableDataCol>tamura@xxx.co.jp</TableDataCol>
+            <TableDataCol>田村一郎</TableDataCol>
+            <TableDataCol>password</TableDataCol>
+            <TableDataCol>-</TableDataCol>
+          </TableDataRow>
+        </template>
+      </TableArea>
+    </div>
   </MainContainer>
 </template>
