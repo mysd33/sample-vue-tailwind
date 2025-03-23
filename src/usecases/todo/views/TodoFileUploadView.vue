@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import InputItem from '@/components/form/InputItem.vue'
@@ -14,8 +13,6 @@ import MessageBanner from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 
-const router = useRouter()
-
 // TODO: サーバエラーの状態を管理するための変数を仮定義
 const messageLevel = ref('')
 const message = ref('')
@@ -26,7 +23,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { values, errors, handleSubmit, isSubmitting, defineField } = useForm({
+const { errors, handleSubmit, isSubmitting, defineField } = useForm({
   validationSchema: schema,
 })
 

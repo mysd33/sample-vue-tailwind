@@ -19,7 +19,7 @@ interface Props<T> {
   /**
    * 最大表示ページ数
    */
-  maxDisplayPage: number
+  maxDisplayPage?: number
 }
 
 // プロパティの定義

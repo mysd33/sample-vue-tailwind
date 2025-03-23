@@ -94,7 +94,7 @@ const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
 </script>
 
 <template>
-  <HeaderArea title="TODO管理アプリ" />
+  <HeaderArea title="TODO管理アプリ" :show-user="false" />
   <MainContainer>
     <ValidationErrorBanner :is-error="isValidationError" />
     <MessageBanner :message="message" :level="messageLevel" />

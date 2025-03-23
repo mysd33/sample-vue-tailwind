@@ -6,6 +6,7 @@ import { configure } from 'vee-validate'
 import { setLocale } from 'yup'
 import * as ja from '@/usecases/common/validation/validation_messages_ja'
 import { useUserDummyStore } from '@/usecases/common/stores/usersStore'
+import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 
 // Piniaの有効化
 const pinia = createPinia()
@@ -23,6 +24,9 @@ setup((app: App) => {
   // スタブ実装として、以下のユーザデータを初期登録する
   const usersDummyStore = useUserDummyStore()
   usersDummyStore.init()
+  // スタブ実装として、以下のログイン済みデータを初期登録する
+  const authStore = useAuthenticationStore()
+  authStore.user = usersDummyStore.users[0]
 })
 
 const preview: Preview = {
