@@ -296,7 +296,8 @@ export const useUserDummyStore = defineStore(
       // セッションストレージの場合
       // storage: sessionStorage,
 
-      // 開発者ツール上、すぐにユーザ情報を見たい場合はコメントアウトするとよい
+      // Base64エンコードして、開発者ツール上、ユーザ情報を難読化する場合はコメントはずす
+      // 開発者ツールでユーザ情報を見たい場合はコメントアウト
       /*
       serializer: {
         deserialize: (value): StateTree => {

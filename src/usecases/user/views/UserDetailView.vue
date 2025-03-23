@@ -38,7 +38,7 @@ const router = useRouter()
 const messageLevel = ref('')
 const message = ref('')
 
-// ダイアログの状態を管理するための変数を仮定義
+// ダイアログの状態を管理するための変数を定義
 const isUpdateCompleteDialogOpen = ref(false)
 const isDeleteConfirmDialogOpen = ref(false)
 const isDeleteCompleteDialogOpen = ref(false)
@@ -81,6 +81,7 @@ onMounted(async () => {
 })
 
 // 更新ボタンクリック時の処理
+// 入力チェックOKの場合の処理
 const onValidUpdateSubmit = async () => {
   // ユーザ更新処理
   const user: User = {
@@ -91,7 +92,7 @@ const onValidUpdateSubmit = async () => {
     isAdmin: isAdmin.value,
   }
   await userService.update(user).then(() => {
-    // 処理完了ダイアログを表示
+    // 更新完了ダイアログを表示
     isUpdateCompleteDialogOpen.value = true
   })
 }
@@ -107,6 +108,7 @@ const onClickDeleteButton = () => {
   isDeleteConfirmDialogOpen.value = true
 }
 
+// 削除確認ダイアログのOKボタンクリック時の処理
 const onDeleteOKButtonClick = () => {
   // ユーザ削除処理
   userService.delete(userId.value).then(() => {
@@ -115,10 +117,12 @@ const onDeleteOKButtonClick = () => {
   })
 }
 
+// 削除確認ダイアログのキャンセルボタンクリック時の処理
 const onDeleteCancelButtonClick = () => {
   console.log('確認ダイアログのキャンセルボタンがクリックされました。')
 }
 
+// 削除完了ダイアログのOKボタンクリック時の処理
 const onDeleteCompleteOKButtonClick = () => {
   router.push({ name: 'userList' })
 }

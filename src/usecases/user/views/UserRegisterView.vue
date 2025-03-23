@@ -16,12 +16,22 @@ import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue
 import MessageBanner from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
+import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
+import { UserRepository } from '@/usecases/common/repositories/UserRepository'
+import { UserService } from '@/usecases/user/services/UserService'
+import type { User } from '@/usecases/common/models/User'
+
+const userRepository = new UserRepository()
+const userService = new UserService(userRepository)
 
 const router = useRouter()
 
 // TODO: サーバエラーの状態を管理するための変数を仮定義
 const messageLevel = ref('')
 const message = ref('')
+
+// ダイアログの状態を管理するための変数を定義
+const isCreateCompleteDialogOpen = ref(false)
 
 // yup
 const schema = yup.object({
@@ -47,14 +57,30 @@ const isValidationError = computed(() => {
   return Object.keys(errors.value).length > 0
 })
 
-const onValidSubmit = () => {
+// ユーザ登録ボタンクリック時の処理
+// バリデーションOK時の処理
+const onValidSubmit = async () => {
   console.log(values)
-  // TODO: 仮でメニューへ遷移
-  router.push({ name: 'userList' })
+  const user: User = {
+    id: values.userId,
+    password: values.password,
+    name: values.userName,
+    birthday: values.birthday,
+    isAdmin: values.isAdmin,
+  }
+  await userService.create(user).then(() => {
+    // 作成完了ダイアログを表示
+    isCreateCompleteDialogOpen.value = true
+  })
 }
 
 // handleSubmit時にバリデーション
 const onSubmit = handleSubmit(onValidSubmit)
+
+// 更新完了ダイアログのOKボタンクリック時の処理
+const onClickCreateCompleteOKButtonClick = () => {
+  router.push({ name: 'userList' })
+}
 </script>
 
 <template>
@@ -102,5 +128,10 @@ const onSubmit = handleSubmit(onValidSubmit)
         <SubmitButton :disabled="isSubmitting">ユーザ登録</SubmitButton>
       </ButtonArea>
     </FormArea>
+    <InformationModalDialog
+      v-model:open="isCreateCompleteDialogOpen"
+      title="ユーザ作成完了"
+      message="ユーザを作成しました。"
+      @ok-button-click="onClickCreateCompleteOKButtonClick" />
   </MainContainer>
 </template>
