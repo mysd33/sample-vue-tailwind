@@ -49,15 +49,14 @@ npx vitest run
 
 ## 画面一覧
 > [!WARNING]
-> 現在、作成中です。Vue.jsとTailwind CSSを使ったSPAの画面は、まだモックアップレベルの実装なので、比較の際、ご注意ください。
+> 現在、作成中です。Vue.jsとTailwind CSSを使ったSPAの画面は、サーバサイド処理はスタブなので、比較の際、ご注意ください。
 
 > [!NOTE]
 > 比較として、完全にHTML、CSSを一致させているわけではなく、だいたいのレイアウト、色が一致するようにしているだけです。ご注意ください。
 
 - 作成している画面は以下の通り。
 
-- 現状、静的な画面は、GitHub Pagesに[Storybook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイしてプレビュー見られます。
-    - 今後、動的に表示するよう実装すると、Storybookだとうまく表示できないかもです。
+- 現状、GitHub Pagesに[Storybook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイしてプレビュー見られます。
 
 | 画面名 | 説明 | 画面イメージ | Storybook | Vue+TailWindソースコード | （参考比較）Thymeleaf+Bootstrapソースコード |
 | ---- | ---- | ---- | ---- | ---- | ---- |
@@ -78,9 +77,6 @@ npx vitest run
 - 正常終了時やエラー時のメッセージおよびバナー等表示できるように対応しています。
 - また、比較対象の「Spring Boot + Thymeleaf + Bootstrap」では実装してませんが、モーダルダイアログの表示も試しています。
 
-> [!WARNING]
-> 現在、作成中です。
-
 | メッセージ種類 | 画面イメージ |
 | ----------- | ----------- |
 | 確認時モーダルダイアログ     | [画面](docs/img/screen/confirm-dialog.png) |
@@ -95,6 +91,9 @@ npx vitest run
 - 作成している画面部品は以下の通り。
 
 - GitHub Pagesに[Storybook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイして見られるように対応しました。
+
+> [!WARNING]
+> 現在、各部品のStoryBookは作成中です。
 
 | 画面部品 | 説明 | ソースコード | Storybook |
 | ---- | ---- | ---- | ---- |
@@ -263,9 +262,15 @@ export default {
 ```
 
 > [!NOTE]
-> ver3での設定方法です。  
-> ver4だと、tailwind.config.jsがなくなり、指定方法がCSSファイルに変わったので注意してください。
+> 上記は、ver3での設定方法です。  
+> ver4だと、tailwind.config.jsがなくなり、以下のように指定方法がCSSファイルに変わったので注意してください。
 > 
+> ```css
+> @import 'tailwindcss';
+> 
+> @plugin '@tailwindcss/forms';
+> ```
+>
 
 ### Storybookのセットアップ
 - 以下のコマンドを実行
