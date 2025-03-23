@@ -22,6 +22,7 @@ import { useForm } from 'vee-validate'
 import { UserRepository } from '@/usecases/common/repositories/UserRepository'
 import { UserService } from '@/usecases/user/services/UserService'
 import { formatDateWithHyphen } from '@/usecases/common/utils/date_utils'
+import type { User } from '@/usecases/common/models/User'
 
 interface Props {
   id: string
@@ -37,9 +38,10 @@ const router = useRouter()
 const messageLevel = ref('')
 const message = ref('')
 
-// TODO: ダイアログの状態を管理するための変数を仮定義
-const isConfirmDialogOpen = ref(false)
-const isInformationDialogOpen = ref(false)
+// ダイアログの状態を管理するための変数を仮定義
+const isUpdateCompleteDialogOpen = ref(false)
+const isDeleteConfirmDialogOpen = ref(false)
+const isDeleteCompleteDialogOpen = ref(false)
 
 // yup
 const schema = yup.object({
@@ -51,7 +53,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { values, errors, handleSubmit, isSubmitting, defineField } = useForm({
+const { errors, handleSubmit, isSubmitting, defineField } = useForm({
   validationSchema: schema,
 })
 
@@ -79,33 +81,45 @@ onMounted(async () => {
 })
 
 // 更新ボタンクリック時の処理
-const onClickUpdateButton = handleSubmit(() => {
-  console.log(values)
-  // TODO:更新処理の実装
-  // TODO: 仮でメニューへ遷移
+const onValidUpdateSubmit = async () => {
+  // ユーザ更新処理
+  const user: User = {
+    id: userId.value,
+    password: password.value,
+    name: userName.value,
+    birthday: birthday.value,
+    isAdmin: isAdmin.value,
+  }
+  await userService.update(user).then(() => {
+    // 処理完了ダイアログを表示
+    isUpdateCompleteDialogOpen.value = true
+  })
+}
+const onClickUpdateButton = handleSubmit(onValidUpdateSubmit)
+
+// 更新完了ダイアログのOKボタンクリック時の処理
+const onClickUpdateCompleteOKButtonClick = () => {
   router.push({ name: 'userList' })
-})
+}
 
 // 削除ボタンクリック時の処理
 const onClickDeleteButton = () => {
-  isConfirmDialogOpen.value = true
+  isDeleteConfirmDialogOpen.value = true
 }
 
-const onConfirmDialogOKButtonClick = () => {
-  console.log('確認ダイアログのOKボタンがクリックされました。')
-  // TODO: 削除処理の実装
-
-  // 処理完了ダイアログを表示
-  isInformationDialogOpen.value = true
+const onDeleteOKButtonClick = () => {
+  // ユーザ削除処理
+  userService.delete(userId.value).then(() => {
+    // 処理完了ダイアログを表示
+    isDeleteCompleteDialogOpen.value = true
+  })
 }
 
-const onConfirmDialogCancelButtonClick = () => {
+const onDeleteCancelButtonClick = () => {
   console.log('確認ダイアログのキャンセルボタンがクリックされました。')
 }
 
-const onInfoDialogOKButtonClick = () => {
-  console.log('完了ダイアログのOKボタンがクリックされました。')
-  // TODO: 仮でメニューへ遷移
+const onDeleteCompleteOKButtonClick = () => {
   router.push({ name: 'userList' })
 }
 </script>
@@ -156,16 +170,21 @@ const onInfoDialogOKButtonClick = () => {
         >
       </ButtonArea>
     </FormArea>
+    <InformationModalDialog
+      v-model:open="isUpdateCompleteDialogOpen"
+      title="ユーザ情報更新完了"
+      message="ユーザ情報を更新しました。"
+      @ok-button-click="onClickUpdateCompleteOKButtonClick" />
     <ConfirmModalDialog
-      v-model:open="isConfirmDialogOpen"
+      v-model:open="isDeleteConfirmDialogOpen"
       title="ユーザ削除確認"
       message="ユーザを削除してもいいですか？"
-      @ok-button-click="onConfirmDialogOKButtonClick"
-      @cancel-button-click="onConfirmDialogCancelButtonClick" />
+      @ok-button-click="onDeleteOKButtonClick"
+      @cancel-button-click="onDeleteCancelButtonClick" />
     <InformationModalDialog
-      v-model:open="isInformationDialogOpen"
+      v-model:open="isDeleteCompleteDialogOpen"
       title="ユーザ削除完了"
       message="ユーザを削除しました。"
-      @ok-button-click="onInfoDialogOKButtonClick" />
+      @ok-button-click="onDeleteCompleteOKButtonClick" />
   </MainContainer>
 </template>
