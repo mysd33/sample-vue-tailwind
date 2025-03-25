@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 import MenuView from '@/usecases/login/views/MenuView.vue'
-import { AuthenticationServiceImpl } from '@/usecases/login/services/authenticationService'
 import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import { AuthenticationServiceImpl } from '@/usecases/login/services/authenticationService'
 
 /**
  * ## メニュー画面
