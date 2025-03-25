@@ -1,10 +1,26 @@
-import { UserRepository } from '@/usecases/common/repositories/UserRepository'
+import type { UserRepository } from '@/usecases/common/repositories/userRepository'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
+
+/**
+ * 認証機能を提供するServiceインタフェース
+ */
+export interface AuthenticationService {
+  /**
+   * ログイン処理
+   * @param id ユーザID
+   * @param password
+   */
+  login(id: string, password: string): Promise<void>
+  /**
+   * ログアウト処理
+   */
+  logout(): Promise<void>
+}
 
 /**
  * 認証機能を提供するServiceクラス
  */
-export class AuthenticationService {
+export class AuthenticationServiceImpl implements AuthenticationService {
   private authenticationStore = useAuthenticationStore()
 
   constructor(private userRepository: UserRepository) {}
@@ -18,9 +34,7 @@ export class AuthenticationService {
     const user = await this.userRepository.authenticate(id, password)
 
     if (user) {
-      console.log(
-        `ログイン成功: ${this.authenticationStore.$id} : ${user.lastName} ${user.firstName}`,
-      )
+      console.log(`ログイン成功: ${this.authenticationStore.$id} : ${user.name}`)
       // ログイン成功時に、ログイン済認証時情報を保存
       this.authenticationStore.user = user
     }

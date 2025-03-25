@@ -2,15 +2,14 @@
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import MenuButton from '@/components/button/MenuButton.vue'
-import { AuthenticationService } from '@/usecases/login/services/AuthenticationService'
-import { UserRepository } from '@/usecases/common/repositories/UserRepository'
+import { AuthenticationServiceImpl } from '@/usecases/login/services/AuthenticationService'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 import { useRouter } from 'vue-router'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 
 const authStore = useAuthenticationStore()
 const router = useRouter()
-const userRepository = new UserRepository()
-const loginService = new AuthenticationService(userRepository)
+const loginService = new AuthenticationServiceImpl(new UserRepositoryImpl())
 
 const onLogoutMenuClicked = async (): Promise<void> => {
   // ログアウト処理

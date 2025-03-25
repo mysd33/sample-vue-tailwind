@@ -1,6 +1,6 @@
 import { defineStore, type StateTree } from 'pinia'
 import { computed, ref } from 'vue'
-import type { User } from '@/usecases/common/models/User'
+import type { User } from '@/usecases/common/models/user'
 
 /**
  * ログイン済ユーザの認証情報を管理するStore

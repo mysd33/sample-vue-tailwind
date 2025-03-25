@@ -12,17 +12,16 @@ import ButtonArea from '@/components/button/ButtonArea.vue'
 import TableDataCol from '@/components/table/TableDataCol.vue'
 import { useRouter } from 'vue-router'
 import ActionButton from '@/components/button/ActionButton.vue'
-import { UserRepository } from '@/usecases/common/repositories/UserRepository'
-import type { User } from '@/usecases/common/models/User'
-import { UserService } from '@/usecases/user/services/UserService'
-import { formatDate, calcAge } from '@/usecases/common/utils/date_utils'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import type { User } from '@/usecases/common/models/user'
+import { UserServiceImpl } from '@/usecases/user/services/userService'
+import { formatDate, calcAge } from '@/usecases/common/utils/dateUtils'
 import { Page, Pageable } from '@/components/pagination/pagination'
 
 //TODO: 設定ファイルに切り出しできるようにする
 const pageSize = 5
 
-const userRepository = new UserRepository()
-const userService = new UserService(userRepository)
+const userService = new UserServiceImpl(new UserRepositoryImpl())
 
 const userPage = ref<Page<User>>()
 

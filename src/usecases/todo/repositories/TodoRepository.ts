@@ -1,13 +1,46 @@
-/**
- * Todoリストを管理するRepositoryクラス
- */
 import { useTodoDummyStore } from '@/usecases/todo/stores/todoStore'
-import type { Todo } from '@/usecases/todo/models/Todo'
-import { generateUUID } from '@/usecases/common/utils/id_utils'
+import type { Todo } from '@/usecases/todo/models/todo'
+import { generateUUID } from '@/usecases/common/utils/idUtils'
 
 const sleepTime = 300
 
-export class TodoRepository {
+/**
+ * Todoリストを管理するRepositoryインタフェース
+ */
+export interface TodoRepository {
+  /**
+   * IDを指定してTODOを取得する
+   * @param id ID
+   * @returns TODO
+   */
+  findOne(id: string): Promise<Todo | null>
+  /**
+   * TODOリストを取得する
+   * @returns TODOリスト
+   */
+  findAll(): Promise<Todo[]>
+  /**
+   * TODOを作成する
+   * @param todo TODO
+   * @returns 作成したTODO
+   */
+  create(todo: Todo): Promise<Todo>
+  /**
+   * TODOを更新する
+   * @param todo TODO
+   */
+  update(todo: Todo): Promise<void>
+  /**
+   * TODOを削除する
+   * @param id ID
+   */
+  delete(id: string): Promise<void>
+}
+
+/**
+ * Todoリストを管理するRepositoryクラス
+ */
+export class TodoRepositoryImpl implements TodoRepository {
   private todoDummyStore = useTodoDummyStore()
 
   public async findOne(id: string): Promise<Todo | null> {

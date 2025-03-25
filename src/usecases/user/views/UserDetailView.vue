@@ -19,18 +19,17 @@ import ConfirmModalDialog from '@/components/dialog/ConfirmModalDialog.vue'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
-import { UserRepository } from '@/usecases/common/repositories/UserRepository'
-import { UserService } from '@/usecases/user/services/UserService'
-import { formatDateWithHyphen } from '@/usecases/common/utils/date_utils'
-import type { User } from '@/usecases/common/models/User'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import { UserServiceImpl } from '@/usecases/user/services/userService'
+import { formatDateWithHyphen } from '@/usecases/common/utils/dateUtils'
+import type { User } from '@/usecases/common/models/user'
 
 interface Props {
   id: string
 }
 const props = defineProps<Props>()
 
-const userRepository = new UserRepository()
-const userService = new UserService(userRepository)
+const userService = new UserServiceImpl(new UserRepositoryImpl())
 
 const router = useRouter()
 

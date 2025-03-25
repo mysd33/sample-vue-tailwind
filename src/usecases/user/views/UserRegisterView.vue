@@ -17,12 +17,11 @@ import MessageBanner from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
-import { UserRepository } from '@/usecases/common/repositories/UserRepository'
-import { UserService } from '@/usecases/user/services/UserService'
-import type { User } from '@/usecases/common/models/User'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import { UserServiceImpl } from '@/usecases/user/services/userService'
+import type { User } from '@/usecases/common/models/user'
 
-const userRepository = new UserRepository()
-const userService = new UserService(userRepository)
+const userService = new UserServiceImpl(new UserRepositoryImpl())
 
 const router = useRouter()
 

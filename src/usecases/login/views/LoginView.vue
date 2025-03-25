@@ -11,18 +11,18 @@ import { computed, ref, type Ref } from 'vue'
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
-import { AuthenticationService } from '@/usecases/login/services/AuthenticationService'
+import { AuthenticationServiceImpl } from '@/usecases/login/services/AuthenticationService'
 import MessageBanner from '@/components/banner/MessageBanner.vue'
-import { UserRepository } from '@/usecases/common/repositories/UserRepository'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 import TableArea from '@/components/table/TableArea.vue'
 import TableHeaderRow from '@/components/table/TableHeaderRow.vue'
 import TableHeaderCol from '@/components/table/TableHeaderCol.vue'
 import TableDataRow from '@/components/table/TableDataRow.vue'
 import TableDataCol from '@/components/table/TableDataCol.vue'
 
+const authenticationService = new AuthenticationServiceImpl(new UserRepositoryImpl())
+
 const router = useRouter()
-const userRepository = new UserRepository()
-const authenticationService = new AuthenticationService(userRepository)
 
 // TODO: サーバエラーの状態を管理するための変数を仮定義
 const messageLevel = ref('')

@@ -11,13 +11,12 @@ import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue
 import MessageBanner from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
-import { TodoRepository } from '@/usecases/todo/repositories/TodoRepository'
-import { TodoService } from '@/usecases/todo/services/TodoService'
-import type { Todo } from '@/usecases/todo/models/Todo'
+import { TodoRepositoryImpl } from '@/usecases/todo/repositories/todoRepository'
+import { TodoServiceImpl } from '@/usecases/todo/services/todoService'
+import type { Todo } from '@/usecases/todo/models/todo'
 import TodoItem from '@/usecases/todo/views/TodoItem.vue'
 
-const todoRepository = new TodoRepository()
-const todoService = new TodoService(todoRepository)
+const todoService = new TodoServiceImpl(new TodoRepositoryImpl())
 
 const todos = ref<Todo[]>([])
 

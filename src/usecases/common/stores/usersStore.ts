@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import type { User } from '@/usecases/common/models/User'
+import type { User } from '@/usecases/common/models/user'
 import { defineStore, type StateTree } from 'pinia'
 
 /**
@@ -297,8 +297,7 @@ export const useUserDummyStore = defineStore(
       // storage: sessionStorage,
 
       // Base64エンコードして、開発者ツール上、ユーザ情報を難読化する場合はコメントはずす
-      // 開発者ツールでユーザ情報を見たい場合はコメントアウト
-      /*
+      // 開発者ツールでユーザ情報を見たい場合はコメントアウトする
       serializer: {
         deserialize: (value): StateTree => {
           // Base64デコードして復号化
@@ -310,7 +309,7 @@ export const useUserDummyStore = defineStore(
           // Base64エンコードして、開発者ツール上、ユーザ情報を難読化
           return btoa(encodeURIComponent(rawData))
         },
-      },*/
+      },
     },
   },
 )

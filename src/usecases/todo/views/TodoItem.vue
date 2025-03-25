@@ -4,8 +4,8 @@ import { useForm } from 'vee-validate'
 import FormArea from '@/components/form/FormArea.vue'
 import ButtonArea from '@/components/button/ButtonArea.vue'
 import SubmitButton from '@/components/button/SubmitButton.vue'
-import type { Todo } from '@/usecases/todo/models/Todo'
-import type { TodoService } from '@/usecases/todo/services/TodoService'
+import type { Todo } from '@/usecases/todo/models/todo'
+import type { TodoService } from '@/usecases/todo/services/todoService'
 
 interface Props {
   todo: Todo
