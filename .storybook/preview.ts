@@ -4,7 +4,7 @@ import { createPinia } from 'pinia'
 import { App } from 'vue'
 import { configure } from 'vee-validate'
 import { setLocale } from 'yup'
-import * as ja from '@/usecases/common/validation/validation_messages_ja'
+import * as ja from '@/usecases/common/messages/validationMessages'
 import { useUserDummyStore } from '@/usecases/common/stores/usersStore'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 

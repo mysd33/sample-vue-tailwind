@@ -17,11 +17,15 @@ import MessageBanner from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
-import { UserServiceImpl } from '@/usecases/user/services/userService'
-import type { User } from '@/usecases/common/models/user'
 
-const userService = new UserServiceImpl(new UserRepositoryImpl())
+import type { User } from '@/usecases/common/models/user'
+import type { UserService } from '../services/userService'
+
+interface Props {
+  userService: UserService
+}
+
+const props = defineProps<Props>()
 
 const router = useRouter()
 
@@ -67,7 +71,7 @@ const onValidSubmit = async () => {
     birthday: values.birthday,
     isAdmin: values.isAdmin,
   }
-  await userService.create(user).then(() => {
+  await props.userService.create(user).then(() => {
     // 作成完了ダイアログを表示
     isCreateCompleteDialogOpen.value = true
   })

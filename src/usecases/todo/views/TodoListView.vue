@@ -11,12 +11,15 @@ import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue
 import MessageBanner from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
-import { TodoRepositoryImpl } from '@/usecases/todo/repositories/todoRepository'
-import { TodoServiceImpl } from '@/usecases/todo/services/todoService'
+import type { TodoService } from '@/usecases/todo/services/todoService'
 import type { Todo } from '@/usecases/todo/models/todo'
 import TodoItem from '@/usecases/todo/views/TodoItem.vue'
 
-const todoService = new TodoServiceImpl(new TodoRepositoryImpl())
+interface Props {
+  todoService: TodoService
+}
+
+const props = defineProps<Props>()
 
 const todos = ref<Todo[]>([])
 
@@ -44,14 +47,14 @@ const isValidationError = computed(() => {
 const onValidSubmit = async () => {
   console.log('TODO作成:' + todoTitle.value)
   // TODOの作成処理
-  await todoService
+  await props.todoService
     .create(todoTitle.value)
     .then(() => {
       todoTitle.value = ''
       messageLevel.value = 'info'
       message.value = '作成しました。'
       // TODO一覧を再取得
-      return todoService.findAll()
+      return props.todoService.findAll()
     })
     .then((result) => {
       todos.value = result
@@ -76,7 +79,7 @@ const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
 const onFinish = async (todoId: string) => {
   console.log('TODO完了:' + todoId)
   // TODO一覧を再取得
-  await todoService.findAll().then((result) => {
+  await props.todoService.findAll().then((result) => {
     todos.value = result
     messageLevel.value = 'info'
     message.value = '完了しました。'
@@ -87,7 +90,7 @@ const onFinish = async (todoId: string) => {
 const onDelete = async (todoId: string) => {
   console.log('TODO削除:' + todoId)
   // TODO一覧を再取得
-  await todoService.findAll().then((result) => {
+  await props.todoService.findAll().then((result) => {
     todos.value = result
     messageLevel.value = 'info'
     message.value = '削除しました。'
@@ -97,7 +100,7 @@ const onDelete = async (todoId: string) => {
 // 初期表示の処理
 onMounted(async () => {
   // TODO一覧を取得
-  todos.value = await todoService.findAll()
+  todos.value = await props.todoService.findAll()
 })
 </script>
 

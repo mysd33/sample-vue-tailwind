@@ -2,18 +2,22 @@
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import MenuButton from '@/components/button/MenuButton.vue'
-import { AuthenticationServiceImpl } from '@/usecases/login/services/AuthenticationService'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import type { AuthenticationService } from '@/usecases/login/services/authenticationService'
 import { useRouter } from 'vue-router'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 
+interface Props {
+  authenticationService: AuthenticationService
+}
+
+const props = defineProps<Props>()
+
 const authStore = useAuthenticationStore()
 const router = useRouter()
-const loginService = new AuthenticationServiceImpl(new UserRepositoryImpl())
 
 const onLogoutMenuClicked = async (): Promise<void> => {
   // ログアウト処理
-  loginService.logout().then(() => {
+  props.authenticationService.logout().then(() => {
     router.push({ name: 'home' })
   })
 }

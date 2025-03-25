@@ -1,6 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 import LoginView from '@/usecases/login/views/LoginView.vue'
+import { AuthenticationServiceImpl } from '@/usecases/login/services/authenticationService'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import { TodoServiceImpl } from '@/usecases/todo/services/todoService'
+import { TodoRepositoryImpl } from '@/usecases/todo/repositories/todoRepository'
+import { UserServiceImpl } from '@/usecases/user/services/userService'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,18 +17,36 @@ const router = createRouter({
       // ログイン未済でアクセスしてよい画面
       meta: { allowsNotAuth: true },
       component: LoginView,
+      props: () => {
+        return {
+          // サービスのDI
+          authenticationService: new AuthenticationServiceImpl(new UserRepositoryImpl()),
+        }
+      },
     },
     {
       // メニュー画面
       path: '/menu',
       name: 'menu',
       component: () => import('@/usecases/login/views/MenuView.vue'),
+      props: () => {
+        return {
+          // サービスのDI
+          authenticationService: new AuthenticationServiceImpl(new UserRepositoryImpl()),
+        }
+      },
     },
     {
       // TODO管理画面
       path: '/todo',
       name: 'todo',
       component: () => import('@/usecases/todo/views/TodoListView.vue'),
+      props: () => {
+        return {
+          // サービスのDI
+          todoService: new TodoServiceImpl(new TodoRepositoryImpl()),
+        }
+      },
     },
     {
       // TODO一括登録
@@ -36,12 +59,24 @@ const router = createRouter({
       path: '/users',
       name: 'userList',
       component: () => import('@/usecases/user/views/UserListView.vue'),
+      props: () => {
+        return {
+          // サービスのDI
+          userService: new UserServiceImpl(new UserRepositoryImpl()),
+        }
+      },
     },
     {
       // ユーザ登録画面
       path: '/newuser',
       name: 'newUser',
       component: () => import('@/usecases/user/views/UserRegisterView.vue'),
+      props: () => {
+        return {
+          // サービスのDI
+          userService: new UserServiceImpl(new UserRepositoryImpl()),
+        }
+      },
     },
     {
       // ユーザ詳細画面
@@ -51,6 +86,8 @@ const router = createRouter({
       props: (routes) => {
         return {
           id: routes.params.id,
+          // サービスのDI
+          userService: new UserServiceImpl(new UserRepositoryImpl()),
         }
       },
     },

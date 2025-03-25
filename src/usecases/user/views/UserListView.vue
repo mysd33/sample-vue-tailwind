@@ -12,16 +12,19 @@ import ButtonArea from '@/components/button/ButtonArea.vue'
 import TableDataCol from '@/components/table/TableDataCol.vue'
 import { useRouter } from 'vue-router'
 import ActionButton from '@/components/button/ActionButton.vue'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 import type { User } from '@/usecases/common/models/user'
-import { UserServiceImpl } from '@/usecases/user/services/userService'
+import type { UserService } from '@/usecases/user/services/userService'
 import { formatDate, calcAge } from '@/usecases/common/utils/dateUtils'
 import { Page, Pageable } from '@/components/pagination/pagination'
 
+interface Props {
+  userService: UserService
+}
+
+const props = defineProps<Props>()
+
 //TODO: 設定ファイルに切り出しできるようにする
 const pageSize = 5
-
-const userService = new UserServiceImpl(new UserRepositoryImpl())
 
 const userPage = ref<Page<User>>()
 
@@ -30,12 +33,12 @@ const router = useRouter()
 // 初期表示処理
 onMounted(async () => {
   // ユーザ一覧を取得
-  userPage.value = await userService.findAllForPageNation(new Pageable(pageSize, 0))
+  userPage.value = await props.userService.findAllForPageNation(new Pageable(pageSize, 0))
 })
 
 // ページング処理
 const onPageClicked = async (pageable: Pageable) => {
-  userPage.value = await userService.findAllForPageNation(pageable)
+  userPage.value = await props.userService.findAllForPageNation(pageable)
 }
 
 // 詳細ボタンクリック時の処理

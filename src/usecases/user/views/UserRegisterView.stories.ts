@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 import UserRegisterView from '@/usecases/user/views/UserRegisterView.vue'
-
+import { UserServiceImpl } from '@/usecases/user/services/userService'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 /**
  * ## Todo管理画面
  */
@@ -14,5 +15,7 @@ export default meta
 type Story = StoryObj<typeof UserRegisterView>
 
 export const Default: Story = {
-  args: {},
+  args: {
+    userService: new UserServiceImpl(new UserRepositoryImpl()),
+  },
 }

@@ -19,17 +19,16 @@ import ConfirmModalDialog from '@/components/dialog/ConfirmModalDialog.vue'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
-import { UserServiceImpl } from '@/usecases/user/services/userService'
+import type { UserService } from '@/usecases/user/services/userService'
 import { formatDateWithHyphen } from '@/usecases/common/utils/dateUtils'
 import type { User } from '@/usecases/common/models/user'
 
 interface Props {
   id: string
+  userService: UserService
 }
-const props = defineProps<Props>()
 
-const userService = new UserServiceImpl(new UserRepositoryImpl())
+const props = defineProps<Props>()
 
 const router = useRouter()
 
@@ -69,7 +68,7 @@ const isValidationError = computed(() => {
 // 初期表示処理
 onMounted(async () => {
   console.log('id: ' + props.id)
-  const user = await userService.findOne(props.id)
+  const user = await props.userService.findOne(props.id)
   // userがnull出なければ値をセット
   if (user) {
     userId.value = user.id
@@ -90,7 +89,7 @@ const onValidUpdateSubmit = async () => {
     birthday: birthday.value,
     isAdmin: isAdmin.value,
   }
-  await userService.update(user).then(() => {
+  await props.userService.update(user).then(() => {
     // 更新完了ダイアログを表示
     isUpdateCompleteDialogOpen.value = true
   })
@@ -110,7 +109,7 @@ const onClickDeleteButton = () => {
 // 削除確認ダイアログのOKボタンクリック時の処理
 const onDeleteOKButtonClick = () => {
   // ユーザ削除処理
-  userService.delete(userId.value).then(() => {
+  props.userService.delete(userId.value).then(() => {
     // 処理完了ダイアログを表示
     isDeleteCompleteDialogOpen.value = true
   })
