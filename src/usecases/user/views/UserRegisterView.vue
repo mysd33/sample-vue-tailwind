@@ -19,7 +19,7 @@ import { useForm } from 'vee-validate'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
 
 import type { User } from '@/usecases/common/models/user'
-import type { UserService } from '../services/userService'
+import type { UserService } from '@/usecases/user/services/userService'
 
 interface Props {
   userService: UserService
