@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 import MenuView from '@/usecases/login/views/MenuView.vue'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import { UserRepositoryImpl } from '../../common/repositories/userRepository'
 import { AuthenticationServiceImpl } from '@/usecases/login/services/authenticationService'
 
 /**
