@@ -2,22 +2,20 @@
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import MenuButton from '@/components/button/MenuButton.vue'
-import type { AuthenticationService } from '@/usecases/login/services/authenticationService'
+import { AuthenticationServiceImpl } from '@/usecases/login/services/authenticationService'
 import { useRouter } from 'vue-router'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 
-interface Props {
-  authenticationService: AuthenticationService
-}
-
-const props = defineProps<Props>()
+// ビジネスロジック
+const authenticationService = new AuthenticationServiceImpl(new UserRepositoryImpl())
 
 const authStore = useAuthenticationStore()
 const router = useRouter()
 
 const onLogoutMenuClicked = async (): Promise<void> => {
   // ログアウト処理
-  props.authenticationService.logout().then(() => {
+  authenticationService.logout().then(() => {
     router.push({ name: 'home' })
   })
 }

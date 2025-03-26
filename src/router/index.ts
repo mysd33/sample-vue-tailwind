@@ -29,12 +29,6 @@ const router = createRouter({
       path: '/menu',
       name: 'menu',
       component: () => import('@/usecases/login/views/MenuView.vue'),
-      props: () => {
-        return {
-          // サービスのDI
-          authenticationService: new AuthenticationServiceImpl(new UserRepositoryImpl()),
-        }
-      },
     },
     {
       // TODO管理画面
