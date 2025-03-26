@@ -86,8 +86,6 @@ const router = createRouter({
       props: (routes) => {
         return {
           id: routes.params.id,
-          // サービスのDI
-          userService: new UserServiceImpl(new UserRepositoryImpl()),
         }
       },
     },
