@@ -14,8 +14,8 @@ import { useForm } from 'vee-validate'
 
 import type { Todo } from '@/usecases/todo/models/todo'
 import TodoItem from '@/usecases/todo/views/TodoItem.vue'
-import { TodoServiceImpl } from '../services/todoService'
-import { TodoRepositoryImpl } from '../repositories/todoRepository'
+import { TodoServiceImpl } from '@/usecases/todo/services/todoService'
+import { TodoRepositoryImpl } from '@/usecases/todo/repositories/todoRepository'
 
 // ビジネスロジック
 const todoService = new TodoServiceImpl(new TodoRepositoryImpl())
