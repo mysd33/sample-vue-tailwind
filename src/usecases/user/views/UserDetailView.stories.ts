@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 import UserDetailView from '@/usecases/user/views/UserDetailView.vue'
-import { UserServiceImpl } from '@/usecases/user/services/userService'
 import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import { UserServiceImpl } from '@/usecases/user/services/userService'
 
 /**
  * ## Todo管理画面
