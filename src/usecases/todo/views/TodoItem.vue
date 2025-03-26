@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue'
 import { useForm } from 'vee-validate'
 import FormArea from '@/components/form/FormArea.vue'
 import ButtonArea from '@/components/button/ButtonArea.vue'

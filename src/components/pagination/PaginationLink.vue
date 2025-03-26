@@ -2,7 +2,7 @@
 // 参考
 // https://tailwindui.com/components/application-ui/navigation/pagination を参考に作成
 
-import { defineProps, defineEmits, computed } from 'vue'
+import { computed } from 'vue'
 import { Pageable, Page } from '@/components/pagination/pagination'
 
 // Propsのインターフェース定義
