@@ -323,7 +323,7 @@ setup((app: App) => {
     - GitHubのリポジトリの「Settings」の「Pages」にて、GitHub Pagesの設定を行う
         - 「Build and deployment」の「Source」を「GitHub Actions」に設定
         - ワークフローが正常に終了すると、「https://(ユーザ名).github.io/(リポジトリ名)」というURLでStorybookが公開される
-            - 本サンプルでは「https://mysd33.github.io/sample-vue-tailwind」というURLで公開されている
+            - 本サンプルでは「[https://mysd33.github.io/sample-vue-tailwind](https://mysd33.github.io/sample-vue-tailwind)」というURLで公開されている
 
 ### その他、ライブラリインストール
 - 以下のコマンドで、上記の手順ではインストールされないライブラリをインストール
