@@ -28,12 +28,6 @@ const router = createRouter({
       path: '/todo',
       name: 'todo',
       component: () => import('@/usecases/todo/views/TodoListView.vue'),
-      props: () => {
-        return {
-          // サービスのDI
-          todoService: new TodoServiceImpl(new TodoRepositoryImpl()),
-        }
-      },
     },
     {
       // TODO一括登録
