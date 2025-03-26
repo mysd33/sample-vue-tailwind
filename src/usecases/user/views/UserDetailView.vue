@@ -21,7 +21,7 @@ import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 import { formatDateWithHyphen } from '@/usecases/common/utils/dateUtils'
 import type { User } from '@/usecases/common/models/user'
-import { UserServiceImpl } from '../services/userService'
+import { UserServiceImpl } from '@/usecases/user/services/userService'
 import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 
 interface Props {
