@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 import TodoListView from '@/usecases/todo/views/TodoListView.vue'
-import { TodoServiceImpl } from '@/usecases/todo/services/todoService'
-import { TodoRepositoryImpl } from '@/usecases/todo/repositories/todoRepository'
+import { TodoServiceImpl } from '../services/todoService'
+import { TodoRepositoryImpl } from '../repositories/todoRepository'
 
 /**
  * ## Todo管理画面

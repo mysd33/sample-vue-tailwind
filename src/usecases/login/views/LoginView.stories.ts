@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 import LoginView from '@/usecases/login/views/LoginView.vue'
-import { AuthenticationServiceImpl } from '@/usecases/login/services/authenticationService'
+import { AuthenticationServiceImpl } from '../services/authenticationService'
 import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 
 /**
