@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 import LoginView from '@/usecases/login/views/LoginView.vue'
-import { AuthenticationServiceImpl } from '@/usecases/login/services/authenticationService'
 import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 import { TodoServiceImpl } from '@/usecases/todo/services/todoService'
 import { TodoRepositoryImpl } from '@/usecases/todo/repositories/todoRepository'
@@ -47,12 +46,6 @@ const router = createRouter({
       path: '/users',
       name: 'userList',
       component: () => import('@/usecases/user/views/UserListView.vue'),
-      props: () => {
-        return {
-          // サービスのDI
-          userService: new UserServiceImpl(new UserRepositoryImpl()),
-        }
-      },
     },
     {
       // ユーザ登録画面
