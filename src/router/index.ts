@@ -65,12 +65,6 @@ const router = createRouter({
       path: '/newuser',
       name: 'newUser',
       component: () => import('@/usecases/user/views/UserRegisterView.vue'),
-      props: () => {
-        return {
-          // サービスのDI
-          userService: new UserServiceImpl(new UserRepositoryImpl()),
-        }
-      },
     },
     {
       // ユーザ詳細画面

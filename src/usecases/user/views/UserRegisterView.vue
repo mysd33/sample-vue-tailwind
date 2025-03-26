@@ -19,13 +19,11 @@ import { useForm } from 'vee-validate'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
 
 import type { User } from '@/usecases/common/models/user'
-import type { UserService } from '@/usecases/user/services/userService'
+import { UserServiceImpl } from '@/usecases/user/services/userService'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 
-interface Props {
-  userService: UserService
-}
-
-const props = defineProps<Props>()
+// ビジネスロジック
+const userService = new UserServiceImpl(new UserRepositoryImpl())
 
 const router = useRouter()
 
@@ -71,7 +69,7 @@ const onValidSubmit = async () => {
     birthday: values.birthday,
     isAdmin: values.isAdmin,
   }
-  await props.userService.create(user).then(() => {
+  await userService.create(user).then(() => {
     // 作成完了ダイアログを表示
     isCreateCompleteDialogOpen.value = true
   })
