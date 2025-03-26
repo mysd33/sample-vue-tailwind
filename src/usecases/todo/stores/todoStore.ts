@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue'
-import type { Todo } from '@/usecases/todo/models/todo'
+import type { Todo } from '@/usecases/todo/models/Todo'
 import { defineStore } from 'pinia'
 
 /**

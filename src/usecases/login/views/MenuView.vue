@@ -2,10 +2,10 @@
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import MenuButton from '@/components/button/MenuButton.vue'
-import { AuthenticationServiceImpl } from '@/usecases/login/services/authenticationService'
+import { AuthenticationServiceImpl } from '@/usecases/login/services/AuthenticationService'
 import { useRouter } from 'vue-router'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/UserRepository'
 
 // ビジネスロジック
 const authenticationService = new AuthenticationServiceImpl(new UserRepositoryImpl())

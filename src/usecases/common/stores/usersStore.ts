@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import type { User } from '@/usecases/common/models/user'
+import type { User } from '@/usecases/common/models/User'
 import { defineStore, type StateTree } from 'pinia'
 
 /**
