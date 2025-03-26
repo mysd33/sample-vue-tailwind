@@ -11,19 +11,18 @@ import { computed, ref, type Ref } from 'vue'
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
-import { type AuthenticationService } from '@/usecases/login/services/authenticationService'
+
 import MessageBanner from '@/components/banner/MessageBanner.vue'
 import TableArea from '@/components/table/TableArea.vue'
 import TableHeaderRow from '@/components/table/TableHeaderRow.vue'
 import TableHeaderCol from '@/components/table/TableHeaderCol.vue'
 import TableDataRow from '@/components/table/TableDataRow.vue'
 import TableDataCol from '@/components/table/TableDataCol.vue'
+import { AuthenticationServiceImpl } from '../services/authenticationService'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 
-interface Props {
-  authenticationService: AuthenticationService
-}
-
-const props = defineProps<Props>()
+// ビジネスロジック
+const authenticationService = new AuthenticationServiceImpl(new UserRepositoryImpl())
 
 const router = useRouter()
 
@@ -64,7 +63,7 @@ const onValidSubmit = async () => {
 
   // ログイン処理
   try {
-    await props.authenticationService.login(userId.value, password.value)
+    await authenticationService.login(userId.value, password.value)
     // ログイン成功時はメニュー画面に遷移
     router.push({ name: 'menu' })
     return
