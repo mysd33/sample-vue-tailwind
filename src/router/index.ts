@@ -14,11 +14,6 @@ const router = createRouter({
       // ログイン未済でアクセスしてよい画面
       meta: { allowsNotAuth: true },
       component: LoginView,
-      props: () => {
-        return {
-          authenticationService: new AuthenticationServiceImpl(new UserRepositoryImpl()),
-        }
-      },
     },
     {
       // メニュー画面

@@ -18,13 +18,11 @@ import TableHeaderRow from '@/components/table/TableHeaderRow.vue'
 import TableHeaderCol from '@/components/table/TableHeaderCol.vue'
 import TableDataRow from '@/components/table/TableDataRow.vue'
 import TableDataCol from '@/components/table/TableDataCol.vue'
-import type { AuthenticationService } from '@/usecases/login/services/AuthenticationService'
+import { AuthenticationServiceImpl } from '@/usecases/login/services/AuthenticationService'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/UserRepository'
 
-interface Props {
-  // ビジネスロジック
-  authenticationService: AuthenticationService
-}
-const props = defineProps<Props>()
+// ビジネスロジック
+const authenticationService = new AuthenticationServiceImpl(new UserRepositoryImpl())
 
 const router = useRouter()
 
@@ -65,7 +63,7 @@ const onValidSubmit = async () => {
 
   // ログイン処理
   try {
-    await props.authenticationService.login(userId.value, password.value)
+    await authenticationService.login(userId.value, password.value)
     // ログイン成功時はメニュー画面に遷移
     router.push({ name: 'menu' })
     return

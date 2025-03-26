@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 import LoginView from '@/usecases/login/views/LoginView.vue'
-import { AuthenticationServiceImpl } from '@/usecases/login/services/AuthenticationService'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/UserRepository'
 
 /**
  * ## ログイン画面
@@ -16,7 +14,5 @@ export default meta
 type Story = StoryObj<typeof LoginView>
 
 export const Default: Story = {
-  args: {
-    authenticationService: new AuthenticationServiceImpl(new UserRepositoryImpl()),
-  },
+  args: {},
 }
