@@ -7,8 +7,7 @@ import SubmitButton from '@/components/button/SubmitButton.vue'
 import LinkButton from '@/components/button/LinkButton.vue'
 import InputItem from '@/components/form/InputItem.vue'
 import ButtonArea from '@/components/button/ButtonArea.vue'
-import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
-import MessageBanner from '@/components/banner/MessageBanner.vue'
+import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 
@@ -19,11 +18,10 @@ import { TodoRepositoryImpl } from '@/usecases/todo/repositories/todoRepository'
 
 // ビジネスロジック
 const todoService = new TodoServiceImpl(new TodoRepositoryImpl())
-
+// TODOリスト
 const todos = ref<Todo[]>([])
-
-// TODO: サーバエラーの状態を管理するための変数を仮定義
-const messageLevel = ref('')
+// メッセージ
+const messageLevel = ref<MessageLevel>('')
 const message = ref('')
 
 // VeeValidate with yup
@@ -39,9 +37,6 @@ const { errors, handleSubmit, isSubmitting, defineField } = useForm({
 
 const [todoTitle] = defineField('todoTitle')
 
-const isValidationError = computed(() => {
-  return Object.keys(errors.value).length > 0
-})
 // 入力チェック成功時
 const onValidSubmit = async () => {
   console.log('TODO作成:' + todoTitle.value)
@@ -67,9 +62,7 @@ const onValidSubmit = async () => {
 }
 // 入力チェック失敗時
 const onInvalidSubmit = () => {
-  // TODO: 入力エラーと、業務エラーのメッセージ領域を統一すればこの処理が不要になる
-  messageLevel.value = ''
-  message.value = ''
+  messageLevel.value = 'validation'
 }
 // 作成ボタン（Submit）時の処理
 const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
@@ -108,7 +101,6 @@ onMounted(async () => {
     <LinkButton :outline="true" forward-view-name="menu">メニューに戻る</LinkButton>
   </HeaderArea>
   <MainContainer>
-    <ValidationErrorBanner :is-error="isValidationError" />
     <MessageBanner :message="message" :level="messageLevel" />
     <!-- TODO: SimpleFormAreaというコンポーネント化  -->
     <form class="mb-3 flex flex-row gap-10" @submit="onSubmit">
