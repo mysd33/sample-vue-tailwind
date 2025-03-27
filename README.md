@@ -100,7 +100,6 @@ npx vitest run
 | ヘッダ領域 | 画面ヘッダー部分の表示領域| [ソースコード](src/components/layout/HeaderArea.vue) | TBD |
 | メイン領域 | メインの表示領域 | [ソースコード](src/components/layout/MainContainer.vue) | TBD |
 | フォーム領域  | フォームの表示領域 | [ソースコード](src/components/form/FormArea.vue) | TBD |
-| 入力エラー用バナー | 入力エラー時のバナー表示領域 | [ソースコード](src/components/banner/ValidationErrorBanner.vue) | TBD |
 | メッセージバナー | メッセージ表示用バナー表示領域 | [ソースコード](src/components/banner/MessageBanner.vue) | TBD |
 | 入力項目領域  | フォームの入力項目表示領域 | [ソースコード](src/components/form/InputItem.vue) | TBD |
 | 入力の基底部品 | 入力部品共通の基底のコンポーネント | [ソースコード](src/components/form/BaseInput.vue) | TBD |

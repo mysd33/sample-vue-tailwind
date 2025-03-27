@@ -7,12 +7,11 @@ import LoginInputPassword from '@/components/form/LoginInputPassword.vue'
 import SubmitButton from '@/components/button/SubmitButton.vue'
 import { useRouter } from 'vue-router'
 import InputItem from '@/components/form/InputItem.vue'
-import { computed, ref, type Ref } from 'vue'
-import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
+import { ref, type Ref } from 'vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 
-import MessageBanner from '@/components/banner/MessageBanner.vue'
+import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBanner.vue'
 import TableArea from '@/components/table/TableArea.vue'
 import TableHeaderRow from '@/components/table/TableHeaderRow.vue'
 import TableHeaderCol from '@/components/table/TableHeaderCol.vue'
@@ -27,16 +26,13 @@ const authenticationService = new AuthenticationServiceImpl(new UserRepositoryIm
 const router = useRouter()
 
 // TODO: サーバエラーの状態を管理するための変数を仮定義
-const messageLevel = ref('')
+const messageLevel = ref<MessageLevel>('')
 const message = ref('')
 
 // バリデーションエラーの状態を管理するための変数を定義
 const isUserIdError = ref(false)
 const isPasswordError = ref(false)
 const validationErrorMessages: Ref<string[], string[]> = ref([])
-const isValidationError = computed(() => {
-  return Object.keys(errors.value).length > 0
-})
 
 // yup
 const schema = yup.object({
@@ -45,16 +41,15 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { errors, handleSubmit, isSubmitting, defineField } = useForm({
+const { handleSubmit, isSubmitting, defineField } = useForm({
   validationSchema: schema,
 })
 
 const [userId] = defineField('userId')
 const [password] = defineField('password')
 
+// 入力チェック成功時
 const onValidSubmit = async () => {
-  // TODO: エラーメッセージのクリアの方法を検討
-  // resetFormつかえないか？
   validationErrorMessages.value = []
   isUserIdError.value = false
   isPasswordError.value = false
@@ -80,13 +75,12 @@ const onValidSubmit = async () => {
     }
   }
 }
+
+// 入力エラー時
 const onInvalidSubmit = ({ errors }) => {
-  // TODO: エラーメッセージのクリアの方法を検討
-  isPasswordError.value = false
-  message.value = ''
-  messageLevel.value = ''
-  // ログイン画面のみ入力エラーメッセージの出力方法が違うので、ここでエラーメッセージを設定
+  // ログイン画面のみ、入力エラーメッセージをまとめて出力するため、ここでエラーメッセージを設定
   validationErrorMessages.value = [errors.userId, errors.password]
+  messageLevel.value = 'validation'
   isUserIdError.value = errors.userId ? true : false
   isPasswordError.value = errors.password ? true : false
 }
@@ -98,7 +92,6 @@ const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
 <template>
   <HeaderArea title="TODO管理アプリ" :show-user="false" />
   <MainContainer>
-    <ValidationErrorBanner :is-error="isValidationError" />
     <MessageBanner :message="message" :level="messageLevel" />
     <LoginFormArea @submit="onSubmit">
       <InputItem :errors="validationErrorMessages">
