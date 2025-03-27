@@ -1,4 +1,4 @@
-import type { UserRepository } from '@/usecases/common/repositories/UserRepository'
+import type { UserRepository } from '@/usecases/common/repositories/userRepository'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 
 /**

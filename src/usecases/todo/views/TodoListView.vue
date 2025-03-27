@@ -12,10 +12,10 @@ import MessageBanner from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 
-import type { Todo } from '@/usecases/todo/models/Todo'
+import type { Todo } from '@/usecases/todo/models/todo'
 import TodoItem from '@/usecases/todo/views/TodoItem.vue'
-import { TodoServiceImpl } from '@/usecases/todo/services/TodoService'
-import { TodoRepositoryImpl } from '@/usecases/todo/repositories/TodoRepository'
+import { TodoServiceImpl } from '@/usecases/todo/services/todoService'
+import { TodoRepositoryImpl } from '@/usecases/todo/repositories/todoRepository'
 
 // ビジネスロジック
 const todoService = new TodoServiceImpl(new TodoRepositoryImpl())

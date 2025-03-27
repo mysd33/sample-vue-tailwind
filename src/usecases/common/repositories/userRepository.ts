@@ -1,5 +1,5 @@
 import { Page, Pageable } from '@/components/pagination/pagination'
-import type { User } from '@/usecases/common/models/User'
+import type { User } from '@/usecases/common/models/user'
 import { useUserDummyStore } from '@/usecases/common/stores/usersStore'
 
 const sleepTime = 500

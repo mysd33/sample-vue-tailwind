@@ -18,8 +18,8 @@ import TableHeaderRow from '@/components/table/TableHeaderRow.vue'
 import TableHeaderCol from '@/components/table/TableHeaderCol.vue'
 import TableDataRow from '@/components/table/TableDataRow.vue'
 import TableDataCol from '@/components/table/TableDataCol.vue'
-import { AuthenticationServiceImpl } from '@/usecases/login/services/AuthenticationService'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/UserRepository'
+import { AuthenticationServiceImpl } from '@/usecases/login/services/authenticationService'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 
 // ビジネスロジック
 const authenticationService = new AuthenticationServiceImpl(new UserRepositoryImpl())

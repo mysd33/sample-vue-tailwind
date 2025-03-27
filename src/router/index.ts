@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 import LoginView from '@/usecases/login/views/LoginView.vue'
-import { AuthenticationServiceImpl } from '@/usecases/login/services/AuthenticationService'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/UserRepository'
+import { AuthenticationServiceImpl } from '@/usecases/login/services/authenticationService'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

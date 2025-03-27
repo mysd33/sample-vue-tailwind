@@ -12,11 +12,11 @@ import ButtonArea from '@/components/button/ButtonArea.vue'
 import TableDataCol from '@/components/table/TableDataCol.vue'
 import { useRouter } from 'vue-router'
 import ActionButton from '@/components/button/ActionButton.vue'
-import type { User } from '@/usecases/common/models/User'
-import { UserServiceImpl } from '@/usecases/user/services/UserService'
+import type { User } from '@/usecases/common/models/user'
+import { UserServiceImpl } from '@/usecases/user/services/userService'
 import { formatDate, calcAge } from '@/usecases/common/utils/dateUtils'
 import { Page, Pageable } from '@/components/pagination/pagination'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/UserRepository'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 
 // ビジネスロジック
 const userService = new UserServiceImpl(new UserRepositoryImpl())

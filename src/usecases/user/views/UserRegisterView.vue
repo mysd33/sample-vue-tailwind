@@ -18,9 +18,9 @@ import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
 
-import type { User } from '@/usecases/common/models/User'
-import { UserServiceImpl } from '@/usecases/user/services/UserService'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/UserRepository'
+import type { User } from '@/usecases/common/models/user'
+import { UserServiceImpl } from '@/usecases/user/services/userService'
+import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
 
 // ビジネスロジック
 const userService = new UserServiceImpl(new UserRepositoryImpl())

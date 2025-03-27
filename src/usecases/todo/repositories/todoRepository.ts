@@ -1,5 +1,5 @@
 import { useTodoDummyStore } from '@/usecases/todo/stores/todoStore'
-import type { Todo } from '@/usecases/todo/models/Todo'
+import type { Todo } from '@/usecases/todo/models/todo'
 import { generateUUID } from '@/usecases/common/utils/idUtils'
 
 const sleepTime = 300

@@ -1,6 +1,6 @@
 import type { Page, Pageable } from '@/components/pagination/pagination'
-import type { User } from '@/usecases/common/models/User'
-import type { UserRepository } from '@/usecases/common/repositories/UserRepository'
+import type { User } from '@/usecases/common/models/user'
+import type { UserRepository } from '@/usecases/common/repositories/userRepository'
 
 /**
  * ユーザ情報を提供するServiceインタフェース

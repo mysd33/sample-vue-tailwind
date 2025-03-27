@@ -377,6 +377,24 @@ npx @tailwindcss/upgrade
 
 - upgrade toolによるgitの変更差分は[こちら](https://github.com/mysd33/sample-vue-tailwind/commit/9af2589efd63d822eec20fe7f4ce42727f64f851)
 
+## (参考) gitの設定
+- typeScriptでは一般的にファイル名をキャメルケースが良いとされている。Vueのコンポーネントはパスカルケースが一般的である。
+- 小文字と大文字を誤ったファイル名を後で変更するときに、gitのデフォルトでは、大文字と小文字を区別しないので、gitの設定を変更しておかないと、import文のファイル名が変更されているのに、gitサーバ上のファイル名が大文字のままといった問題が発生しうる。
+
+- 以下のコマンドで行うことで、大文字小文字を区別するように設定できる。
+
+```sh
+cd sample-vue-tailwind　# プロジェクトのルートディレクトリに移動
+git config -l --local | grep core.ignorecase
+
+# trueになっていることを確認
+core.ignorecase=true
+```
+
+```sh
+# falseに変更
+git config core.ignorecase false
+```
 
 ## (参考) インストールするとよいVSCodeの拡張機能
 
