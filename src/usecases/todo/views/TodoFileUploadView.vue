@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import InputItem from '@/components/form/InputItem.vue'
@@ -8,13 +8,12 @@ import SubmitButton from '@/components/button/SubmitButton.vue'
 import InputFile from '@/components/form/InputFile.vue'
 import RequiredBadge from '@/components/icons/RequiredBadge.vue'
 import LinkButton from '@/components/button/LinkButton.vue'
-import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
-import MessageBanner from '@/components/banner/MessageBanner.vue'
+import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 
-// TODO: サーバエラーの状態を管理するための変数を仮定義
-const messageLevel = ref('')
+// メッセージ
+const messageLevel = ref<MessageLevel>('')
 const message = ref('')
 
 // yup
@@ -29,16 +28,18 @@ const { errors, handleSubmit, isSubmitting, defineField } = useForm({
 
 const [todoFile] = defineField('todoFile')
 
-const isValidationError = computed(() => {
-  return Object.keys(errors.value).length > 0
-})
-
 const onValidSubmit = () => {
   console.log('TODO一括登録:' + todoFile.value)
+  messageLevel.value = 'info'
+  message.value = 'ファイルの一括登録を依頼しました。'
+}
+
+const onInvalidSubmit = () => {
+  messageLevel.value = 'validation'
 }
 
 // handleSubmit時にバリデーション
-const onSubmit = handleSubmit(onValidSubmit)
+const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
 </script>
 
 <template>
@@ -46,7 +47,6 @@ const onSubmit = handleSubmit(onValidSubmit)
     <LinkButton :outline="true" forward-view-name="menu">メニューに戻る</LinkButton>
   </HeaderArea>
   <MainContainer>
-    <ValidationErrorBanner :is-error="isValidationError" />
     <MessageBanner :message="message" :level="messageLevel" />
     <form @submit.prevent="onSubmit" class="flex flex-col text-left">
       <InputItem>
