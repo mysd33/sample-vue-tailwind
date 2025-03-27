@@ -106,6 +106,7 @@ const onClickUpdateCompleteOKButtonClick = () => {
 }
 
 // 削除ボタンクリック時の処理
+// 入力チェックしないため、handleSubmitは使用しない
 const onClickDeleteButton = () => {
   isDeleteConfirmDialogOpen.value = true
 }

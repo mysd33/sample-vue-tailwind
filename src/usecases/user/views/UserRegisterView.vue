@@ -13,7 +13,7 @@ import ButtonArea from '@/components/button/ButtonArea.vue'
 import LinkButton from '@/components/button/LinkButton.vue'
 import SubmitButton from '@/components/button/SubmitButton.vue'
 import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
-import MessageBanner from '@/components/banner/MessageBanner.vue'
+import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
@@ -27,8 +27,8 @@ const userService = new UserServiceImpl(new UserRepositoryImpl())
 
 const router = useRouter()
 
-// TODO: サーバエラーの状態を管理するための変数を仮定義
-const messageLevel = ref('')
+// メッセージ
+const messageLevel = ref<MessageLevel>('')
 const message = ref('')
 
 // ダイアログの状態を管理するための変数を定義
@@ -54,13 +54,10 @@ const [userName] = defineField('userName')
 const [birthday] = defineField('birthday')
 const [isAdmin] = defineField('isAdmin')
 
-const isValidationError = computed(() => {
-  return Object.keys(errors.value).length > 0
-})
-
 // ユーザ登録ボタンクリック時の処理
 // バリデーションOK時の処理
 const onValidSubmit = async () => {
+  messageLevel.value = ''
   console.log(values)
   const user: User = {
     id: values.userId,
@@ -75,8 +72,12 @@ const onValidSubmit = async () => {
   })
 }
 
+const onInvalidSubmit = () => {
+  messageLevel.value = 'validation'
+}
+
 // handleSubmit時にバリデーション
-const onSubmit = handleSubmit(onValidSubmit)
+const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
 
 // 更新完了ダイアログのOKボタンクリック時の処理
 const onClickCreateCompleteOKButtonClick = () => {
@@ -89,7 +90,6 @@ const onClickCreateCompleteOKButtonClick = () => {
     <LinkButton :outline="true" forward-view-name="userList">ユーザ一覧に戻る</LinkButton>
   </HeaderArea>
   <MainContainer>
-    <ValidationErrorBanner :is-error="isValidationError" />
     <MessageBanner :message="message" :level="messageLevel" />
     <FormArea @submit="onSubmit">
       <InputItem label="ユーザーID" labelFor="userId" :required="true">
