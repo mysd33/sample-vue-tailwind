@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
@@ -13,8 +13,7 @@ import ToggleSwitch from '@/components/form/ToggleSwitch.vue'
 import ButtonArea from '@/components/button/ButtonArea.vue'
 import LinkButton from '@/components/button/LinkButton.vue'
 import SubmitButton from '@/components/button/SubmitButton.vue'
-import ValidationErrorBanner from '@/components/banner/ValidationErrorBanner.vue'
-import MessageBanner from '@/components/banner/MessageBanner.vue'
+import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBanner.vue'
 import ConfirmModalDialog from '@/components/dialog/ConfirmModalDialog.vue'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
 import * as yup from 'yup'
@@ -35,8 +34,8 @@ const userService = new UserServiceImpl(new UserRepositoryImpl())
 
 const router = useRouter()
 
-// TODO: バナーの状態を管理するための変数を仮定義
-const messageLevel = ref('')
+// メッセージ
+const messageLevel = ref<MessageLevel>('')
 const message = ref('')
 
 // ダイアログの状態を管理するための変数を定義
@@ -64,10 +63,6 @@ const [userName] = defineField('userName')
 const [birthday] = defineField('birthday')
 const [isAdmin] = defineField('isAdmin')
 
-const isValidationError = computed(() => {
-  return Object.keys(errors.value).length > 0
-})
-
 // 初期表示処理
 onMounted(async () => {
   console.log('id: ' + props.id)
@@ -84,6 +79,7 @@ onMounted(async () => {
 // 更新ボタンクリック時の処理
 // 入力チェックOKの場合の処理
 const onValidUpdateSubmit = async () => {
+  messageLevel.value = ''
   // ユーザ更新処理
   const user: User = {
     id: userId.value,
@@ -97,7 +93,12 @@ const onValidUpdateSubmit = async () => {
     isUpdateCompleteDialogOpen.value = true
   })
 }
-const onClickUpdateButton = handleSubmit(onValidUpdateSubmit)
+
+const onInvalidUpdateSubmit = () => {
+  messageLevel.value = 'validation'
+}
+
+const onClickUpdateButton = handleSubmit(onValidUpdateSubmit, onInvalidUpdateSubmit)
 
 // 更新完了ダイアログのOKボタンクリック時の処理
 const onClickUpdateCompleteOKButtonClick = () => {
@@ -134,7 +135,6 @@ const onDeleteCompleteOKButtonClick = () => {
     <LinkButton :outline="true" forward-view-name="userList">ユーザ一覧に戻る</LinkButton>
   </HeaderArea>
   <MainContainer>
-    <ValidationErrorBanner :is-error="isValidationError" />
     <MessageBanner :message="message" :level="messageLevel" />
     <FormArea>
       <InputItem label="ユーザーID" labelFor="userId">
