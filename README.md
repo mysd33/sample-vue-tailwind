@@ -145,6 +145,8 @@ npx vitest run
 - テストツール
     - [Vitest](https://vitest.dev/)
     - [Vue Test Utils](https://test-utils.vuejs.org/)
+    - [MSW（Mock Service Worker）](https://mswjs.io/)
+        - APIのモックサーバーを立てるために使用a
     - [Cypress](https://www.cypress.io/)
 
 - TailWind CSSプラグイン
@@ -338,14 +340,18 @@ npm install @heroicons/vue
 npm install vee-validate
 npm install @vee-validate/yup
 
-# Vue Test Utils
-npm install --save-dev @vue/test-utils
-
 # Pinia Plugin Persistedstate
 npm install pinia-plugin-persistedstate
 
 # uuid
 npm install uuid
+
+# Vue Test Utils
+npm install --save-dev @vue/test-utils
+
+# MSW(Mock Service Worker)
+npm install msw@latest --save-dev
+npx msw init public --save
 ```
 
 - main.tsに以下を追記

@@ -55,6 +55,7 @@
     "eslint-plugin-storybook": "^0.11.4",
     "eslint-plugin-vue": "^9.30.0",
     "jsdom": "^25.0.1",
+    "msw": "^2.7.3",
     "npm-run-all2": "^7.0.2",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
@@ -71,6 +72,11 @@
   "eslintConfig": {
     "extends": [
       "plugin:storybook/recommended"
+    ]
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
     ]
   }
 }

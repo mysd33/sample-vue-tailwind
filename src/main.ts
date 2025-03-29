@@ -26,4 +26,18 @@ configure({
 // yupの入力エラーメッセージの日本語化
 setLocale(ja.messages)
 
-app.mount('#app')
+// MSWの有効化
+// https://mswjs.io/docs/integrations/browser#conditionally-enable-mocking
+async function enableMocking() {
+  if (import.meta.env.MODE === 'development') {
+    const { worker } = await import('@/mocks/worker')
+    // Service Workerの起動
+    worker.start({
+      onUnhandledRequest: 'bypass',
+    })
+  }
+}
+enableMocking().then(() => {
+  // APの起動
+  app.mount('#app')
+})
