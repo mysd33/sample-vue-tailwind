@@ -138,6 +138,12 @@ npx vitest run
         - 入力チェックに使用
     - [@vee-validate/yup](https://vee-validate.logaretm.com/v4/guide/composition-api/getting-started/#validating-with-yup)
         - 入力チェックに使用。yupと連携してVeeValidateを使用        
+    - [AXIOS](https://axios-http.com/)
+        - サーバへのREST API通信に使用
+    - [axios-retry](https://github.com/softonic/axios-retry)
+        - AXIOSでのREST API通信のリトライ処理に使用
+    - [uuid](https://github.com/uuidjs/uuid)
+        - UUIDの生成に使用
 
 - Storybook
     - [Storybook](https://storybook.js.org/)
@@ -146,8 +152,9 @@ npx vitest run
     - [Vitest](https://vitest.dev/)
     - [Vue Test Utils](https://test-utils.vuejs.org/)
     - [MSW（Mock Service Worker）](https://mswjs.io/)
-        - APIのモックサーバーを立てるために使用a
+        - APIのモックサーバーを立てるために使用
     - [Cypress](https://www.cypress.io/)
+        - E2Eテストに使用
 
 - TailWind CSSプラグイン
     - [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms)
@@ -343,6 +350,12 @@ npm install @vee-validate/yup
 # Pinia Plugin Persistedstate
 npm install pinia-plugin-persistedstate
 
+# AXIOS
+npm install axios
+
+# axios-retry
+npm install axios-retry
+
 # uuid
 npm install uuid
 
@@ -450,4 +463,13 @@ git config core.ignorecase false
     },
     ```
 
+- [EditorConfig for AWS](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+    - [.editorconfig](.editorconfig)に書かれた設定をもとにインデントの種類やインデントの大きさ、改行コードなどを自動で統一し、コーディングスタイルの一貫性を保つことができる。
+        - Prettierで対応されてない、TypeScript以外等の様々な形式ファイルに対しても設定を行うことができる。
+    - Prettierも.editorconfigをサポートしており、EditorConfigとPrettierは共存できるそうです。
+    - プロジェクト内に .editorconfig ファイルがある場合、Prettier はそれを解析し、そのプロパティを対応するPrettierの設定に変換します。この設定は、.prettierrc等によって上書かれるそうです。
+        - https://prettier.io/docs/configuration.html#editorconfig
+
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+
