@@ -6,6 +6,12 @@ import type { TodoRepository } from '@/usecases/todo/repositories/todoRepository
  */
 export interface TodoService {
   /**
+   * IDを指定してTODOを取得する
+   * @param id ID
+   * @returns TODO
+   */
+  findOne(id: string): Promise<Todo | null>
+  /**
    * TODOリストを取得する
    * @returns TODOリスト
    */
@@ -32,6 +38,14 @@ export interface TodoService {
  */
 export class TodoServiceImpl implements TodoService {
   constructor(private todoRepository: TodoRepository) {}
+  /**
+   * IDを指定してTODOを取得する
+   * @param id ID
+   * @returns TODO
+   */
+  public async findOne(id: string): Promise<Todo | null> {
+    return this.todoRepository.findOne(id)
+  }
 
   /**
    * TODOリストを取得する

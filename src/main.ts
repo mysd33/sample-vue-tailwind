@@ -29,13 +29,14 @@ setLocale(ja.messages)
 // MSWの有効化
 // https://mswjs.io/docs/integrations/browser#conditionally-enable-mocking
 async function enableMocking() {
-  if (import.meta.env.MODE === 'development') {
-    const { worker } = await import('@/mocks/worker')
-    // Service Workerの起動
-    worker.start({
-      onUnhandledRequest: 'bypass',
-    })
+  if (import.meta.env.MODE !== 'development') {
+    return
   }
+  const { worker } = await import('@/mocks/worker')
+  // Service Workerの起動
+  return worker.start({
+    onUnhandledRequest: 'bypass',
+  })
 }
 enableMocking().then(() => {
   // APの起動

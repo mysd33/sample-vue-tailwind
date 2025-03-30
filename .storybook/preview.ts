@@ -10,7 +10,7 @@ import { useAuthenticationStore } from '@/usecases/common/stores/authenticationS
 
 // Piniaの有効化
 const pinia = createPinia()
-setup((app: App) => {
+setup(async (app: App) => {
   app.use(pinia)
 
   // VeeValidateのエラーのグローバル設定
@@ -27,6 +27,13 @@ setup((app: App) => {
   // スタブ実装として、以下のログイン済みデータを初期登録する
   const authStore = useAuthenticationStore()
   authStore.user = usersDummyStore.users[0]
+  // MSWの有効化
+  // https://mswjs.io/docs/integrations/browser#conditionally-enable-mocking
+  const { worker } = await import('@/mocks/worker')
+  // Service Workerの起動
+  return worker.start({
+    onUnhandledRequest: 'bypass',
+  })
 })
 
 const preview: Preview = {

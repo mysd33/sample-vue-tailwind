@@ -14,10 +14,16 @@ import { useForm } from 'vee-validate'
 import type { Todo } from '@/usecases/todo/models/todo'
 import TodoItem from '@/usecases/todo/views/TodoItem.vue'
 import { TodoServiceImpl } from '@/usecases/todo/services/todoService'
-import { TodoRepositoryImpl } from '@/usecases/todo/repositories/todoRepository'
+//import { TodoRepositoryStub } from '@/usecases/todo/repositories/todoRepositoryStub'
+import { TodoRepositoryImpl } from '../repositories/todoRepositoryImpl'
 
-// ビジネスロジック
-const todoService = new TodoServiceImpl(new TodoRepositoryImpl())
+// Repository
+//const repository = new TodoRepositoryStub() //スタブ
+const repository = new TodoRepositoryImpl() //実装クラス
+
+// Service（ビジネスロジック）
+const todoService = new TodoServiceImpl(repository)
+
 // TODOリスト
 const todos = ref<Todo[]>([])
 // メッセージ
@@ -93,6 +99,8 @@ const onDelete = async (todoId: string) => {
 onMounted(async () => {
   // TODO一覧を取得
   todos.value = await todoService.findAll()
+  //const todo = (await todoService.findOne('1')) as Todo
+  //todos.value.push(todo)
 })
 </script>
 
