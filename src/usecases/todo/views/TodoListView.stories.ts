@@ -3,6 +3,28 @@ import type { Meta, StoryObj } from '@storybook/vue3'
 import TodoListView from '@/usecases/todo/views/TodoListView.vue'
 import type { Todo } from '../models/todo'
 import { http, HttpResponse } from 'msw'
+import { generateUUID } from '@/usecases/common/utils/idUtils'
+
+const todoList: Todo[] = [
+  {
+    id: generateUUID(),
+    title: 'ミルクを買う',
+    finished: false,
+    createAt: new Date(),
+  },
+  {
+    id: generateUUID(),
+    title: '新聞を読む',
+    finished: true,
+    createAt: new Date(),
+  },
+  {
+    id: generateUUID(),
+    title: '掃除をする',
+    finished: false,
+    createAt: new Date(),
+  },
+]
 
 /**
  * ## Todo管理画面
@@ -13,27 +35,40 @@ const meta: Meta<typeof TodoListView> = {
   parameters: {
     msw: {
       handlers: [
-        http.get<never, never, Todo[]>('/bf-api/v1/todo', async () => {
-          return HttpResponse.json([
-            {
-              id: '1',
-              title: 'ミルクを買う',
-              finished: false,
-              createAt: new Date(),
-            },
-            {
-              id: '2',
-              title: '新聞を読む',
-              finished: true,
-              createAt: new Date(),
-            },
-            {
-              id: '3',
-              title: '掃除をする',
-              finished: false,
-              createAt: new Date(),
-            },
-          ])
+        http.get<never, never, Todo>('/bff-api/v1/todo/:id', async ({ params }) => {
+          const id = params.id
+          const todo = todoList.find((todo) => todo.id === id)
+          if (todo) {
+            return HttpResponse.json(todo)
+          }
+          return HttpResponse.json(null, { status: 404 })
+        }),
+        http.get<never, never, Todo[]>('/bff-api/v1/todo', async () => {
+          return HttpResponse.json(todoList)
+        }),
+        http.post<never, Todo, never>('/bff-api/v1/todo', async ({ request }) => {
+          const todo = (await request.json()) as Todo
+          todo.id = generateUUID()
+          todo.finished = false
+          todo.createAt = new Date()
+          todoList.push(todo)
+          return HttpResponse.json(todo, { status: 201 })
+        }),
+        http.put<never, Todo, never>('/bff-api/v1/todo', async ({ request }) => {
+          const todo = (await request.json()) as Todo
+          const index = todoList.findIndex((t) => t.id === todo.id)
+          if (index !== -1) {
+            todoList[index] = todo
+          }
+          return HttpResponse.json()
+        }),
+        http.delete<never, never, never>('/bff-api/v1/todo/:id', async ({ params }) => {
+          const id = params.id
+          const index = todoList.findIndex((todo) => todo.id === id)
+          if (index !== -1) {
+            todoList.splice(index, 1)
+          }
+          return HttpResponse.json()
         }),
       ],
     },

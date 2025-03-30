@@ -14,16 +14,16 @@ export const handlers = [
   // TODO: ログインAPIのモックを作成
 
   // TODO取得
-  http.get<never, never, Todo>('/bf-api/v1/todo/:id', async ({ params }) => {
+  http.get<never, never, Todo>('/bff-api/v1/todo/:id', async ({ params }) => {
     const todo = todoDummyStore.todos.find((todo) => todo.id === params.id)
     return HttpResponse.json(todo ?? null)
   }),
   // TODO一覧の取得
-  http.get<never, never, Todo[]>('/bf-api/v1/todo', async () => {
+  http.get<never, never, Todo[]>('/bff-api/v1/todo', async () => {
     return HttpResponse.json(todoDummyStore.todos)
   }),
   // TODOの登録
-  http.post<never, Todo, never>('/bf-api/v1/todo', async ({ request }) => {
+  http.post<never, Todo, never>('/bff-api/v1/todo', async ({ request }) => {
     const todo = (await request.json()) as Todo
     // 本来サーバ登録時に設定される値をクライアントでダミー値を設定
     todo.id = generateUUID()
@@ -34,13 +34,13 @@ export const handlers = [
     return HttpResponse.json(todo, { status: 201 })
   }),
   // TODOの完了
-  http.put<never, Todo, never>('/bf-api/v1/todo', async ({ request }) => {
+  http.put<never, Todo, never>('/bff-api/v1/todo', async ({ request }) => {
     const todo = (await request.json()) as Todo
     todoDummyStore.update(todo)
     return HttpResponse.json()
   }),
   // TODOの削除
-  http.delete<never, never, never>('/bf-api/v1/todo/:id', async ({ params }) => {
+  http.delete<never, never, never>('/bff-api/v1/todo/:id', async ({ params }) => {
     todoDummyStore.remove(params.id)
     return HttpResponse.json()
   }),
