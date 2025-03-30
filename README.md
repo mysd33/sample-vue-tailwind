@@ -147,6 +147,7 @@ npx vitest run
 
 - Storybook
     - [Storybook](https://storybook.js.org/)
+    - [msw-storybook-addon](https://github.com/mswjs/msw-storybook-addon)
 
 - テストツール
     - [Vitest](https://vitest.dev/)
@@ -295,6 +296,17 @@ npx storybook@latest init
 npx storybook@latest add @storybook/addon-styling-webpack
 ```
 
+- MSWをインストールし、Storybookアドオンmsw-storybook-addonをインストール
+
+```sh
+# MSW(Mock Service Worker)
+npm install msw@latest --save-dev
+npx msw init public --save
+
+# msw-storybook-addon
+npm install msw-storybook-addon -D
+```
+
 - .storybook/preview.jsに、以下を追記
 
 ```js
@@ -307,6 +319,13 @@ import { createPinia } from 'pinia'
 import { App } from 'vue'
 
 const pinia = createPinia()
+
+// MSWの初期化
+initialize({
+  onUnhandledRequest: 'bypass',
+})
+
+
 setup((app: App) => {
   app.use(pinia)
 
@@ -320,6 +339,22 @@ setup((app: App) => {
 })
 
 …
+```
+
+- .storybook/main.jsに、以下を追記
+
+```ts
+…
+const config: StorybookConfig = {
+  …
+  framework: {
+    …  
+  },
+  //publicフォルダのmockServiceWorker.jsを認識できるよう、staticDirsを追記
+  staticDirs: ['../public'],
+}
+export default config
+
 ```
 
 ### Github Pagesを使ってStorybookを公開する設定
@@ -361,11 +396,6 @@ npm install uuid
 
 # Vue Test Utils
 npm install --save-dev @vue/test-utils
-
-# MSW(Mock Service Worker)
-npm install msw@latest --save-dev
-npx msw init public --save
-npx msw init .storybook/public --save
 ```
 
 - main.tsに以下を追記

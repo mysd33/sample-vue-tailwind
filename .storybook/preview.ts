@@ -7,9 +7,16 @@ import { setLocale } from 'yup'
 import * as ja from '@/usecases/common/messages/validationMessages'
 import { useUserDummyStore } from '@/usecases/common/stores/usersStore'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
+import { initialize, mswLoader } from 'msw-storybook-addon'
 
 // Piniaの有効化
 const pinia = createPinia()
+
+// MSWの初期化
+initialize({
+  onUnhandledRequest: 'bypass',
+})
+
 setup(async (app: App) => {
   app.use(pinia)
 
@@ -27,13 +34,6 @@ setup(async (app: App) => {
   // スタブ実装として、以下のログイン済みデータを初期登録する
   const authStore = useAuthenticationStore()
   authStore.user = usersDummyStore.users[0]
-  // MSWの有効化
-  // https://mswjs.io/docs/integrations/browser#conditionally-enable-mocking
-  const { worker } = await import('@/mocks/worker')
-  // Service Workerの起動
-  return worker.start({
-    onUnhandledRequest: 'bypass',
-  })
 })
 
 const preview: Preview = {
@@ -45,6 +45,7 @@ const preview: Preview = {
       },
     },
   },
+  loaders: [mswLoader],
 }
 
 export default preview
