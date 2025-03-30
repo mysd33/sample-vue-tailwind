@@ -31,7 +31,7 @@ setup(async (app: App) => {
   // https://mswjs.io/docs/integrations/browser#conditionally-enable-mocking
   const { worker } = await import('@/mocks/worker')
   // Service Workerの起動
-  worker.start({
+  return worker.start({
     onUnhandledRequest: 'bypass',
   })
 })

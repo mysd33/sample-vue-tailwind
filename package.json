@@ -34,7 +34,6 @@
     "@chromatic-com/storybook": "^3.2.5",
     "@storybook/addon-essentials": "^8.6.4",
     "@storybook/addon-interactions": "^8.6.4",
-    "@storybook/addon-onboarding": "^8.6.4",
     "@storybook/addon-styling-webpack": "^1.0.1",
     "@storybook/blocks": "^8.6.4",
     "@storybook/test": "^8.6.4",
