@@ -7,15 +7,22 @@ import { setLocale } from 'yup'
 import * as ja from '@/usecases/common/messages/validationMessages'
 import { useUserDummyStore } from '@/usecases/common/stores/usersStore'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
-import { initialize, mswLoader } from 'msw-storybook-addon'
+import { initialize, InitializeOptions, mswLoader } from 'msw-storybook-addon'
 
 // Piniaの有効化
 const pinia = createPinia()
 
 // MSWの初期化
-initialize({
-  onUnhandledRequest: 'bypass',
-})
+const options =
+  // GitHub Pagesでホストしている場合は、404エラーにならないようmockServiceWorker.jsのアドレスを調整
+  location.hostname !== 'mysd33.github.io'
+    ? ({ onUnhandledRequest: 'bypass' } as InitializeOptions)
+    : ({
+        onUnhandledRequest: 'bypass',
+        serviceWorker: { url: '/sample-vue-tailwind/mockServiceWorker.js' },
+      } as InitializeOptions)
+
+initialize(options)
 
 setup(async (app: App) => {
   app.use(pinia)
