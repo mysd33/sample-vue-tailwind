@@ -34,7 +34,6 @@ setup(async (app: App) => {
   worker.start({
     onUnhandledRequest: 'bypass',
   })
-  window.msw = { worker }
 })
 
 const preview: Preview = {
