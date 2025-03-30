@@ -365,6 +365,7 @@ npm install --save-dev @vue/test-utils
 # MSW(Mock Service Worker)
 npm install msw@latest --save-dev
 npx msw init public --save
+npx msw init .storybook/public --save
 ```
 
 - main.tsに以下を追記
