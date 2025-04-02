@@ -7,6 +7,7 @@ import '@/style.css'
 import { setLocale } from 'yup'
 import * as ja from '@/usecases/common/messages/validationMessages'
 import { configure } from 'vee-validate'
+import globalErrorHandler from '@/usecases/common/errors/errorhandler'
 
 const app = createApp(App)
 
@@ -19,6 +20,9 @@ app.use(pinia)
 // ViewRouterの設定
 app.use(router)
 
+// 集約例外ハンドリング
+app.config.errorHandler = globalErrorHandler(router)
+
 // VeeValidateのエラーのグローバル設定
 configure({
   validateOnModelUpdate: false,
@@ -29,7 +33,7 @@ setLocale(ja.messages)
 // MSWの有効化
 // https://mswjs.io/docs/integrations/browser#conditionally-enable-mocking
 async function enableMocking() {
-  if (import.meta.env.MODE !== 'development') {
+  if (!import.meta.env.DEV) {
     return
   }
   const { worker } = await import('@/mocks/worker')

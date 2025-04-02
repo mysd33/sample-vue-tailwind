@@ -1,4 +1,7 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios'
+import axiosRetry from 'axios-retry'
+import { BusinessError, SystemError } from '../errors'
+import { OtherError } from '../errors/errors'
 
 /**
  * HTTPクライアント機能を提供するクラス
@@ -10,14 +13,51 @@ export class HttpClient {
 
   private constructor() {
     this.axiosInstance = axios.create({
-      baseURL: import.meta.env.VITE_API_BASE_URL,
-      timeout: 10000,
+      baseURL: import.meta.env.API_BASE_URL,
+      timeout: import.meta.env.HTTP_CLIENT_TIMEOUT,
       headers: {
         'Content-Type': 'application/json',
       },
     })
 
-    //  TODO: axios-retryの設定追加
+    // リトライ対象のステータスコードを取得
+    const retryableStatusCodeStr = import.meta.env.RETRY_STATUS_CODES as string
+    const retryableStatusCodes = retryableStatusCodeStr?.split(',').map((code) => {
+      return Number(code.trim())
+    })
+
+    // レスポンスインターセプターを追加して、エラーハンドリングを行う
+    this.axiosInstance.interceptors.response.use(
+      (response) => {
+        // 成功時はそのままレスポンスを返す
+        return response
+      },
+      (error) => {
+        return Promise.reject(this.handleError(error))
+      },
+    )
+
+    // axios-retryの設定追加
+    axiosRetry(this.axiosInstance, {
+      retries: import.meta.env.RETRY_COUNT ?? 3, // リトライ回数
+      retryDelay: axiosRetry.exponentialDelay, // エクスポネンシャルバックオフを使用
+      retryCondition: (error) => {
+        return (
+          // ネットワークエラーまたは冪等性のあるリクエストが5xxエラーの場合にリトライ
+          axiosRetry.isNetworkOrIdempotentRequestError(error) ||
+          // 指定したステータスコードであればリトライ
+          (retryableStatusCodes
+            ? retryableStatusCodes.includes(error.response?.status ?? 0)
+            : false)
+        )
+      },
+      onRetry: (retryCount, error, requestConfig) => {
+        // リトライ時は警告ログを出力
+        console.warn(
+          `[${requestConfig.method?.toUpperCase()} ${requestConfig.url}] リトライ処理: ${retryCount}回`,
+        )
+      },
+    })
   }
 
   /**
@@ -85,5 +125,32 @@ export class HttpClient {
    */
   public delete<T>(url: string): Promise<AxiosResponse<T>> {
     return this.axiosInstance.delete<T, AxiosResponse<T>, never>(url)
+  }
+
+  // TODO: エラーハンドリングとバナーへのメッセージ表示処理の実現
+  private handleError(error: unknown): Error {
+    if (axios.isAxiosError(error)) {
+      // AxiosErrorの場合は、レスポンスのエラーメッセージを取得
+      const response = error.response
+      if (response) {
+        // TODO: エラーレスポンスデータの形式(code, message, details)をチェック
+
+        // TBD:401認証エラー
+        // TBD:403権限エラー
+        // それ以外の400系の場合は、サーバの入力エラーまたは業務エラー
+        if (response.status >= 400 && response.status < 500) {
+          return new BusinessError(response.data.code, response.data.message, response.data.details)
+        }
+        // 500系の場合は、システムエラー
+        return new SystemError(response.data.code, response.data.message, response.data.details)
+      } else {
+        // ネットワークエラー
+        return new OtherError(
+          'w.fw.9002',
+          'サービス呼び出し時にエラーが発生しました。しばらく経ってから実行してください。',
+        )
+      }
+    }
+    return new SystemError('e.fw.9001', '想定外のエラーが発生しました')
   }
 }

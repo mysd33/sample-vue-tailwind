@@ -15,7 +15,8 @@ import type { Todo } from '@/usecases/todo/models/todo'
 import TodoItem from '@/usecases/todo/views/TodoItem.vue'
 import { TodoServiceImpl } from '@/usecases/todo/services/todoService'
 //import { TodoRepositoryStub } from '@/usecases/todo/repositories/todoRepositoryStub'
-import { TodoRepositoryImpl } from '../repositories/todoRepositoryImpl'
+import { TodoRepositoryImpl } from '@/usecases/todo/repositories/todoRepositoryImpl'
+import { BusinessError } from '@/framework/errors'
 
 // Repository
 //const repository = new TodoRepositoryStub() //スタブ
@@ -59,11 +60,17 @@ const onValidSubmit = async () => {
     .then((result) => {
       todos.value = result
     })
-    .catch(() => {
-      //TODO: 業務エラーハンドリング、メッセージ取得
-      messageLevel.value = 'warn'
-      message.value =
-        'サービス呼び出し時にエラーが発生しました。しばらく経ってから実行してください。'
+    .catch((error) => {
+      // TODO: メッセージがBusinessErrorをうけとれるように修正
+
+      // 業務エラーの場合には、エラーメッセージを表示
+      if (error instanceof BusinessError) {
+        messageLevel.value = 'warn'
+        message.value = `[${error.code}] ${error.message}`
+        return
+      }
+      // それ以外のエラーの場合には、上位へ投げる
+      return Promise.reject(error)
     })
 }
 // 入力チェック失敗時
