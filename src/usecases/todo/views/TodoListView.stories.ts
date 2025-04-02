@@ -48,6 +48,26 @@ const meta: Meta<typeof TodoListView> = {
         }),
         http.post<never, Todo, never>('/bff-api/v1/todo', async ({ request }) => {
           const todo = (await request.json()) as Todo
+          // bizerrorの時は、業務エラーのレスポンスを返す
+          if (todo.title === 'bizerror') {
+            return HttpResponse.json(
+              {
+                code: 'w.ex.5001',
+                message: 'TODOのタイトルが不正です。',
+              },
+              { status: 400 },
+            )
+          }
+          // syserrorの時は、システムエラーのレスポンスを返す
+          if (todo.title === 'syserror') {
+            return HttpResponse.json(
+              {
+                code: 'e.ex.9002',
+                message: 'TODOサービスでシステムエラーが発生しました。',
+              },
+              { status: 500 },
+            )
+          }
           todo.id = generateUUID()
           todo.finished = false
           todo.createAt = new Date()

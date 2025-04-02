@@ -25,6 +25,7 @@ const options =
 initialize(options)
 
 setup(async (app: App) => {
+  // Piniaの設定
   app.use(pinia)
 
   // VeeValidateのエラーのグローバル設定
