@@ -1,19 +1,20 @@
+import { HttpClient } from '@/framework/httpclient'
 import type { Todo } from '@/usecases/todo/models/todo'
 import type { TodoRepository } from '@/usecases/todo/repositories/todoRepository'
-import axios, { type AxiosResponse } from 'axios'
 
 /**
  * Todoリストを管理するRepositoryの実装クラス
  */
 export class TodoRepositoryImpl implements TodoRepository {
+  private readonly httpClient = HttpClient.getInstance()
+
   /**
    * IDを指定してTODOを取得する
    * @param id ID
    * @returns TODO
    */
   public async findOne(id: string): Promise<Todo | null> {
-    const todo = (await axios.get<Todo, AxiosResponse<Todo>, never>(`/bff-api/v1/todo/${id}`)).data
-    return todo
+    return (await this.httpClient.get<Todo>(`/bff-api/v1/todo/${id}`)).data
   }
 
   /**
@@ -21,7 +22,7 @@ export class TodoRepositoryImpl implements TodoRepository {
    * @returns TODOリスト
    */
   public async findAll(): Promise<Todo[]> {
-    return (await axios.get<Todo[], AxiosResponse<Todo[]>, never>('/bff-api/v1/todo')).data
+    return (await this.httpClient.get<Todo[]>('/bff-api/v1/todo')).data
   }
   /**
    * TODOを作成する
@@ -29,20 +30,20 @@ export class TodoRepositoryImpl implements TodoRepository {
    * @returns 作成したTODO
    */
   public async create(todo: Todo): Promise<Todo> {
-    return (await axios.post<Todo, AxiosResponse<Todo>, Todo>('/bff-api/v1/todo', todo)).data
+    return (await this.httpClient.post<Todo, Todo>('/bff-api/v1/todo', todo)).data
   }
   /**
    * TODOを更新する
    * @param todo TODO
    */
   public async update(todo: Todo): Promise<void> {
-    return (await axios.put<void, AxiosResponse<void>, Todo>(`/bff-api/v1/todo`, todo)).data
+    return (await this.httpClient.put<Todo, void>(`/bff-api/v1/todo`, todo)).data
   }
   /**
    * TODOを削除する
    * @param id ID
    */
   public async delete(id: string): Promise<void> {
-    return (await axios.delete<void, AxiosResponse<void>, never>(`/bff-api/v1/todo/${id}`)).data
+    return (await this.httpClient.delete<void>(`/bff-api/v1/todo/${id}`)).data
   }
 }
