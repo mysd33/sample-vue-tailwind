@@ -1,6 +1,6 @@
 import type { Todo } from '@/usecases/todo/models/todo'
 import type { TodoRepository } from '@/usecases/todo/repositories/todoRepository'
-import axios from 'axios'
+import axios, { type AxiosResponse } from 'axios'
 
 /**
  * Todoリストを管理するRepositoryの実装クラス
@@ -12,8 +12,8 @@ export class TodoRepositoryImpl implements TodoRepository {
    * @returns TODO
    */
   public async findOne(id: string): Promise<Todo | null> {
-    //TODO:　ジェネリクスを使って型を指定する
-    return (await axios.get(`/bff-api/v1/todo/${id}`)).data
+    const todo = (await axios.get<Todo, AxiosResponse<Todo>, never>(`/bff-api/v1/todo/${id}`)).data
+    return todo
   }
 
   /**
@@ -21,8 +21,7 @@ export class TodoRepositoryImpl implements TodoRepository {
    * @returns TODOリスト
    */
   public async findAll(): Promise<Todo[]> {
-    //TODO:　ジェネリクスを使って型を指定する
-    return (await axios.get('/bff-api/v1/todo')).data
+    return (await axios.get<Todo[], AxiosResponse<Todo[]>, never>('/bff-api/v1/todo')).data
   }
   /**
    * TODOを作成する
@@ -30,23 +29,20 @@ export class TodoRepositoryImpl implements TodoRepository {
    * @returns 作成したTODO
    */
   public async create(todo: Todo): Promise<Todo> {
-    //TODO:　ジェネリクスを使って型を指定する
-    return (await axios.post('/bff-api/v1/todo', todo)).data
+    return (await axios.post<Todo, AxiosResponse<Todo>, Todo>('/bff-api/v1/todo', todo)).data
   }
   /**
    * TODOを更新する
    * @param todo TODO
    */
   public async update(todo: Todo): Promise<void> {
-    //TODO:　ジェネリクスを使って型を指定する
-    return await axios.put(`/bff-api/v1/todo`, todo)
+    return (await axios.put<void, AxiosResponse<void>, Todo>(`/bff-api/v1/todo`, todo)).data
   }
   /**
    * TODOを削除する
    * @param id ID
    */
   public async delete(id: string): Promise<void> {
-    //TODO:　ジェネリクスを使って型を指定する
-    return await axios.delete(`/bff-api/v1/todo/${id}`)
+    return (await axios.delete<void, AxiosResponse<void>, never>(`/bff-api/v1/todo/${id}`)).data
   }
 }
