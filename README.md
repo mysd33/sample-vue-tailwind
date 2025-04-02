@@ -84,9 +84,9 @@ npx vitest run
 | 完了時情報メッセージ（バナー表示）     | [画面](docs/img/screen/info-message.png) |    
 | クライアント入力エラーメッセージ（バナー・入力項目のエラー表示）    | [画面](docs/img/screen/client-validation-error.png) |
 | サーバ入力エラー・業務エラーメッセージ（バナー表示）         | [画面](docs/img/screen/server-business-error.png) |
-| サーバシステムエラー時エラーページ表示  | TBD |      
+| サーバシステムエラー時エラーページ表示  | [画面](docs/img/screen/server-system-error.png) |      
 
-## 画面部品
+# 画面部品
 - [src/components/](src/components/)フォルダに入っています。
 - 作成している画面部品は以下の通り。
 
