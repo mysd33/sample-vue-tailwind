@@ -3,7 +3,7 @@ import LinkButton from '@/components/button/LinkButton.vue'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import { onMounted, ref } from 'vue'
-import { useGlobalErrorStore } from '@/usecases/common/stores/GlobalErrorStore'
+import { useGlobalErrorStore } from '@/usecases/common/stores/globalErrorStore'
 import { SystemError } from '@/framework/errors'
 
 const globalErrorStore = useGlobalErrorStore()

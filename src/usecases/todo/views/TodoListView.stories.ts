@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3'
 
 import TodoListView from '@/usecases/todo/views/TodoListView.vue'
 import type { Todo } from '../models/todo'
-import { http, HttpResponse } from 'msw'
+import { http, HttpResponse, type PathParams } from 'msw'
 import { generateUUID } from '@/usecases/common/utils/idUtils'
 
 const todoList: Todo[] = [
@@ -35,7 +35,7 @@ const meta: Meta<typeof TodoListView> = {
   parameters: {
     msw: {
       handlers: [
-        http.get<never, never, Todo>('/bff-api/v1/todo/:id', async ({ params }) => {
+        http.get<PathParams, never, Todo>('/bff-api/v1/todo/:id', async ({ params }) => {
           const id = params.id
           const todo = todoList.find((todo) => todo.id === id)
           if (todo) {
@@ -82,8 +82,8 @@ const meta: Meta<typeof TodoListView> = {
           }
           return HttpResponse.json()
         }),
-        http.delete<never, never, never>('/bff-api/v1/todo/:id', async ({ params }) => {
-          const id = params.id
+        http.delete<PathParams, never, never>('/bff-api/v1/todo/:id', async ({ params }) => {
+          const id = params.id as string
           const index = todoList.findIndex((todo) => todo.id === id)
           if (index !== -1) {
             todoList.splice(index, 1)
