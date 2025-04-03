@@ -15,11 +15,12 @@ export class HttpClient {
   public constructor(errorHandler: HttpClientErrorHandler = new DefaultHttpClientErrorHandler()) {
     this.errorHandler = errorHandler
     this.axiosInstance = axios.create({
-      baseURL: import.meta.env.API_BASE_URL,
-      timeout: import.meta.env.HTTP_CLIENT_TIMEOUT,
+      baseURL: import.meta.env.API_BASE_URL, // APIのベースURLを指定
+      timeout: parseInt(import.meta.env.HTTP_CLIENT_TIMEOUT, 10) || 0, // タイムアウト時間(ms)を指定 デフォルト（0）は無制限
       headers: {
         'Content-Type': 'application/json',
       },
+      // withCredentials: true, // Cookieを送信する場合はtrueに設定
     })
 
     // リトライ対象のステータスコードを取得
@@ -64,13 +65,13 @@ export class HttpClient {
 
   /**
    * Getリクエストを送信する
-   * @templatelatelate D レスポンスの型
+   * @templatelatelate T レスポンスの型
    * @param url URLパス
    * @param config リクエスト設定
    * @returns レスポンス
    */
-  public get<D>(url: string, config?: AxiosRequestConfig<never>): Promise<AxiosResponse<D>> {
-    return this.axiosInstance.get<D, AxiosResponse<D>, never>(url, config)
+  public get<T>(url: string, config?: AxiosRequestConfig<null>): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.get<T, AxiosResponse<T>, null>(url, config)
   }
 
   /**
