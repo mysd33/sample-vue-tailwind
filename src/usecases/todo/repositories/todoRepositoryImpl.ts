@@ -6,7 +6,7 @@ import type { TodoRepository } from '@/usecases/todo/repositories/todoRepository
  * Todoリストを管理するRepositoryの実装クラス
  */
 export class TodoRepositoryImpl implements TodoRepository {
-  private readonly httpClient = HttpClient.getInstance()
+  private readonly httpClient = new HttpClient()
 
   /**
    * IDを指定してTODOを取得する

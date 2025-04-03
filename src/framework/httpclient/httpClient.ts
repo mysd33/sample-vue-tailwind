@@ -1,16 +1,19 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios'
 import axiosRetry from 'axios-retry'
-import { BusinessError, SystemError, OtherError } from '../errors'
+import {
+  DefaultHttpClientErrorHandler,
+  type HttpClientErrorHandler,
+} from '@/framework/httpclient/httpClientErrorHandler'
 
 /**
  * HTTPクライアント機能を提供するクラス
- * axiosをラップして、シングルトンでインスタンスを管理する
  */
 export class HttpClient {
-  private static instance: HttpClient | null = null
   private readonly axiosInstance: AxiosInstance
+  private readonly errorHandler: HttpClientErrorHandler
 
-  private constructor() {
+  public constructor(errorHandler: HttpClientErrorHandler = new DefaultHttpClientErrorHandler()) {
+    this.errorHandler = errorHandler
     this.axiosInstance = axios.create({
       baseURL: import.meta.env.API_BASE_URL,
       timeout: import.meta.env.HTTP_CLIENT_TIMEOUT,
@@ -32,7 +35,7 @@ export class HttpClient {
         return response
       },
       (error) => {
-        return Promise.reject(this.handleError(error))
+        return Promise.reject(this.errorHandler.handleError(error))
       },
     )
 
@@ -57,17 +60,6 @@ export class HttpClient {
         )
       },
     })
-  }
-
-  /**
-   * HttpClientのインスタンスを取得する
-   * @returns HttpClientのインスタンス
-   */
-  public static getInstance(): HttpClient {
-    if (HttpClient.instance === null) {
-      HttpClient.instance = new HttpClient()
-    }
-    return HttpClient.instance
   }
 
   /**
@@ -124,34 +116,5 @@ export class HttpClient {
    */
   public delete<T>(url: string): Promise<AxiosResponse<T>> {
     return this.axiosInstance.delete<T, AxiosResponse<T>, never>(url)
-  }
-
-  // TODO: エラーハンドリングとバナーへのメッセージ表示処理の実現
-  private handleError(error: unknown): Error {
-    if (axios.isAxiosError(error)) {
-      // AxiosErrorの場合は、レスポンスのエラーメッセージを取得
-      const response = error.response
-      if (response) {
-        // TODO: エラーレスポンスデータの形式(code, message, details)をチェック
-
-        // TBD:401認証エラー
-        // TBD:403権限エラー
-        // それ以外の400系の場合は、サーバの入力エラーまたは業務エラー
-        if (response.status >= 400 && response.status < 500) {
-          return new BusinessError(response.data.code, response.data.message, response.data.details)
-        }
-        // 500系の場合は、システムエラー
-        return new SystemError(response.data.code, response.data.message, response.data.details)
-      } else {
-        // ネットワークエラー
-        return new OtherError(
-          //TODO:　メッセージ管理機能の導入
-          'w.fw.9002',
-          'サービス呼び出し時にエラーが発生しました。しばらく経ってから実行してください。',
-        )
-      }
-    }
-    //TODO:　メッセージ管理機能の導入
-    return new SystemError('e.fw.9001', '想定外のエラーが発生しました')
   }
 }
