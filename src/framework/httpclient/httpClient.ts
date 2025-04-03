@@ -1,7 +1,6 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios'
 import axiosRetry from 'axios-retry'
-import { BusinessError, SystemError } from '../errors'
-import { OtherError } from '../errors/errors'
+import { BusinessError, SystemError, OtherError } from '../errors'
 
 /**
  * HTTPクライアント機能を提供するクラス
@@ -73,7 +72,7 @@ export class HttpClient {
 
   /**
    * Getリクエストを送信する
-   * @type D レスポンスの型
+   * @templatelatelate D レスポンスの型
    * @param url URLパス
    * @param config リクエスト設定
    * @returns レスポンス
@@ -84,8 +83,8 @@ export class HttpClient {
 
   /**
    * Postリクエストを送信する
-   * @type D リクエストの型
-   * @type T レスポンスの型
+   * @template D リクエストの型
+   * @template T レスポンスの型
    * @param url URLパス
    * @param data リクエストボディ
    * @param config リクエスト設定
@@ -101,8 +100,8 @@ export class HttpClient {
 
   /**
    * Putリクエストを送信する
-   * @type D リクエストの型
-   * @type T レスポンスの型
+   * @template D リクエストの型
+   * @template T レスポンスの型
    * @param url URLパス
    * @param data リクエストボディ
    * @param config リクエスト設定
@@ -118,7 +117,7 @@ export class HttpClient {
 
   /**
    * Deleteリクエストを送信する
-   * @type T レスポンスの型
+   * @template T レスポンスの型
    * @param url URLパス
    * @param config リクエスト設定
    * @returns レスポンス
@@ -146,11 +145,13 @@ export class HttpClient {
       } else {
         // ネットワークエラー
         return new OtherError(
+          //TODO:　メッセージ管理機能の導入
           'w.fw.9002',
           'サービス呼び出し時にエラーが発生しました。しばらく経ってから実行してください。',
         )
       }
     }
+    //TODO:　メッセージ管理機能の導入
     return new SystemError('e.fw.9001', '想定外のエラーが発生しました')
   }
 }

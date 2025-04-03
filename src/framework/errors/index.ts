@@ -1,1 +1,1 @@
-export { BusinessError, SystemError } from './errors'
+export * from './errors'
