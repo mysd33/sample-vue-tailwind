@@ -15,8 +15,8 @@ export class HttpClient {
   public constructor(errorHandler: HttpClientErrorHandler = new DefaultHttpClientErrorHandler()) {
     this.errorHandler = errorHandler
     this.axiosInstance = axios.create({
-      baseURL: import.meta.env.API_BASE_URL, // APIのベースURLを指定
-      timeout: parseInt(import.meta.env.HTTP_CLIENT_TIMEOUT, 10) || 0, // タイムアウト時間(ms)を指定 デフォルト（0）は無制限
+      baseURL: import.meta.env.VITE_API_BASE_URL, // APIのベースURLを指定
+      timeout: parseInt(import.meta.env.VITE_HTTP_CLIENT_TIMEOUT, 10) || 0, // タイムアウト時間(ms)を指定 デフォルト（0）は無制限
       headers: {
         'Content-Type': 'application/json',
       },
@@ -24,7 +24,7 @@ export class HttpClient {
     })
 
     // リトライ対象のステータスコードを取得
-    const retryableStatusCodeStr = import.meta.env.RETRY_STATUS_CODES as string
+    const retryableStatusCodeStr = import.meta.env.VITE_RETRY_STATUS_CODES as string
     const retryableStatusCodes = retryableStatusCodeStr?.split(',').map((code) => {
       return Number(code.trim())
     })
@@ -42,7 +42,7 @@ export class HttpClient {
 
     // axios-retryの設定追加
     axiosRetry(this.axiosInstance, {
-      retries: import.meta.env.RETRY_COUNT ?? 3, // リトライ回数
+      retries: import.meta.env.VITE_RETRY_COUNT ?? 3, // リトライ回数
       retryDelay: axiosRetry.exponentialDelay, // エクスポネンシャルバックオフを使用
       retryCondition: (error) => {
         return (
