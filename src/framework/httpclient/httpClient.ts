@@ -1,4 +1,9 @@
-import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios'
+import axios, {
+  type AxiosInstance,
+  type AxiosRequestConfig,
+  type AxiosResponse,
+  type CreateAxiosDefaults,
+} from 'axios'
 import axiosRetry from 'axios-retry'
 import {
   DefaultHttpClientErrorHandler,
@@ -12,20 +17,22 @@ export class HttpClient {
   private readonly axiosInstance: AxiosInstance
   private readonly errorHandler: HttpClientErrorHandler
 
-  public constructor(errorHandler: HttpClientErrorHandler = new DefaultHttpClientErrorHandler()) {
+  public constructor(
+    config: CreateAxiosDefaults,
+    errorHandler: HttpClientErrorHandler = new DefaultHttpClientErrorHandler(),
+    retryableStatusCodeList: string,
+  ) {
     this.errorHandler = errorHandler
     this.axiosInstance = axios.create({
-      baseURL: import.meta.env.VITE_API_BASE_URL, // APIのベースURLを指定
-      timeout: parseInt(import.meta.env.VITE_HTTP_CLIENT_TIMEOUT, 10) || 0, // タイムアウト時間(ms)を指定 デフォルト（0）は無制限
       headers: {
         'Content-Type': 'application/json',
       },
       // withCredentials: true, // Cookieを送信する場合はtrueに設定
+      ...config,
     })
 
     // リトライ対象のステータスコードを取得
-    const retryableStatusCodeStr = import.meta.env.VITE_RETRY_STATUS_CODES as string
-    const retryableStatusCodes = retryableStatusCodeStr?.split(',').map((code) => {
+    const retryableStatusCodes = retryableStatusCodeList?.split(',').map((code) => {
       return Number(code.trim())
     })
 

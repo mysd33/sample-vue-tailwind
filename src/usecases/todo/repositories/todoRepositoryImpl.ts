@@ -6,7 +6,14 @@ import type { TodoRepository } from '@/usecases/todo/repositories/todoRepository
  * Todoリストを管理するRepositoryの実装クラス
  */
 export class TodoRepositoryImpl implements TodoRepository {
-  private readonly httpClient = new HttpClient()
+  private readonly httpClient = new HttpClient(
+    {
+      baseURL: import.meta.env.VITE_API_BASE_URL, // APIのベースURLを指定
+      timeout: parseInt(import.meta.env.VITE_HTTP_CLIENT_TIMEOUT, 10) || 0, // タイムアウト時間(ms)を指定 デフォルト（0）は無制限
+    },
+    undefined,
+    import.meta.env.VITE_RETRYABLE_STATUS_CODES, // リトライ対象のステータスコードのリスト
+  )
 
   /**
    * IDを指定してTODOを取得する
