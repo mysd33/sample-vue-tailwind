@@ -8,6 +8,8 @@ import { setLocale } from 'yup'
 import * as ja from '@/usecases/common/messages/validationMessages'
 import { configure } from 'vee-validate'
 import globalErrorHandler from '@/usecases/common/errors/errorhandler'
+import { MessageManager } from './framework/messages'
+import { applicationMessages } from './usecases/common/messages/applicationMessages'
 
 const app = createApp(App)
 
@@ -28,7 +30,10 @@ configure({
   validateOnModelUpdate: false,
 })
 // yupの入力エラーメッセージの日本語化
-setLocale(ja.messages)
+setLocale(ja.validationMessages)
+
+// メッセージ定義の読み込み
+MessageManager.load(applicationMessages)
 
 // MSWの有効化
 // https://mswjs.io/docs/integrations/browser#conditionally-enable-mocking

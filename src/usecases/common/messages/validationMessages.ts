@@ -58,7 +58,7 @@ export const array: yup.LocaleObject['array'] = {
   length: ({ label, length }) => (label ? label + 'は' : '') + `${length}つである必要があります。`,
 }
 
-export const messages: yup.LocaleObject = {
+export const validationMessages: yup.LocaleObject = {
   mixed,
   string,
   number,

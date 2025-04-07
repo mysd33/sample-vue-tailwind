@@ -5,6 +5,8 @@ import MainContainer from '@/components/layout/MainContainer.vue'
 import { onMounted, ref } from 'vue'
 import { useGlobalErrorStore } from '@/usecases/common/stores/globalErrorStore'
 import { SystemError } from '@/framework/errors'
+import { E_EX_9001 } from '../messages/applicationMessages'
+import { MessageManager } from '@/framework/messages'
 
 const globalErrorStore = useGlobalErrorStore()
 
@@ -23,8 +25,8 @@ onMounted(() => {
     errorMessage.value = error.message
     return
   }
-  errorCode.value = 'e.ex.9001'
-  errorMessage.value = 'システムエラーが発生しました。'
+  errorCode.value = E_EX_9001
+  errorMessage.value = MessageManager.getMessage(E_EX_9001)
 })
 </script>
 
