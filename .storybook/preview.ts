@@ -4,7 +4,9 @@ import { createPinia } from 'pinia'
 import { App } from 'vue'
 import { configure } from 'vee-validate'
 import { setLocale } from 'yup'
+import { MessageManager } from '@/framework/messages'
 import * as ja from '@/usecases/common/messages/validationMessages'
+import { applicationMessages } from '@/usecases/common/messages/applicationMessages'
 import { useUserDummyStore } from '@/usecases/common/stores/usersStore'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 import { initialize, InitializeOptions, mswLoader } from 'msw-storybook-addon'
@@ -34,7 +36,10 @@ setup(async (app: App) => {
   })
 
   // yupの入力エラーメッセージの日本語化
-  setLocale(ja.messages)
+  setLocale(ja.validationMessages)
+
+  // メッセージ定義の読み込み
+  MessageManager.load(applicationMessages)
 
   // スタブ実装として、以下のユーザデータを初期登録する
   const usersDummyStore = useUserDummyStore()
