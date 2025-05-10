@@ -8,7 +8,7 @@ import axiosRetry from 'axios-retry'
 import {
   DefaultHttpClientErrorHandler,
   type HttpClientErrorHandler,
-} from '@/framework/httpclient/httpClientErrorHandler'
+} from '@/framework/http-client/httpClientErrorHandler'
 
 /**
  * HTTPクライアント機能を提供するクラス

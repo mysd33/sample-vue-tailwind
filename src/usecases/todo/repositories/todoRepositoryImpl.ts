@@ -1,4 +1,4 @@
-import { HttpClient } from '@/framework/httpclient'
+import { HttpClient } from '@/framework/http-client'
 import type { Todo } from '@/usecases/todo/models/todo'
 import type { TodoRepository } from '@/usecases/todo/repositories/todoRepository'
 

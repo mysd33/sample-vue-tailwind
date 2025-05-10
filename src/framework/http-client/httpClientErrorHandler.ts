@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BusinessError, SystemError, OtherError } from '../errors'
+import { BusinessError, SystemError, OtherError } from '@/framework/errors'
 
 /**
  * サーバエラーを処理するためのインターフェース
