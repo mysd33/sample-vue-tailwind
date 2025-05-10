@@ -1,17 +1,34 @@
 import { useTodoDummyStore } from '@/usecases/todo/stores/todoStore'
 import type { Todo } from '@/usecases/todo/models/todo'
 import { generateUUID } from '@/usecases/common/utils/idUtils'
-import type { TodoRepository } from '@/usecases/todo/repositories/todoRepository'
 
 const sleepTime = 300
 
 /**
  * Todoリストを管理するRepositoryのStubクラス
  */
-export class TodoRepositoryStub implements TodoRepository {
+export class TodoRepositoryStub {
   // Piniaで保持するダミーのストアを利用
-  private todoDummyStore = useTodoDummyStore()
+  private readonly todoDummyStore = useTodoDummyStore()
 
+  private static instance: TodoRepositoryStub
+  private constructor() {}
+  /**
+   * Todoリストを管理するRepositoryのStubクラスのインスタンスを取得する
+   * @returns Todoリストを管理するRepositoryのStubクラスのインスタンス
+   **/
+  public static getInstance(): TodoRepositoryStub {
+    if (!TodoRepositoryStub.instance) {
+      TodoRepositoryStub.instance = new TodoRepositoryStub()
+    }
+    return TodoRepositoryStub.instance
+  }
+
+  /**
+   * IDを指定してTodoを取得する
+   * @param id ID
+   * @returns Todo
+   */
   public async findOne(id: string): Promise<Todo | null> {
     // サーバ処理を疑似するため待機
     await new Promise((resolve) => setTimeout(resolve, sleepTime))

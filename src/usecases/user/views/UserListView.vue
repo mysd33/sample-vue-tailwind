@@ -13,13 +13,12 @@ import TableDataCol from '@/components/table/TableDataCol.vue'
 import { useRouter } from 'vue-router'
 import ActionButton from '@/components/button/ActionButton.vue'
 import type { User } from '@/usecases/common/models/user'
-import { UserServiceImpl } from '@/usecases/user/services/userService'
 import { formatDate, calcAge } from '@/usecases/common/utils/dateUtils'
 import { Page, Pageable } from '@/components/pagination/pagination'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import { UserService } from '@/usecases/user/services/userService'
 
 // ビジネスロジック
-const userService = new UserServiceImpl(new UserRepositoryImpl())
+const userService = UserService.getInstance()
 
 //TODO: ページサイズを設定ファイルに切り出しできるようにする
 const pageSize = 5

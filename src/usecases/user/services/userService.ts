@@ -1,49 +1,26 @@
 import type { Page, Pageable } from '@/components/pagination/pagination'
 import type { User } from '@/usecases/common/models/user'
-import type { UserRepository } from '@/usecases/common/repositories/userRepository'
-
-/**
- * ユーザ情報を提供するServiceインタフェース
- */
-export interface UserService {
-  /**
-   * ページネーションしてユーザ情報を取得する
-   * @param pageable ページネーション情報
-   * @returns ユーザリストの1ページ分
-   */
-  findAllForPageNation(pageable: Pageable): Promise<Page<User>>
-
-  /**
-   * 指定したIDのユーザ情報を取得する
-   * @param id ユーザID
-   * @returns ユーザ情報
-   */
-  findOne(id: string): Promise<User | null>
-
-  /**
-   * ユーザを作成する
-   * @param user ユーザ情報
-   */
-  create(user: User): Promise<void>
-
-  /**
-   * ユーザ情報を更新する
-   * @param user ユーザ情報
-   */
-  update(user: User): Promise<void>
-
-  /**
-   * ユーザ情報を削除する
-   * @param id ユーザID
-   */
-  delete(id: string): Promise<void>
-}
+import { UserRepository } from '@/usecases/common/repositories/userRepository'
 
 /**
  * ユーザ情報を提供するServiceクラス
  */
-export class UserServiceImpl implements UserService {
-  constructor(private userRepository: UserRepository) {}
+export class UserService {
+  private static instance: UserService
+  private constructor(
+    private readonly userRepository: UserRepository = UserRepository.getInstance(),
+  ) {}
+
+  /**
+   * ユーザ情報を提供するServiceクラスのインスタンスを取得する
+   * @returns ユーザ情報を提供するServiceクラスのインスタンス
+   */
+  public static getInstance(): UserService {
+    if (!UserService.instance) {
+      UserService.instance = new UserService()
+    }
+    return UserService.instance
+  }
 
   /**
    * ページネーションしてユーザ情報を取得する

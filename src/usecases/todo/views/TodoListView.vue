@@ -10,20 +10,13 @@ import ButtonArea from '@/components/button/ButtonArea.vue'
 import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
-
 import type { Todo } from '@/usecases/todo/models/todo'
 import TodoItem from '@/usecases/todo/views/TodoItem.vue'
-import { TodoServiceImpl } from '@/usecases/todo/services/todoService'
-//import { TodoRepositoryStub } from '@/usecases/todo/repositories/todoRepositoryStub'
-import { TodoRepositoryImpl } from '@/usecases/todo/repositories/todoRepositoryImpl'
 import { BusinessError } from '@/framework/errors'
-
-// Repository
-//const repository = new TodoRepositoryStub() //スタブ
-const repository = new TodoRepositoryImpl() //実装クラス
+import { TodoService } from '@/usecases/todo/services/todoService'
 
 // Service（ビジネスロジック）
-const todoService = new TodoServiceImpl(repository)
+const todoService = TodoService.getInstance()
 
 // TODOリスト
 const todos = ref<Todo[]>([])

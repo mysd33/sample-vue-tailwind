@@ -16,13 +16,11 @@ import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBan
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
-
 import type { User } from '@/usecases/common/models/user'
-import { UserServiceImpl } from '@/usecases/user/services/userService'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import { UserService } from '@/usecases/user/services/userService'
 
 // ビジネスロジック
-const userService = new UserServiceImpl(new UserRepositoryImpl())
+const userService = UserService.getInstance()
 
 const router = useRouter()
 

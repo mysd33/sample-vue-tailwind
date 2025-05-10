@@ -1,43 +1,25 @@
 import type { Todo } from '@/usecases/todo/models/todo'
-import type { TodoRepository } from '@/usecases/todo/repositories/todoRepository'
-
-/**
- * TODOリスト機能を提供するServiceインタフェース
- */
-export interface TodoService {
-  /**
-   * IDを指定してTODOを取得する
-   * @param id ID
-   * @returns TODO
-   */
-  findOne(id: string): Promise<Todo | null>
-  /**
-   * TODOリストを取得する
-   * @returns TODOリスト
-   */
-  findAll(): Promise<Todo[]>
-  /**
-   * TODOを追加する
-   * @param title タイトル
-   */
-  create(title: string): Promise<void>
-  /**
-   * TODOを完了する
-   * @param id ID
-   */
-  finish(id: string): Promise<void>
-  /**
-   * TODOを削除する
-   * @param id ID
-   */
-  delete(id: string): Promise<void>
-}
+import { TodoRepository } from '../repositories/todoRepository'
 
 /**
  * TODOリスト機能を提供するServiceクラス
  */
-export class TodoServiceImpl implements TodoService {
-  constructor(private todoRepository: TodoRepository) {}
+export class TodoService {
+  private static instance: TodoService
+  private constructor(
+    private readonly todoRepository: TodoRepository = TodoRepository.getInstance(),
+  ) {}
+  /**
+   * TODOリスト機能を提供するServiceクラスのインスタンスを取得する
+   * @returns TODOリスト機能を提供するServiceクラスのインスタンス
+   */
+  public static getInstance(): TodoService {
+    if (!TodoService.instance) {
+      TodoService.instance = new TodoService()
+    }
+    return TodoService.instance
+  }
+
   /**
    * IDを指定してTODOを取得する
    * @param id ID

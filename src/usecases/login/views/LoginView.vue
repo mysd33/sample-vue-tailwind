@@ -9,7 +9,7 @@ import { useRouter } from 'vue-router'
 import InputItem from '@/components/form/InputItem.vue'
 import { ref, type Ref } from 'vue'
 import * as yup from 'yup'
-import { useForm } from 'vee-validate'
+import { useForm, type GenericObject, type InvalidSubmissionHandler } from 'vee-validate'
 
 import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBanner.vue'
 import TableArea from '@/components/table/TableArea.vue'
@@ -17,11 +17,10 @@ import TableHeaderRow from '@/components/table/TableHeaderRow.vue'
 import TableHeaderCol from '@/components/table/TableHeaderCol.vue'
 import TableDataRow from '@/components/table/TableDataRow.vue'
 import TableDataCol from '@/components/table/TableDataCol.vue'
-import { AuthenticationServiceImpl } from '@/usecases/login/services/authenticationService'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import { AuthenticationService } from '@/usecases/login/services/authenticationService'
 
 // ビジネスロジック
-const authenticationService = new AuthenticationServiceImpl(new UserRepositoryImpl())
+const authenticationService = AuthenticationService.getInstance()
 
 const router = useRouter()
 

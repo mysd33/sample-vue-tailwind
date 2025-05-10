@@ -1,29 +1,28 @@
-import type { UserRepository } from '@/usecases/common/repositories/userRepository'
+import { UserRepository } from '@/usecases/common/repositories/userRepository'
 import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
-
-/**
- * 認証機能を提供するServiceインタフェース
- */
-export interface AuthenticationService {
-  /**
-   * ログイン処理
-   * @param id ユーザID
-   * @param password
-   */
-  login(id: string, password: string): Promise<void>
-  /**
-   * ログアウト処理
-   */
-  logout(): Promise<void>
-}
 
 /**
  * 認証機能を提供するServiceクラス
  */
-export class AuthenticationServiceImpl implements AuthenticationService {
-  private authenticationStore = useAuthenticationStore()
+export class AuthenticationService {
+  private static instance: AuthenticationService
+  private readonly authenticationStore = useAuthenticationStore()
+  private constructor(
+    private readonly userRepository: UserRepository = UserRepository.getInstance(),
+  ) {
+    this.userRepository = userRepository
+  }
 
-  constructor(private userRepository: UserRepository) {}
+  /**
+   * 認証機能を提供するServiceクラスのインスタンスを取得する
+   * @returns 認証機能を提供するServiceクラスのインスタンス
+   */
+  public static getInstance(): AuthenticationService {
+    if (!AuthenticationService.instance) {
+      AuthenticationService.instance = new AuthenticationService()
+    }
+    return AuthenticationService.instance
+  }
 
   /**
    * ログイン処理

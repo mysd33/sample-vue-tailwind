@@ -5,55 +5,23 @@ import { useUserDummyStore } from '@/usecases/common/stores/usersStore'
 const sleepTime = 500
 
 /**
- * ユーザ情報を管理するRepositoryインタフェース
- */
-export interface UserRepository {
-  /**
-   * ユーザ認証する
-   * @param id ユーザID
-   * @param password パスワード
-   * @returns ユーザ情報またはnull
-   */
-  authenticate(id: string, password: string): Promise<User | null>
-
-  /**
-   * ページネーションしてユーザ情報を取得する
-   * @param pageable ページネーション情報
-   * @returns ページ情報
-   */
-  findAllForPagination(pageable: Pageable): Promise<Page<User>>
-
-  /**
-   * 指定したIDのユーザ情報を取得する
-   * @param id ユーザID
-   * @returns ユーザ情報またはnull
-   */
-  findOne(id: string): Promise<User | null>
-
-  /**
-   * ユーザを作成する
-   * @param user ユーザ情報
-   */
-  create(user: User): Promise<void>
-
-  /**
-   * ユーザ情報を更新する
-   * @param user ユーザ情報
-   */
-  update(user: User): Promise<void>
-
-  /**
-   * ユーザ情報を削除する
-   * @param id ユーザID
-   */
-  delete(id: string): Promise<void>
-}
-
-/**
  * ユーザ情報を管理するRepositoryクラス
  */
-export class UserRepositoryImpl implements UserRepository {
+export class UserRepository {
+  private static instance: UserRepository
   private usersDummyStore = useUserDummyStore()
+  private constructor() {}
+
+  /**
+   * ユーザ情報を管理するRepositoryクラスのインスタンスを取得する
+   * @returns ユーザ情報を管理するRepositoryクラスのインスタンス
+   */
+  public static getInstance(): UserRepository {
+    if (!UserRepository.instance) {
+      UserRepository.instance = new UserRepository()
+    }
+    return UserRepository.instance
+  }
 
   /**
    * ユーザ認証する

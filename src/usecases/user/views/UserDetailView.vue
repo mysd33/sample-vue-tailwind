@@ -20,8 +20,7 @@ import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 import { formatDateWithHyphen } from '@/usecases/common/utils/dateUtils'
 import type { User } from '@/usecases/common/models/user'
-import { UserServiceImpl } from '@/usecases/user/services/userService'
-import { UserRepositoryImpl } from '@/usecases/common/repositories/userRepository'
+import { UserService } from '@/usecases/user/services/userService'
 
 interface Props {
   id: string
@@ -30,7 +29,7 @@ interface Props {
 const props = defineProps<Props>()
 
 // ビジネスロジック
-const userService = new UserServiceImpl(new UserRepositoryImpl())
+const userService = UserService.getInstance()
 
 const router = useRouter()
 
