@@ -83,7 +83,8 @@ npx vitest run
 | 完了時情報モーダルダイアログ     | [画面](docs/img/screen/info-dialog.png) |
 | 完了時情報メッセージ（バナー表示）     | [画面](docs/img/screen/info-message.png) |    
 | クライアント入力エラーメッセージ（バナー・入力項目のエラー表示）    | [画面](docs/img/screen/client-validation-error.png) |
-| サーバ入力エラー・業務エラーメッセージ（バナー表示）         | [画面](docs/img/screen/server-business-error.png) |
+| サーバ入力エラーメッセージ（バナー表示）         | [画面](docs/img/screen/server-validation-error.png) |
+| サーバ業務エラーメッセージ（バナー表示）         | [画面](docs/img/screen/server-business-error.png) |
 | サーバシステムエラー時エラーページ表示  | [画面](docs/img/screen/server-system-error.png) |      
 
 # 画面部品

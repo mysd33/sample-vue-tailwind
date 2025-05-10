@@ -25,12 +25,22 @@ export const handlers = [
   // TODOの登録
   http.post<never, Todo, never>('/bff-api/v1/todo', async ({ request }) => {
     const todo = (await request.json()) as Todo
-    // bizerrorの時は、業務エラーのレスポンスを返す
-    if (todo.title === 'bizerror') {
+    // todoタイトルが'validationerror'の時は、業務エラーのレスポンスを返す
+    if (todo.title === 'validationerror') {
+      return HttpResponse.json(
+        {
+          code: 'w.ex.2001',
+          message: 'TODOのタイトルが不正です。',
+        },
+        { status: 400 },
+      )
+    }
+    // todoタイトルが'bizerror'か登録件数が5件の時は、業務エラーのレスポンスを返す
+    if (todo.title === 'bizerror' || todoDummyStore.todos.length >= 5) {
       return HttpResponse.json(
         {
           code: 'w.ex.5001',
-          message: 'TODOのタイトルが不正です。',
+          message: 'TODOの登録は5件までしかできません。',
         },
         { status: 400 },
       )
