@@ -9,7 +9,7 @@ import { useRouter } from 'vue-router'
 import InputItem from '@/components/form/InputItem.vue'
 import { ref, type Ref } from 'vue'
 import * as yup from 'yup'
-import { useForm, type GenericObject, type InvalidSubmissionHandler } from 'vee-validate'
+import { useForm, type GenericObject } from 'vee-validate'
 
 import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBanner.vue'
 import TableArea from '@/components/table/TableArea.vue'
@@ -76,7 +76,7 @@ const onValidSubmit = async () => {
 }
 
 // 入力エラー時
-const onInvalidSubmit = ({ errors }) => {
+const onInvalidSubmit = ({ errors }: { errors: GenericObject }) => {
   // ログイン画面のみ、入力エラーメッセージをまとめて出力するため、ここでエラーメッセージを設定
   validationErrorMessages.value = [errors.userId, errors.password]
   messageLevel.value = 'validation'
