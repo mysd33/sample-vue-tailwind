@@ -21,6 +21,7 @@ export class HttpClient {
     config: CreateAxiosDefaults,
     errorHandler: HttpClientErrorHandler = new DefaultHttpClientErrorHandler(),
     retryableStatusCodeList: string,
+    retryCount: number = 3,
   ) {
     this.errorHandler = errorHandler
     this.axiosInstance = axios.create({
@@ -49,7 +50,7 @@ export class HttpClient {
 
     // axios-retryの設定追加
     axiosRetry(this.axiosInstance, {
-      retries: import.meta.env.VITE_RETRY_COUNT ?? 3, // リトライ回数
+      retries: retryCount, // リトライ回数
       retryDelay: axiosRetry.exponentialDelay, // エクスポネンシャルバックオフを使用
       retryCondition: (error) => {
         return (
