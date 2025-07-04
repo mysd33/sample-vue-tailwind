@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { BusinessError, SystemError, OtherError } from '@/framework/errors'
+import { FrameworkMessageIds, MessageManager } from '../messages'
 
 /**
  * サーバエラーを処理するためのインターフェース
@@ -25,14 +26,15 @@ export class DefaultHttpClientErrorHandler implements HttpClientErrorHandler {
         }
         return new SystemError(response.data.code, response.data.message, response.data.details)
       } else {
-        //TODO: メッセージ管理
         return new OtherError(
-          'w.fw.9002',
-          'サービス呼び出し時にエラーが発生しました。しばらく経ってから実行してください。',
+          FrameworkMessageIds.W_FW_9002,
+          MessageManager.getMessage(FrameworkMessageIds.W_FW_9002),
         )
       }
     }
-    //TODO: メッセージ管理
-    return new SystemError('e.fw.9001', '想定外のエラーが発生しました')
+    return new SystemError(
+      FrameworkMessageIds.E_FW_9001,
+      MessageManager.getMessage(FrameworkMessageIds.E_FW_9001),
+    )
   }
 }

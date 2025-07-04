@@ -1,7 +1,16 @@
+import { MessageManager } from '@/framework/messages'
+
+// メッセージ初期化処理
+export const initMessages = () => {
+  MessageManager.load(applicationMessages)
+}
+
 // メッセージIDの定義
-export const E_EX_9001 = 'e.ex.9001'
+export const MessageId = {
+  E_EX_9001: 'e.ex.9001',
+} as const
 
 // メッセージの定義
-export const applicationMessages = {
-  'e.ex.9001': 'システムエラーが発生しました。',
-}
+const applicationMessages = {
+  [MessageId.E_EX_9001]: 'システムエラーが発生しました。',
+} as const

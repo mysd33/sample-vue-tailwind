@@ -1,10 +1,12 @@
+import { frameworkMessageList } from './frameworkMessages'
+
 /**
  * メッセージ管理クラス
  */
 export class MessageManager {
-  private readonly messages: { [key: string]: string }
+  private messages: { [key: string]: string }
   // シングルトンインスタンス
-  private static instance: MessageManager | null = null
+  private static instance: MessageManager = new MessageManager(frameworkMessageList)
 
   /**
    * コンストラクタ
@@ -19,7 +21,11 @@ export class MessageManager {
    * @param messages メッセージ定義
    */
   public static load<T extends { [key: string]: string }>(messages: T): void {
-    this.instance = new MessageManager(messages)
+    //　既存のmessagesとマージして新しいインスタンスを作成
+    this.instance = new MessageManager({
+      ...this.instance.messages,
+      ...messages,
+    })
   }
 
   /**
