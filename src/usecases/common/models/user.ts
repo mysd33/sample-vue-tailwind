@@ -20,9 +20,13 @@ export interface User {
    */
   isAdmin: boolean
 
-  //TODO: いずれ削除
   /**
    * パスワード
    */
-  password: string
+  password?: string
+
+  /**
+   * 確認用パスワード
+   */
+  confirmPassword?: string
 }

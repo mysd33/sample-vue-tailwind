@@ -21,6 +21,8 @@ import { useForm } from 'vee-validate'
 import { formatDateWithHyphen } from '@/usecases/common/utils/dateUtils'
 import type { User } from '@/usecases/common/models/user'
 import { UserService } from '@/usecases/user/services/userService'
+import { MessageManager } from '@/framework/messages'
+import { MessageIds } from '@/usecases/common/messages/applicationMessages'
 
 interface Props {
   id: string
@@ -46,6 +48,11 @@ const isDeleteCompleteDialogOpen = ref(false)
 const schema = yup.object({
   userId: yup.string().label('ユーザID'),
   password: yup.string().label('パスワード').required(),
+  confirmPassword: yup
+    .string()
+    .label('確認用パスワード')
+    .required()
+    .oneOf([yup.ref('password')], MessageManager.getMessage(MessageIds.W_EX_2001)),
   userName: yup.string().label('ユーザ名').required(),
   birthday: yup.date().label('生年月日').required(),
   isAdmin: yup.boolean().label('管理者'),
@@ -58,6 +65,7 @@ const { errors, handleSubmit, isSubmitting, defineField } = useForm({
 
 const [userId] = defineField('userId')
 const [password] = defineField('password')
+const [confirmPassword] = defineField('confirmPassword')
 const [userName] = defineField('userName')
 const [birthday] = defineField('birthday')
 const [isAdmin] = defineField('isAdmin')
@@ -83,6 +91,7 @@ const onValidUpdateSubmit = async () => {
   const user: User = {
     id: userId.value,
     password: password.value,
+    confirmPassword: confirmPassword.value,
     name: userName.value,
     birthday: birthday.value,
     isAdmin: isAdmin.value,
@@ -140,6 +149,13 @@ const onDeleteCompleteOKButtonClick = () => {
       <InputItem label="ユーザーID" labelFor="userId">
         <InputText id="userId" name="userId" :readonly="true" v-model:value="userId" />
       </InputItem>
+      <InputItem label="ユーザ名" labelFor="userName" :required="true">
+        <InputText
+          id="userName"
+          name="userName"
+          v-model:value="userName"
+          :error="errors.userName" />
+      </InputItem>
       <InputItem label="パスワード" labelFor="password" :required="true">
         <InputPassword
           id="password"
@@ -148,12 +164,13 @@ const onDeleteCompleteOKButtonClick = () => {
           v-model:value="password"
           :error="errors.password" />
       </InputItem>
-      <InputItem label="ユーザ名" labelFor="userName" :required="true">
-        <InputText
-          id="userName"
-          name="userName"
-          v-model:value="userName"
-          :error="errors.userName" />
+      <InputItem label="パスワード" labelFor="confirmPassword" :required="true">
+        <InputPassword
+          id="confirmPassword"
+          name="confirmPassword"
+          :focus="true"
+          v-model:value="confirmPassword"
+          :error="errors.confirmPassword" />
       </InputItem>
       <InputItem label="生年月日" labelFor="birthday" :required="true">
         <InputDate
@@ -165,7 +182,6 @@ const onDeleteCompleteOKButtonClick = () => {
       <InputItem>
         <ToggleSwitch v-model:enabled="isAdmin">管理者</ToggleSwitch>
       </InputItem>
-      <InputItem></InputItem>
       <ButtonArea>
         <SubmitButton :disabled="isSubmitting" @click="onClickUpdateButton"
           >ユーザ更新</SubmitButton

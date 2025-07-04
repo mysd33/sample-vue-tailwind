@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
 import FormArea from '@/components/form/FormArea.vue'
@@ -18,6 +18,8 @@ import { useForm } from 'vee-validate'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
 import type { User } from '@/usecases/common/models/user'
 import { UserService } from '@/usecases/user/services/userService'
+import { MessageManager } from '@/framework/messages'
+import { MessageIds } from '@/usecases/common/messages/applicationMessages'
 
 // ビジネスロジック
 const userService = UserService.getInstance()
@@ -35,6 +37,11 @@ const isCreateCompleteDialogOpen = ref(false)
 const schema = yup.object({
   userId: yup.string().label('ユーザID').required().email(),
   password: yup.string().label('パスワード').required(),
+  confirmPassword: yup
+    .string()
+    .label('確認用パスワード')
+    .required()
+    .oneOf([yup.ref('password')], MessageManager.getMessage(MessageIds.W_EX_2001)),
   userName: yup.string().label('ユーザ名').required(),
   birthday: yup.date().label('生年月日').required(),
   isAdmin: yup.boolean().label('管理者'),
@@ -47,6 +54,7 @@ const { values, errors, handleSubmit, isSubmitting, defineField } = useForm({
 
 const [userId] = defineField('userId')
 const [password] = defineField('password')
+const [confirmPassword] = defineField('confirmPassword')
 const [userName] = defineField('userName')
 const [birthday] = defineField('birthday')
 const [isAdmin] = defineField('isAdmin')
@@ -59,6 +67,7 @@ const onValidSubmit = async () => {
   const user: User = {
     id: values.userId,
     password: values.password,
+    confirmPassword: values.confirmPassword,
     name: values.userName,
     birthday: values.birthday,
     isAdmin: values.isAdmin,
@@ -97,6 +106,13 @@ const onClickCreateCompleteOKButtonClick = () => {
           v-model:value="userId"
           :error="errors.userId" />
       </InputItem>
+      <InputItem label="ユーザー名" labelFor="userName" :required="true">
+        <InputText
+          id="userName"
+          name="userName"
+          v-model:value="userName"
+          :error="errors.userName" />
+      </InputItem>
       <InputItem label="パスワード" labelFor="password" :required="true">
         <InputPassword
           id="password"
@@ -104,12 +120,12 @@ const onClickCreateCompleteOKButtonClick = () => {
           v-model:value="password"
           :error="errors.password" />
       </InputItem>
-      <InputItem label="ユーザー名" labelFor="userName" :required="true">
-        <InputText
-          id="userName"
-          name="userName"
-          v-model:value="userName"
-          :error="errors.userName" />
+      <InputItem label="確認用パスワード" labelFor="confirmPassword" :required="true">
+        <InputPassword
+          id="confirmPassword"
+          name="confirmPassword"
+          v-model:value="confirmPassword"
+          :error="errors.confirmPassword" />
       </InputItem>
       <InputItem label="生年月日" labelFor="birthday" :required="true">
         <InputDate
@@ -121,7 +137,6 @@ const onClickCreateCompleteOKButtonClick = () => {
       <InputItem>
         <ToggleSwitch v-model:enabled="isAdmin">管理者</ToggleSwitch>
       </InputItem>
-      <InputItem></InputItem>
       <ButtonArea>
         <SubmitButton :disabled="isSubmitting">ユーザ登録</SubmitButton>
       </ButtonArea>
