@@ -8,6 +8,7 @@ import { useGlobalErrorStore } from '@/usecases/common/stores/globalErrorStore'
  */
 function globalErrorHandler(router: Router) {
   return (err: unknown) => {
+    console.error('グローバルエラー:', err)
     const globalErrorStore = useGlobalErrorStore()
     // グローバルエラー用のストアにエラーをセット
     globalErrorStore.setError(err)
