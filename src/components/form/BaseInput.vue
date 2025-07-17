@@ -11,12 +11,15 @@ interface Props {
   disabled?: boolean
   isError?: boolean
   error?: string
-  validateOnBlur?: boolean
-  validateOnChange?: boolean
+  validateOnBlur?: boolean | undefined
+  validateOnChange?: boolean | undefined
   overrideClass?: string
 }
 
-defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  validateOnBlur: true,
+  validateOnChange: true,
+})
 </script>
 
 <template>

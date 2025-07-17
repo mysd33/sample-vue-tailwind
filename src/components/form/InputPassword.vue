@@ -10,9 +10,13 @@ interface Props {
   disabled?: boolean
   isError?: boolean
   error?: string
+  validateOnBlur?: boolean
+  validateOnChange?: boolean
 }
-
-defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  validateOnBlur: true,
+  validateOnChange: true,
+})
 </script>
 
 <template>
@@ -25,5 +29,7 @@ defineProps<Props>()
     :readonly="readonly"
     :disabled="disabled"
     :is-error="isError"
-    :error="error" />
+    :error="error"
+    :validateOnBlur="validateOnBlur"
+    :validateOnChange="validateOnChange" />
 </template>

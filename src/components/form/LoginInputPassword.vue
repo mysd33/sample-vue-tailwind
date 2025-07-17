@@ -10,9 +10,13 @@ interface Props {
   disabled?: boolean
   isError?: boolean
   validateOnBlur?: boolean
+  validateOnChange?: boolean
 }
-
-defineProps<Props>()
+// ログインではフォーカスアウト時にバリデーションを行わないようにする
+withDefaults(defineProps<Props>(), {
+  validateOnBlur: false,
+  validateOnChange: false,
+})
 </script>
 <!-- TODO: class設定の見直し -->
 <template>

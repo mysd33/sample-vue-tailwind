@@ -84,19 +84,8 @@ const onInvalidSubmit = ({ errors }: { errors: GenericObject }) => {
         <InputItem>
           <!-- TODO: ログインは、入力エラーのメッセージ表示が特殊なので個別の作りこみが必要 -->
           <!-- ログインだけロストフォーカス時に入力チェックしない設定に -->
-          <LoginInputText
-            id="userId"
-            name="userId"
-            placeholder="ユーザID"
-            :focus="true"
-            :validateOnBlur="false"
-            :validateOnChange="false" />
-          <LoginInputPassword
-            id="password"
-            name="password"
-            placeholder="パスワード"
-            :validateOnBlur="false"
-            :validateOnChange="false" />
+          <LoginInputText id="userId" name="userId" placeholder="ユーザID" :focus="true" />
+          <LoginInputPassword id="password" name="password" placeholder="パスワード" />
         </InputItem>
         <SubmitButton size="lg" class="mt-3" :disabled="isSubmitting">ログイン</SubmitButton>
       </form>

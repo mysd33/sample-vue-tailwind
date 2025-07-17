@@ -14,7 +14,10 @@ interface Props {
   validateOnChange?: boolean
   overrideClass?: string
 }
-defineProps<Props>()
+withDefaults(defineProps<Props>(), {
+  validateOnBlur: true,
+  validateOnChange: true,
+})
 </script>
 
 <template>

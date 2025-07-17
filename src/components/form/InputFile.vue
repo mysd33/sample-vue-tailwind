@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
+//TODO: Fieldコンポーネント対応
+
 interface Props {
   id?: string
   name?: string
