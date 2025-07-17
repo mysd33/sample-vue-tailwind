@@ -9,7 +9,7 @@ import InputItem from '@/components/form/InputItem.vue'
 import ButtonArea from '@/components/button/ButtonArea.vue'
 import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBanner.vue'
 import * as yup from 'yup'
-import { useForm } from 'vee-validate'
+import { Form as VeeForm } from 'vee-validate'
 import type { Todo } from '@/usecases/todo/models/todo'
 import TodoItem from '@/usecases/todo/views/TodoItem.vue'
 import { BusinessError } from '@/framework/errors'
@@ -30,21 +30,13 @@ const schema = yup.object({
   todoTitle: yup.string().label('TODOタイトル').required(),
 })
 
-// VeeValidate with yup
-const { errors, handleSubmit, isSubmitting, defineField } = useForm({
-  validationSchema: schema,
-})
-
-const [todoTitle] = defineField('todoTitle')
-
 // 入力チェック成功時
-const onValidSubmit = async () => {
-  console.log('TODO作成:' + todoTitle.value)
+const onValidSubmit = async (values) => {
+  console.log('TODO作成:' + values.todoTitle)
   // TODOの作成処理
   await todoService
-    .create(todoTitle.value)
+    .create(values.todoTitle)
     .then(() => {
-      todoTitle.value = ''
       messageLevel.value = 'info'
       message.value = '作成しました。'
       // TODO一覧を再取得
@@ -70,8 +62,6 @@ const onValidSubmit = async () => {
 const onInvalidSubmit = () => {
   messageLevel.value = 'validation'
 }
-// 作成ボタン（Submit）時の処理
-const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
 
 // 完了処理完了時
 const onFinish = async (todoId: string) => {
@@ -111,18 +101,19 @@ onMounted(async () => {
   <MainContainer>
     <MessageBanner :message="message" :level="messageLevel" />
     <!-- TODO: SimpleFormAreaというコンポーネント化  -->
-    <form class="mb-3 flex flex-row gap-10" @submit="onSubmit">
-      <InputItem class="basis-2/3 text-left">
-        <InputText
-          id="todoTitle"
-          name="todoTitle"
-          v-model:value="todoTitle"
-          :error="errors.todoTitle" />
-      </InputItem>
-      <ButtonArea class="basis-1/3 text-left">
-        <SubmitButton :disabled="isSubmitting">作成</SubmitButton>
-      </ButtonArea>
-    </form>
+    <VeeForm
+      v-slot="{ handleSubmit, isSubmitting }"
+      :validation-schema="schema"
+      @invalid-submit="onInvalidSubmit">
+      <form class="mb-3 flex flex-row gap-10" @submit="handleSubmit($event, onValidSubmit)">
+        <InputItem class="basis-2/3 text-left">
+          <InputText id="todoTitle" name="todoTitle" />
+        </InputItem>
+        <ButtonArea class="basis-1/3 text-left">
+          <SubmitButton :disabled="isSubmitting">作成</SubmitButton>
+        </ButtonArea>
+      </form>
+    </VeeForm>
     <hr />
     <div class="mt-3 text-left">
       <ul class="list-disc">

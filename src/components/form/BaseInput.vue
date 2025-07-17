@@ -1,59 +1,47 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-
+import { ErrorMessage, Field } from 'vee-validate'
+//TODO: 不要なプロパティを削除
 interface Props {
   type: string
   id?: string
-  name?: string
+  name: string
   placeholder?: string
   focus?: boolean
   readonly?: boolean
   disabled?: boolean
   isError?: boolean
   error?: string
+  validateOnBlur?: boolean
+  validateOnChange?: boolean
+  overrideClass?: string
 }
 
-const props = defineProps<Props>()
-
-const valueModel = defineModel<string>('value')
-
-const borderColor = computed(() => {
-  return props.isError || props.error
-    ? 'border-red-600 focus:border-red-400 focus:ring-red-300/50 errorIcon'
-    : 'border-gray-300 focus:border-blue-400 focus:ring-blue-300/50'
-})
+defineProps<Props>()
 </script>
 
 <template>
-  <template v-if="!error">
+  <Field
+    v-slot="{ errors, field }"
+    :name="name"
+    :validateOnBlur="validateOnBlur"
+    :validateOnChange="validateOnChange">
     <input
+      v-bind="field"
       :type="type"
       :id="id"
-      :name="name"
       :placeholder="placeholder"
       :autofocus="focus"
       :readonly="readonly"
       :disabled="disabled"
-      :class="[borderColor]"
-      class="h-10 rounded-lg border shadow-xs read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:ring-3 read-only:focus:border-transparent read-only:focus:ring-transparent"
-      v-model="valueModel" />
-  </template>
-  <template v-else>
-    <input
-      :type="type"
-      :id="id"
-      :name="name"
-      :placeholder="placeholder"
-      :autofocus="focus"
-      :readonly="readonly"
-      :disabled="disabled"
-      :class="[borderColor]"
-      class="h-10 rounded-lg border shadow-xs read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:ring-3 read-only:focus:border-transparent read-only:focus:ring-transparent"
-      v-model="valueModel" />
-    <template v-if="isError || error">
-      <div class="flow flow-col m-1 text-sm text-red-600">{{ error }}</div>
-    </template>
-  </template>
+      :class="[
+        overrideClass,
+        'h-10 rounded-lg border shadow-xs read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:ring-3 read-only:focus:border-transparent read-only:focus:ring-transparent',
+        Object.keys(errors).length > 0
+          ? 'errorIcon border-red-600 focus:border-red-400 focus:ring-red-300/50'
+          : 'border-gray-300 focus:border-blue-400 focus:ring-blue-300/50',
+      ]" />
+  </Field>
+  <ErrorMessage :name="name" class="flow flow-col m-1 text-sm text-red-600" />
 </template>
 
 <style scoped>

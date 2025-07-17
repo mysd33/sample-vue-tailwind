@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import BaseInput from './BaseInput.vue'
-
+//TODO: 不要なプロパティを削除
 interface Props {
   id?: string
-  name?: string
+  name: string
   placeholder?: string
   focus?: boolean
   readonly?: boolean
@@ -13,7 +13,6 @@ interface Props {
 }
 
 defineProps<Props>()
-const valueModel = defineModel<string>('value')
 </script>
 
 <template>
@@ -26,6 +25,5 @@ const valueModel = defineModel<string>('value')
     :readonly="readonly"
     :disabled="disabled"
     :is-error="isError"
-    :error="error"
-    v-model:value="valueModel" />
+    :error="error" />
 </template>

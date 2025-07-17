@@ -1,20 +1,22 @@
 <script setup lang="ts">
 import InputText from './InputText.vue'
+//TODO: 不要なプロパティを削除
 interface Props {
   id?: string
-  name?: string
+  name: string
   placeholder?: string
   focus?: boolean
   readonly?: boolean
   disabled?: boolean
   isError?: boolean
+  validateOnBlur?: boolean
+  validateOnChange?: boolean
 }
 
 defineProps<Props>()
-
-const valueModel = defineModel<string>('value')
 </script>
 
+<!-- TODO: class設定の見直し -->
 <template>
   <InputText
     :id="id"
@@ -28,6 +30,7 @@ const valueModel = defineModel<string>('value')
       'z-0': !isError,
       'z-20': isError,
     }"
-    class="mb-[-1px] h-12 rounded-none rounded-t-lg focus:z-20"
-    v-model:value="valueModel" />
+    :validateOnBlur="validateOnBlur"
+    :validateOnChange="validateOnChange"
+    overrideClass="mb-[-1px] h-12 rounded-none rounded-t-lg focus:z-20" />
 </template>

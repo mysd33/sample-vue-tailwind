@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import BaseInput from './BaseInput.vue'
+//TODO: 不要なプロパティを削除
 interface Props {
   id?: string
-  name?: string
+  name: string
   placeholder?: string
   focus?: boolean
   readonly?: boolean
   disabled?: boolean
   isError?: boolean
   error?: string
+  validateOnBlur?: boolean
+  validateOnChange?: boolean
+  overrideClass?: string
 }
 defineProps<Props>()
-
-const valueModel = defineModel<string>('value')
 </script>
 
 <template>
@@ -26,5 +28,7 @@ const valueModel = defineModel<string>('value')
     :disabled="disabled"
     :is-error="isError"
     :error="error"
-    v-model:value="valueModel" />
+    :validateOnBlur="validateOnBlur"
+    :validateOnChange="validateOnChange"
+    :overrideClass="overrideClass" />
 </template>

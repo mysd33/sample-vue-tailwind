@@ -4,6 +4,7 @@ import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 const switchOn = defineModel<boolean>('enabled')
 </script>
 <template>
+  <!-- TODO: Fieldタグでのバインド対応 -->
   <SwitchGroup>
     <div>
       <Switch

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, useTemplateRef } from 'vue'
 
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
@@ -17,7 +17,7 @@ import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBan
 import ConfirmModalDialog from '@/components/dialog/ConfirmModalDialog.vue'
 import InformationModalDialog from '@/components/dialog/InformationModalDialog.vue'
 import * as yup from 'yup'
-import { useForm } from 'vee-validate'
+import { Form as VeeForm } from 'vee-validate'
 import { formatDateWithHyphen } from '@/usecases/common/utils/dateUtils'
 import type { User } from '@/usecases/common/models/user'
 import { UserService } from '@/usecases/user/services/userService'
@@ -44,6 +44,9 @@ const isUpdateCompleteDialogOpen = ref(false)
 const isDeleteConfirmDialogOpen = ref(false)
 const isDeleteCompleteDialogOpen = ref(false)
 
+// TODO: 暫定的にトグルのデータの保持
+const isAdmin = ref(false)
+
 // yup
 const schema = yup.object({
   userId: yup.string().label('ユーザID'),
@@ -58,17 +61,7 @@ const schema = yup.object({
   isAdmin: yup.boolean().label('管理者'),
 })
 
-// VeeValidate with yup
-const { errors, handleSubmit, isSubmitting, defineField } = useForm({
-  validationSchema: schema,
-})
-
-const [userId] = defineField('userId')
-const [password] = defineField('password')
-const [confirmPassword] = defineField('confirmPassword')
-const [userName] = defineField('userName')
-const [birthday] = defineField('birthday')
-const [isAdmin] = defineField('isAdmin')
+const veeForm = useTemplateRef('vee-form')
 
 // 初期表示処理
 onMounted(async () => {
@@ -76,25 +69,31 @@ onMounted(async () => {
   const user = await userService.findOne(props.id)
   // userがnull出なければ値をセット
   if (user) {
-    userId.value = user.id
-    userName.value = user.name
-    birthday.value = formatDateWithHyphen(user.birthday)
+    const initialValues = {
+      userId: user.id,
+      userName: user.name,
+      password: '',
+      confirmPassword: '',
+      birthday: formatDateWithHyphen(user.birthday),
+    }
+    // VeeValidateのフォームに初期値をセット
+    veeForm.value?.setValues(initialValues)
     isAdmin.value = user.isAdmin
   }
 })
 
 // 更新ボタンクリック時の処理
 // 入力チェックOKの場合の処理
-const onValidUpdateSubmit = async () => {
+const onValidUpdateSubmit = async (values) => {
   messageLevel.value = ''
   // ユーザ更新処理
   const user: User = {
-    id: userId.value,
-    password: password.value,
-    confirmPassword: confirmPassword.value,
-    name: userName.value,
-    birthday: birthday.value,
-    isAdmin: isAdmin.value,
+    id: values.userId,
+    password: values.password,
+    confirmPassword: values.confirmPassword,
+    name: values.userName,
+    birthday: values.birthday,
+    isAdmin: values.isAdmin,
   }
   await userService.update(user).then(() => {
     // 更新完了ダイアログを表示
@@ -105,8 +104,6 @@ const onValidUpdateSubmit = async () => {
 const onInvalidUpdateSubmit = () => {
   messageLevel.value = 'validation'
 }
-
-const onClickUpdateButton = handleSubmit(onValidUpdateSubmit, onInvalidUpdateSubmit)
 
 // 更新完了ダイアログのOKボタンクリック時の処理
 const onClickUpdateCompleteOKButtonClick = () => {
@@ -122,7 +119,7 @@ const onClickDeleteButton = () => {
 // 削除確認ダイアログのOKボタンクリック時の処理
 const onDeleteOKButtonClick = () => {
   // ユーザ削除処理
-  userService.delete(userId.value).then(() => {
+  userService.delete(props.id).then(() => {
     // 処理完了ダイアログを表示
     isDeleteCompleteDialogOpen.value = true
   })
@@ -145,52 +142,42 @@ const onDeleteCompleteOKButtonClick = () => {
   </HeaderArea>
   <MainContainer>
     <MessageBanner :message="message" :level="messageLevel" />
-    <FormArea>
-      <InputItem label="ユーザーID" labelFor="userId">
-        <InputText id="userId" name="userId" :readonly="true" v-model:value="userId" />
-      </InputItem>
-      <InputItem label="ユーザ名" labelFor="userName" :required="true">
-        <InputText
-          id="userName"
-          name="userName"
-          v-model:value="userName"
-          :error="errors.userName" />
-      </InputItem>
-      <InputItem label="パスワード" labelFor="password" :required="true">
-        <InputPassword
-          id="password"
-          name="password"
-          :focus="true"
-          v-model:value="password"
-          :error="errors.password" />
-      </InputItem>
-      <InputItem label="パスワード" labelFor="confirmPassword" :required="true">
-        <InputPassword
-          id="confirmPassword"
-          name="confirmPassword"
-          :focus="true"
-          v-model:value="confirmPassword"
-          :error="errors.confirmPassword" />
-      </InputItem>
-      <InputItem label="生年月日" labelFor="birthday" :required="true">
-        <InputDate
-          id="birthday"
-          name="birthday"
-          v-model:value="birthday"
-          :error="errors.birthday" />
-      </InputItem>
-      <InputItem>
-        <ToggleSwitch v-model:enabled="isAdmin">管理者</ToggleSwitch>
-      </InputItem>
-      <ButtonArea>
-        <SubmitButton :disabled="isSubmitting" @click="onClickUpdateButton"
-          >ユーザ更新</SubmitButton
-        >
-        <SubmitButton :danger="true" :disabled="isSubmitting" @click="onClickDeleteButton"
-          >ユーザ削除</SubmitButton
-        >
-      </ButtonArea>
-    </FormArea>
+
+    <!-- TODO: form部分をFormArea画面部品の実装にする -->
+    <VeeForm
+      v-slot="{ handleSubmit, isSubmitting }"
+      :validation-schema="schema"
+      @invalid-submit="onInvalidUpdateSubmit"
+      ref="vee-form">
+      <form class="grid grid-cols-2 gap-6 text-left">
+        <InputItem label="ユーザーID" labelFor="userId">
+          <InputText id="userId" name="userId" :readonly="true" />
+        </InputItem>
+        <InputItem label="ユーザ名" labelFor="userName" :required="true">
+          <InputText id="userName" name="userName" />
+        </InputItem>
+        <InputItem label="パスワード" labelFor="password" :required="true">
+          <InputPassword id="password" name="password" :focus="true" />
+        </InputItem>
+        <InputItem label="パスワード" labelFor="confirmPassword" :required="true">
+          <InputPassword id="confirmPassword" name="confirmPassword" :focus="true" />
+        </InputItem>
+        <InputItem label="生年月日" labelFor="birthday" :required="true">
+          <InputDate id="birthday" name="birthday" />
+        </InputItem>
+        <InputItem>
+          <ToggleSwitch v-model:enabled="isAdmin">管理者</ToggleSwitch>
+        </InputItem>
+        <ButtonArea>
+          <SubmitButton :disabled="isSubmitting" @click="handleSubmit($event, onValidUpdateSubmit)"
+            >ユーザ更新</SubmitButton
+          >
+          <SubmitButton :danger="true" :disabled="isSubmitting" @click="onClickDeleteButton"
+            >ユーザ削除</SubmitButton
+          >
+        </ButtonArea>
+      </form>
+    </VeeForm>
     <InformationModalDialog
       v-model:open="isUpdateCompleteDialogOpen"
       title="ユーザ情報更新完了"
