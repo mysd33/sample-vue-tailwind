@@ -50,8 +50,6 @@ const [password] = defineField('password')
 // 入力チェック成功時
 const onValidSubmit = async () => {
   validationErrorMessages.value = []
-  isUserIdError.value = false
-  isPasswordError.value = false
   message.value = ''
   messageLevel.value = ''
 
@@ -99,13 +97,11 @@ const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
           name="userId"
           placeholder="ユーザID"
           :focus="true"
-          :is-error="isUserIdError"
           v-model:value="userId" />
         <LoginInputPassword
           id="password"
           name="password"
           placeholder="パスワード"
-          :is-error="isPasswordError"
           v-model:value="password" />
       </InputItem>
       <SubmitButton size="lg" class="mt-3" :disabled="isSubmitting">ログイン</SubmitButton>

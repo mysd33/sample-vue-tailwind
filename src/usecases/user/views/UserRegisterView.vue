@@ -99,40 +99,22 @@ const onClickCreateCompleteOKButtonClick = () => {
     <MessageBanner :message="message" :level="messageLevel" />
     <FormArea @submit="onSubmit">
       <InputItem label="ユーザーID" labelFor="userId" :required="true">
-        <InputText
-          id="userId"
-          name="userId"
-          :focus="true"
-          v-model:value="userId"
-          :error="errors.userId" />
+        <InputText id="userId" name="userId" :focus="true" v-model:value="userId" />
       </InputItem>
       <InputItem label="ユーザー名" labelFor="userName" :required="true">
-        <InputText
-          id="userName"
-          name="userName"
-          v-model:value="userName"
-          :error="errors.userName" />
+        <InputText id="userName" name="userName" v-model:value="userName" />
       </InputItem>
       <InputItem label="パスワード" labelFor="password" :required="true">
-        <InputPassword
-          id="password"
-          name="password"
-          v-model:value="password"
-          :error="errors.password" />
+        <InputPassword id="password" name="password" v-model:value="password" />
       </InputItem>
       <InputItem label="確認用パスワード" labelFor="confirmPassword" :required="true">
         <InputPassword
           id="confirmPassword"
           name="confirmPassword"
-          v-model:value="confirmPassword"
-          :error="errors.confirmPassword" />
+          v-model:value="confirmPassword" />
       </InputItem>
       <InputItem label="生年月日" labelFor="birthday" :required="true">
-        <InputDate
-          id="birthday"
-          name="birthday"
-          v-model:value="birthday"
-          :error="errors.birthday" />
+        <InputDate id="birthday" name="birthday" v-model:value="birthday" />
       </InputItem>
       <InputItem>
         <ToggleSwitch v-model:enabled="isAdmin">管理者</ToggleSwitch>

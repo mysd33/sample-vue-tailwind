@@ -3,13 +3,11 @@ import BaseInput from './BaseInput.vue'
 
 interface Props {
   id?: string
-  name?: string
+  name: string
   placeholder?: string
   focus?: boolean
   readonly?: boolean
   disabled?: boolean
-  isError?: boolean
-  error?: string
 }
 
 defineProps<Props>()
@@ -25,7 +23,5 @@ const valueModel = defineModel<string>('value')
     :focus="focus"
     :readonly="readonly"
     :disabled="disabled"
-    :is-error="isError"
-    :error="error"
     v-model:value="valueModel" />
 </template>

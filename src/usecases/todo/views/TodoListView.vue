@@ -31,7 +31,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { errors, handleSubmit, isSubmitting, defineField } = useForm({
+const { handleSubmit, isSubmitting, defineField } = useForm({
   validationSchema: schema,
 })
 
@@ -45,6 +45,7 @@ const onValidSubmit = async () => {
     .create(todoTitle.value)
     .then(() => {
       todoTitle.value = ''
+      // TODO: メッセージ定義
       messageLevel.value = 'info'
       message.value = '作成しました。'
       // TODO一覧を再取得
@@ -79,6 +80,8 @@ const onFinish = async (todoId: string) => {
   // TODO一覧を再取得
   await todoService.findAll().then((result) => {
     todos.value = result
+
+    // TODO: メッセージ定義
     messageLevel.value = 'info'
     message.value = '完了しました。'
   })
@@ -90,6 +93,8 @@ const onDelete = async (todoId: string) => {
   // TODO一覧を再取得
   await todoService.findAll().then((result) => {
     todos.value = result
+
+    // TODO: メッセージ定義
     messageLevel.value = 'info'
     message.value = '削除しました。'
   })
@@ -99,8 +104,6 @@ const onDelete = async (todoId: string) => {
 onMounted(async () => {
   // TODO一覧を取得
   todos.value = await todoService.findAll()
-  //const todo = (await todoService.findOne('1')) as Todo
-  //todos.value.push(todo)
 })
 </script>
 
@@ -113,11 +116,7 @@ onMounted(async () => {
     <!-- TODO: SimpleFormAreaというコンポーネント化  -->
     <form class="mb-3 flex flex-row gap-10" @submit="onSubmit">
       <InputItem class="basis-2/3 text-left">
-        <InputText
-          id="todoTitle"
-          name="todoTitle"
-          v-model:value="todoTitle"
-          :error="errors.todoTitle" />
+        <InputText id="todoTitle" name="todoTitle" v-model:value="todoTitle" />
       </InputItem>
       <ButtonArea class="basis-1/3 text-left">
         <SubmitButton :disabled="isSubmitting">作成</SubmitButton>

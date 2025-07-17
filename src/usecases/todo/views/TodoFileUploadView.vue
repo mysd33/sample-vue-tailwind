@@ -22,7 +22,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { errors, handleSubmit, isSubmitting, defineField } = useForm({
+const { handleSubmit, isSubmitting, defineField } = useForm({
   validationSchema: schema,
 })
 
@@ -30,6 +30,7 @@ const [todoFile] = defineField('todoFile')
 
 const onValidSubmit = () => {
   console.log('TODO一括登録:' + todoFile.value)
+  // TODO: メッセージ定義
   messageLevel.value = 'info'
   message.value = 'ファイルの一括登録を依頼しました。'
 }
@@ -54,12 +55,7 @@ const onSubmit = handleSubmit(onValidSubmit, onInvalidSubmit)
           >Todoファイル
           <RequiredBadge />
         </label>
-        <InputFile
-          id="todoFile"
-          name="todoFile"
-          :focus="true"
-          v-model:value="todoFile"
-          :error="errors.todoFile" />
+        <InputFile id="todoFile" name="todoFile" :focus="true" v-model:value="todoFile" />
       </InputItem>
       <ButtonArea class="mt-4">
         <SubmitButton :disabled="isSubmitting">登録</SubmitButton>

@@ -1,48 +1,44 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ErrorMessage, Field } from 'vee-validate'
 
 interface Props {
   id?: string
-  name?: string
+  name: string
   placeholder?: string
   focus?: boolean
   disabled?: boolean
-  isError?: boolean
-  error?: string
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const modelValue = defineModel<File>('value')
 
+// Fileは双方向バインドに対応していないため、changeイベントで更新する
 const onChanged = (event: Event) => {
   const target = event.target as HTMLInputElement
   if (target.files) {
     modelValue.value = target.files[0]
   }
 }
-
-const borderColor = computed(() => {
-  return props.isError || props.error
-    ? 'border-red-600 focus:border-red-400 focus:ring-red-300/50 file:border-red-600 file:focus:border-red-400 file:focus:ring-red-300/50 errorIcon'
-    : 'border-gray-300 focus:border-blue-400 focus:ring-blue-300/50 file:border-r-gray-300 file:focus:border-blue-400 file:focus:ring-blue-300/50'
-})
 </script>
 
 <template>
-  <input
-    type="file"
-    :id="id"
-    :name="name"
-    :placeholder="placeholder"
-    :focus="focus"
-    :disabled="disabled"
-    :class="[borderColor]"
-    class="h-10 cursor-pointer rounded-lg border bg-white shadow-xs file:mr-3 file:h-10 file:border-t-0 file:border-r file:border-b-0 file:border-l-0 file:border-solid file:bg-gray-100 file:px-3 hover:file:cursor-pointer hover:file:bg-gray-200 focus:ring-3 focus:outline-hidden file:focus:ring-3"
-    @change="onChanged" />
-  <template v-if="isError || error">
-    <div class="flow flow-col m-1 text-sm text-red-600">{{ error }}</div>
-  </template>
+  <Field :name="name" v-slot="{ errors }" v-model="modelValue">
+    <input
+      type="file"
+      :id="id"
+      :placeholder="placeholder"
+      :focus="focus"
+      :disabled="disabled"
+      class="h-10 cursor-pointer rounded-lg border bg-white shadow-xs file:mr-3 file:h-10 file:border-t-0 file:border-r file:border-b-0 file:border-l-0 file:border-solid file:bg-gray-100 file:px-3 hover:file:cursor-pointer hover:file:bg-gray-200 focus:ring-3 focus:outline-hidden file:focus:ring-3"
+      :class="[
+        errors.length == 0
+          ? 'border-gray-300 file:border-r-gray-300 focus:border-blue-400 focus:ring-blue-300/50 file:focus:border-blue-400 file:focus:ring-blue-300/50'
+          : 'errorIcon border-red-600 file:border-red-600 focus:border-red-400 focus:ring-red-300/50 file:focus:border-red-400 file:focus:ring-red-300/50',
+      ]"
+      @change="onChanged" />
+  </Field>
+  <ErrorMessage :name="name" class="flow flow-col m-1 text-sm text-red-600" as="div" />
 </template>
 
 <style scoped>

@@ -59,7 +59,7 @@ const schema = yup.object({
 })
 
 // VeeValidate with yup
-const { errors, handleSubmit, isSubmitting, defineField } = useForm({
+const { handleSubmit, isSubmitting, defineField } = useForm({
   validationSchema: schema,
 })
 
@@ -150,34 +150,20 @@ const onDeleteCompleteOKButtonClick = () => {
         <InputText id="userId" name="userId" :readonly="true" v-model:value="userId" />
       </InputItem>
       <InputItem label="ユーザ名" labelFor="userName" :required="true">
-        <InputText
-          id="userName"
-          name="userName"
-          v-model:value="userName"
-          :error="errors.userName" />
+        <InputText id="userName" name="userName" v-model:value="userName" />
       </InputItem>
       <InputItem label="パスワード" labelFor="password" :required="true">
-        <InputPassword
-          id="password"
-          name="password"
-          :focus="true"
-          v-model:value="password"
-          :error="errors.password" />
+        <InputPassword id="password" name="password" :focus="true" v-model:value="password" />
       </InputItem>
       <InputItem label="パスワード" labelFor="confirmPassword" :required="true">
         <InputPassword
           id="confirmPassword"
           name="confirmPassword"
           :focus="true"
-          v-model:value="confirmPassword"
-          :error="errors.confirmPassword" />
+          v-model:value="confirmPassword" />
       </InputItem>
       <InputItem label="生年月日" labelFor="birthday" :required="true">
-        <InputDate
-          id="birthday"
-          name="birthday"
-          v-model:value="birthday"
-          :error="errors.birthday" />
+        <InputDate id="birthday" name="birthday" v-model:value="birthday" />
       </InputItem>
       <InputItem>
         <ToggleSwitch v-model:enabled="isAdmin">管理者</ToggleSwitch>
