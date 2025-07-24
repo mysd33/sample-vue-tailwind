@@ -1,7 +1,7 @@
 /**
  * エラーコードを持つエラーを表すクラス
  */
-abstract class CodableError extends Error {
+export abstract class CodableError extends Error {
   public readonly code: string
   public readonly message: string
   public readonly details?: string[]

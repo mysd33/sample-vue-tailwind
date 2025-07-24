@@ -9,6 +9,7 @@ import {
   DefaultHttpClientErrorHandler,
   type HttpClientErrorHandler,
 } from '@/framework/http-client/httpClientErrorHandler'
+import { CodableError } from '../errors'
 
 /**
  * HTTPクライアント機能を提供するクラス
@@ -44,6 +45,13 @@ export class HttpClient {
         return response
       },
       (error) => {
+        // リトライ後のエラーの対応
+        if (error instanceof CodableError) {
+          // 前回試行時のエラーハンドリングでCodableErrorとして扱われている場合はそのまま返す
+          return Promise.reject(error)
+        }
+        //TODO: ダウンロード処理のエラーハンドリング忘れずに
+
         return Promise.reject(this.errorHandler.handleError(error))
       },
     )
