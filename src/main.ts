@@ -9,6 +9,7 @@ import * as ja from '@/usecases/common/messages/validationMessages'
 import { configure } from 'vee-validate'
 import globalErrorHandler from '@/usecases/common/errors/errorhandler'
 import { initMessages } from '@/usecases/common/messages/applicationMessages'
+import { errorHandlingPlugin } from './framework/errorhandler'
 
 const app = createApp(App)
 
@@ -22,7 +23,11 @@ app.use(pinia)
 app.use(router)
 
 // 集約例外ハンドリング
-app.config.errorHandler = globalErrorHandler(router)
+app.use(errorHandlingPlugin, {
+  customGlobalErrorHandler: globalErrorHandler,
+  router,
+  pinia,
+})
 
 // VeeValidateのエラーのグローバル設定
 configure({
