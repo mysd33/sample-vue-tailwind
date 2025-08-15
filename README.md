@@ -146,6 +146,8 @@ npx vitest run
         - AXIOSでのREST API通信のリトライ処理に使用
     - [uuid](https://github.com/uuidjs/uuid)
         - UUIDの生成に使用
+    - [vite-plugin-remove-console](https://githu　b.com/xiaoxian521/vite-plugin-remove-console)
+        - 本番環境での動作では、開発用のconsoleログを削除するのに使用
 
 - Storybook
     - [Storybook](https://storybook.js.org/)
@@ -398,6 +400,9 @@ npm install uuid
 
 # Vue Test Utils
 npm install --save-dev @vue/test-utils
+
+# vite-plugin-remove-console
+npm install vite-plugin-remove-console -D
 ```
 
 - main.tsに以下を追記
