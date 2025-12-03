@@ -36,11 +36,13 @@ export class HttpClient {
   ) {
     this.errorHandler = errorHandler
     this.axiosInstance = axios.create({
+      ...config,
       headers: {
         [HEADER_CONTENT_TYPE]: MIME_APPLICATION_JSON,
+        ...config.headers,
       },
-      // withCredentials: true, // Cookieを送信する場合はtrueに設定
-      ...config,
+      // Cookieを送信する場合はtrueに設定する
+      // withCredentials: true,
     })
 
     // リトライ対象のステータスコードを取得

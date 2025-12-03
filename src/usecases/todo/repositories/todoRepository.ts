@@ -55,6 +55,6 @@ export class TodoRepository {
    * @param id ID
    */
   public async delete(id: string): Promise<void> {
-    return (await this.httpClient.delete<void>(`/bff-api/v1/todo/${id}`)).data
+    return (await this.httpClient.delete<never, void>(`/bff-api/v1/todo/${id}`)).data
   }
 }
