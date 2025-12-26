@@ -160,8 +160,9 @@ npx vitest run
         - APIのモックサーバーを立てるために使用
     - [Cypress](https://www.cypress.io/)
         - E2Eテストに使用
+        - この後は、[Playwright](https://playwright.dev/)のほうがいいかもしれません。
 
-- TailWind CSSプラグイン
+- Tailwind CSSプラグイン
     - [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms)
 
 ## (参考) ブランクプロジェクトのセットアップ方法
@@ -478,6 +479,10 @@ git config core.ignorecase false
 - [Preitter - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 
     - Prettierのプラグインとして、[Prettier plugin for Tailwind CSS](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)もインストールするとよい。
+
+        ```sh
+        npm install -D prettier prettier-plugin-tailwindcss
+        ```    
 
     - .prettierrc.jsに以下の設定を追加すると、Tailwind CSSのクラス名のフォーマットが適用される。
         - pluginsに"prettier-plugin-tailwindcss"を追加
