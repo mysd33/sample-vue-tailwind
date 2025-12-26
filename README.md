@@ -452,7 +452,12 @@ core.ignorecase=true
 git config core.ignorecase false
 ```
 
-## (参考) インストールするとよいVSCodeの拡張機能
+## (参考) インストールするとよいツール
+### Chorom拡張機能
+- [Vue.js devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
+    - Vue.jsのコンポーネント構造や状態を確認できる
+
+### VSCodeの拡張機能
 
 - [Vue - Official拡張機能](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 
