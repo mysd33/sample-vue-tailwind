@@ -116,7 +116,7 @@ npx vitest run
 | ボタンの基底部品 | ボタン共通の基底のコンポーネント| [ソースコード](src/components/button/BaseButton.vue) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/components-button-basebutton--docs) |
 | メニューボタン | メニュー画面のレイアウトに合わせたリンクボタン | [ソースコード](src/components/button/MenuButton.vue) | TBD |
 | リンクボタン | 画面遷移のリンクボタン | [ソースコード](src/components/button/LinkButton.vue) | TBD |
-| 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/button/SubmitButton.vue) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/components-button-submitbutton--docs) | TBD |
+| 送信ボタン | フォームの送信ボタン | [ソースコード](src/components/button/SubmitButton.vue) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/docs/components-button-submitbutton--docs) |
 | アクションボタン | フォーム以外でのロジック実行ボタン | [ソースコード](src/components/button/ActionButton.vue) | TBD |
 | テーブル | テーブルの表示領域、ヘッダー部、データ部 | [ソースコード](src/components/table/) | TBD |
 | ページネーションリンク | ページネーションのリンクボタン | [ソースコード](src/components/pagination/PaginationLink.vue) | TBD |
