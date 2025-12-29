@@ -139,7 +139,7 @@ npx vitest run
     - [VeeValidate](https://vee-validate.logaretm.com/v4/)       
         - 入力チェックに使用
     - [@vee-validate/yup](https://vee-validate.logaretm.com/v4/guide/composition-api/getting-started/#validating-with-yup)
-        - 入力チェックに使用。yupと連携してVeeValidateを使用        
+        - 入力チェック（スキーマバリデーション）に使用。yupと連携してVeeValidateを使用        
     - [AXIOS](https://axios-http.com/)
         - サーバへのREST API通信に使用
     - [axios-retry](https://github.com/softonic/axios-retry)
@@ -148,6 +148,9 @@ npx vitest run
         - UUIDの生成に使用
     - [vite-plugin-remove-console](https://githu　b.com/xiaoxian521/vite-plugin-remove-console)
         - 本番環境での動作では、開発用のconsoleログを削除するのに使用
+
+- Tailwind CSSプラグイン
+    - [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms)
 
 - Storybook
     - [Storybook](https://storybook.js.org/)
@@ -161,9 +164,6 @@ npx vitest run
     - [Cypress](https://www.cypress.io/)
         - E2Eテストに使用
         - この後は、[Playwright](https://playwright.dev/)のほうがいいかもしれません。
-
-- Tailwind CSSプラグイン
-    - [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms)
 
 ## (参考) ブランクプロジェクトのセットアップ方法
 - Vue.jsとTailwind CSSを使ったブランクプロジェクトの作成手順は以下の通り
