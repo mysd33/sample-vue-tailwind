@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import XCircleIcon from '@/components/icons/XCircleIcon.vue'
-import EyeIcon from '@/components/icons/EyeIcon.vue'
-
 import { computed } from 'vue'
-import CheckCircleIcon from '@/components/icons/CheckCircleIcon.vue'
+import ErrorIcon from '@/components/icons/ErrorIcon.vue'
+import InfoIcon from '@/components/icons/InfoIcon.vue'
+import WarnIcon from '@/components/icons/WarnIcon.vue'
 
 export type MessageLevel = '' | 'validation' | 'info' | 'warn' | 'error'
 
@@ -24,7 +23,7 @@ const isError = computed(() => props.level === 'error')
     v-if="isValidationError"
     class="mb-4 flex flex-row content-center rounded-lg border border-red-950/20 bg-red-500/20 px-4 py-3">
     <div class="flex flex-row">
-      <XCircleIcon />
+      <ErrorIcon />
       <span class="mt-1 ml-3 text-red-950">入力エラーです。</span>
     </div>
   </div>
@@ -32,7 +31,7 @@ const isError = computed(() => props.level === 'error')
     class="mb-4 flex flex-row content-center rounded-lg border border-green-950/20 bg-green-600/20 px-4 py-3"
     v-if="message && isInfo">
     <div class="flex flex-row">
-      <CheckCircleIcon />
+      <InfoIcon />
       <span class="mt-1 ml-3 text-green-950">{{ message }}</span>
     </div>
   </div>
@@ -40,7 +39,7 @@ const isError = computed(() => props.level === 'error')
     class="mb-4 flex flex-row content-center rounded-lg border border-amber-950/20 bg-amber-500/20 px-4 py-3"
     v-if="message && isWarn">
     <div class="flex flex-row">
-      <EyeIcon />
+      <WarnIcon />
       <span class="mt-1 ml-3 text-amber-950">{{ message }}</span>
     </div>
   </div>
@@ -48,7 +47,7 @@ const isError = computed(() => props.level === 'error')
     class="mb-4 flex flex-row content-center rounded-lg border border-red-950/20 bg-red-500/20 px-4 py-3"
     v-if="message && isError">
     <div class="flex flex-row">
-      <XCircleIcon />
+      <ErrorIcon />
       <span class="mt-1 ml-3 text-red-950">{{ message }}</span>
     </div>
   </div>

@@ -3,10 +3,25 @@ import RequiredBadge from '@/components/icons/RequiredBadge.vue'
 import { computed } from 'vue'
 
 interface Props {
+  /**
+   * ラベル名
+   */
   label?: string
+  /**
+   * ラベルのfor属性
+   */
   labelFor?: string
+  /**
+   * スクリーンリーダー用にラベルを非表示にするか
+   */
   srOnly?: boolean
+  /**
+   * 必須項目かどうか
+   */
   required?: boolean
+  /**
+   * 入力エラーメッセージ
+   */
   errors?: string[]
 }
 const props = defineProps<Props>()

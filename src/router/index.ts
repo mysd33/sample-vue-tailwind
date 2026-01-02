@@ -39,7 +39,7 @@ const router = createRouter({
     },
     {
       // ユーザ登録画面
-      path: '/newuser',
+      path: '/users/newuser',
       name: 'newUser',
       component: () => import('@/usecases/user/views/UserRegisterView.vue'),
     },
