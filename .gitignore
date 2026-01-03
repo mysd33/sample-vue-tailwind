@@ -32,3 +32,5 @@ coverage
 *storybook.log
 
 storybook-static/
+
+*.bkp

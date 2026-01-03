@@ -11,6 +11,10 @@
 
 - このサンプルAPでは、2つの考え方の違いによる実装を比較するため、[Spring Boot + Thymeleaf + BootstrapのサンプルAP](https://github.com/mysd33/sample-bff/)と同じ画面を作成して、ソースコードを比較できるようにしてみようと思います。
 
+- サンプルAPのソフトウェアアーキテクチャ図は以下の通り。
+
+![ソフトウェアアーキテクチャ図](docs/img/architecture.png)
+
 ## サンプルAPの動作確認方法
 
 - 必要なパッケージをインストール
