@@ -8,6 +8,10 @@ interface Props {
    */
   forwardViewName?: string
   /**
+   * ボタンのサイズ（sm, md, lg）
+   */
+  size?: 'sm' | 'md' | 'lg' | undefined
+  /**
    * アウトラインボタンかどうか
    */
   outline?: boolean
@@ -38,7 +42,7 @@ const onClick = (): void => {
 }
 </script>
 <template>
-  <BaseButton :disabled="disabled" :outline="outline" @click="onClick">
+  <BaseButton :size="size" :disabled="disabled" :outline="outline" @click="onClick">
     <slot></slot>
   </BaseButton>
 </template>
