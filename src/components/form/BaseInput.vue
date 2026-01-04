@@ -2,12 +2,33 @@
 import { ErrorMessage, Field } from 'vee-validate'
 
 interface Props {
+  /**
+   * input要素のtype
+   */
   type: string
+  /**
+   * input要素のid
+   */
   id?: string
+  /**
+   * input要素のname
+   */
   name: string
+  /**
+   * input要素のプレースフォルダ
+   */
   placeholder?: string
+  /**
+   * input要素にフォーカスを当てるかどうか
+   */
   focus?: boolean
+  /**
+   * input要素が読み取り専用かどうか
+   */
   readonly?: boolean
+  /**
+   * input要素が無効にするかどうか
+   */
   disabled?: boolean
 }
 

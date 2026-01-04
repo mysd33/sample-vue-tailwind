@@ -116,7 +116,7 @@ onMounted(async () => {
     <!-- TODO: SimpleFormAreaというコンポーネント化  -->
     <form class="mb-3 flex flex-row gap-10" @submit="onSubmit">
       <InputItem class="basis-2/3 text-left">
-        <InputText id="todoTitle" name="todoTitle" v-model:value="todoTitle" />
+        <InputText id="todoTitle" name="todoTitle" :focus="true" v-model:value="todoTitle" />
       </InputItem>
       <ButtonArea class="basis-1/3 text-left">
         <SubmitButton :disabled="isSubmitting">作成</SubmitButton>
