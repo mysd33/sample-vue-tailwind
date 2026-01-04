@@ -31,6 +31,16 @@ npm run dev
 
 - ブラウザで[http://localhost:5173/](http://localhost:5173/)アクセス
 
+## VSCodeでデバッグ実行
+- [.vscode/launch.json](.vscode/launch.json)を作成し、VSCodeのデバッグ実行で、Chromeブラウザを起動してデバッグできるようにしています。
+
+### 開発用サーバー起動後にクライアントAPのデバッグ実行する方法
+- `npm run dev`で開発用サーバーを起動した後、VSCodeのデバッグ実行で「Vue.js: Debug」を選択して実行してください。VSCodeでソースコードにブレークポイントを設定して止めることができます。
+
+### 開発用サーバー起動とクライアントAPのデバッグ実行を同時に行う方法
+- VSCodeのデバッグ実行で「Vue.js: Run npm dev & Debug」を選択して実行してください。`npm run dev`で開発用サーバーが起動され、Chromeブラウザを起動して、同様に、VSCodeでソースコードにブレークポイントを設定して止めて、デバッグできるようにしています。
+
+
 ## Storybookの起動方法
 - GitHub Pagesに[Storybook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイして見られるように対応していますが、ローカルで起動する場合は以下の通り。
 
