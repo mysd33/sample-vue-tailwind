@@ -41,7 +41,7 @@ const onClickDeleteButton = handleSubmit(async () => {
 <!-- ボタンごとにクライアント処理を分けるために@submitではなく各ボタンの@clickにイベントを関連付け -->
 <template>
   <FormArea>
-    <ButtonArea>
+    <ButtonArea class="pt-2">
       <span class="pt-2" :class="{ 'line-through': todo.finished }">{{ todo.title }}</span>
 
       <SubmitButton v-if="!todo.finished" :disabled="isSubmitting" @click="onClickFinishButton"
