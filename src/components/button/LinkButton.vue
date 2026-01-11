@@ -8,6 +8,11 @@ interface Props {
    */
   forwardViewName?: string
   /**
+   * 遷移先のパスパラメータ
+   */
+  forwardViewParams?: Record<string, string>
+
+  /**
    * ボタンのサイズ（sm, md, lg）
    */
   size?: 'sm' | 'md' | 'lg' | undefined
@@ -37,7 +42,7 @@ const onClick = (): void => {
   emit('click')
   // 指定の画面があれば遷移
   if (props.forwardViewName) {
-    router.push({ name: props.forwardViewName })
+    router.push({ name: props.forwardViewName, params: props.forwardViewParams || {} })
   }
 }
 </script>

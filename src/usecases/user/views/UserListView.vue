@@ -37,12 +37,6 @@ onMounted(async () => {
 const onPageClicked = async (pageable: Pageable) => {
   userPage.value = await userService.findAllForPageNation(pageable)
 }
-
-// 詳細ボタンクリック時の処理
-const onDetailButtonClicked = (id: string) => {
-  // クリックされたユーザIDをパラメータにして詳細画面に遷移
-  router.push({ name: 'userDetail', params: { id: id } })
-}
 </script>
 
 <template>
@@ -71,7 +65,10 @@ const onDetailButtonClicked = (id: string) => {
           <TableDataCol>{{ calcAge(user.birthday) }}</TableDataCol>
           <TableDataCol>{{ user.isAdmin ? '○' : '-' }}</TableDataCol>
           <TableDataCol>
-            <LinkButton @click="onDetailButtonClicked(user.id)">詳細</LinkButton>
+            <!-- 詳細ボタンで詳細画面へ遷移 -->
+            <LinkButton forward-view-name="userDetail" :forward-view-params="{ id: user.id }"
+              >詳細</LinkButton
+            >
           </TableDataCol>
         </TableDataRow>
       </template>
