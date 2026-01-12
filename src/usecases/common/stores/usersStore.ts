@@ -279,7 +279,7 @@ export const useUserDummyStore = defineStore(
           isAdmin: false,
         },
         {
-          id: 'tamura20@xxx.co.jp',
+          id: 'tamura30@xxx.co.jp',
           name: '田村十郎',
           birthday: new Date('1986-11-05'),
           password: 'password',

@@ -10,7 +10,6 @@ import PaginationLink from '@/components/pagination/PaginationLink.vue'
 import LinkButton from '@/components/button/LinkButton.vue'
 import ButtonArea from '@/components/button/ButtonArea.vue'
 import TableDataCol from '@/components/table/TableDataCol.vue'
-import { useRouter } from 'vue-router'
 import ActionButton from '@/components/button/ActionButton.vue'
 import type { User } from '@/usecases/common/models/user'
 import { formatDate, calcAge } from '@/usecases/common/utils/dateUtils'
@@ -24,8 +23,6 @@ const userService = UserService.getInstance()
 const pageSize = 5
 
 const userPage = ref<Page<User>>()
-
-const router = useRouter()
 
 // 初期表示処理
 onMounted(async () => {
