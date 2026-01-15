@@ -37,7 +37,11 @@ const isError = computed(() => {
       <RequiredBadge v-if="required" />
     </label>
     <slot></slot>
-    <div v-if="isError" class="flow flow-col m-1 text-sm text-red-600">
+    <div
+      v-if="isError"
+      class="flow flow-col m-1 text-sm text-red-600"
+      role="alert"
+      aria-live="polite">
       <div v-for="error in props.errors" :key="error">{{ error }}</div>
     </div>
   </div>

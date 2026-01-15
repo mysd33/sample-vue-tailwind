@@ -35,6 +35,7 @@ const valueModel = defineModel<string>('value')
           ? 'z-0 border-gray-300 focus:border-blue-400 focus:ring-blue-300/50'
           : 'errorIcon z-20 border-red-600 focus:border-red-400 focus:ring-red-300/50',
       ]"
+      :aria-invalid="errors.length > 0 ? 'true' : 'false'"
       v-bind="field" />
   </Field>
 </template>
