@@ -53,31 +53,38 @@ const onPageClicked = async (pageable: Pageable) => {
           <TableHeaderCol></TableHeaderCol>
         </TableHeaderRow>
       </template>
-      <template v-slot:tbody v-if="userPage">
-        <TableDataRow v-for="(user, index) in userPage.content" :key="user.id">
-          <TableDataCol>{{ index + 1 }}</TableDataCol>
-          <TableDataCol>{{ user.id }}</TableDataCol>
-          <TableDataCol>{{ user.name }}</TableDataCol>
-          <TableDataCol>{{ formatDate(user.birthday) }}</TableDataCol>
-          <TableDataCol>{{ calcAge(user.birthday) }}</TableDataCol>
-          <TableDataCol>{{ user.isAdmin ? '○' : '-' }}</TableDataCol>
-          <TableDataCol>
-            <!-- 詳細ボタンで詳細画面へ遷移 -->
-            <LinkButton forward-view-name="userDetail" :forward-view-params="{ id: user.id }"
-              >詳細</LinkButton
-            >
-          </TableDataCol>
-        </TableDataRow>
+      <template v-slot:tbody>
+        <template v-if="!userPage || userPage.content.length === 0">
+          <TableDataRow>
+            <TableDataCol colSpan="7" class="text-center">データが存在しません</TableDataCol>
+          </TableDataRow>
+        </template>
+        <template v-if="userPage && userPage.content.length > 0">
+          <TableDataRow v-for="(user, index) in userPage.content" :key="user.id">
+            <TableDataCol>{{ index + 1 }}</TableDataCol>
+            <TableDataCol>{{ user.id }}</TableDataCol>
+            <TableDataCol>{{ user.name }}</TableDataCol>
+            <TableDataCol>{{ formatDate(user.birthday) }}</TableDataCol>
+            <TableDataCol>{{ calcAge(user.birthday) }}</TableDataCol>
+            <TableDataCol>{{ user.isAdmin ? '○' : '-' }}</TableDataCol>
+            <TableDataCol>
+              <!-- 詳細ボタンで詳細画面へ遷移 -->
+              <LinkButton forward-view-name="userDetail" :forward-view-params="{ id: user.id }"
+                >詳細</LinkButton
+              >
+            </TableDataCol>
+          </TableDataRow>
+        </template>
       </template>
     </TableArea>
     <PaginationLink
-      v-if="userPage"
+      v-if="userPage && userPage.content.length > 0"
       :pageSize="pageSize"
       :page="userPage"
       @onClick="onPageClicked" />
 
     <div class="my-2 text-left">
-      <label>合計: {{ userPage ? userPage.totalElements : 0 }}件</label>
+      <span>合計: {{ userPage ? userPage.totalElements : 0 }}件</span>
     </div>
     <br />
     <ButtonArea>
