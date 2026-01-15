@@ -291,6 +291,8 @@ export const useUserDummyStore = defineStore(
   },
   {
     // 永続化の設定
+    // TODO: 型定義の問題を回避する最善の方法を検討
+    // @ts-ignore: persistのプロパティが認識できない型定義問題を回避
     persist: {
       storage: localStorage,
       // セッションストレージの場合
@@ -299,11 +301,12 @@ export const useUserDummyStore = defineStore(
       // Base64エンコードして、開発者ツール上、ユーザ情報を難読化する場合はコメントはずす
       // 開発者ツールでユーザ情報を見たい場合はコメントアウトする
       serializer: {
-        deserialize: (value): StateTree => {
+        deserialize: (value: string): StateTree => {
           // Base64デコードして復号化
           const rawData = atob(value)
           return JSON.parse(decodeURIComponent(rawData))
         },
+        // @ts-ignore: データ型を定義できないため回避
         serialize: (value): string => {
           const rawData = JSON.stringify(value)
           // Base64エンコードして、開発者ツール上、ユーザ情報を難読化
