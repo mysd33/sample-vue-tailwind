@@ -30,7 +30,7 @@ const valueModel = defineModel<string>('value')
       :autofocus="focus"
       :readonly="readonly"
       :disabled="disabled"
-      class="mb-[-1px] h-12 rounded-t-lg border shadow-xs read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:z-20 focus:ring-3 read-only:focus:border-transparent read-only:focus:ring-transparent"
+      class="-mb-px h-12 rounded-t-lg border shadow-xs read-only:border-transparent read-only:bg-transparent read-only:px-0 read-only:shadow-none focus:z-20 focus:ring-3 read-only:focus:border-transparent read-only:focus:ring-transparent"
       :class="[
         errors.length == 0
           ? 'z-0 border-gray-300 focus:border-blue-400 focus:ring-blue-300/50'
