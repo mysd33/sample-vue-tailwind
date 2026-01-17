@@ -516,16 +516,22 @@ git config core.ignorecase false
     *.md
     ```    
 
-    - vueファイルやtsファイルが、VSCodeでも自動保存時にPrettierでフォーマットされるように、settings.jsonに以下を追記
+    - vueファイルやtsファイルが、VSCodeでも自動保存時にPrettierでフォーマット、import文の整理がされるように、settings.jsonに以下を追記
 
     ```json
     "[vue]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }  
     },
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }  
     },      
     ```
 
