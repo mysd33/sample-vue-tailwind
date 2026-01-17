@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import ErrorIcon from '@/components/icons/ErrorIcon.vue'
 import InfoIcon from '@/components/icons/InfoIcon.vue'
 import WarnIcon from '@/components/icons/WarnIcon.vue'
+import { computed } from 'vue'
 
 export type MessageLevel = '' | 'validation' | 'info' | 'warn' | 'error'
 

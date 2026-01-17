@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useForm } from 'vee-validate'
-import FormArea from '@/components/form/FormArea.vue'
 import ButtonArea from '@/components/button/ButtonArea.vue'
 import SubmitButton from '@/components/button/SubmitButton.vue'
+import FormArea from '@/components/form/FormArea.vue'
 import type { Todo } from '@/usecases/todo/models/todo'
 import type { TodoService } from '@/usecases/todo/services/todoService'
+import { useForm } from 'vee-validate'
 
 interface Props {
   todo: Todo

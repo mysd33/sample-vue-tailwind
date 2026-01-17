@@ -1,6 +1,6 @@
-import { ref } from 'vue'
 import type { User } from '@/usecases/common/models/user'
 import { defineStore, type StateTree } from 'pinia'
+import { ref } from 'vue'
 
 /**
  * ユーザ情報を管理するダミーのStore

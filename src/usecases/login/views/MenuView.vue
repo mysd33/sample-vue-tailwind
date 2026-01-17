@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import MenuButton from '@/components/button/MenuButton.vue'
 import HeaderArea from '@/components/layout/HeaderArea.vue'
 import MainContainer from '@/components/layout/MainContainer.vue'
-import MenuButton from '@/components/button/MenuButton.vue'
+import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 import { AuthenticationService } from '@/usecases/login/services/authenticationService'
 import { useRouter } from 'vue-router'
-import { useAuthenticationStore } from '@/usecases/common/stores/authenticationStore'
 
 // ビジネスロジック
 const authenticationService = AuthenticationService.getInstance()

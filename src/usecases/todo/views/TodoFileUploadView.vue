@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import HeaderArea from '@/components/layout/HeaderArea.vue'
-import MainContainer from '@/components/layout/MainContainer.vue'
-import InputItem from '@/components/form/InputItem.vue'
+import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBanner.vue'
 import ButtonArea from '@/components/button/ButtonArea.vue'
+import LinkButton from '@/components/button/LinkButton.vue'
 import SubmitButton from '@/components/button/SubmitButton.vue'
 import InputFile from '@/components/form/InputFile.vue'
+import InputItem from '@/components/form/InputItem.vue'
 import RequiredBadge from '@/components/icons/RequiredBadge.vue'
-import LinkButton from '@/components/button/LinkButton.vue'
-import MessageBanner, { type MessageLevel } from '@/components/banner/MessageBanner.vue'
-import * as yup from 'yup'
+import HeaderArea from '@/components/layout/HeaderArea.vue'
+import MainContainer from '@/components/layout/MainContainer.vue'
 import { useForm } from 'vee-validate'
+import { ref } from 'vue'
+import * as yup from 'yup'
 
 // メッセージ
 const messageLevel = ref<MessageLevel>('')

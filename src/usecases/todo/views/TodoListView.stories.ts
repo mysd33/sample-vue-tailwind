@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-import TodoListView from '@/usecases/todo/views/TodoListView.vue'
-import type { Todo } from '../models/todo'
-import { http, HttpResponse, type PathParams } from 'msw'
 import { generateUUID } from '@/usecases/common/utils/idUtils'
+import TodoListView from '@/usecases/todo/views/TodoListView.vue'
+import { http, HttpResponse, type PathParams } from 'msw'
+import type { Todo } from '../models/todo'
 
 const todoList: Todo[] = [
   {

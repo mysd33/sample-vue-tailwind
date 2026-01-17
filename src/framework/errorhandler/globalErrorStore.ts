@@ -1,6 +1,6 @@
+import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
 import type { CodableError } from '../errors'
-import { defineStore } from 'pinia'
 
 interface GlobalErrorStore {
   error: Ref<CodableError | null>

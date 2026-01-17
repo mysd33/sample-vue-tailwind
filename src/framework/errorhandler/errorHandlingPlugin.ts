@@ -1,9 +1,9 @@
 import type { Pinia } from 'pinia'
 import type { App } from 'vue'
 import type { Router } from 'vue-router'
+import { CodableError, SystemError } from '../errors'
 import { FrameworkMessageIds, MessageManager } from '../messages'
 import { useGlobalErrorStore } from './globalErrorStore'
-import { CodableError, SystemError } from '../errors'
 
 // 集約例外ハンドリング機能を組み込むVueのプラグイン
 // https://vuejs.org/guide/reusability/plugins

@@ -1,6 +1,6 @@
-import { computed, ref } from 'vue'
 import type { Todo } from '@/usecases/todo/models/todo'
 import { defineStore } from 'pinia'
+import { computed, ref } from 'vue'
 
 /**
  * TODOリストを管理するダミーのStore

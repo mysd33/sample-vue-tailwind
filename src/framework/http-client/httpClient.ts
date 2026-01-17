@@ -1,3 +1,8 @@
+import { CodableError } from '@/framework/errors'
+import {
+  DefaultHttpClientErrorHandler,
+  type HttpClientErrorHandler,
+} from '@/framework/http-client/httpClientErrorHandler'
 import axios, {
   type AxiosInstance,
   type AxiosProgressEvent,
@@ -6,11 +11,7 @@ import axios, {
   type CreateAxiosDefaults,
 } from 'axios'
 import axiosRetry from 'axios-retry'
-import {
-  DefaultHttpClientErrorHandler,
-  type HttpClientErrorHandler,
-} from '@/framework/http-client/httpClientErrorHandler'
-import { CodableError } from '@/framework/errors'
+import type { ApiRequestConfig, ApiResponse, DownloadProgress, UploadProgress } from './api'
 import {
   DEFAULT_RETRY_COUNT,
   HEADER_CONTENT_DISPOSITION,
@@ -19,7 +20,6 @@ import {
   MIME_APPLICATION_OCTET_STREAM,
   MIME_MULTIPART_FORM_DATA,
 } from './constants'
-import type { ApiRequestConfig, ApiResponse, DownloadProgress, UploadProgress } from './api'
 
 /**
  * HTTPクライアント機能を提供するクラス
