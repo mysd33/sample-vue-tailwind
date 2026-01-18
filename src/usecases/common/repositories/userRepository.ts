@@ -39,7 +39,7 @@ export class UserRepository {
     )
     if (!user) {
       // TODO: 認証エラーの扱いの検討（業務エラーの定義）
-      throw new Error('ユーザ名かパスワードが正しくありません')
+      throw new Error('ユーザIDかパスワードが正しくありません')
     }
     return user
   }

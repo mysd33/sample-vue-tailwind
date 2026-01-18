@@ -27,12 +27,12 @@ const userPage = ref<Page<User>>()
 // 初期表示処理
 onMounted(async () => {
   // ユーザ一覧を取得
-  userPage.value = await userService.findAllForPageNation(new Pageable(pageSize, 0))
+  userPage.value = await userService.findAllForPagination(new Pageable(pageSize, 0))
 })
 
 // ページネーション処理
 const onPageClicked = async (pageable: Pageable) => {
-  userPage.value = await userService.findAllForPageNation(pageable)
+  userPage.value = await userService.findAllForPagination(pageable)
 }
 </script>
 

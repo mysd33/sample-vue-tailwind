@@ -60,6 +60,8 @@ const onValidSubmit = async () => {
     router.push({ name: 'menu' })
     return
   } catch (e) {
+    // TODO: 仮置きのエラーハンドリング。
+    // AuthenticationError、BusinessErrorのみをハンドリングするように修正する
     // ログインエラーのメッセージを設定
     // warnレベルだが、ログインエラーは赤で表示させたいのでerrorで設定
     messageLevel.value = 'error'
