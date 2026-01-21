@@ -401,7 +401,7 @@ export default config
 ```
 
 ### Github Pagesを使ってStorybookを公開する設定
-- Github Pagesを使ってStorybookを公開したい場合は、[Storybookのドキュメント](https://storybook.js.org/docs/sharing/publish-storybook#publish-storybook-to-other-services)や[Deploy Storybook to GitHub Pagesのドキュメント](https://github.com/bitovi/github-actions-storybook-to-github-pages)を参考に以下の設定を行う。
+- Github Pagesを使ってStorybookを公開したい場合は、[Storybookのドキュメント](https://storybook.js.org/docs/sharing/publish-storybook#publish-storybook-to-other-services)を参考に以下の設定を行う。
 
     - 「.github/workflows」フォルダにGitHub Actionsのワークフローを作成
         - [ワークフローの記載例（deploy-github-pages.yml）](.github/workflows/deploy-github-pages.yml)
