@@ -1,4 +1,4 @@
-import { setup, type Preview } from '@storybook/vue3'
+import { setup, type Preview } from '@storybook/vue3-vite'
 import '@/style.css'
 import { createPinia } from 'pinia'
 import { App } from 'vue'

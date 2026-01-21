@@ -31,14 +31,12 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^3.2.5",
-    "@storybook/addon-essentials": "^8.6.4",
-    "@storybook/addon-interactions": "^8.6.4",
+    "@chromatic-com/storybook": "^5.0.0",
     "@storybook/addon-styling-webpack": "^1.0.1",
     "@storybook/blocks": "^8.6.4",
     "@storybook/test": "^8.6.4",
-    "@storybook/vue3": "^8.6.4",
-    "@storybook/vue3-vite": "^8.6.4",
+    "@storybook/vue3": "^10.1.11",
+    "@storybook/vue3-vite": "^10.1.11",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/postcss": "^4.0.0",
     "@tsconfig/node22": "^22.0.0",
@@ -53,7 +51,7 @@
     "cypress": "^13.17.0",
     "eslint": "^9.14.0",
     "eslint-plugin-cypress": "^4.1.0",
-    "eslint-plugin-storybook": "^0.11.4",
+    "eslint-plugin-storybook": "^10.1.11",
     "eslint-plugin-vue": "^9.30.0",
     "jsdom": "^25.0.1",
     "msw": "^2.7.3",
@@ -63,14 +61,15 @@
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "start-server-and-test": "^2.0.9",
-    "storybook": "^8.6.4",
+    "storybook": "^10.1.11",
     "tailwindcss": "^4.0.0",
     "typescript": "~5.6.3",
     "vite": "^6.0.5",
     "vite-plugin-remove-console": "^2.2.0",
     "vite-plugin-vue-devtools": "^7.6.8",
     "vitest": "^2.1.8",
-    "vue-tsc": "^2.1.10"
+    "vue-tsc": "^2.1.10",
+    "@storybook/addon-docs": "^10.1.11"
   },
   "eslintConfig": {
     "extends": [
