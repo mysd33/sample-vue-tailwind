@@ -176,9 +176,11 @@ npx vitest run
     - [@heroicons/vue](https://github.com/tailwindlabs/heroicons?tab=readme-ov-file#vue)
         - アイコンに使用
     - [VeeValidate](https://vee-validate.logaretm.com/v4/)       
-        - 入力チェックに使用
+        - 入力チェックに使用                
     - [@vee-validate/yup](https://vee-validate.logaretm.com/v4/guide/composition-api/getting-started/#validating-with-yup)
-        - 入力チェック（スキーマバリデーション）に使用。yupと連携してVeeValidateを使用        
+        - 入力チェック（スキーマバリデーション）に使用。yupと連携してVeeValidateを使用                    
+        - yupを使いましたが、今考えると、[zod](https://zod.dev/)のほうがよかったかもしれません。
+        - zodを使う場合は、[@vee-validate/zod](https://vee-validate.logaretm.com/v4/guide/composition-api/getting-started/#validating-with-zod)を使用します。
     - [AXIOS](https://axios-http.com/)
         - サーバへのREST API通信に使用
     - [axios-retry](https://github.com/softonic/axios-retry)
