@@ -336,6 +336,37 @@ pnpm add msw@latest --save-dev
 npx msw init public --save
 ```
 
+- 本サンプルAPは、CSRのため、ブラウザ上でのMSWを利用するため、以下の通り設定する。
+- [mocks/handler.ts](./src/mocks/handler.ts)を作成し、MSWのハンドラを記載
+- [mocks/worker.ts](./src/mocks/worker.ts)を作成し、以下を記載
+
+    ```ts
+    import { handlers } from '@/mocks/handler'
+    import { setupWorker } from 'msw/browser'
+
+    export const worker = setupWorker(...handlers)
+
+    ```
+- [main.ts](./src/main.ts)に以下を追記
+
+    ```ts
+    // 開発環境ではMSWの起動
+    async function enableMocking() {
+        if (!import.meta.env.DEV) {
+            return
+        }
+        const { worker } = await import('@/mocks/worker')
+        // Service Workerの起動
+        return worker.start({
+            onUnhandledRequest: 'bypass',
+        })
+    }
+    // MSW起動後、APの起動
+    enableMocking().then(() => {        
+        app.mount('#app')
+    })
+    ```
+
 ### Storybookのセットアップ
 - 以下のコマンドを実行
 
