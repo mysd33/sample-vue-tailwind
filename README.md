@@ -327,6 +327,15 @@ export default {
 > ```
 >
 
+### MSW(Mock Service Worker)のセットアップ
+- 以下のコマンドを実行
+
+```sh
+# MSW(Mock Service Worker)
+pnpm add msw@latest --save-dev
+npx msw init public --save
+```
+
 ### Storybookのセットアップ
 - 以下のコマンドを実行
 
@@ -342,13 +351,9 @@ npx storybook@latest init
 npx storybook@latest add @storybook/addon-styling-webpack
 ```
 
-- MSWをインストールし、Storybookアドオンmsw-storybook-addonをインストール
+- Storybookアドオンmsw-storybook-addonをインストール
 
 ```sh
-# MSW(Mock Service Worker)
-npm install msw@latest --save-dev
-npx msw init public --save
-
 # msw-storybook-addon
 npm install msw-storybook-addon -D
 ```
