@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BaseModalDialog, { type BaseModalDialogProps } from './BaseModalDialog.vue'
+import BaseModalDialog, { type BaseModalDialogProps } from '@/components/dialog/BaseModalDialog.vue'
 
 type Props = BaseModalDialogProps
 defineProps<Props>()
