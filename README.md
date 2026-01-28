@@ -15,7 +15,7 @@
 
 ![ソフトウェアアーキテクチャ図](docs/img/architecture.png)
 
-## サンプルAPの動作確認方法
+## 1. サンプルAPの動作確認方法
 
 - 必要なパッケージをインストール
 
@@ -31,17 +31,17 @@ npm run dev
 
 - ブラウザで[http://localhost:5173/](http://localhost:5173/)アクセス
 
-## VSCodeでデバッグ実行
+## 2. VSCodeでデバッグ実行
 - [.vscode/launch.json](.vscode/launch.json)を作成し、VSCodeのデバッグ実行で、Chromeブラウザを起動してデバッグできるようにしています。
 
-### 開発用サーバー起動後にクライアントAPのデバッグ実行する方法
+### 2.1. 開発用サーバー起動後にクライアントAPのデバッグ実行する方法
 - `npm run dev`で開発用サーバーを起動した後、VSCodeのデバッグ実行で「Vue.js: Debug」を選択して実行してください。VSCodeでソースコードにブレークポイントを設定して止めることができます。
 
-### 開発用サーバー起動とクライアントAPのデバッグ実行を同時に行う方法
+### 2.2. 開発用サーバー起動とクライアントAPのデバッグ実行を同時に行う方法
 - VSCodeのデバッグ実行で「Vue.js: Run npm dev & Debug」を選択して実行してください。`npm run dev`で開発用サーバーが起動され、Chromeブラウザを起動して、同様に、VSCodeでソースコードにブレークポイントを設定して止めて、デバッグできるようにしています。
 
 
-## Storybookの起動方法
+## 3. Storybookの起動方法
 - GitHub Pagesに[Storybook](https://mysd33.github.io/sample-vue-tailwind/)をデプロイして見られるように対応していますが、ローカルで起動する場合は以下の通り。
 
 ```sh
@@ -50,7 +50,7 @@ npm run storybook
 
 - ブラウザで[http://localhost:6006/](http://localhost:6006/)にアクセス
 
-## Vitestによるユニットテストの実行方法
+## 4. Vitestによるユニットテストの実行方法
 
 ```sh
 # ファイル変更待ちで継続的にテスト実行する場合
@@ -61,7 +61,7 @@ npx vitest run
 ```
 
 
-## 画面一覧
+## 5. 画面一覧
 > [!WARNING]
 > 現在、作成中です。Vue.jsとTailwind CSSを使ったSPAの画面は、サーバサイド処理はスタブなので、比較の際、ご注意ください。
 
@@ -82,12 +82,12 @@ npx vitest run
 | ユーザ登録画面 | ユーザを新規登録するための画面。 | [画面](docs/img/screen/screen6.png) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/story/usecases-user-views-userregisterview--default) | [ソースコード](src/usecases/user/views/UserRegisterView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/regist.html) |
 | ユーザ詳細画面 | ユーザの詳細情報の表示と情報更新するための画面。 | [画面](docs/img/screen/screen7.png) | [Storybook](https://mysd33.github.io/sample-vue-tailwind/?path=/story/usecases-user-views-userdetailview--default) | [ソースコード](src/usecases/user/views/UserDetailView.vue) | [ソースコード](https://github.com/mysd33/sample-bff/blob/main/src/main/resources/templates/user/userDetail.html) |
 
-## 画面遷移図
+## 6. 画面遷移図
 - [src/router/index.ts](src/router/index.ts)に画面遷移の設定が記述されています。
 
 ![画面遷移図](docs/img/screen-flow.png)
 
-## メッセージ表示
+## 7. メッセージ表示
 - 正常終了時やエラー時のメッセージおよびバナー等表示できるように対応しています。
 - また、比較対象の「Spring Boot + Thymeleaf + Bootstrap」では実装してませんが、モーダルダイアログの表示も試しています。
 
@@ -102,7 +102,7 @@ npx vitest run
 | サーバ業務エラーメッセージ（バナー表示）         | [画面](docs/img/screen/server-business-error.png) |
 | サーバシステムエラー時エラーページ表示  | [画面](docs/img/screen/server-system-error.png) |      
 
-## 画面部品
+## 8. 画面部品
 - [src/components/](src/components/)フォルダに入っています。
 - 作成している画面部品は以下の通り。
 
@@ -138,7 +138,7 @@ npx vitest run
 | 確認用モーダルダイアログ | 確認ダイアログ | [ソースコード](src/components/dialog/ConfirmModalDialog.vue) | TBD |
 | 情報モーダルダイアログ | 完了時等の情報ダイアログ | [ソースコード](src/components/dialog/ConfirmModalDialog.vue) | TBD |
 
-## ソフトウェアフレームワーク機能
+## 9. ソフトウェアフレームワーク機能
 - 本サンプルアプリケーションでは、ソフトウェアフレームワーク実装例も同梱している。簡単のため、アプリケーションと同じプロジェクトでソース管理している。
 - 拡張実装したソースコードは、[src/framework](src/framework)フォルダ配下に格納されている。
 - 本格的な開発を実施する場合には、業務アプリケーションと別のGitリポジトリとして管理し、CodeArtifactやSonatype NEXUSといったライブラリリポジトリサーバでnpmを管理し、package.jsonから参照するようにすべきであるし、テストやCI/CD等もちゃんとすべきであるが、ここでは、あえて同じプロジェクトに格納してノウハウを簡単に参考にしてもらいやすいようにしている。
@@ -163,7 +163,7 @@ npx vitest run
 
 
 
-## 追加したプラグイン・ライブラリ
+## 10. 追加したプラグイン・ライブラリ
 - Vueライブラリ
     - [vue-router](https://router.vuejs.org/)
         - 画面遷移制御に使用
@@ -206,10 +206,10 @@ npx vitest run
         - E2Eテストに使用
         - この後は、[Playwright](https://playwright.dev/)のほうがいいかもしれません。
 
-## (参考) ブランクプロジェクトのセットアップ方法
+## 11. (参考) ブランクプロジェクトのセットアップ方法
 - Vue.jsとTailwind CSSを使ったブランクプロジェクトの作成手順は以下の通り
 
-### Vueのプロジェクト作成
+### 11.1. Vueのプロジェクト作成
 
 - vue-cliを使ってプロジェクトを作成
 
@@ -228,7 +228,7 @@ Add ESLint for code quality? » Yes
 Add Prettier for code formatting? ... Yes
 ```
 
-### Tailwind CSS ver3の導入
+### 11.2. Tailwind CSS ver3の導入
 > [!NOTE]
 >
 > サンプルAPのプロジェクト作成時はTailwind CSS ver3だったため、そのインストール手順をベースに記載しています。
@@ -295,7 +295,7 @@ const app = createApp(App)
 …
 ```
 
-### tailwindcss/formsのインストール
+### 11.3. tailwindcss/formsのインストール
 
 - 以下のコマンドを実行
 
@@ -327,7 +327,7 @@ export default {
 > ```
 >
 
-### MSW(Mock Service Worker)のセットアップ
+### 11.4. MSW(Mock Service Worker)のセットアップ
 - 以下のコマンドを実行
 
 ```sh
@@ -367,7 +367,7 @@ npx msw init public --save
     })
     ```
 
-### Storybookのセットアップ
+### 11.5. Storybookのセットアップ
 - 以下のコマンドを実行
 
 ```sh
@@ -439,7 +439,7 @@ export default config
 
 ```
 
-### Github Pagesを使ってStorybookを公開する設定
+### 11.6. Github Pagesを使ってStorybookを公開する設定
 - Github Pagesを使ってStorybookを公開したい場合は、[Storybookのドキュメント](https://storybook.js.org/docs/sharing/publish-storybook#publish-storybook-to-other-services)を参考に以下の設定を行う。
 
     - 「.github/workflows」フォルダにGitHub Actionsのワークフローを作成
@@ -450,7 +450,7 @@ export default config
         - ワークフローが正常に終了すると、「https://(ユーザ名).github.io/(リポジトリ名)」というURLでStorybookが公開される
             - 本サンプルでは「[https://mysd33.github.io/sample-vue-tailwind](https://mysd33.github.io/sample-vue-tailwind)」というURLで公開されている
 
-### その他、ライブラリインストール
+### 11.7. その他、ライブラリインストール
 - 以下のコマンドで、上記の手順ではインストールされないライブラリをインストール
     
 ```sh
@@ -492,7 +492,7 @@ pinia.use(piniaPluginPersistedstate)
 app.use(pinia)
 ```
 
-### (参考) Tailwind CSS ver4移行
+### 11.8. (参考) Tailwind CSS ver4移行
 
 > [!NOTE]
 > 本サンプルAPを作成当初Tailwind CSS ver3で作成していたが、ver4への移行したため、その手順を記載しておく
@@ -511,7 +511,7 @@ npx @tailwindcss/upgrade
 
 - upgrade toolによるgitの変更差分は[こちら](https://github.com/mysd33/sample-vue-tailwind/commit/9af2589efd63d822eec20fe7f4ce42727f64f851)
 
-## (参考) gitの設定
+## 12. (参考) gitの設定
 - TypeScriptでは一般的にファイル名をキャメルケースが良いとされている。Vueのコンポーネントはパスカルケースが一般的である。
 - 小文字と大文字を誤ったファイル名を後で変更するときに、gitのデフォルトでは、大文字と小文字を区別しないので、gitの設定を変更しておかないと、import文のファイル名が変更されているのに、gitサーバ上のファイル名が大文字のままといった問題が発生しうる。
 
@@ -530,12 +530,12 @@ core.ignorecase=true
 git config core.ignorecase false
 ```
 
-## (参考) インストールするとよいツール
-### Chorom拡張機能
+## 13. (参考) インストールするとよいツール
+### 13.1. Chorom拡張機能
 - [Vue.js devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
     - Vue.jsのコンポーネント構造や状態を確認できる
 
-### VSCodeの拡張機能
+### 13.2. VSCodeの拡張機能
 
 - [Vue - Official拡張機能](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 
@@ -554,7 +554,8 @@ git config core.ignorecase false
     ```
 
 - [Preitter - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-
+    - コードフォーマッタ。
+    - `npm run format`などのコマンドで都度実行できるが、VSCodeで、ファイル保存時にPrettierによるコードフォーマットを実行できるようにする。
     - Prettierのプラグインとして、[Prettier plugin for Tailwind CSS](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)もインストールするとよい。
 
         ```sh
@@ -606,5 +607,13 @@ git config core.ignorecase false
         - https://prettier.io/docs/configuration.html#editorconfig
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+    - リンタ（静的コードチェックツール）。
+    - eslintは、lintツールとして、`npm run lint`などのコマンドで都度実行できるが、VSCodeの拡張機能をインストールしておくと、プロジェクトにインストールされたESLintを使って、VSCode上でリアルタイムにコードチェックができるようになる。
+    - eslint-plugin-jsx-a11y
+        - ESLintでアクセシビリティに沿った実装かできているかチェックを行う場合は、[eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)もインストールするとよい。
+        - 例えば、imageにaltがあるか, aria-* や role属性が適切に使われているか等をチェックできる。
 
+    ```sh
+    npm install -D eslint-plugin-jsx-a11y
+    ```
 
