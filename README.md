@@ -134,7 +134,7 @@ npx vitest run
 | アクションボタン | フォーム以外でのロジック実行ボタン | [ソースコード](src/components/button/ActionButton.vue) | TBD |
 | テーブル | テーブルの表示領域、ヘッダー部、データ部 | [ソースコード](src/components/table/) | TBD |
 | ページネーションリンク | ページネーションのリンクボタン | [ソースコード](src/components/pagination/PaginationLink.vue) | TBD |
-| モーダルダイアログの基底部品 | ダイアログ共通の基底のコンポーネント | TBD | TBD |
+| モーダルダイアログの基底部品 | ダイアログ共通の基底のコンポーネント | [ソースコード](src/components/dialog/BaseModalDialog.vue) | TBD |
 | 確認用モーダルダイアログ | 確認ダイアログ | [ソースコード](src/components/dialog/ConfirmModalDialog.vue) | TBD |
 | 情報モーダルダイアログ | 完了時等の情報ダイアログ | [ソースコード](src/components/dialog/ConfirmModalDialog.vue) | TBD |
 
